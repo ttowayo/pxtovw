@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PX ↔ VW 변환기</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <span>계산</span>
+      <button class="close-btn">×</button>
+    </div>
+    <div class="main">
+      <div class="convert-section">
+        <div class="convert-box">
+          <h2>Viewport Width :</h2>
+          <div class="vw-preset-group">
+            <button type="button" class="vw-preset-btn" data-value="320">320px</button>
+            <button type="button" class="vw-preset-btn" data-value="360">360px</button>
+            <button type="button" class="vw-preset-btn" data-value="480">480px</button>
+            <button type="button" class="vw-preset-btn" data-value="720">720px</button>
+          </div>
+          <input type="number" id="vw1-width" value="720"> PX / 소수점 : <input type="number" id="vw1-float" value="2" min="0" max="5">
+          <div class="row">
+            <input type="number" id="px-input" placeholder="PX">
+            <input type="text" id="vw-output" placeholder="VW" readonly>
+            <button type="button" id="vw-copy-btn">복사</button>
+          </div>
+          <button id="px-to-vw-btn">계산하기</button>
+        </div>
+        <div class="convert-box">
+          <h2>Viewport Width :</h2>
+          <input type="number" id="vw2-width" value="1440"> PX /  
+            <label><input type="checkbox" id="px-no-float" checked> 소수점 없음(반올림)</label>
+          <div class="row">
+            <input type="number" id="vw-input" placeholder="VW">
+            <input type="text" id="px-output" placeholder="PX" readonly>
+            <button type="button" id="px-copy-btn">복사</button>
+          </div>
+         
+          <button id="vw-to-px-btn">계산하기</button>
+        </div>
+      </div>
+      <div class="css-section">
+        <div class="css-box">
+          <div class="css-header">
+            Viewport Width : <input type="number" id="css1-width" value="1440"> PX / 소수점 : <input type="number" id="css1-float" value="2" min="0" max="5">
+            <label><input type="checkbox" id="css1-remove"> 속성 삭제</label>
+          </div>
+          <textarea id="css1-input" placeholder="css 소스를 입력하세요."></textarea>
+          <textarea id="css1-output" readonly></textarea>
+          <button id="css1-btn">계산하기</button>
+        </div>
+        <div class="css-box">
+          <div class="css-header">
+            Viewport Width : <input type="number" id="css2-width" value="1440"> PX
+            <label><input type="checkbox" id="css2-remove"> 속성 삭제</label>
+            <label style="margin-left:8px;"><input type="checkbox" id="css2-no-float" checked> 소수점 없음(반올림)</label>
+          </div>
+          <textarea id="css2-input" placeholder="css 소스를 입력하세요."></textarea>
+          <textarea id="css2-output" readonly></textarea>
+          <button id="css2-btn">계산하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html> 
