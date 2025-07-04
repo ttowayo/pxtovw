@@ -145,4 +145,18 @@ document.getElementById('vw-copy-btn').onclick = function() {
 };
 document.getElementById('px-copy-btn').onclick = function() {
   copyToClipboard(document.getElementById('px-output').value, this);
-}; 
+};
+// css1-output 복사 버튼
+const css1CopyBtn = document.getElementById('css1-copy-btn');
+if (css1CopyBtn) {
+  css1CopyBtn.onclick = function() {
+    copyToClipboard(document.getElementById('css1-output').value, this);
+  };
+}
+// css2-output 복사 버튼
+const css2CopyBtn = document.getElementById('css2-copy-btn');
+if (css2CopyBtn) {
+  css2CopyBtn.onclick = function() {
+    copyToClipboard(document.getElementById('css2-output').value, this);
+  };
+} 
