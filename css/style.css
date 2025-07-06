@@ -1,0 +1,303 @@
+body {
+  background: #f7f7f7;
+  font-family: "Noto Sans KR", Arial, sans-serif;
+  margin: 0;
+}
+.container {
+  background: #fff;
+  margin: 20px auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  max-width: 1400px;
+  min-width: 900px;
+}
+.header {
+  background: #2196f3;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 500;
+  padding: 16px 16px 12px 16px;
+  border-radius: 6px 6px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.close-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+}
+.main {
+  padding: 20px 16px;
+}
+.convert-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.convert-box {
+  background: #fafbfc;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 14px;
+  width: 50%;
+  box-sizing: border-box;
+}
+.convert-box h2 {
+  font-size: 18px;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+
+.convert-box h3 {
+  font-size: 18px;
+  margin: 0 0 10px 0;
+  font-weight: 400;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.row input {
+  margin-right: 8px;
+  padding: 6px 8px;
+  font-size: 16px;
+  width: auto;
+}
+button,
+#px-to-vw-btn,
+#vw-to-px-btn,
+#css1-btn,
+#css2-btn,
+#css1-copy-btn {
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(123, 31, 162, 0.1);
+  background: #ffebee;
+  color: #d32f2f;
+  border: 1px solid #ffcdd2;
+  padding: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+  margin-bottom: 5px;
+  cursor: pointer;
+  outline: none;
+}
+button:active,
+#px-to-vw-btn:active,
+#vw-to-px-btn:active,
+#css1-btn:active,
+#css2-btn:active {
+  background: #4a148c;
+}
+button:focus,
+#px-to-vw-btn:focus,
+#vw-to-px-btn:focus,
+#css1-btn:focus,
+#css2-btn:focus {
+  outline: none;
+}
+#px-to-vw-btn,
+#vw-to-px-btn,
+#css1-btn,
+#css2-btn {
+  background: #7b1fa2;
+  color: #fff;
+  border: 1px solid #a745d1;
+}
+#px-to-vw-btn:hover,
+#vw-to-px-btn:hover,
+#css1-btn:hover,
+#css2-btn:hover {
+  background: #4a148c;
+}
+#css1-copy-btn {
+  background: #fffde7;
+  color: #f57c00;
+  border: 1px solid #ffe0b2;
+}
+#css1-copy-btn:hover {
+  background: #f57c00;
+  color: #fff;
+}
+.css-section {
+  display: flex;
+  justify-content: space-between;
+}
+.css-box {
+  background: #fafbfc;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 14px;
+  width: 50%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.css-header {
+  font-size: 16px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.css-header input[type="number"] {
+  width: 70px;
+  margin: 0 4px;
+  padding: 6px;
+}
+.css-header label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-left: 8px;
+}
+textarea {
+  font-family: "Noto Sans KR", Arial, sans-serif;
+  font-size: 15px;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 8px;
+  resize: vertical;
+  min-height: 150px;
+  max-height: 300px;
+  background: #fff;
+}
+textarea[readonly] {
+  background: #f0f0f0;
+}
+.vw-preset-group {
+  margin-bottom: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.vw-preset-btn {
+  background: #f3e5f5;
+  color: #7b1fa2;
+  border: 1px solid #ce93d8;
+  border-radius: 4px;
+  padding: 6px 6px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.vw-preset-btn:hover,
+.vw-preset-btn:active {
+  background: #7b1fa2;
+  color: #fff;
+}
+
+.vw2-preset-btn:hover,
+.vw2-preset-btn:active {
+  background: #d32f2f;
+  color: #fff;
+}
+#vw-copy-btn,
+#px-copy-btn,
+#css2-copy-btn {
+  background: #fffde7;
+  color: #f57c00;
+  border: 1px solid #ffe0b2;
+  padding: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+#vw-copy-btn:hover,
+#px-copy-btn:hover,
+#css2-copy-btn:hover {
+  background: #f57c00;
+  color: #fff;
+}
+#vw-clear-btn,
+#px-clear-btn,
+#css2-clear-btn {
+  background: #ffebee;
+  color: #d32f2f;
+  border: 1px solid #ffcdd2;
+  padding: 6px 6px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+#vw-clear-btn:hover,
+#px-clear-btn:hover,
+#css2-clear-btn:hover {
+  background: #d32f2f;
+  color: #fff;
+}
+#css1-clear-btn:hover {
+  background: #d32f2f;
+  color: #fff;
+}
+/* 폼 전체 스타일 */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+input[type="number"],
+input[type="text"],
+textarea {
+  border: 1.5px solid #bdbdbd;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 16px;
+  background: #fff;
+  transition: border 0.2s, box-shadow 0.2s;
+  outline: none;
+  margin-bottom: 5px;
+}
+input[type="number"]:focus,
+input[type="text"]:focus,
+textarea:focus {
+  border: 1.5px solid #7b1fa2;
+  box-shadow: 0 0 0 2px #f3e5f5;
+}
+input[readonly],
+textarea[readonly] {
+  background: #f5f5f5;
+  color: #888;
+}
+/* 체크박스 커스텀 디자인 */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #7b1fa2;
+  border-radius: 5px;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+  transition: border 0.2s, box-shadow 0.2s;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+input[type="checkbox"]:checked {
+  background: #7b1fa2;
+  border-color: #7b1fa2;
+}
+input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #f3e5f5;
+}
+input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0px;
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+  transition: all 0.2s;
+}
