@@ -11,49 +11,59 @@ function vwToPx(vw, viewport, floatNum) {
 // CSS 내 px -> vw 변환
 function cssPxToVw(css, viewport, floatNum, removeValue) {
   if (!removeValue) {
-    return css.replace(
-      /(\d+\.?\d*)px/g,
-      (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
-    );
+    // 세미콜론을 임시로 보존하면서 변환
+    return css
+      .replace(/;/g, "___SEMICOLON___")
+      .replace(
+        /(\d+\.?\d*)px/g,
+        (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
+      )
+      .replace(/___SEMICOLON___/g, ";");
   }
   // 속성 삭제: 숫자 단위가 없는 속성 전체 삭제
-  return css
-    .split(/;\s*/)
-    .map((line) => {
-      // 숫자+단위가 있으면 변환, 없으면 삭제
-      if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(line)) {
-        return line.replace(
-          /(\d+\.?\d*)px/g,
-          (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
-        );
-      }
-      return "";
-    })
-    .filter(Boolean)
-    .join(";\n");
+  const lines = css.split(/;\s*/);
+  const processedLines = lines.map((line) => {
+    // 숫자+단위가 있으면 변환, 없으면 삭제
+    if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(line)) {
+      return line.replace(
+        /(\d+\.?\d*)px/g,
+        (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
+      );
+    }
+    return "";
+  }).filter(Boolean);
+  
+  // 마지막 세미콜론 추가
+  const result = processedLines.join(";\n");
+  return result + (css.includes("}") ? "}" : "");
 }
 // CSS 내 vw -> px 변환
 function cssVwToPx(css, viewport, floatNum, removeValue) {
   if (!removeValue) {
-    return css.replace(
-      /(\d+\.?\d*)vw/g,
-      (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
-    );
+    // 세미콜론을 임시로 보존하면서 변환
+    return css
+      .replace(/;/g, "___SEMICOLON___")
+      .replace(
+        /(\d+\.?\d*)vw/g,
+        (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
+      )
+      .replace(/___SEMICOLON___/g, ";");
   }
   // 속성 삭제: 숫자 단위가 없는 속성 전체 삭제
-  return css
-    .split(/;\s*/)
-    .map((line) => {
-      if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(line)) {
-        return line.replace(
-          /(\d+\.?\d*)vw/g,
-          (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
-        );
-      }
-      return "";
-    })
-    .filter(Boolean)
-    .join(";\n");
+  const lines = css.split(/;\s*/);
+  const processedLines = lines.map((line) => {
+    if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(line)) {
+      return line.replace(
+        /(\d+\.?\d*)vw/g,
+        (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
+      );
+    }
+    return "";
+  }).filter(Boolean);
+  
+  // 마지막 세미콜론 추가
+  const result = processedLines.join(";\n");
+  return result + (css.includes("}") ? "}" : "");
 }
 // px -> vw 단일 변환
 const pxInput = document.getElementById("px-input");
