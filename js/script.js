@@ -17,20 +17,26 @@ function cssPxToVw(css, viewport, floatNum, removeValue) {
     );
   }
   // 속성 삭제: 숫자 단위가 없는 속성 전체 삭제
-  return css
-    .split(/;\s*/)
-    .map((line) => {
-      // 숫자+단위가 있으면 변환, 없으면 삭제
-      if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(line)) {
-        return line.replace(
-          /(\d+\.?\d*)px/g,
-          (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
-        );
-      }
-      return "";
-    })
-    .filter(Boolean)
-    .join(";\n");
+  return css.replace(
+    /([^{]+{)([^}]+)(})/g,
+    (match, selector, properties, closingBrace) => {
+      const propertyList = properties.split(/;\s*/);
+      const filteredProperties = propertyList
+        .map((line) => {
+          // 숫자+단위가 있으면 변환, 없으면 삭제
+          if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(line)) {
+            return line.replace(
+              /(\d+\.?\d*)px/g,
+              (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
+            );
+          }
+          return "";
+        })
+        .filter(Boolean);
+
+      return selector + filteredProperties.join(";\n") + ";\n" + closingBrace;
+    }
+  );
 }
 // CSS 내 vw -> px 변환
 function cssVwToPx(css, viewport, floatNum, removeValue) {
@@ -41,19 +47,25 @@ function cssVwToPx(css, viewport, floatNum, removeValue) {
     );
   }
   // 속성 삭제: 숫자 단위가 없는 속성 전체 삭제
-  return css
-    .split(/;\s*/)
-    .map((line) => {
-      if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(line)) {
-        return line.replace(
-          /(\d+\.?\d*)vw/g,
-          (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
-        );
-      }
-      return "";
-    })
-    .filter(Boolean)
-    .join(";\n");
+  return css.replace(
+    /([^{]+{)([^}]+)(})/g,
+    (match, selector, properties, closingBrace) => {
+      const propertyList = properties.split(/;\s*/);
+      const filteredProperties = propertyList
+        .map((line) => {
+          if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(line)) {
+            return line.replace(
+              /(\d+\.?\d*)vw/g,
+              (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
+            );
+          }
+          return "";
+        })
+        .filter(Boolean);
+
+      return selector + filteredProperties.join(";\n") + ";\n" + closingBrace;
+    }
+  );
 }
 // px -> vw 단일 변환
 const pxInput = document.getElementById("px-input");
