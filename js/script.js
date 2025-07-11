@@ -213,7 +213,7 @@ function copyToClipboard(value, btn) {
   if (!value) return;
   navigator.clipboard.writeText(value).then(() => {
     const org = btn.textContent;
-    btn.textContent = "복사됨!";
+    btn.textContent = "✅ Copied!";
     setTimeout(() => {
       btn.textContent = org;
     }, 1000);
