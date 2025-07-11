@@ -33,9 +33,12 @@ function cssPxToVw(css, viewport, floatNum, removeValue) {
     return "";
   }).filter(Boolean);
   
-  // 마지막 세미콜론 추가
+  // CSS 구조 유지
   const result = processedLines.join(";\n");
-  return result + (css.includes("}") ? "}" : "");
+  if (css.includes("}")) {
+    return result + ";\n}";
+  }
+  return result;
 }
 // CSS 내 vw -> px 변환
 function cssVwToPx(css, viewport, floatNum, removeValue) {
@@ -61,9 +64,12 @@ function cssVwToPx(css, viewport, floatNum, removeValue) {
     return "";
   }).filter(Boolean);
   
-  // 마지막 세미콜론 추가
+  // CSS 구조 유지
   const result = processedLines.join(";\n");
-  return result + (css.includes("}") ? "}" : "");
+  if (css.includes("}")) {
+    return result + ";\n}";
+  }
+  return result;
 }
 // px -> vw 단일 변환
 const pxInput = document.getElementById("px-input");
