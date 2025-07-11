@@ -31,18 +31,22 @@ body {
 }
 .main {
   padding: 20px 16px;
+  height: calc(100vh - 80px);
+  min-height: 818px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
 }
 .convert-section {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
 }
 .convert-box {
   background: #fafbfc;
   border: 1px solid #e0e0e0;
   border-radius: 6px;
   padding: 14px;
-  width: 50%;
+  width: 49.6%;
   box-sizing: border-box;
 }
 .convert-box h2 {
@@ -75,7 +79,7 @@ button,
 #css2-btn,
 #css1-copy-btn {
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(123, 31, 162, 0.1);
+  box-shadow: 0 2px 8px rgba(171, 71, 188, 0.1);
   background: #ffebee;
   color: #d32f2f;
   border: 1px solid #ffcdd2;
@@ -101,13 +105,22 @@ button:focus,
 #css2-btn:focus {
   outline: none;
 }
+.button-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.button-box button{
+ width: 100%;
+}
 #px-to-vw-btn,
 #vw-to-px-btn,
 #css1-btn,
 #css2-btn {
-  background: #7b1fa2;
+  background: #ab47bc;
   color: #fff;
-  border: 1px solid #a745d1;
+  border: 1px solid #ba68c8;
+  padding: 6px 9px;
 }
 #px-to-vw-btn:hover,
 #vw-to-px-btn:hover,
@@ -127,13 +140,16 @@ button:focus,
 .css-section {
   display: flex;
   justify-content: space-between;
+  height: calc(100vh - 314px);
+  min-height: 540px;
 }
 .css-box {
   background: #fafbfc;
   border: 1px solid #e0e0e0;
   border-radius: 6px;
   padding: 14px;
-  width: 50%;
+  width: 49.6%;
+  height: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -156,6 +172,12 @@ button:focus,
   font-size: 14px;
   margin-left: 8px;
 }
+.textarea-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 textarea {
   font-family: "Noto Sans KR", Arial, sans-serif;
   font-size: 15px;
@@ -165,7 +187,7 @@ textarea {
   margin-bottom: 8px;
   resize: vertical;
   min-height: 150px;
-  max-height: 300px;
+  height: 100%;
   background: #fff;
 }
 textarea[readonly] {
@@ -179,7 +201,7 @@ textarea[readonly] {
 }
 .vw-preset-btn {
   background: #f3e5f5;
-  color: #7b1fa2;
+  color: #ab47bc;
   border: 1px solid #ce93d8;
   border-radius: 4px;
   padding: 6px 6px;
@@ -190,7 +212,7 @@ textarea[readonly] {
 }
 .vw-preset-btn:hover,
 .vw-preset-btn:active {
-  background: #7b1fa2;
+  background: #ab47bc;
   color: #fff;
 }
 
@@ -258,7 +280,7 @@ textarea {
 input[type="number"]:focus,
 input[type="text"]:focus,
 textarea:focus {
-  border: 1.5px solid #7b1fa2;
+  border: 1.5px solid #ab47bc;
   box-shadow: 0 0 0 2px #f3e5f5;
 }
 input[readonly],
@@ -272,7 +294,7 @@ input[type="checkbox"] {
   -webkit-appearance: none;
   width: 20px;
   height: 20px;
-  border: 2px solid #7b1fa2;
+  border: 2px solid #ab47bc;
   border-radius: 5px;
   background: #fff;
   cursor: pointer;
@@ -282,8 +304,8 @@ input[type="checkbox"] {
   margin-right: 4px;
 }
 input[type="checkbox"]:checked {
-  background: #7b1fa2;
-  border-color: #7b1fa2;
+  background: #ab47bc;
+  border-color: #ab47bc;
 }
 input[type="checkbox"]:focus {
   outline: none;
