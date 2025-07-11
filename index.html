@@ -3,9 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PX ↔ VW 변환기</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/reset.css">
+  <title>PX ↔ VW Converter</title>
+   <link rel="icon" href="favicon.ico">
+    <meta name="title" content="PX-VW 변환기 | px to vw | vw to px | CSS 단위 변환 | 반응형 웹 | 뷰포트 | 픽셀 변환 | CSS 자동 변환 | 웹디자인 | 프론트엔드 | 모바일 웹 | 반응형 단위 | px vw 변환기 | CSS px vw 변환 | px vw 자동 변환 | px to vw converter | vw to px converter | CSS 단위 자동 변환 | 웹 퍼블리셔 툴 | 프론트엔드 툴 | CSS 유틸리티 | 웹 개발자 도구">
+    <meta name="description" content="PX-VW 변환기는 픽셀(px)과 뷰포트 단위(vw) 간의 변환을 쉽고 빠르게 도와주는 웹 도구입니다. CSS 코드 내의 px 값을 vw로, vw 값을 px로 자동 변환하며, 반응형 웹, 모바일 웹, 웹디자인, 프론트엔드 개발에 최적화된 기능을 제공합니다. 다양한 브레이크포인트 프리셋, 소수점 조절, 단위 포함 옵션, CSS 자동 변환, 복사 및 초기화 기능까지 지원합니다.">
+    <meta name="keywords" content="PX-VW 변환기, px to vw, vw to px, CSS 단위 변환, 반응형 웹, 뷰포트, 픽셀 변환, CSS 자동 변환, 웹디자인, 프론트엔드, 모바일 웹, 반응형 단위, px vw 변환기, CSS px vw 변환, px vw 자동 변환, px to vw converter, vw to px converter, CSS 단위 자동 변환, 웹 퍼블리셔 툴, 프론트엔드 툴, CSS 유틸리티, 웹 개발자 도구, CSS px 변환, CSS vw 변환, 반응형 CSS, CSS 브레이크포인트, CSS 소수점 변환, CSS 복사, CSS 초기화, 웹 개발, 웹 퍼블리싱, 모바일 반응형, 데스크탑 반응형, CSS 단위 변환기, CSS px to vw, CSS vw to px, CSS px vw 자동 변환, CSS px vw 변환기, CSS px vw 변환 툴">
+    <meta property="og:title" content="PX-VW 변환기 | px to vw | vw to px | CSS 단위 변환 | 반응형 웹 | 픽셀 변환">
+    <meta property="og:site_name" content="PX-VW 변환기 - 반응형 CSS 단위 변환 툴">
+    <meta property="og:description" content="픽셀(px)과 뷰포트(vw) 단위를 쉽고 빠르게 변환하세요. CSS 자동 변환, 반응형 웹, 프론트엔드 개발자를 위한 필수 도구.">
+    <meta property="og:url" content="img/og.png">
+    <meta property="og:image" content="og 이미지"> 
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reset.css">
 </head>
 <body>
   <div class="container">
@@ -31,9 +40,9 @@
             <input type="text" id="vw-output" placeholder="VW" readonly>
             <label style="margin-left:6px;"><input type="checkbox" id="vw-unit-check" checked>단위포함(px)</label>
           </div>
-          <button id="px-to-vw-btn">계산하기</button>
-          <button type="button" id="vw-copy-btn">복사하기</button>
-          <button type="button" id="vw-clear-btn">내용지우기</button>
+            <button id="px-to-vw-btn"><span style="margin-right:4px;">🧮</span>Convert</button>
+            <button type="button" id="vw-copy-btn"><span style="margin-right:4px;">📋</span>Copy</button>
+            <button type="button" id="vw-clear-btn"><span style="margin-right:4px;">🗑️</span>Clear</button>
         </div>
         <div class="convert-box">
           <h2>VW to PX</h2>
@@ -56,38 +65,48 @@
             <input type="text" id="px-output" placeholder="PX" readonly>
             <label style="margin-left:6px;"><input type="checkbox" id="px-unit-check" checked>단위포함(vw)</label>
           </div>
-          <button id="vw-to-px-btn">계산하기</button>
-          <button type="button" id="px-copy-btn">복사하기</button>
-          <button type="button" id="px-clear-btn">내용지우기</button>
+            <button id="vw-to-px-btn"><span style="margin-right:4px;">🧮</span>Convert</button>
+            <button type="button" id="px-copy-btn"><span style="margin-right:4px;">📋</span>Copy</button>
+            <button type="button" id="px-clear-btn"><span style="margin-right:4px;">🗑️</span>Clear</button>
         </div>
       </div>
       <div class="css-section">
         <div class="css-box">
           <div class="css-header">
             Breakpoints <input type="number" id="css1-width" value="720"> PX / 소수점 : <input type="number" id="css1-float" value="2" min="0" max="5">
-            <label><input type="checkbox" id="css1-remove"> 속성 삭제</label>
+            <label>
+              <input type="checkbox" id="css1-remove">속성삭제(Remove property)
+            </label>
           </div>
-          <textarea id="css1-input" placeholder="Enter the source"></textarea>
-          <textarea id="css1-output" readonly></textarea>
-          <button id="css1-btn">계산하기</button>
-          <button id="css1-copy-btn">복사하기</button>
-          <button type="button" id="css1-clear-btn">내용지우기</button>
+          <div class="textarea-box">
+            <textarea id="css1-input" placeholder="Enter the source"></textarea>
+            <textarea id="css1-output" readonly></textarea>
+          </div>
+          <div class="button-box">
+            <button id="css1-btn"><span style="margin-right:4px;">🧮</span>Convert</button>
+            <button id="css1-copy-btn"><span style="margin-right:4px;">📋</span>Copy</button>
+            <button type="button" id="css1-clear-btn"><span style="margin-right:4px;">🗑️</span>Clear</button>
+          </div>
         </div>
         <div class="css-box">
           <div class="css-header">
             Breakpoints <input type="number" id="css2-width" value="720"> PX
-            <label><input type="checkbox" id="css2-remove"> 속성 삭제</label>
+            <label><input type="checkbox" id="css2-remove">속성삭제(Remove property)</label>
             <label style="margin-left:8px;"><input type="checkbox" id="css2-no-float" checked> 소수점 없음(반올림)</label>
           </div>
-          <textarea id="css2-input" placeholder="Enter the source"></textarea>
-          <textarea id="css2-output" readonly></textarea>
-          <button id="css2-btn">계산하기</button>
-          <button id="css2-copy-btn">복사하기</button>
-          <button type="button" id="css2-clear-btn">내용지우기</button>
+          <div class="textarea-box">
+            <textarea id="css2-input" placeholder="Enter the source"></textarea>
+            <textarea id="css2-output" readonly></textarea>
+          </div>
+          <div class="button-box">
+            <button id="css2-btn"><span style="margin-right:4px;">🧮</span>Convert</button>
+            <button id="css2-copy-btn"><span style="margin-right:4px;">📋</span>Copy</button>
+            <button type="button" id="css2-clear-btn"><span style="margin-right:4px;">🗑️</span>Clear</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <script src="/js/script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html> 
