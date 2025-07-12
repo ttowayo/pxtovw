@@ -334,21 +334,311 @@ if (mobileToggleBtn && pxToVwBox && vwToPxBox && css1Box && css2Box) {
     }
   });
 
-  // 화면 크기 변경 시 이벤트
-  // window.addEventListener("resize", function () {
-  //   if (window.innerWidth > 720) {
-  //     // 데스크탑에서는 모든 박스 표시
-  //     pxToVwBox.classList.remove("visible", "hidden");
-  //     vwToPxBox.classList.remove("visible", "hidden");
-  //     css1Box.classList.remove("visible", "hidden");
-  //     css2Box.classList.remove("visible", "hidden");
-  //     mobileToggleBtn.classList.remove("on");
-  //   } else {
-  //     // 모바일에서는 초기 상태로 설정
-  //     setInitialMobileState();
-  //   }
-  // });
-
   // 페이지 로드 시 초기 상태 설정
   setInitialMobileState();
 }
+
+// Supabase 방문자 카운트 기능
+// Supabase 클라이언트 초기화
+const supabase = window.supabase.createClient(
+  window.SUPABASE_CONFIG.url,
+  window.SUPABASE_CONFIG.anonKey
+);
+
+// 방문자 중복 체크 함수
+async function checkDuplicateVisit() {
+  try {
+    const today = new Date().toISOString().split("T")[0];
+
+    // 브라우저 정보로 방문자 식별 (IP는 클라이언트에서 얻을 수 없으므로 User Agent + 기타 정보 조합)
+    const visitorFingerprint = generateVisitorFingerprint();
+
+    // console.log("방문자 식별 정보:", visitorFingerprint);
+
+    // 오늘 같은 방문자가 이미 방문했는지 확인
+    const { data: existingVisit, error } = await supabase
+      .from("visit_logs")
+      .select("*")
+      .eq("visit_date", today)
+      .eq("visitor_fingerprint", visitorFingerprint)
+      .limit(1);
+
+    if (error) {
+      // console.error("중복 방문 체크 오류:", error);
+      return false; // 오류 시 중복이 아닌 것으로 처리
+    }
+
+    const isDuplicate = existingVisit && existingVisit.length > 0;
+    // console.log("중복 방문 여부:", isDuplicate);
+
+    return isDuplicate;
+  } catch (error) {
+    // console.error("중복 방문 체크 예외:", error);
+    return false;
+  }
+}
+
+// 방문자 식별 정보 생성 함수
+function generateVisitorFingerprint() {
+  const userAgent = navigator.userAgent;
+  const language = navigator.language;
+  const platform = navigator.platform;
+  const screenResolution = `${screen.width}x${screen.height}`;
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const colorDepth = screen.colorDepth;
+  const pixelRatio = window.devicePixelRatio || 1;
+
+  // 추가 브라우저 정보
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  ctx.textBaseline = "top";
+  ctx.font = "14px Arial";
+  ctx.fillText("Browser fingerprint", 2, 2);
+  const canvasFingerprint = canvas.toDataURL();
+
+  // 브라우저 정보 조합
+  const fingerprint = `${userAgent}|${language}|${platform}|${screenResolution}|${timezone}|${colorDepth}|${pixelRatio}|${canvasFingerprint}`;
+
+  // 간단한 해시 생성 (실제로는 더 정교한 해시 함수 사용 권장)
+  let hash = 0;
+  for (let i = 0; i < fingerprint.length; i++) {
+    const char = fingerprint.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash = hash & hash; // 32비트 정수로 변환
+  }
+
+  return Math.abs(hash).toString(36);
+}
+
+// 방문자 카운트 함수들
+async function incrementVisitCount() {
+  try {
+    const today = new Date().toISOString().split("T")[0];
+    // console.log("방문자 카운트 시작 - 날짜:", today);
+
+    // 중복 방문 체크
+    const isDuplicate = await checkDuplicateVisit();
+    if (isDuplicate) {
+      // console.log("중복 방문으로 카운트하지 않음");
+      return;
+    }
+
+    // 오늘 날짜의 방문 기록 확인 - 더 안전한 방식
+    let existingRecord = null;
+    try {
+      const { data, error } = await supabase
+        .from("visitor_stats")
+        .select("*")
+        .eq("visit_date", today);
+
+      if (error) {
+        // console.error("방문 기록 조회 오류:", error);
+        return;
+      }
+
+      existingRecord = data && data.length > 0 ? data[0] : null;
+      // console.log("기존 기록:", existingRecord);
+    } catch (err) {
+      // console.error("방문 기록 조회 예외:", err);
+      return;
+    }
+
+    if (existingRecord) {
+      // 기존 기록이 있으면 카운트 증가
+      // console.log("기존 기록 업데이트:", existingRecord.total_visits + 1);
+      const { error: updateError } = await supabase
+        .from("visitor_stats")
+        .update({
+          total_visits: existingRecord.total_visits + 1,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("visit_date", today);
+
+      if (updateError) {
+        // console.error("방문 카운트 업데이트 오류:", updateError);
+      } else {
+        // console.log("방문자 카운트 업데이트 성공");
+      }
+    } else {
+      // 새로운 날짜면 새 기록 생성
+      // console.log("새 기록 생성");
+      const { error: insertError } = await supabase
+        .from("visitor_stats")
+        .insert({
+          visit_date: today,
+          total_visits: 1,
+        });
+
+      if (insertError) {
+        // console.error("방문 기록 생성 오류:", insertError);
+      } else {
+        // console.log("방문자 카운트 생성 성공");
+      }
+    }
+
+    // 방문 로그 기록 (중복이 아닌 경우에만)
+    await logVisit();
+  } catch (error) {
+    // console.error("방문자 카운트 오류:", error);
+  }
+}
+
+// 방문 로그 기록 함수
+async function logVisit() {
+  try {
+    const today = new Date().toISOString().split("T")[0];
+    const visitorFingerprint = generateVisitorFingerprint();
+
+    // 방문자 정보 수집
+    const visitorInfo = {
+      visit_date: today,
+      user_agent: navigator.userAgent,
+      visitor_fingerprint: visitorFingerprint,
+      language: navigator.language,
+      platform: navigator.platform,
+      screen_resolution: `${screen.width}x${screen.height}`,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    };
+
+    // console.log("방문 로그 기록:", visitorInfo);
+
+    const { error } = await supabase.from("visit_logs").insert(visitorInfo);
+
+    if (error) {
+      // console.error("방문 로그 기록 오류:", error);
+    } else {
+      // console.log("방문 로그 기록 성공");
+    }
+  } catch (error) {
+    // console.error("방문 로그 오류:", error);
+  }
+}
+
+// 방문자 통계 조회 함수
+async function loadVisitorStats() {
+  try {
+    const today = new Date().toISOString().split("T")[0];
+    const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000)
+      .toISOString()
+      .split("T")[0];
+
+    // console.log("조회할 날짜:", { today, yesterday });
+
+    // 오늘 방문자 수 - 더 안전한 방식
+    let todayData = null;
+    try {
+      const { data, error } = await supabase
+        .from("visitor_stats")
+        .select("total_visits")
+        .eq("visit_date", today);
+
+      if (error) {
+        // console.error("오늘 데이터 조회 오류:", error);
+      } else {
+        todayData = data && data.length > 0 ? data[0] : null;
+        // console.log("오늘 데이터:", todayData);
+      }
+    } catch (err) {
+      // console.error("오늘 데이터 조회 예외:", err);
+    }
+
+    // 어제 방문자 수 - 더 안전한 방식
+    let yesterdayData = null;
+    try {
+      const { data, error } = await supabase
+        .from("visitor_stats")
+        .select("total_visits")
+        .eq("visit_date", yesterday);
+
+      if (error) {
+        // console.error("어제 데이터 조회 오류:", error);
+      } else {
+        yesterdayData = data && data.length > 0 ? data[0] : null;
+        // console.log("어제 데이터:", yesterdayData);
+      }
+    } catch (err) {
+      // console.error("어제 데이터 조회 예외:", err);
+    }
+
+    // 전체 방문자 수 (모든 날짜 합계)
+    let totalData = null;
+    try {
+      const { data, error } = await supabase
+        .from("visitor_stats")
+        .select("total_visits");
+
+      if (error) {
+        // console.error("전체 데이터 조회 오류:", error);
+      } else {
+        totalData = data;
+        // console.log("전체 데이터:", totalData);
+      }
+    } catch (err) {
+      // console.error("전체 데이터 조회 예외:", err);
+    }
+
+    // 결과 업데이트
+    const visitToday = document.getElementById("visit-today");
+    const visitYesterday = document.getElementById("visit-yesterday");
+    const visitTotal = document.getElementById("visit-total");
+
+    if (visitToday) {
+      visitToday.textContent = todayData?.total_visits || 0;
+    }
+    if (visitYesterday) {
+      visitYesterday.textContent = yesterdayData?.total_visits || 0;
+    }
+    if (visitTotal) {
+      const totalVisits =
+        totalData?.reduce((sum, record) => sum + record.total_visits, 0) || 0;
+      visitTotal.textContent = totalVisits;
+    }
+
+    // console.log("방문자 통계 업데이트 완료");
+  } catch (error) {
+    // console.error("방문자 통계 조회 오류:", error);
+  }
+}
+
+// 주기적으로 통계 업데이트 (선택사항)
+setInterval(loadVisitorStats, 60000); // 1분마다 업데이트
+
+// 디버깅용 테스트 함수
+async function testSupabaseConnection() {
+  try {
+    // console.log("Supabase 연결 테스트 시작...");
+
+    // 기본 연결 테스트
+    const { data, error } = await supabase
+      .from("visitor_stats")
+      .select("*")
+      .limit(1);
+
+    if (error) {
+      // console.error("연결 테스트 실패:", error);
+      return false;
+    }
+
+    // console.log("연결 테스트 성공:", data);
+    return true;
+  } catch (error) {
+    // console.error("연결 테스트 오류:", error);
+    return false;
+  }
+}
+
+// 페이지 로드 시 연결 테스트 실행
+document.addEventListener("DOMContentLoaded", async function () {
+  // 연결 테스트
+  const isConnected = await testSupabaseConnection();
+
+  if (isConnected) {
+    // 방문자 카운트 증가
+    await incrementVisitCount();
+
+    // 방문자 통계 로드
+    await loadVisitorStats();
+  } else {
+    // console.error("Supabase 연결 실패 - 방문자 카운트 기능 비활성화");
+  }
+});
