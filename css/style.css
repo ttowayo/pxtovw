@@ -72,6 +72,9 @@ body {
   font-size: 16px;
   width: auto;
 }
+button.mobile-toggle-btn {
+  display: none;
+}
 button,
 #px-to-vw-btn,
 #vw-to-px-btn,
