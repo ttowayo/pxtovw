@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no">
+  <title>CSS 단위 완벽 가이드 | px, vw, rem, em, % 단위 비교와 활용법</title>
+  <link rel="icon" href="favicon.ico">
+  <meta name="description" content="CSS 단위의 모든 것을 알아보세요. px, vw, rem, em, % 단위의 차이점과 언제 어떤 단위를 사용해야 하는지 완벽하게 정리했습니다.">
+  <meta name="keywords" content="CSS 단위, px, vw, rem, em, 퍼센트, CSS 가이드, 웹 개발, 반응형 디자인, CSS 기초">
+  <meta property="og:title" content="CSS 단위 완벽 가이드">
+  <meta property="og:description" content="px, vw, rem, em, % 단위 비교와 활용법">
+  <meta property="og:url" content="https://pxtovw.co.kr/blog-css-units.html">
+  <meta property="og:image" content="https://pxtovw.co.kr/img/og.png">
+  
+  <!-- font add -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/blog.css">
+</head>
+<body>
+  <div class="blog-container">
+    <div class="blog-header">
+      <h1>CSS 단위 완벽 가이드</h1>
+      <div class="blog-meta">
+        <span>📅 2025년 7월 11일</span> | 
+        <span>👨‍💻 웹 개발</span> | 
+        <span>📚 CSS 기초</span>
+      </div>
+      <p>px, vw, rem, em, % 단위 비교와 언제 어떤 단위를 사용해야 하는지 알아보세요</p>
+    </div>
+    
+    <div class="blog-content">
+      <p>CSS에서 단위는 웹 디자인의 핵심 요소입니다. 각 단위마다 고유한 특성과 사용 시기가 있어서, 올바른 단위를 선택하는 것이 반응형 웹 디자인의 성공을 좌우합니다. 이 글에서는 CSS의 주요 단위들을 자세히 살펴보고, 언제 어떤 단위를 사용해야 하는지 알아보겠습니다.</p>
+      
+      <h2>1. 절대 단위 (Absolute Units)</h2>
+      
+      <h3>1.1 픽셀 (px)</h3>
+      <p>픽셀은 CSS에서 가장 기본적인 단위입니다. 화면의 물리적 픽셀을 기준으로 하는 절대 단위로, 모든 기기에서 동일한 크기를 유지합니다.</p>
+      
+      <div class="code-block">
+        .element {
+          width: 100px;
+          height: 50px;
+          font-size: 16px;
+        }
+      </div>
+      
+      <h4>px 단위의 특징:</h4>
+      <ul>
+        <li><strong>고정 크기</strong>: 모든 기기에서 동일한 크기</li>
+        <li><strong>정확성</strong>: 정확한 픽셀 단위로 제어 가능</li>
+        <li><strong>일관성</strong>: 디자인 시안과 정확히 일치</li>
+        <li><strong>반응형 부족</strong>: 화면 크기에 따라 조정되지 않음</li>
+      </ul>
+      
+      <div class="tip-box">
+        <h4>💡 px 단위 사용 시기</h4>
+        <p>보더, 그림자, 최소/최대 크기 등 고정된 크기가 필요한 요소에 사용하세요. 반응형이 필요 없는 UI 요소에 적합합니다.</p>
+      </div>
+      
+      <h2>2. 상대 단위 (Relative Units)</h2>
+      
+      <h3>2.1 뷰포트 단위 (vw, vh)</h3>
+      <p>뷰포트 단위는 화면 크기에 비례하여 조정되는 상대 단위입니다. vw는 뷰포트 너비의 1%, vh는 뷰포트 높이의 1%를 의미합니다.</p>
+      
+      <div class="code-block">
+        .responsive-container {
+          width: 50vw;        /* 화면 너비의 50% */
+          height: 30vh;       /* 화면 높이의 30% */
+          font-size: 2vw;     /* 화면 너비의 2% */
+        }
+      </div>
+      
+      <h4>뷰포트 단위의 특징:</h4>
+      <ul>
+        <li><strong>완전 반응형</strong>: 화면 크기에 비례하여 조정</li>
+        <li><strong>유연성</strong>: 다양한 기기에 자동 대응</li>
+        <li><strong>일관된 비율</strong>: 모든 화면에서 동일한 비율 유지</li>
+        <li><strong>제어 어려움</strong>: 너무 작거나 큰 화면에서 문제 발생 가능</li>
+      </ul>
+      
+      <div class="warning-box">
+        <h4>⚠️ 뷰포트 단위 주의사항</h4>
+        <p>매우 작은 화면(320px 이하)이나 큰 화면(1920px 이상)에서는 폰트 크기가 부적절할 수 있습니다. min(), max() 함수와 함께 사용하는 것을 권장합니다.</p>
+      </div>
+      
+      <h3>2.2 루트 상대 단위 (rem)</h3>
+      <p>rem은 루트 요소(html)의 폰트 크기를 기준으로 하는 상대 단위입니다. 기본적으로 1rem = 16px입니다.</p>
+      
+      <div class="code-block">
+        html {
+          font-size: 16px;    /* 기본값 */
+        }
+        
+        .element {
+          font-size: 1.5rem;  /* 24px (16px × 1.5) */
+          margin: 1rem;       /* 16px */
+          padding: 0.5rem;    /* 8px (16px × 0.5) */
+        }
+      </div>
+      
+      <h4>rem 단위의 특징:</h4>
+      <ul>
+        <li><strong>접근성</strong>: 사용자의 폰트 크기 설정을 존중</li>
+        <li><strong>일관성</strong>: 전체 사이트에서 일관된 크기 비율</li>
+        <li><strong>유지보수</strong>: 루트 폰트 크기 변경으로 전체 조정 가능</li>
+        <li><strong>계산 필요</strong>: px에서 변환 시 계산이 필요</li>
+      </ul>
+      
+      <h3>2.3 요소 상대 단위 (em)</h3>
+      <p>em은 현재 요소의 폰트 크기를 기준으로 하는 상대 단위입니다. 중첩된 요소에서는 복잡한 계산이 필요할 수 있습니다.</p>
+      
+      <div class="code-block">
+        .parent {
+          font-size: 16px;
+          padding: 1em;       /* 16px */
+        }
+        
+        .child {
+          font-size: 1.5em;   /* 24px (16px × 1.5) */
+          margin: 1em;        /* 24px (현재 폰트 크기 기준) */
+        }
+      </div>
+      
+      <h4>em 단위의 특징:</h4>
+      <ul>
+        <li><strong>컨텍스트 의존</strong>: 부모 요소의 폰트 크기에 영향받음</li>
+        <li><strong>복잡성</strong>: 중첩 시 계산이 복잡해짐</li>
+        <li><strong>유연성</strong>: 요소별로 다른 크기 비율 적용 가능</li>
+        <li><strong>디버깅 어려움</strong>: 예상치 못한 크기 변화 발생 가능</li>
+      </ul>
+      
+      <h3>2.4 퍼센트 (%)</h3>
+      <p>퍼센트는 부모 요소를 기준으로 하는 상대 단위입니다. 부모 요소의 크기에 비례하여 조정됩니다.</p>
+      
+      <div class="code-block">
+        .parent {
+          width: 500px;
+          height: 300px;
+        }
+        
+        .child {
+          width: 50%;         /* 250px (500px × 0.5) */
+          height: 80%;        /* 240px (300px × 0.8) */
+        }
+      </div>
+      
+      <h2>3. 단위 비교표</h2>
+      
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>단위</th>
+            <th>기준</th>
+            <th>장점</th>
+            <th>단점</th>
+            <th>사용 시기</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>px</strong></td>
+            <td>절대 크기</td>
+            <td>정확성, 일관성</td>
+            <td>반응형 부족</td>
+            <td>보더, 그림자, 고정 크기</td>
+          </tr>
+          <tr>
+            <td><strong>vw</strong></td>
+            <td>뷰포트 너비</td>
+            <td>완전 반응형, 유연성</td>
+            <td>극단적 크기에서 문제</td>
+            <td>컨테이너, 레이아웃</td>
+          </tr>
+          <tr>
+            <td><strong>vh</strong></td>
+            <td>뷰포트 높이</td>
+            <td>높이 반응형</td>
+            <td>모바일 주소창 영향</td>
+            <td>풀스크린 레이아웃</td>
+          </tr>
+          <tr>
+            <td><strong>rem</strong></td>
+            <td>루트 폰트 크기</td>
+            <td>접근성, 일관성</td>
+            <td>계산 필요</td>
+            <td>폰트 크기, 여백</td>
+          </tr>
+          <tr>
+            <td><strong>em</strong></td>
+            <td>현재 폰트 크기</td>
+            <td>컨텍스트 반응</td>
+            <td>복잡한 계산</td>
+            <td>상대적 여백, 패딩</td>
+          </tr>
+          <tr>
+            <td><strong>%</strong></td>
+            <td>부모 요소</td>
+            <td>직관적, 유연성</td>
+            <td>부모 의존</td>
+            <td>너비, 높이, 여백</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h2>4. 실전 활용 가이드</h2>
+      
+      <h3>4.1 반응형 웹 디자인에서의 단위 선택</h3>
+      
+      <div class="code-block">
+        /* 모바일 퍼스트 접근법 */
+        .container {
+          width: 100%;           /* 모바일에서 전체 너비 */
+          max-width: 1200px;     /* 데스크탑 최대 너비 */
+          margin: 0 auto;
+          padding: 1rem;         /* 반응형 패딩 */
+        }
+        
+        .card {
+          width: 100%;           /* 모바일에서 전체 너비 */
+          padding: 1.5rem;       /* 반응형 패딩 */
+          font-size: 1rem;       /* 기본 폰트 크기 */
+        }
+        
+        /* 태블릿 이상 */
+        @media (min-width: 768px) {
+          .card {
+            width: calc(50% - 1rem);  /* 2열 레이아웃 */
+            font-size: 1.125rem;      /* 약간 큰 폰트 */
+          }
+        }
+        
+        /* 데스크탑 */
+        @media (min-width: 1024px) {
+          .card {
+            width: calc(33.333% - 1rem);  /* 3열 레이아웃 */
+            font-size: 1.25rem;           /* 더 큰 폰트 */
+          }
+        }
+      </div>
+      
+      <h3>4.2 접근성을 고려한 폰트 크기 설정</h3>
+      
+      <div class="code-block">
+        /* 루트 폰트 크기 설정 */
+        html {
+          font-size: 16px;  /* 기본값 유지 */
+        }
+        
+        /* 사용자 설정 존중 */
+        @media (prefers-reduced-motion: reduce) {
+          html {
+            font-size: 18px;  /* 더 큰 폰트 */
+          }
+        }
+        
+        /* 폰트 크기 체계 */
+        .text-xs { font-size: 0.75rem; }   /* 12px */
+        .text-sm { font-size: 0.875rem; }  /* 14px */
+        .text-base { font-size: 1rem; }    /* 16px */
+        .text-lg { font-size: 1.125rem; }  /* 18px */
+        .text-xl { font-size: 1.25rem; }   /* 20px */
+        .text-2xl { font-size: 1.5rem; }   /* 24px */
+      </div>
+      
+      <h2>5. 단위 변환 팁</h2>
+      
+      <h3>5.1 px to vw 변환 공식</h3>
+      <p>px를 vw로 변환할 때는 다음 공식을 사용합니다:</p>
+      
+      <div class="code-block">
+        vw = (px ÷ 기준 너비) × 100
+        
+        예시: 1440px 기준에서 100px를 vw로 변환
+        vw = (100 ÷ 1440) × 100 = 6.94vw
+      </div>
+      
+      <h3>5.2 px to rem 변환 공식</h3>
+      <p>px를 rem으로 변환할 때는 다음 공식을 사용합니다:</p>
+      
+      <div class="code-block">
+        rem = px ÷ 16
+        
+        예시: 24px를 rem으로 변환
+        rem = 24 ÷ 16 = 1.5rem
+      </div>
+      
+      <div class="tip-box">
+        <h4>🔧 PX-VW 변환기 활용</h4>
+        <p>복잡한 계산 없이 <a href="index.html">PX-VW 변환기</a>를 사용하면 px 값을 vw로 쉽게 변환할 수 있습니다. 다양한 브레이크포인트에 맞춰 정확한 변환을 제공합니다.</p>
+      </div>
+      
+      <h2>6. 모범 사례</h2>
+      
+      <ul>
+        <li><strong>폰트 크기</strong>: rem 사용 (접근성 고려)</li>
+        <li><strong>레이아웃 너비</strong>: %, vw, 또는 max-width 조합</li>
+        <li><strong>여백과 패딩</strong>: rem 사용 (일관성)</li>
+        <li><strong>보더와 그림자</strong>: px 사용 (고정 크기)</li>
+        <li><strong>미디어 쿼리</strong>: em 사용 (폰트 크기 변화 고려)</li>
+      </ul>
+      
+      <h2>7. 결론</h2>
+      
+      <p>CSS 단위는 각각의 고유한 특성과 사용 시기가 있습니다. 프로젝트의 요구사항과 접근성 고려사항에 따라 적절한 단위를 선택하는 것이 중요합니다. 반응형 웹 디자인에서는 여러 단위를 조합하여 사용하는 것이 효과적이며, PX-VW 변환기를 활용하면 더욱 효율적으로 작업할 수 있습니다.</p>
+      
+      <div class="nav-links">
+        <a href="index.html">🏠 메인으로</a>
+        <a href="how-to-use.html">📖 사용법 가이드</a>
+        <a href="blog-responsive-design.html">📱 반응형 디자인</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 
