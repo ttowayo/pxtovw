@@ -272,3 +272,83 @@ if (css2ClearBtn) {
     css2Output.value = "";
   };
 }
+
+// 모바일 전환 버튼 기능
+const mobileToggleBtn = document.getElementById("mobile-toggle-btn");
+const pxToVwBox = document.querySelector(".convert-box:first-child");
+const vwToPxBox = document.querySelector(".convert-box:last-child");
+const css1Box = document.querySelector(".css-box:first-child");
+const css2Box = document.querySelector(".css-box:last-child");
+
+if (mobileToggleBtn && pxToVwBox && vwToPxBox && css1Box && css2Box) {
+  let isPxToVwVisible = true;
+
+  // 초기 상태 설정 (모바일에서만 적용)
+  function setInitialMobileState() {
+    if (window.innerWidth <= 720) {
+      pxToVwBox.classList.add("visible");
+      vwToPxBox.classList.add("hidden");
+      css1Box.classList.add("visible");
+      css2Box.classList.add("hidden");
+      mobileToggleBtn.textContent = "VW to PX";
+      mobileToggleBtn.classList.remove("on");
+    } else {
+      pxToVwBox.classList.remove("visible", "hidden");
+      vwToPxBox.classList.remove("visible", "hidden");
+      css1Box.classList.remove("visible", "hidden");
+      css2Box.classList.remove("visible", "hidden");
+      mobileToggleBtn.classList.remove("on");
+    }
+  }
+
+  // 전환 버튼 클릭 이벤트
+  mobileToggleBtn.addEventListener("click", function () {
+    if (window.innerWidth <= 720) {
+      if (isPxToVwVisible) {
+        // PX to VW에서 VW to PX로 전환
+        pxToVwBox.classList.remove("visible");
+        pxToVwBox.classList.add("hidden");
+        vwToPxBox.classList.remove("hidden");
+        vwToPxBox.classList.add("visible");
+        css1Box.classList.remove("visible");
+        css1Box.classList.add("hidden");
+        css2Box.classList.remove("hidden");
+        css2Box.classList.add("visible");
+        mobileToggleBtn.textContent = "PX to VW";
+        mobileToggleBtn.classList.add("on");
+        isPxToVwVisible = false;
+      } else {
+        // VW to PX에서 PX to VW로 전환
+        vwToPxBox.classList.remove("visible");
+        vwToPxBox.classList.add("hidden");
+        pxToVwBox.classList.remove("hidden");
+        pxToVwBox.classList.add("visible");
+        css2Box.classList.remove("visible");
+        css2Box.classList.add("hidden");
+        css1Box.classList.remove("hidden");
+        css1Box.classList.add("visible");
+        mobileToggleBtn.textContent = "VW to PX";
+        mobileToggleBtn.classList.remove("on");
+        isPxToVwVisible = true;
+      }
+    }
+  });
+
+  // 화면 크기 변경 시 이벤트
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 720) {
+      // 데스크탑에서는 모든 박스 표시
+      pxToVwBox.classList.remove("visible", "hidden");
+      vwToPxBox.classList.remove("visible", "hidden");
+      css1Box.classList.remove("visible", "hidden");
+      css2Box.classList.remove("visible", "hidden");
+      mobileToggleBtn.classList.remove("on");
+    } else {
+      // 모바일에서는 초기 상태로 설정
+      setInitialMobileState();
+    }
+  });
+
+  // 페이지 로드 시 초기 상태 설정
+  setInitialMobileState();
+}

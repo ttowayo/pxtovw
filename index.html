@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no">
   <title>PX ↔ VW Converter</title>
    <link rel="icon" href="favicon.ico">
     <meta name="title" content="PX-VW 변환기 | px to vw | vw to px | CSS 단위 변환 | 반응형 웹 | 뷰포트 | 픽셀 변환 | CSS 자동 변환 | 웹디자인 | 프론트엔드 | 모바일 웹 | 반응형 단위 | px vw 변환기 | CSS px vw 변환 | px vw 자동 변환 | px to vw converter | vw to px converter | CSS 단위 자동 변환 | 웹 퍼블리셔 툴 | 프론트엔드 툴 | CSS 유틸리티 | 웹 개발자 도구">
@@ -65,9 +65,11 @@
             <input type="text" id="vw-output" placeholder="VW" readonly>
             <label style="margin-left:6px;"><input type="checkbox" id="vw-unit-check" checked>단위포함(px)</label>
           </div>
+          <div class="btn-box">
             <button id="px-to-vw-btn"><span style="margin-right:4px;">🧮</span>Convert</button>
             <button type="button" id="vw-copy-btn"><span style="margin-right:4px;">📋</span>Copy</button>
             <button type="button" id="vw-clear-btn"><span style="margin-right:4px;">🗑️</span>Clear</button>
+          </div>
         </div>
         <div class="convert-box">
           <h2>VW to PX</h2>
@@ -90,9 +92,11 @@
             <input type="text" id="px-output" placeholder="PX" readonly>
             <label style="margin-left:6px;"><input type="checkbox" id="px-unit-check" checked>단위포함(vw)</label>
           </div>
+          <div class="btn-box"> 
             <button id="vw-to-px-btn"><span style="margin-right:4px;">🧮</span>Convert</button>
             <button type="button" id="px-copy-btn"><span style="margin-right:4px;">📋</span>Copy</button>
             <button type="button" id="px-clear-btn"><span style="margin-right:4px;">🗑️</span>Clear</button>
+          </div>
         </div>
       </div>
       <div class="css-section">
@@ -132,6 +136,12 @@
       </div>
     </div>
   </div>
+  
+  <!-- 모바일 전환 버튼 -->
+  <button class="mobile-toggle-btn" id="mobile-toggle-btn">
+    PX to VW
+  </button>
+  
   <script src="js/script.js"></script>
    <!-- Google Tag Manager (noscript) -->
    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W9S8HFM9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

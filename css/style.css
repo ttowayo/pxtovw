@@ -110,8 +110,8 @@ button:focus,
   flex-direction: column;
   align-items: center;
 }
-.button-box button{
- width: 100%;
+.button-box button {
+  width: 100%;
 }
 #px-to-vw-btn,
 #vw-to-px-btn,
@@ -322,4 +322,296 @@ input[type="checkbox"]:checked::after {
   border-width: 0 3px 3px 0;
   transform: rotate(45deg);
   transition: all 0.2s;
+}
+
+/* =========================== mobile ================================ */
+/* =========================== mobile ================================ */
+/* =========================== mobile ================================ */
+
+@media (max-width: 720px) {
+  .container {
+    margin: 10px;
+    min-width: auto;
+    max-width: none;
+    height: 100%;
+  }
+  .header {
+    font-size: 18px;
+    padding: 12px 12px 8px 12px;
+  }
+  .close-btn {
+    font-size: 24px;
+  }
+  .main {
+    padding: 15px 12px;
+    height: 100%;
+    min-height: 100%;
+  }
+  .convert-section {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .convert-box {
+    width: 100%;
+    padding: 12px;
+  }
+  .convert-box h2 {
+    font-size: 16px;
+  }
+  .convert-box h3 {
+    font-size: 16px;
+  }
+  .row {
+    flex-direction: column;
+    align-items: stretch;
+    /* gap: 8px; */
+  }
+  .row input {
+    width: 100%;
+    margin-right: 0;
+    box-sizing: border-box;
+  }
+  button,
+  #px-to-vw-btn,
+  #vw-to-px-btn,
+  #css1-btn,
+  #css2-btn,
+  #css1-copy-btn {
+    font-size: 14px;
+    padding: 4px 6px;
+  }
+  button:active,
+  #px-to-vw-btn:active,
+  #vw-to-px-btn:active,
+  #css1-btn:active,
+  #css2-btn:active {
+    background: #4a148c;
+  }
+  button:focus,
+  #px-to-vw-btn:focus,
+  #vw-to-px-btn:focus,
+  #css1-btn:focus,
+  #css2-btn:focus {
+    outline: none;
+  }
+  .btn-box {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
+  .btn-box button {
+    width: auto;
+    flex: 1;
+    padding: 8px;
+  }
+  .button-box {
+    flex-direction: row;
+    gap: 8px;
+  }
+  .button-box button {
+    width: auto;
+    flex: 1;
+    padding: 8px;
+  }
+  #px-to-vw-btn,
+  #vw-to-px-btn,
+  #css1-btn,
+  #css2-btn {
+    background: #ab47bc;
+    color: #fff;
+    border: 1px solid #ba68c8;
+    padding: 8px;
+  }
+  #px-to-vw-btn:hover,
+  #vw-to-px-btn:hover,
+  #css1-btn:hover,
+  #css2-btn:hover {
+    background: #4a148c;
+  }
+  #css1-copy-btn {
+    background: #fffde7;
+    color: #f57c00;
+    border: 1px solid #ffe0b2;
+    padding: 8px;
+  }
+  #css1-copy-btn:hover {
+    background: #f57c00;
+    color: #fff;
+  }
+  .css-section {
+    flex-direction: column;
+    height: auto;
+    min-height: auto;
+    gap: 15px;
+  }
+  .css-box {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+  }
+  .css-header {
+    font-size: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .css-header input[type="number"] {
+    width: 60px;
+  }
+  .css-header label {
+    font-size: 12px;
+    margin-left: 4px;
+  }
+  .textarea-box {
+    min-height: 200px;
+  }
+  textarea {
+    font-size: 14px;
+    min-height: 120px;
+  }
+  textarea[readonly] {
+    background: #f0f0f0;
+  }
+  .vw-preset-group {
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+  #vw1-width,
+  #vw2-width {
+    width: 30%;
+  }
+  #css1-float {
+    width: 10%;
+  }
+  .vw-preset-btn {
+    font-size: 14px;
+    padding: 4px 6px;
+  }
+  .vw-preset-btn:hover,
+  .vw-preset-btn:active {
+    background: #ab47bc;
+    color: #fff;
+  }
+  .vw2-preset-btn:hover,
+  .vw2-preset-btn:active {
+    background: #d32f2f;
+    color: #fff;
+  }
+  #vw-copy-btn,
+  #px-copy-btn,
+  #css2-copy-btn {
+    font-size: 14px;
+    padding: 8px;
+  }
+  #vw-copy-btn:hover,
+  #px-copy-btn:hover,
+  #css2-copy-btn:hover {
+    background: #f57c00;
+    color: #fff;
+  }
+  #vw-clear-btn,
+  #px-clear-btn,
+  #css2-clear-btn {
+    font-size: 14px;
+    padding: 8px;
+  }
+  #vw-clear-btn:hover,
+  #px-clear-btn:hover,
+  #css2-clear-btn:hover {
+    background: #d32f2f;
+    color: #fff;
+  }
+  #css1-clear-btn:hover {
+    background: #d32f2f;
+    color: #fff;
+  }
+  /* 폼 전체 스타일 */
+  form {
+    gap: 10px;
+  }
+  input[type="number"],
+  input[type="text"],
+  textarea {
+    font-size: 14px;
+    padding: 6px 10px;
+    /* margin-bottom: 0; */
+  }
+  input[type="number"]:focus,
+  input[type="text"]:focus,
+  textarea:focus {
+    border: 1.5px solid #ab47bc;
+    box-shadow: 0 0 0 2px #f3e5f5;
+  }
+  input[readonly],
+  textarea[readonly] {
+    background: #f5f5f5;
+    color: #888;
+  }
+  /* 체크박스 커스텀 디자인 */
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+  }
+  input[type="checkbox"]:checked {
+    background: #ab47bc;
+    border-color: #ab47bc;
+  }
+  input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #f3e5f5;
+  }
+  input[type="checkbox"]:checked::after {
+    left: 3px;
+    top: 0px;
+    width: 4px;
+    height: 8px;
+  }
+
+  /* 모바일 전환 버튼 */
+  .mobile-toggle-btn {
+    position: fixed;
+    top: 40px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(171, 71, 188, 0.3);
+    z-index: 1000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.2;
+    background: #ffebee;
+    color: #d32f2f;
+    border: 1px solid #ffcdd2;
+  }
+  .mobile-toggle-btn.on {
+    background: #f3e5f5;
+    color: #ab47bc;
+    border: 1px solid #ce93d8;
+  }
+
+  .mobile-toggle-btn:hover {
+    /* background: #4a148c; */
+    /* transform: scale(1.05); */
+  }
+
+  .mobile-toggle-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* 모바일에서 화면 전환 */
+  .convert-box.hidden,
+  .css-box.hidden {
+    display: none;
+  }
+
+  .convert-box.visible,
+  .css-box.visible {
+    display: block;
+  }
 }
