@@ -75,7 +75,12 @@ const vw1Float = document.getElementById("vw1-float");
 // 프리셋 버튼 이벤트
 Array.from(document.getElementsByClassName("vw-preset-btn")).forEach((btn) => {
   btn.onclick = function () {
-    vw1Width.value = this.getAttribute("data-value");
+    const value = this.getAttribute("data-value");
+    vw1Width.value = value;
+    // CSS1 섹션의 너비도 함께 변경
+    if (css1Width) {
+      css1Width.value = value;
+    }
   };
 });
 // PX to VW 단위포함 기능
@@ -122,7 +127,12 @@ const pxNoFloat = document.getElementById("px-no-float");
 // VW to PX 프리셋 버튼 이벤트
 Array.from(document.getElementsByClassName("vw2-preset-btn")).forEach((btn) => {
   btn.onclick = function () {
-    vw2Width.value = this.getAttribute("data-value");
+    const value = this.getAttribute("data-value");
+    vw2Width.value = value;
+    // CSS2 섹션의 너비도 함께 변경
+    if (css2Width) {
+      css2Width.value = value;
+    }
   };
 });
 // VW to PX 단위포함 기능
