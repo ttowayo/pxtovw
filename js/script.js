@@ -273,6 +273,100 @@ if (css2ClearBtn) {
   };
 }
 
+// Supabase 설정
+const supabaseUrl = "https://vahiwfiwpsxhwyrtxgrw.supabase.co";
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZhaGl3Zml3cHN4aHd5cnR4Z3J3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzMDEyMjYsImV4cCI6MjA2Nzg3NzIyNn0.R3M7rb7fn1_d__REv_rg5TX1tadSlqvDHhsqrKh9RUc";
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+// 방문자 통계 기능
+async function updateVisitStats() {
+  try {
+    const today = new Date().toISOString().split("T")[0];
+    const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000)
+      .toISOString()
+      .split("T")[0];
+
+    // 오늘 방문자 수 조회 또는 생성
+    let { data: todayData, error: todayError } = await supabaseClient
+      .from("pxtove")
+      .select("visit_count")
+      .eq("visit_data", today)
+      .single();
+
+    if (todayError && todayError.code === "PGRST116") {
+      // 오늘 데이터가 없으면 새로 생성
+      const { data: newTodayData, error: insertError } = await supabaseClient
+        .from("pxtove")
+        .insert([{ visit_data: today, visit_count: 1 }])
+        .select("visit_count")
+        .single();
+
+      if (insertError) {
+        console.error("오늘 방문자 데이터 생성 실패:", insertError);
+        return;
+      }
+
+      todayData = newTodayData;
+    } else if (todayError) {
+      console.error("오늘 방문자 데이터 조회 실패:", todayError);
+      return;
+    } else {
+      // 오늘 데이터가 있으면 카운트 증가
+      const { error: updateError } = await supabaseClient
+        .from("pxtove")
+        .update({ visit_count: todayData.visit_count + 1 })
+        .eq("visit_data", today);
+
+      if (updateError) {
+        console.error("오늘 방문자 카운트 업데이트 실패:", updateError);
+        return;
+      }
+
+      todayData.visit_count += 1;
+    }
+
+    // 어제 방문자 수 조회
+    let { data: yesterdayData, error: yesterdayError } = await supabaseClient
+      .from("pxtove")
+      .select("visit_count")
+      .eq("visit_data", yesterday)
+      .single();
+
+    if (yesterdayError && yesterdayError.code === "PGRST116") {
+      yesterdayData = { visit_count: 0 };
+    } else if (yesterdayError) {
+      console.error("어제 방문자 데이터 조회 실패:", yesterdayError);
+      yesterdayData = { visit_count: 0 };
+    }
+
+    // 전체 방문자 수 조회
+    let { data: totalData, error: totalError } = await supabaseClient
+      .from("pxtove")
+      .select("visit_count");
+
+    if (totalError) {
+      console.error("전체 방문자 데이터 조회 실패:", totalError);
+      return;
+    }
+
+    const totalCount = totalData.reduce((sum, row) => sum + row.visit_count, 0);
+
+    // 화면 업데이트
+    document.getElementById("visit-total").textContent = totalCount;
+    document.getElementById("visit-today").textContent = todayData.visit_count;
+    document.getElementById("visit-yesterday").textContent =
+      yesterdayData.visit_count;
+  } catch (error) {
+    console.error("방문자 통계 업데이트 실패:", error);
+  }
+}
+
+// 페이지 로드 시 방문자 통계 업데이트
+document.addEventListener("DOMContentLoaded", function () {
+  updateVisitStats();
+});
+
 // 모바일 전환 버튼 기능
 const mobileToggleBtn = document.getElementById("mobile-toggle-btn");
 const pxToVwBox = document.querySelector(".convert-box:first-child");
@@ -335,19 +429,19 @@ if (mobileToggleBtn && pxToVwBox && vwToPxBox && css1Box && css2Box) {
   });
 
   // 화면 크기 변경 시 이벤트
-  window.addEventListener("resize", function () {
-    if (window.innerWidth > 720) {
-      // 데스크탑에서는 모든 박스 표시
-      pxToVwBox.classList.remove("visible", "hidden");
-      vwToPxBox.classList.remove("visible", "hidden");
-      css1Box.classList.remove("visible", "hidden");
-      css2Box.classList.remove("visible", "hidden");
-      mobileToggleBtn.classList.remove("on");
-    } else {
-      // 모바일에서는 초기 상태로 설정
-      setInitialMobileState();
-    }
-  });
+  // window.addEventListener("resize", function () {
+  //   if (window.innerWidth > 720) {
+  //     // 데스크탑에서는 모든 박스 표시
+  //     pxToVwBox.classList.remove("visible", "hidden");
+  //     vwToPxBox.classList.remove("visible", "hidden");
+  //     css1Box.classList.remove("visible", "hidden");
+  //     css2Box.classList.remove("visible", "hidden");
+  //     mobileToggleBtn.classList.remove("on");
+  //   } else {
+  //     // 모바일에서는 초기 상태로 설정
+  //     setInitialMobileState();
+  //   }
+  // });
 
   // 페이지 로드 시 초기 상태 설정
   setInitialMobileState();
