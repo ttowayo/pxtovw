@@ -8,140 +8,18 @@ function vwToPx(vw, viewport, floatNum) {
   if (!vw || !viewport) return "";
   return ((parseFloat(vw) * parseFloat(viewport)) / 100).toFixed(floatNum);
 }
-// 중괄호 매칭을 위한 헬퍼 함수
-function findMatchingBrace(str, startPos) {
-  let depth = 0;
-  let pos = startPos;
-  while (pos < str.length) {
-    if (str[pos] === '{') depth++;
-    if (str[pos] === '}') {
-      depth--;
-      if (depth === 0) return pos;
-    }
-    pos++;
-  }
-  return -1;
-}
-
-// 주석 보호를 위한 헬퍼 함수
-function protectComments(css) {
-  const comments = [];
-  let commentIndex = 0;
-  const protected = css.replace(/\/\*[\s\S]*?\*\//g, (match) => {
-    const marker = `__COMMENT_${commentIndex}__`;
-    comments.push(match);
-    commentIndex++;
-    return marker;
-  });
-  return { protected, comments };
-}
-
-// 주석 복원을 위한 헬퍼 함수
-function restoreComments(protected, comments) {
-  let result = protected;
-  comments.forEach((comment, index) => {
-    result = result.replace(`__COMMENT_${index}__`, comment);
-  });
-  return result;
-}
-
 // CSS 내 px -> vw 변환
 function cssPxToVw(css, viewport, floatNum, removeValue) {
-  // 주석 보호
-  const { protected: protectedCss, comments } = protectComments(css);
-  let workingCss = protectedCss;
-  
   if (!removeValue) {
-    const result = workingCss.replace(
+    return css.replace(
       /(\d+\.?\d*)px/g,
       (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
     );
-    return restoreComments(result, comments);
   }
   // 속성 삭제: 숫자 단위가 없는 속성 전체 삭제
-  // @keyframes 블록 처리
-  let result = "";
-  let pos = 0;
-  while (pos < workingCss.length) {
-    const keyframesMatch = workingCss.substring(pos).match(/@keyframes\s+([^{]+)\{/);
-    if (keyframesMatch) {
-      const keyframesStart = pos + keyframesMatch.index;
-      const keyframesName = keyframesMatch[1].trim();
-      const braceStart = keyframesStart + keyframesMatch[0].length - 1;
-      const braceEnd = findMatchingBrace(workingCss, braceStart);
-      
-      if (braceEnd !== -1) {
-        // @keyframes 블록 내용 추출
-        const keyframesContent = workingCss.substring(braceStart + 1, braceEnd);
-        
-        // 키프레임 내부 처리 (0%, 50%, 100% 등)
-        let processedContent = "";
-        let contentPos = 0;
-        while (contentPos < keyframesContent.length) {
-          const keyframeMatch = keyframesContent.substring(contentPos).match(/([^{]+)\{/);
-          if (keyframeMatch) {
-            const keyframeSelector = keyframeMatch[1].trim();
-            const keyframeBraceStart = contentPos + keyframeMatch.index + keyframeMatch[0].length - 1;
-            const keyframeBraceEnd = findMatchingBrace(keyframesContent, keyframeBraceStart);
-            
-            if (keyframeBraceEnd !== -1) {
-              const keyframeProps = keyframesContent.substring(keyframeBraceStart + 1, keyframeBraceEnd);
-              const propertyList = keyframeProps.split(/;\s*/);
-              const filteredProperties = propertyList
-                .map((line) => {
-                  if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(line)) {
-                    return line.replace(
-                      /(\d+\.?\d*)px/g,
-                      (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
-                    );
-                  }
-                  return "";
-                })
-                .filter(Boolean);
-              
-              // 키프레임이 비어있지 않으면 추가
-              if (filteredProperties.length > 0) {
-                processedContent += keyframeSelector + "{" + filteredProperties.join(";\n") + ";\n}";
-              }
-              
-              contentPos = keyframeBraceEnd + 1;
-            } else {
-              break;
-            }
-          } else {
-            break;
-          }
-        }
-        
-        // 모든 키프레임이 삭제되었으면 @keyframes 블록 전체 삭제
-        if (processedContent.trim()) {
-          result += "@keyframes " + keyframesName + "{" + processedContent + "}";
-        }
-        
-        pos = braceEnd + 1;
-        continue;
-      }
-    }
-    
-    // @keyframes가 아니면 일반 텍스트 추가
-    const nextKeyframes = workingCss.substring(pos).search(/@keyframes\s+[^{]+\{/);
-    if (nextKeyframes === -1) {
-      result += workingCss.substring(pos);
-      break;
-    } else {
-      result += workingCss.substring(pos, pos + nextKeyframes);
-      pos += nextKeyframes;
-    }
-  }
-  
-  // 일반 CSS 규칙 처리 (@keyframes 제외)
-  const finalResult = result.replace(
-    /(?!@keyframes)([^{]+{)([^}]+)(})/g,
+  return css.replace(
+    /([^{]+{)([^}]+)(})/g,
     (match, selector, properties, closingBrace) => {
-      // @keyframes로 시작하는 경우 건너뛰기
-      if (selector.trim().startsWith('@keyframes')) {
-        return match;
-      }
       const propertyList = properties.split(/;\s*/);
       const filteredProperties = propertyList
         .map((line) => {
@@ -162,107 +40,19 @@ function cssPxToVw(css, viewport, floatNum, removeValue) {
       return selector + propertiesString + closingBrace;
     }
   );
-  
-  // 주석 복원
-  return restoreComments(finalResult, comments);
 }
 // CSS 내 vw -> px 변환
 function cssVwToPx(css, viewport, floatNum, removeValue) {
-  // 주석 보호
-  const { protected: protectedCss, comments } = protectComments(css);
-  let workingCss = protectedCss;
-  
   if (!removeValue) {
-    const result = workingCss.replace(
+    return css.replace(
       /(\d+\.?\d*)vw/g,
       (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
     );
-    return restoreComments(result, comments);
   }
   // 속성 삭제: 숫자 단위가 없는 속성 전체 삭제
-  // @keyframes 블록 처리
-  let result = "";
-  let pos = 0;
-  while (pos < css.length) {
-    const keyframesMatch = css.substring(pos).match(/@keyframes\s+([^{]+)\{/);
-    if (keyframesMatch) {
-      const keyframesStart = pos + keyframesMatch.index;
-      const keyframesName = keyframesMatch[1].trim();
-      const braceStart = keyframesStart + keyframesMatch[0].length - 1;
-      const braceEnd = findMatchingBrace(css, braceStart);
-      
-      if (braceEnd !== -1) {
-        // @keyframes 블록 내용 추출
-        const keyframesContent = css.substring(braceStart + 1, braceEnd);
-        
-        // 키프레임 내부 처리 (0%, 50%, 100% 등)
-        let processedContent = "";
-        let contentPos = 0;
-        while (contentPos < keyframesContent.length) {
-          const keyframeMatch = keyframesContent.substring(contentPos).match(/([^{]+)\{/);
-          if (keyframeMatch) {
-            const keyframeSelector = keyframeMatch[1].trim();
-            const keyframeBraceStart = contentPos + keyframeMatch.index + keyframeMatch[0].length - 1;
-            const keyframeBraceEnd = findMatchingBrace(keyframesContent, keyframeBraceStart);
-            
-            if (keyframeBraceEnd !== -1) {
-              const keyframeProps = keyframesContent.substring(keyframeBraceStart + 1, keyframeBraceEnd);
-              const propertyList = keyframeProps.split(/;\s*/);
-              const filteredProperties = propertyList
-                .map((line) => {
-                  if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(line)) {
-                    return line.replace(
-                      /(\d+\.?\d*)vw/g,
-                      (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
-                    );
-                  }
-                  return "";
-                })
-                .filter(Boolean);
-              
-              // 키프레임이 비어있지 않으면 추가
-              if (filteredProperties.length > 0) {
-                processedContent += keyframeSelector + "{" + filteredProperties.join(";\n") + ";\n}";
-              }
-              
-              contentPos = keyframeBraceEnd + 1;
-            } else {
-              break;
-            }
-          } else {
-            break;
-          }
-        }
-        
-        // 모든 키프레임이 삭제되었으면 @keyframes 블록 전체 삭제
-        if (processedContent.trim()) {
-          result += "@keyframes " + keyframesName + "{" + processedContent + "}";
-        }
-        
-        pos = braceEnd + 1;
-        continue;
-      }
-    }
-    
-    // @keyframes가 아니면 일반 텍스트 추가
-    const nextKeyframes = workingCss.substring(pos).search(/@keyframes\s+[^{]+\{/);
-    if (nextKeyframes === -1) {
-      result += workingCss.substring(pos);
-      break;
-    } else {
-      result += workingCss.substring(pos, pos + nextKeyframes);
-      pos += nextKeyframes;
-    }
-  }
-  
-  // 일반 CSS 규칙 처리 (@keyframes 제외)
-  const finalResult = result.replace(
-    /(?!@keyframes)([^{]+{)([^}]+)(})/g,
+  return css.replace(
+    /([^{]+{)([^}]+)(})/g,
     (match, selector, properties, closingBrace) => {
-      // @keyframes로 시작하는 경우 건너뛰기
-      if (selector.trim().startsWith('@keyframes')) {
-        return match;
-      }
       const propertyList = properties.split(/;\s*/);
       const filteredProperties = propertyList
         .map((line) => {
@@ -282,9 +72,6 @@ function cssVwToPx(css, viewport, floatNum, removeValue) {
       return selector + propertiesString + closingBrace;
     }
   );
-  
-  // 주석 복원
-  return restoreComments(finalResult, comments);
 }
 // px -> vw 단일 변환
 const pxInput = document.getElementById("px-input");
