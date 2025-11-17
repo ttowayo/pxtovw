@@ -34,7 +34,10 @@ function cssPxToVw(css, viewport, floatNum, removeValue) {
         })
         .filter(Boolean);
 
-      return selector + filteredProperties.join(";\n") + ";\n" + closingBrace;
+      const propertiesString = filteredProperties.length > 0 
+        ? filteredProperties.join(";\n") + ";\n" 
+        : "";
+      return selector + propertiesString + closingBrace;
     }
   );
 }
@@ -63,7 +66,10 @@ function cssVwToPx(css, viewport, floatNum, removeValue) {
         })
         .filter(Boolean);
 
-      return selector + filteredProperties.join(";\n") + ";\n" + closingBrace;
+      const propertiesString = filteredProperties.length > 0 
+        ? filteredProperties.join(";\n") + ";\n" 
+        : "";
+      return selector + propertiesString + closingBrace;
     }
   );
 }
