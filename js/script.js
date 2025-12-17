@@ -34,9 +34,10 @@ function cssPxToVw(css, viewport, floatNum, removeValue) {
         })
         .filter(Boolean);
 
-      const propertiesString = filteredProperties.length > 0 
-        ? filteredProperties.join(";\n") + ";\n" 
-        : "";
+      const propertiesString =
+        filteredProperties.length > 0
+          ? filteredProperties.join(";\n") + ";\n"
+          : "";
       return selector + propertiesString + closingBrace;
     }
   );
@@ -66,9 +67,10 @@ function cssVwToPx(css, viewport, floatNum, removeValue) {
         })
         .filter(Boolean);
 
-      const propertiesString = filteredProperties.length > 0 
-        ? filteredProperties.join(";\n") + ";\n" 
-        : "";
+      const propertiesString =
+        filteredProperties.length > 0
+          ? filteredProperties.join(";\n") + ";\n"
+          : "";
       return selector + propertiesString + closingBrace;
     }
   );
@@ -356,7 +358,7 @@ if (mobileToggleBtn && pxToVwBox && vwToPxBox && css1Box && css2Box) {
 
 // Supabase 방문자 카운트 기능
 // Supabase 클라이언트 초기화
-const supabase = window.supabase.createClient(
+const supabaseClient = window.supabase.createClient(
   window.SUPABASE_CONFIG.url,
   window.SUPABASE_CONFIG.anonKey
 );
@@ -372,7 +374,7 @@ async function checkDuplicateVisit() {
     // console.log("방문자 식별 정보:", visitorFingerprint);
 
     // 오늘 같은 방문자가 이미 방문했는지 확인
-    const { data: existingVisit, error } = await supabase
+    const { data: existingVisit, error } = await supabaseClient
       .from("visit_logs")
       .select("*")
       .eq("visit_date", today)
@@ -442,7 +444,7 @@ async function incrementVisitCount() {
     // 오늘 날짜의 방문 기록 확인 - 더 안전한 방식
     let existingRecord = null;
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabaseClient
         .from("visitor_stats")
         .select("*")
         .eq("visit_date", today);
@@ -462,7 +464,7 @@ async function incrementVisitCount() {
     if (existingRecord) {
       // 기존 기록이 있으면 카운트 증가
       // console.log("기존 기록 업데이트:", existingRecord.total_visits + 1);
-      const { error: updateError } = await supabase
+      const { error: updateError } = await supabaseClient
         .from("visitor_stats")
         .update({
           total_visits: existingRecord.total_visits + 1,
@@ -478,7 +480,7 @@ async function incrementVisitCount() {
     } else {
       // 새로운 날짜면 새 기록 생성
       // console.log("새 기록 생성");
-      const { error: insertError } = await supabase
+      const { error: insertError } = await supabaseClient
         .from("visitor_stats")
         .insert({
           visit_date: today,
@@ -518,7 +520,9 @@ async function logVisit() {
 
     // console.log("방문 로그 기록:", visitorInfo);
 
-    const { error } = await supabase.from("visit_logs").insert(visitorInfo);
+    const { error } = await supabaseClient
+      .from("visit_logs")
+      .insert(visitorInfo);
 
     if (error) {
       // console.error("방문 로그 기록 오류:", error);
@@ -543,7 +547,7 @@ async function loadVisitorStats() {
     // 오늘 방문자 수 - 더 안전한 방식
     let todayData = null;
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabaseClient
         .from("visitor_stats")
         .select("total_visits")
         .eq("visit_date", today);
@@ -561,7 +565,7 @@ async function loadVisitorStats() {
     // 어제 방문자 수 - 더 안전한 방식
     let yesterdayData = null;
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabaseClient
         .from("visitor_stats")
         .select("total_visits")
         .eq("visit_date", yesterday);
@@ -579,7 +583,7 @@ async function loadVisitorStats() {
     // 전체 방문자 수 (모든 날짜 합계)
     let totalData = null;
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabaseClient
         .from("visitor_stats")
         .select("total_visits");
 
@@ -625,7 +629,7 @@ async function testSupabaseConnection() {
     // console.log("Supabase 연결 테스트 시작...");
 
     // 기본 연결 테스트
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
       .from("visitor_stats")
       .select("*")
       .limit(1);
