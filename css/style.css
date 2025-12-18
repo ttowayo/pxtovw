@@ -1,3 +1,10 @@
+.pc {
+  display: block;
+}
+.mo {
+  display: none;
+}
+
 body {
   background: #f7f7f7;
   font-family: "Noto Sans KR", Arial, sans-serif;
@@ -11,7 +18,29 @@ body {
   max-width: 1400px;
   min-width: 900px;
 }
-.header {
+.main-box {
+  position: relative;
+}
+.ad-banner {
+  position: absolute;
+  left: -170px;
+  top: 20px;
+  width: 160px;
+}
+.ad-banner span {
+  display: block;
+  width: 160px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: #000;
+  text-align: center;
+  margin-top: 10px;
+}
+.ad-banner.right {
+  left: auto;
+  right: -170px;
+}
+.h .header {
   background: #2196f3;
   color: #fff;
   font-size: 22px;
@@ -31,22 +60,28 @@ body {
 }
 .main {
   padding: 20px 16px;
-  height: calc(100vh - 80px);
-  min-height: 818px;
+  height: 100%;
+  min-height: 900px;
   gap: 10px;
   display: flex;
   flex-direction: column;
 }
 .convert-section {
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
+}
+.convert-box-section {
+  width: 50%;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
 }
 .convert-box {
   background: #fafbfc;
   border: 1px solid #e0e0e0;
   border-radius: 6px;
   padding: 14px;
-  width: 49.6%;
+  /* width: 49.6%; */
   box-sizing: border-box;
 }
 .convert-box h2 {
@@ -151,11 +186,11 @@ button:focus,
   border: 1px solid #e0e0e0;
   border-radius: 6px;
   padding: 14px;
-  width: 49.6%;
-  height: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  height: calc(100vh - 350px);
+  min-height: 626px;
 }
 .css-header {
   font-size: 16px;
@@ -413,11 +448,39 @@ input[type="checkbox"]:checked::after {
 /* =========================== mobile ================================ */
 
 @media (max-width: 720px) {
+  .pc {
+    display: none;
+  }
+  .mo {
+    display: block;
+  }
   .container {
     margin: 10px;
     min-width: auto;
     max-width: none;
     height: 100%;
+  }
+  .ad-banner {
+    position: relative;
+    left: auto;
+    top: 0;
+    width: 100%;
+    padding: 15px 0;
+  }
+  .ad-banner a {
+    padding: 0 12px;
+  }
+  .ad-banner img {
+    width: 100%;
+  }
+  .ad-banner.right {
+    left: auto;
+    right: -0;
+  }
+  .ad-banner span {
+    width: auto;
+    padding: 0 12px;
+    text-align: left;
   }
   .header {
     font-size: 18px;
@@ -443,6 +506,11 @@ input[type="checkbox"]:checked::after {
   .convert-section {
     flex-direction: column;
     gap: 15px;
+  }
+
+  .convert-box-section {
+    width: 100%;
+    gap: 1.67vw;
   }
   .convert-box {
     width: 100%;
