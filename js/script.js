@@ -90,9 +90,9 @@ const vw1Float = document.getElementById("vw1-float");
 Array.from(document.getElementsByClassName("vw-preset-btn")).forEach((btn) => {
   btn.onclick = function () {
     const value = this.getAttribute("data-value");
-    vw1Width.value = value;
+    if(vw1Width) vw1Width.value = value;
     // CSS1 섹션의 너비도 함께 변경
-    if (css1Width) {
+    if (typeof css1Width !== 'undefined' && css1Width) {
       css1Width.value = value;
     }
   };
@@ -100,7 +100,7 @@ Array.from(document.getElementsByClassName("vw-preset-btn")).forEach((btn) => {
 // PX to VW 단위포함 기능
 const vwUnitCheck = document.getElementById("vw-unit-check");
 function updateVwOutputUnit() {
-  if (!vwOutput.value) return;
+  if (!vwOutput || !vwOutput.value) return;
   if (vwUnitCheck && vwUnitCheck.checked) {
     vwOutput.value = vwOutput.value.replace(/vw$/, "") + "vw";
   } else {
@@ -112,25 +112,26 @@ if (vwUnitCheck) {
 }
 // PX to VW 계산 시 단위포함 적용
 function calcPxToVw() {
-  if (!pxInput.value || !vw1Width.value) return;
+  if (!pxInput || !vw1Width || !pxInput.value || !vw1Width.value) return;
   let result = pxToVw(
     pxInput.value,
     vw1Width.value,
-    Math.min(3, parseInt(vw1Float.value) || 3)
+    Math.min(3, parseInt(vw1Float ? vw1Float.value : 3) || 3)
   );
   if (vwUnitCheck && vwUnitCheck.checked) {
     result += "vw";
   }
-  vwOutput.value = result;
+  if(vwOutput) vwOutput.value = result;
 }
-document.getElementById("px-to-vw-btn").onclick = calcPxToVw;
-pxInput.addEventListener("keydown", function (e) {
+const pxToVwBtn = document.getElementById("px-to-vw-btn");
+if (pxToVwBtn) pxToVwBtn.onclick = calcPxToVw;
+if (pxInput) pxInput.addEventListener("keydown", function (e) {
   if (e.key === "Enter") calcPxToVw();
 });
-vw1Width.addEventListener("keydown", function (e) {
+if (vw1Width) vw1Width.addEventListener("keydown", function (e) {
   if (e.key === "Enter") calcPxToVw();
 });
-vw1Float.addEventListener("keydown", function (e) {
+if (vw1Float) vw1Float.addEventListener("keydown", function (e) {
   if (e.key === "Enter") calcPxToVw();
 });
 // vw -> px 단일 변환
@@ -164,7 +165,7 @@ if (pxUnitCheck) {
 }
 // VW to PX 계산 시 단위포함 적용
 function calcVwToPx() {
-  if (!vwInput.value || !vw2Width.value) return;
+  if (!vwInput || !vw2Width || !vwInput.value || !vw2Width.value) return;
   let result;
   if (!pxNoFloat || pxNoFloat.checked) {
     result = Math.round(vwToPx(vwInput.value, vw2Width.value, 5));
@@ -174,13 +175,14 @@ function calcVwToPx() {
   if (pxUnitCheck && pxUnitCheck.checked) {
     result += "px";
   }
-  pxOutput.value = result;
+  if (pxOutput) pxOutput.value = result;
 }
-document.getElementById("vw-to-px-btn").onclick = calcVwToPx;
-vwInput.addEventListener("keydown", function (e) {
+const vwToPxBtn = document.getElementById("vw-to-px-btn");
+if (vwToPxBtn) vwToPxBtn.onclick = calcVwToPx;
+if (vwInput) vwInput.addEventListener("keydown", function (e) {
   if (e.key === "Enter") calcVwToPx();
 });
-vw2Width.addEventListener("keydown", function (e) {
+if (vw2Width) vw2Width.addEventListener("keydown", function (e) {
   if (e.key === "Enter") calcVwToPx();
 });
 if (pxNoFloat) pxNoFloat.addEventListener("change", calcVwToPx);
@@ -190,15 +192,18 @@ const css1Output = document.getElementById("css1-output");
 const css1Width = document.getElementById("css1-width");
 const css1Float = document.getElementById("css1-float");
 const css1Remove = document.getElementById("css1-remove");
-document.getElementById("css1-btn").onclick = function () {
-  if (!css1Input.value || !css1Width.value) return;
-  css1Output.value = cssPxToVw(
-    css1Input.value,
-    css1Width.value,
-    Math.min(3, parseInt(css1Float.value) || 3),
-    css1Remove.checked
-  );
-};
+const css1Btn = document.getElementById("css1-btn");
+if (css1Btn) {
+  css1Btn.onclick = function () {
+    if (!css1Input.value || !css1Width.value) return;
+    css1Output.value = cssPxToVw(
+      css1Input.value,
+      css1Width.value,
+      Math.min(3, parseInt(css1Float ? css1Float.value : 3) || 3),
+      css1Remove ? css1Remove.checked : false
+    );
+  };
+}
 // CSS vw -> px 변환
 const css2Input = document.getElementById("css2-input");
 const css2Output = document.getElementById("css2-output");
@@ -206,13 +211,13 @@ const css2Width = document.getElementById("css2-width");
 const css2Remove = document.getElementById("css2-remove");
 const css2NoFloat = document.getElementById("css2-no-float");
 function calcCss2() {
-  if (!css2Input.value || !css2Width.value) return;
+  if (!css2Input || !css2Width || !css2Input.value || !css2Width.value) return;
   const floatNum = !css2NoFloat || css2NoFloat.checked ? 0 : 1;
   let result = cssVwToPx(
     css2Input.value,
     css2Width.value,
     floatNum === 0 ? 5 : 1,
-    css2Remove.checked
+    css2Remove ? css2Remove.checked : false
   );
   if (floatNum === 0) {
     // 정수로 반올림
@@ -221,13 +226,14 @@ function calcCss2() {
       (m, p1) => Math.round(parseFloat(p1)) + "px"
     );
   }
-  css2Output.value = result;
+  if (css2Output) css2Output.value = result;
 }
-document.getElementById("css2-btn").onclick = calcCss2;
-css2Input.addEventListener("keydown", function (e) {
+const css2Btn = document.getElementById("css2-btn");
+if (css2Btn) css2Btn.onclick = calcCss2;
+if (css2Input) css2Input.addEventListener("keydown", function (e) {
   if (e.key === "Enter") calcCss2();
 });
-css2Width.addEventListener("keydown", function (e) {
+if (css2Width) css2Width.addEventListener("keydown", function (e) {
   if (e.key === "Enter") calcCss2();
 });
 if (css2NoFloat) css2NoFloat.addEventListener("change", calcCss2);
@@ -243,12 +249,20 @@ function copyToClipboard(value, btn) {
     }, 1000);
   });
 }
-document.getElementById("vw-copy-btn").onclick = function () {
-  copyToClipboard(document.getElementById("vw-output").value, this);
-};
-document.getElementById("px-copy-btn").onclick = function () {
-  copyToClipboard(document.getElementById("px-output").value, this);
-};
+const vwCopyBtn = document.getElementById("vw-copy-btn");
+if (vwCopyBtn) {
+  vwCopyBtn.onclick = function () {
+    const vwOutputEl = document.getElementById("vw-output");
+    if(vwOutputEl) copyToClipboard(vwOutputEl.value, this);
+  };
+}
+const pxCopyBtn = document.getElementById("px-copy-btn");
+if (pxCopyBtn) {
+  pxCopyBtn.onclick = function () {
+    const pxOutputEl = document.getElementById("px-output");
+    if(pxOutputEl) copyToClipboard(pxOutputEl.value, this);
+  };
+}
 // css1-output 복사 버튼
 const css1CopyBtn = document.getElementById("css1-copy-btn");
 if (css1CopyBtn) {

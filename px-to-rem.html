@@ -6,30 +6,27 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no"
     />
-    <title>PX ↔ VW Converter</title>
+    <title>PX ↔ REM Converter</title>
     <link rel="icon" href="favicon.ico" />
-    <meta name="title" content="PX ↔ VW 계산기" />
+    <meta name="title" content="PX ↔ REM 계산기" />
     <meta
       name="description"
-      content="PX-VW 변환기는 픽셀(px)과 뷰포트 단위(vw) 간의 변환을 쉽고 빠르게 도와주는 웹 도구입니다."
+      content="PX-REM 변환기는 기준 폰트 크기를 바탕으로 픽셀(px)과 렘(rem) 단위 간의 변환을 쉽고 빠르게 도와주는 계산기입니다."
     />
     <meta
       name="keywords"
-      content="PX-VW 변환기, px to vw convert, px to vw, vw to px, vw to px convert, vw 계산, vw 계산기, 뷰포트, 픽셀 변환, CSS 자동 변환, 웹디자인, 프론트엔드, 모바일 웹, 반응형 단위, px vw 변환기, CSS px vw 변환, px vw 자동 변환, px to vw converter, vw to px converter, CSS 단위 자동 변환, 웹 퍼블리셔 툴, 프론트엔드 툴, CSS 유틸리티, 웹 개발자 도구, CSS px 변환, CSS vw 변환, CSS 단위 변환기, CSS px to vw, CSS vw to px, CSS px vw 자동 변환, CSS px vw 변환기, CSS px vw 변환 툴"
+      content="PX-REM 변환기, px to rem convert, px to rem, rem to px, rem to px convert, rem 계산기, 루트 폰트, CSS 접근성, 반응형 폰트"
     />
     <meta
       property="og:title"
-      content="PX-VW 변환기 | px to vw | vw to px | CSS 단위 변환 | 반응형 웹 | 픽셀 변환"
+      content="PX-REM 변환기 | px to rem | rem to px | CSS 단위 변환"
     />
-    <meta
-      property="og:site_name"
-      content="PX-VW 변환기 - 반응형 CSS 단위 변환 툴"
-    />
+    <meta property="og:site_name" content="PX-REM 변환기" />
     <meta
       property="og:description"
-      content="PX-VW 변환기는 픽셀(px)과 뷰포트 단위(vw) 간의 변환을 쉽고 빠르게 도와주는 웹 도구입니다."
+      content="PX-REM 변환기는 기준 폰트 크기를 바탕으로 픽셀(px)과 렘(rem) 단위 간의 변환을 쉽고 빠르게 도와줍니다."
     />
-    <meta property="og:url" content="https://pxtovw.co.kr" />
+    <meta property="og:url" content="https://pxtovw.co.kr/px-to-rem.html" />
     <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
     <!-- site verification -->
     <meta
@@ -157,8 +154,8 @@
       <!-- GNB Menu -->
       <nav class="gnb-menu">
         <div class="gnb-menu-inner">
-          <a href="index.html" class="gnb-item active">PX ↔ VW</a>
-          <a href="px-to-rem.html" class="gnb-item">PX ↔ REM</a>
+          <a href="index.html" class="gnb-item">PX ↔ VW</a>
+          <a href="px-to-rem.html" class="gnb-item active">PX ↔ REM</a>
           <a href="clamp-generator.html" class="gnb-item"
             >CSS Clamp Generator</a
           >
@@ -201,209 +198,191 @@
         <div class="main">
           <div class="convert-section">
             <div class="convert-box-section">
-              <div class="convert-box" id="px-to-vw-box">
-                <h2>PX to VW</h2>
-                <h3>Breakpoints</h3>
+              <div class="convert-box" id="px-to-rem-box">
+                <h2>PX to REM</h2>
+                <h3>Root Font Size</h3>
                 <div class="vw-preset-group">
-                  <button type="button" class="vw-preset-btn" data-value="320">
-                    320px
+                  <button type="button" class="rem-preset-btn" data-value="10">
+                    10px
                   </button>
-                  <button type="button" class="vw-preset-btn" data-value="360">
-                    360px
+                  <button type="button" class="rem-preset-btn" data-value="12">
+                    12px
                   </button>
-                  <button type="button" class="vw-preset-btn" data-value="480">
-                    480px
+                  <button type="button" class="rem-preset-btn" data-value="14">
+                    14px
                   </button>
-                  <button type="button" class="vw-preset-btn" data-value="720">
-                    720px
+                  <button type="button" class="rem-preset-btn" data-value="16">
+                    16px
                   </button>
-                  <button type="button" class="vw-preset-btn" data-value="1024">
-                    1024px
+                  <button type="button" class="rem-preset-btn" data-value="20">
+                    20px
                   </button>
-                  <button type="button" class="vw-preset-btn" data-value="1280">
-                    1280px
-                  </button>
-                  <button type="button" class="vw-preset-btn" data-value="1440">
-                    1440px
-                  </button>
-                  <button type="button" class="vw-preset-btn" data-value="1600">
-                    1600px
-                  </button>
-                  <button type="button" class="vw-preset-btn" data-value="1920">
-                    1920px
+                  <button type="button" class="rem-preset-btn" data-value="24">
+                    24px
                   </button>
                 </div>
-                <input type="number" id="vw1-width" value="720" /> PX / 소수점 :
-                <input type="number" id="vw1-float" value="2" min="0" max="5" />
+                <input type="number" id="rem1-root" value="16" /> PX / 소수점 :
+                <input
+                  type="number"
+                  id="rem1-float"
+                  value="3"
+                  min="0"
+                  max="5"
+                />
                 <div class="row">
-                  <input type="number" id="px-input" placeholder="PX" />
-                  <input type="text" id="vw-output" placeholder="VW" readonly />
+                  <input type="number" id="rem-px-input" placeholder="PX" />
+                  <input
+                    type="text"
+                    id="rem-output"
+                    placeholder="REM"
+                    readonly
+                  />
                   <label style="margin-left: 6px"
                     ><input
                       type="checkbox"
-                      id="vw-unit-check"
+                      id="rem-unit-check"
                       checked
-                    />단위포함(px)</label
+                    />단위포함(rem)</label
                   >
                 </div>
                 <div class="btn-box">
-                  <button id="px-to-vw-btn">
+                  <button id="px-to-rem-btn">
                     <span style="margin-right: 4px">🧮</span>Convert
                   </button>
-                  <button type="button" id="vw-copy-btn">
+                  <button type="button" id="rem-copy-btn">
                     <span style="margin-right: 4px">📋</span>Copy
                   </button>
-                  <button type="button" id="vw-clear-btn">
+                  <button type="button" id="rem-clear-btn">
                     <span style="margin-right: 4px">🗑️</span>Clear
                   </button>
                 </div>
               </div>
-              <div class="css-box" id="css1-box">
+              <div class="css-box" id="css-rem1-box">
                 <div class="css-header">
-                  Breakpoints
-                  <input type="number" id="css1-width" value="720" /> PX /
+                  Root Font Size
+                  <input type="number" id="css-rem1-root" value="16" /> PX /
                   소수점 :
                   <input
                     type="number"
-                    id="css1-float"
-                    value="2"
+                    id="css-rem1-float"
+                    value="3"
                     min="0"
                     max="5"
                   />
                   <label>
-                    <input type="checkbox" id="css1-remove" />속성삭제(Remove
-                    property)
+                    <input
+                      type="checkbox"
+                      id="css-rem1-remove"
+                    />속성삭제(Remove property)
                   </label>
                 </div>
                 <div class="textarea-box">
                   <textarea
-                    id="css1-input"
+                    id="css-rem1-input"
                     placeholder="Enter the source"
                   ></textarea>
-                  <textarea id="css1-output" readonly></textarea>
+                  <textarea id="css-rem1-output" readonly></textarea>
                 </div>
                 <div class="button-box">
-                  <button id="css1-btn">
+                  <button id="css-rem1-btn">
                     <span style="margin-right: 4px">🧮</span>Convert
                   </button>
-                  <button id="css1-copy-btn">
+                  <button id="css-rem1-copy-btn">
                     <span style="margin-right: 4px">📋</span>Copy
                   </button>
-                  <button type="button" id="css1-clear-btn">
+                  <button type="button" id="css-rem1-clear-btn">
                     <span style="margin-right: 4px">🗑️</span>Clear
                   </button>
                 </div>
               </div>
             </div>
             <div class="convert-box-section">
-              <div class="convert-box" id="vw-to-px-box">
-                <h2>VW to PX</h2>
-                <h3>Breakpoints</h3>
+              <div class="convert-box" id="rem-to-px-box">
+                <h2>REM to PX</h2>
+                <h3>Root Font Size</h3>
                 <div class="vw-preset-group">
-                  <button type="button" class="vw2-preset-btn" data-value="320">
-                    320px
+                  <button type="button" class="rem2-preset-btn" data-value="10">
+                    10px
                   </button>
-                  <button type="button" class="vw2-preset-btn" data-value="360">
-                    360px
+                  <button type="button" class="rem2-preset-btn" data-value="12">
+                    12px
                   </button>
-                  <button type="button" class="vw2-preset-btn" data-value="480">
-                    480px
+                  <button type="button" class="rem2-preset-btn" data-value="14">
+                    14px
                   </button>
-                  <button type="button" class="vw2-preset-btn" data-value="720">
-                    720px
+                  <button type="button" class="rem2-preset-btn" data-value="16">
+                    16px
                   </button>
-                  <button
-                    type="button"
-                    class="vw2-preset-btn"
-                    data-value="1024"
-                  >
-                    1024px
+                  <button type="button" class="rem2-preset-btn" data-value="20">
+                    20px
                   </button>
-                  <button
-                    type="button"
-                    class="vw2-preset-btn"
-                    data-value="1280"
-                  >
-                    1280px
-                  </button>
-                  <button
-                    type="button"
-                    class="vw2-preset-btn"
-                    data-value="1440"
-                  >
-                    1440px
-                  </button>
-                  <button
-                    type="button"
-                    class="vw2-preset-btn"
-                    data-value="1600"
-                  >
-                    1600px
-                  </button>
-                  <button
-                    type="button"
-                    class="vw2-preset-btn"
-                    data-value="1920"
-                  >
-                    1920px
+                  <button type="button" class="rem2-preset-btn" data-value="24">
+                    24px
                   </button>
                 </div>
-                <input type="number" id="vw2-width" value="720" /> PX /
+                <input type="number" id="rem2-root" value="16" /> PX /
                 <label
-                  ><input type="checkbox" id="px-no-float" checked /> 소수점
+                  ><input type="checkbox" id="rem-px-no-float" checked /> 소수점
                   없음(반올림)</label
                 >
                 <div class="row">
-                  <input type="number" id="vw-input" placeholder="VW" />
-                  <input type="text" id="px-output" placeholder="PX" readonly />
+                  <input type="number" id="rem-input" placeholder="REM" />
+                  <input
+                    type="text"
+                    id="rem-px-output"
+                    placeholder="PX"
+                    readonly
+                  />
                   <label style="margin-left: 6px"
                     ><input
                       type="checkbox"
-                      id="px-unit-check"
+                      id="rem-px-unit-check"
                       checked
-                    />단위포함(vw)</label
+                    />단위포함(px)</label
                   >
                 </div>
                 <div class="btn-box">
-                  <button id="vw-to-px-btn">
+                  <button id="rem-to-px-btn">
                     <span style="margin-right: 4px">🧮</span>Convert
                   </button>
-                  <button type="button" id="px-copy-btn">
+                  <button type="button" id="rem-px-copy-btn">
                     <span style="margin-right: 4px">📋</span>Copy
                   </button>
-                  <button type="button" id="px-clear-btn">
+                  <button type="button" id="rem-px-clear-btn">
                     <span style="margin-right: 4px">🗑️</span>Clear
                   </button>
                 </div>
               </div>
-              <div class="css-box" id="css2-box">
+              <div class="css-box" id="css-rem2-box">
                 <div class="css-header">
-                  Breakpoints
-                  <input type="number" id="css2-width" value="720" /> PX
+                  Root Font Size
+                  <input type="number" id="css-rem2-root" value="16" /> PX
                   <label
-                    ><input type="checkbox" id="css2-remove" />속성삭제(Remove
-                    property)</label
+                    ><input
+                      type="checkbox"
+                      id="css-rem2-remove"
+                    />속성삭제(Remove property)</label
                   >
                   <label style="margin-left: 8px"
-                    ><input type="checkbox" id="css2-no-float" checked /> 소수점
-                    없음(반올림)</label
+                    ><input type="checkbox" id="css-rem2-no-float" checked />
+                    소수점 없음(반올림)</label
                   >
                 </div>
                 <div class="textarea-box">
                   <textarea
-                    id="css2-input"
+                    id="css-rem2-input"
                     placeholder="Enter the source"
                   ></textarea>
-                  <textarea id="css2-output" readonly></textarea>
+                  <textarea id="css-rem2-output" readonly></textarea>
                 </div>
                 <div class="button-box">
-                  <button id="css2-btn">
+                  <button id="css-rem2-btn">
                     <span style="margin-right: 4px">🧮</span>Convert
                   </button>
-                  <button id="css2-copy-btn">
+                  <button id="css-rem2-copy-btn">
                     <span style="margin-right: 4px">📋</span>Copy
                   </button>
-                  <button type="button" id="css2-clear-btn">
+                  <button type="button" id="css-rem2-clear-btn">
                     <span style="margin-right: 4px">🗑️</span>Clear
                   </button>
                 </div>
@@ -447,11 +426,14 @@
     </div>
 
     <!-- 모바일 전환 버튼 -->
-    <button class="mobile-toggle-btn" id="mobile-toggle-btn">PX to VWs</button>
+    <button class="mobile-toggle-btn" id="mobile-toggle-rem-btn">
+      PX to REM
+    </button>
     <!-- Supabase 클라이언트 라이브러리 -->
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="js/config.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/rem.js"></script>
     <!-- Google Tag Manager (noscript) -->
     <noscript
       ><iframe
