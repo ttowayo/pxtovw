@@ -124,7 +124,9 @@ button,
   padding: 6px;
   font-size: 15px;
   font-weight: 500;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
   margin-bottom: 5px;
   cursor: pointer;
   outline: none;
@@ -247,7 +249,9 @@ textarea[readonly] {
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 .vw-preset-btn:hover,
 .vw-preset-btn:active {
@@ -269,7 +273,9 @@ textarea[readonly] {
   padding: 6px;
   font-size: 15px;
   font-weight: 500;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 #vw-copy-btn:hover,
 #px-copy-btn:hover,
@@ -286,7 +292,9 @@ textarea[readonly] {
   padding: 6px 6px;
   font-size: 15px;
   font-weight: 500;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 #vw-clear-btn:hover,
 #px-clear-btn:hover,
@@ -312,7 +320,9 @@ textarea {
   padding: 8px 12px;
   font-size: 16px;
   background: #fff;
-  transition: border 0.2s, box-shadow 0.2s;
+  transition:
+    border 0.2s,
+    box-shadow 0.2s;
   outline: none;
   margin-bottom: 5px;
 }
@@ -338,7 +348,9 @@ input[type="checkbox"] {
   background: #fff;
   cursor: pointer;
   position: relative;
-  transition: border 0.2s, box-shadow 0.2s;
+  transition:
+    border 0.2s,
+    box-shadow 0.2s;
   vertical-align: middle;
   margin-right: 4px;
 }
@@ -464,8 +476,9 @@ input[type="checkbox"]:checked::after {
     position: relative;
     left: auto;
     top: 0;
-    width: 100%;
+    width: calc(100% - 30px);
     padding: 15px 0;
+    margin: 0 auto;
   }
   .ad-banner a {
     padding: 0 12px;
