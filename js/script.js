@@ -668,3 +668,38 @@ document.addEventListener("DOMContentLoaded", async function () {
     // console.error("Supabase 연결 실패 - 방문자 카운트 기능 비활성화");
   }
 });
+
+// 버전 정보 모달창 기능
+document.addEventListener("DOMContentLoaded", function () {
+  const versionBtn = document.getElementById("version-btn");
+  const versionModal = document.getElementById("version-modal");
+  const closeVersionBtn = document.getElementById("close-version-btn");
+
+  if (versionBtn && versionModal) {
+    // 버전 버튼 클릭 시 모달창 토글
+    versionBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      versionModal.classList.toggle("show");
+    });
+
+    // 닫기 버튼 클릭 시 모달창 닫기
+    if (closeVersionBtn) {
+      closeVersionBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        versionModal.classList.remove("show");
+      });
+    }
+
+    // 모달창 내부 클릭 시 닫히지 않도록 막음
+    versionModal.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
+
+    // 화면의 다른 곳 클릭 시 모달창 닫기
+    document.addEventListener("click", function (e) {
+      if (versionModal.classList.contains("show")) {
+        versionModal.classList.remove("show");
+      }
+    });
+  }
+});
