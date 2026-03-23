@@ -115,7 +115,11 @@ button,
 #vw-to-px-btn,
 #css1-btn,
 #css2-btn,
-#css1-copy-btn {
+#css1-copy-btn,
+#px-to-rem-btn,
+#rem-to-px-btn,
+#css-rem1-btn,
+#css-rem2-btn {
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(171, 71, 188, 0.1);
   background: #ffebee;
@@ -156,7 +160,11 @@ button:focus,
 #px-to-vw-btn,
 #vw-to-px-btn,
 #css1-btn,
-#css2-btn {
+#css2-btn,
+#px-to-rem-btn,
+#rem-to-px-btn,
+#css-rem1-btn,
+#css-rem2-btn {
   background: #ab47bc;
   color: #fff;
   border: 1px solid #ba68c8;
@@ -165,15 +173,29 @@ button:focus,
 #px-to-vw-btn:hover,
 #vw-to-px-btn:hover,
 #css1-btn:hover,
-#css2-btn:hover {
+#css2-btn:hover,
+#px-to-rem-btn:hover,
+#rem-to-px-btn:hover,
+#css-rem1-btn:hover,
+#css-rem2-btn:hover {
   background: #4a148c;
 }
-#css1-copy-btn {
+#css1-copy-btn,
+#rem-copy-btn,
+#rem-px-copy-btn,
+#css-rem1-copy-btn,
+#css-rem2-copy-btn,
+#clamp-copy-btn {
   background: #fffde7;
   color: #f57c00;
   border: 1px solid #ffe0b2;
 }
-#css1-copy-btn:hover {
+#css1-copy-btn:hover,
+#rem-copy-btn:hover,
+#rem-px-copy-btn:hover,
+#css-rem1-copy-btn:hover,
+#css-rem2-copy-btn:hover,
+#clamp-copy-btn:hover {
   background: #f57c00;
   color: #fff;
 }
@@ -240,7 +262,9 @@ textarea[readonly] {
   flex-wrap: wrap;
   gap: 6px;
 }
-.vw-preset-btn {
+.vw-preset-btn,
+.rem-preset-btn,
+.rem2-preset-btn {
   background: #f3e5f5;
   color: #ab47bc;
   border: 1px solid #ce93d8;
@@ -254,7 +278,11 @@ textarea[readonly] {
     color 0.2s;
 }
 .vw-preset-btn:hover,
-.vw-preset-btn:active {
+.vw-preset-btn:active,
+.rem-preset-btn:hover,
+.rem-preset-btn:active,
+.rem2-preset-btn:hover,
+.rem2-preset-btn:active {
   background: #ab47bc;
   color: #fff;
 }
@@ -266,7 +294,12 @@ textarea[readonly] {
 }
 #vw-copy-btn,
 #px-copy-btn,
-#css2-copy-btn {
+#css2-copy-btn,
+#rem-copy-btn,
+#rem-px-copy-btn,
+#css-rem1-copy-btn,
+#css-rem2-copy-btn,
+#clamp-copy-btn {
   background: #fffde7;
   color: #f57c00;
   border: 1px solid #ffe0b2;
@@ -279,13 +312,22 @@ textarea[readonly] {
 }
 #vw-copy-btn:hover,
 #px-copy-btn:hover,
-#css2-copy-btn:hover {
+#css2-copy-btn:hover,
+#rem-copy-btn:hover,
+#rem-px-copy-btn:hover,
+#css-rem1-copy-btn:hover,
+#css-rem2-copy-btn:hover,
+#clamp-copy-btn:hover {
   background: #f57c00;
   color: #fff;
 }
 #vw-clear-btn,
 #px-clear-btn,
-#css2-clear-btn {
+#css2-clear-btn,
+#rem-clear-btn,
+#rem-px-clear-btn,
+#css-rem1-clear-btn,
+#css-rem2-clear-btn {
   background: #ffebee;
   color: #d32f2f;
   border: 1px solid #ffcdd2;
@@ -298,11 +340,19 @@ textarea[readonly] {
 }
 #vw-clear-btn:hover,
 #px-clear-btn:hover,
-#css2-clear-btn:hover {
+#css2-clear-btn:hover,
+#rem-clear-btn:hover,
+#rem-px-clear-btn:hover,
+#css-rem1-clear-btn:hover,
+#css-rem2-clear-btn:hover {
   background: #d32f2f;
   color: #fff;
 }
-#css1-clear-btn:hover {
+#css1-clear-btn:hover,
+#rem-clear-btn:hover,
+#rem-px-clear-btn:hover,
+#css-rem1-clear-btn:hover,
+#css-rem2-clear-btn:hover {
   background: #d32f2f;
   color: #fff;
 }
@@ -412,55 +462,50 @@ input[type="checkbox"]:checked::after {
   color: #2196f3;
 }
 
-/* 블로그 링크 스타일 */
-.blog-links-container {
-  text-align: center;
-}
-
-.blog-links {
+/* 상단 우측 보조 도구(블로그 링크 및 업데이트 노트) */
+.right-tools {
+  margin-left: auto;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  align-items: center;
   gap: 10px;
 }
 
-.blog-link {
-  color: #2196f3;
-  text-decoration: none;
+.blog-select,
+.version-btn {
+  padding: 4px 28px 4px 12px;
   font-size: 13px;
-  padding: 5px 10px;
-  border: 1px solid #2196f3;
+  border: 1px solid #ced4da;
   border-radius: 4px;
-  transition: all 0.3s ease;
+  color: #333;
+  background: #f0f4f8
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23666'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")
+    no-repeat right 4px center;
+  background-size: 20px;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+  font-weight: 500;
+  transition: background 0.2s;
+  height: 30px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-sizing: border-box;
+  margin-bottom: 0;
 }
 
-.blog-link:hover {
-  background: #2196f3;
-  color: white;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+.blog-select:hover,
+.version-btn:hover {
+  background-color: #e2e8f0;
+}
+
+.version-btn span {
+  display: none; /* 기존 하드코딩된 ▼ 숨김처리 */
 }
 
 /* 버전 공지사항 */
 .version-info {
-  margin-left: auto;
   position: relative;
-}
-.version-btn {
-  background: #f0f4f8;
-  color: #333;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  padding: 4px 10px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: none;
-  margin: 0;
-}
-.version-btn:hover {
-  background: #e2e8f0;
 }
 .version-modal {
   display: none;
@@ -471,7 +516,7 @@ input[type="checkbox"]:checked::after {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 6px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   padding: 16px;
   max-height: 400px;
@@ -528,6 +573,78 @@ input[type="checkbox"]:checked::after {
 }
 .version-item ul li {
   margin-bottom: 4px;
+}
+
+/* ========================================================================== */
+/* GNB Menu */
+/* ========================================================================== */
+.gnb-menu {
+  background: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 16px;
+  display: flex;
+  justify-content: center;
+}
+.gnb-menu-inner {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.gnb-item {
+  padding: 10px 20px;
+  background: #f8f9fa;
+  color: #495057;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.2s;
+  border: 1px solid #dae1e7;
+}
+.gnb-item:hover {
+  background: #e9ecef;
+  color: #212529;
+}
+.gnb-item.active {
+  background: #2196f3;
+  color: #fff;
+  border-color: #2196f3;
+  box-shadow: 0 4px 10px rgba(33, 150, 243, 0.3);
+}
+
+/* Clamp Generator 상단 툴 레이아웃 등 */
+.clamp-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.clamp-result-box {
+  background: #f1f8ff;
+  border: 1px solid #c8e1ff;
+  padding: 15px;
+  border-radius: 6px;
+  margin-top: 15px;
+}
+.clamp-result-code {
+  font-family: monospace;
+  font-size: 18px;
+  color: #0366d6;
+  word-break: break-all;
+  margin: 10px 0;
+}
+.clamp-preview {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px dashed #ccc;
+  border-radius: 6px;
+  background: #fff;
+  text-align: center;
+}
+.clamp-preview-text {
+  font-weight: 700;
+  line-height: 1.4;
+  color: #333;
 }
 
 /* =========================== 1024px ================================ */
@@ -859,8 +976,7 @@ input[type="checkbox"]:checked::after {
   }
 
   .mobile-toggle-btn:hover {
-    /* background: #4a148c; */
-    /* transform: scale(1.05); */
+    background: #fdfaf5;
   }
 
   .mobile-toggle-btn:active {
@@ -895,5 +1011,49 @@ input[type="checkbox"]:checked::after {
   .visit-count {
     font-size: 20px;
     color: #2196f3;
+  }
+
+  /* GNB Menu VW 단위 변환 (모바일 가독성 개선) */
+  .gnb-menu {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 2.78vw 4.44vw; /* 10px 16px -> 모바일 기준 2배 상향 */
+    margin-top: 0; /* 15px */
+  }
+  .gnb-menu-inner {
+    gap: 2.22vw;
+    flex-wrap: nowrap;
+  }
+  .gnb-item {
+    padding: 7px 12px;
+    font-size: 12px; /* 14px 수준 */
+    border-radius: 5px;
+  }
+  /* 상단 우측 보조 도구(블로그 링크 및 업데이트 노트) 모바일 변환 */
+  .right-tools {
+    margin-left: 0;
+    margin-top: 2.78vw;
+    gap: 2.22vw;
+  }
+  .blog-select,
+  .version-btn {
+    padding: 0 23px;
+    font-size: 12px;
+    border-radius: 1.11vw;
+    height: 27px;
+    background-position: right 0px center;
+    background-size: 5.5vw;
+    margin-bottom: 0;
+  }
+  .version-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 92vw;
+    max-width: 320px;
+    max-height: 80vh; /* 화면을 넘지 않게 */
+    right: auto;
+    z-index: 2000;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
   }
 }
