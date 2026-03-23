@@ -16,8 +16,11 @@ function cssPxToVw(css, viewport, floatNum, removeValue) {
       (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
     );
   }
+  // 블록 파싱 오류를 방지하기 위해 CSS 주석 제거
+  const cleanCss = css.replace(/\/\*[\s\S]*?\*\//g, '');
+  
   // 속성 삭제: 숫자 단위가 없는 속성 전체 삭제
-  return css.replace(
+  return cleanCss.replace(
     /([^{]+{)([^}]+)(})/g,
     (match, selector, properties, closingBrace) => {
       const propertyList = properties.split(/;\s*/);
@@ -50,8 +53,11 @@ function cssVwToPx(css, viewport, floatNum, removeValue) {
       (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
     );
   }
+  // 블록 파싱 오류를 방지하기 위해 CSS 주석 제거
+  const cleanCss = css.replace(/\/\*[\s\S]*?\*\//g, '');
+
   // 속성 삭제: 숫자 단위가 없는 속성 전체 삭제
-  return css.replace(
+  return cleanCss.replace(
     /([^{]+{)([^}]+)(})/g,
     (match, selector, properties, closingBrace) => {
       const propertyList = properties.split(/;\s*/);
