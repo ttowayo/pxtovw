@@ -1,192 +1,419 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no">
-  <title>PX ↔ VW Converter</title>
-    <link rel="icon" href="favicon.ico">
-    <meta name="title" content="PX ↔ VW 계산기">
-    <meta name="description" content="PX-VW 변환기는 픽셀(px)과 뷰포트 단위(vw) 간의 변환을 쉽고 빠르게 도와주는 웹 도구입니다.">
-    <meta name="keywords" content="PX-VW 변환기, px to vw convert, px to vw, vw to px, vw to px convert, vw 계산, vw 계산기, 뷰포트, 픽셀 변환, CSS 자동 변환, 웹디자인, 프론트엔드, 모바일 웹, 반응형 단위, px vw 변환기, CSS px vw 변환, px vw 자동 변환, px to vw converter, vw to px converter, CSS 단위 자동 변환, 웹 퍼블리셔 툴, 프론트엔드 툴, CSS 유틸리티, 웹 개발자 도구, CSS px 변환, CSS vw 변환, CSS 단위 변환기, CSS px to vw, CSS vw to px, CSS px vw 자동 변환, CSS px vw 변환기, CSS px vw 변환 툴">
-    <meta property="og:title" content="PX-VW 변환기 | px to vw | vw to px | CSS 단위 변환 | 반응형 웹 | 픽셀 변환">
-    <meta property="og:site_name" content="PX-VW 변환기 - 반응형 CSS 단위 변환 툴">
-    <meta property="og:description" content="PX-VW 변환기는 픽셀(px)과 뷰포트 단위(vw) 간의 변환을 쉽고 빠르게 도와주는 웹 도구입니다.">
-    <meta property="og:url" content="https://pxtovw.co.kr">
-    <meta property="og:image" content="https://pxtovw.co.kr/img/og.png"> 
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no"
+    />
+    <title>PX ↔ VW Converter</title>
+    <link rel="icon" href="favicon.ico" />
+    <meta name="title" content="PX ↔ VW 계산기" />
+    <meta
+      name="description"
+      content="PX-VW 변환기는 픽셀(px)과 뷰포트 단위(vw) 간의 변환을 쉽고 빠르게 도와주는 웹 도구입니다."
+    />
+    <meta
+      name="keywords"
+      content="PX-VW 변환기, px to vw convert, px to vw, vw to px, vw to px convert, vw 계산, vw 계산기, 뷰포트, 픽셀 변환, CSS 자동 변환, 웹디자인, 프론트엔드, 모바일 웹, 반응형 단위, px vw 변환기, CSS px vw 변환, px vw 자동 변환, px to vw converter, vw to px converter, CSS 단위 자동 변환, 웹 퍼블리셔 툴, 프론트엔드 툴, CSS 유틸리티, 웹 개발자 도구, CSS px 변환, CSS vw 변환, CSS 단위 변환기, CSS px to vw, CSS vw to px, CSS px vw 자동 변환, CSS px vw 변환기, CSS px vw 변환 툴"
+    />
+    <meta
+      property="og:title"
+      content="PX-VW 변환기 | px to vw | vw to px | CSS 단위 변환 | 반응형 웹 | 픽셀 변환"
+    />
+    <meta
+      property="og:site_name"
+      content="PX-VW 변환기 - 반응형 CSS 단위 변환 툴"
+    />
+    <meta
+      property="og:description"
+      content="PX-VW 변환기는 픽셀(px)과 뷰포트 단위(vw) 간의 변환을 쉽고 빠르게 도와주는 웹 도구입니다."
+    />
+    <meta property="og:url" content="https://pxtovw.co.kr" />
+    <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
     <!-- site verification -->
-    <meta name="naver-site-verification" content="20103ff533a39100e375ea8cc675b287b31cadb6" />
-    <meta name="google-site-verification" content="vIfbWBh0H5UPBCqtAVVb7PiNFfPiswQ6N6SRisPMDTs" />
+    <meta
+      name="naver-site-verification"
+      content="20103ff533a39100e375ea8cc675b287b31cadb6"
+    />
+    <meta
+      name="google-site-verification"
+      content="vIfbWBh0H5UPBCqtAVVb7PiNFfPiswQ6N6SRisPMDTs"
+    />
     <!-- font add -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9S15LY0JFE"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-9S15LY0JFE"
+    ></script>
     <!-- adsbygoogle -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9223960755326477" crossorigin="anonymous"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9223960755326477"
+      crossorigin="anonymous"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-      gtag('config', 'G-9S15LY0JFE');
+      gtag("config", "G-9S15LY0JFE");
     </script>
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-W9S8HFM9');</script>
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-W9S8HFM9");
+    </script>
     <!-- End Google Tag Manager -->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/reset.css">
-</head>
-<body>
-  <div class="container">
-    <div class="visit-section">
-      <div class="visit-box">
-        <p>Visit Total : <span id="visit-total">0</span></p>
-        <p>Today : <span id="visit-today">0</span></p>
-        <p>Yesterday : <span id="visit-yesterday">0</span></p>
-      </div>
-      <div class="blog-links-container">
-        <div class="blog-links">
-          <a href="how-to-use.html" class="blog-link">📖 사용법 보기</a>
-          <a href="blog-css-units.html" class="blog-link">📐 CSS 단위 가이드</a>
-          <a href="blog-responsive-design.html" class="blog-link">📱 반응형 디자인</a>
-          <a href="blog-mobile-first.html" class="blog-link">📱 모바일 퍼스트</a>
-          <a href="blog-css-best-practices.html" class="blog-link">🎨 CSS 모범 사례</a>
-          <a href="blog-viewport-units.html" class="blog-link">📐 뷰포트 단위</a>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="visit-section">
+        <div class="visit-box">
+          <p>Visit Total : <span id="visit-total">0</span></p>
+          <p>Today : <span id="visit-today">0</span></p>
+          <p>Yesterday : <span id="visit-yesterday">0</span></p>
         </div>
-      </div>
-    </div>
-    <div class="main-box">
-      <div class="ad-banner left">
-        <a href="https://link.coupang.com/a/dftWww" class="pc" target="_blank" referrerpolicy="unsafe-url">
-          <img src="https://ads-partners.coupang.com/banners/951453?subId=&traceId=V0-301-879dd1202e5c73b2-I951453&w=160&h=600" alt="">
-        </a>
-        <a href="https://link.coupang.com/a/dfuKjm" class="mo" target="_blank" referrerpolicy="unsafe-url">
-          <img src="https://ads-partners.coupang.com/banners/951167?subId=&traceId=V0-301-879dd1202e5c73b2-I951167&w=720&h=90" alt="">
-        </a>
-        <span>이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</span>
-      </div>
-      <div class="main">
-        <div class="convert-section">
-          <div class="convert-box-section">
-            <div class="convert-box">
-              <h2>PX to VW</h2>
-              <h3>Breakpoints</h3>
-              <div class="vw-preset-group">
-                <button type="button" class="vw-preset-btn" data-value="320">320px</button>
-                <button type="button" class="vw-preset-btn" data-value="360">360px</button>
-                <button type="button" class="vw-preset-btn" data-value="480">480px</button>
-                <button type="button" class="vw-preset-btn" data-value="720">720px</button>
-                <button type="button" class="vw-preset-btn" data-value="1024">1024px</button>
-                <button type="button" class="vw-preset-btn" data-value="1280">1280px</button>
-                <button type="button" class="vw-preset-btn" data-value="1440">1440px</button>
-                <button type="button" class="vw-preset-btn" data-value="1600">1600px</button>
-                <button type="button" class="vw-preset-btn" data-value="1920">1920px</button>
-              </div>
-              <input type="number" id="vw1-width" value="720"> PX / 소수점 : <input type="number" id="vw1-float" value="2" min="0" max="5">
-              <div class="row">
-                <input type="number" id="px-input" placeholder="PX">
-                <input type="text" id="vw-output" placeholder="VW" readonly>
-                <label style="margin-left:6px;"><input type="checkbox" id="vw-unit-check" checked>단위포함(px)</label>
-              </div>
-              <div class="btn-box">
-                <button id="px-to-vw-btn"><span style="margin-right:4px;">🧮</span>Convert</button>
-                <button type="button" id="vw-copy-btn"><span style="margin-right:4px;">📋</span>Copy</button>
-                <button type="button" id="vw-clear-btn"><span style="margin-right:4px;">🗑️</span>Clear</button>
-              </div>
-            </div>
-            <div class="css-box">
-              <div class="css-header">
-                Breakpoints <input type="number" id="css1-width" value="720"> PX / 소수점 : <input type="number" id="css1-float" value="2" min="0" max="5">
-                <label>
-                  <input type="checkbox" id="css1-remove">속성삭제(Remove property)
-                </label>
-              </div>
-              <div class="textarea-box">
-                <textarea id="css1-input" placeholder="Enter the source"></textarea>
-                <textarea id="css1-output" readonly></textarea>
-              </div>
-              <div class="button-box">
-                <button id="css1-btn"><span style="margin-right:4px;">🧮</span>Convert</button>
-                <button id="css1-copy-btn"><span style="margin-right:4px;">📋</span>Copy</button>
-                <button type="button" id="css1-clear-btn"><span style="margin-right:4px;">🗑️</span>Clear</button>
-              </div>
-            </div>
-          </div>
-          <div class="convert-box-section">
-            <div class="convert-box">
-              <h2>VW to PX</h2>
-              <h3>Breakpoints</h3>
-              <div class="vw-preset-group">
-                <button type="button" class="vw2-preset-btn" data-value="320">320px</button>
-                <button type="button" class="vw2-preset-btn" data-value="360">360px</button>
-                <button type="button" class="vw2-preset-btn" data-value="480">480px</button>
-                <button type="button" class="vw2-preset-btn" data-value="720">720px</button>
-                <button type="button" class="vw2-preset-btn" data-value="1024">1024px</button>
-                <button type="button" class="vw2-preset-btn" data-value="1280">1280px</button>
-                <button type="button" class="vw2-preset-btn" data-value="1440">1440px</button>
-                <button type="button" class="vw2-preset-btn" data-value="1600">1600px</button>
-                <button type="button" class="vw2-preset-btn" data-value="1920">1920px</button>
-              </div>
-              <input type="number" id="vw2-width" value="720"> PX /  
-                <label><input type="checkbox" id="px-no-float" checked> 소수점 없음(반올림)</label>
-              <div class="row">
-                <input type="number" id="vw-input" placeholder="VW">
-                <input type="text" id="px-output" placeholder="PX" readonly>
-                <label style="margin-left:6px;"><input type="checkbox" id="px-unit-check" checked>단위포함(vw)</label>
-              </div>
-              <div class="btn-box"> 
-                <button id="vw-to-px-btn"><span style="margin-right:4px;">🧮</span>Convert</button>
-                <button type="button" id="px-copy-btn"><span style="margin-right:4px;">📋</span>Copy</button>
-                <button type="button" id="px-clear-btn"><span style="margin-right:4px;">🗑️</span>Clear</button>
-              </div>
-            </div>
-            <div class="css-box">
-              <div class="css-header">
-                Breakpoints <input type="number" id="css2-width" value="720"> PX
-                <label><input type="checkbox" id="css2-remove">속성삭제(Remove property)</label>
-                <label style="margin-left:8px;"><input type="checkbox" id="css2-no-float" checked> 소수점 없음(반올림)</label>
-              </div>
-              <div class="textarea-box">
-                <textarea id="css2-input" placeholder="Enter the source"></textarea>
-                <textarea id="css2-output" readonly></textarea>
-              </div>
-              <div class="button-box">
-                <button id="css2-btn"><span style="margin-right:4px;">🧮</span>Convert</button>
-                <button id="css2-copy-btn"><span style="margin-right:4px;">📋</span>Copy</button>
-                <button type="button" id="css2-clear-btn"><span style="margin-right:4px;">🗑️</span>Clear</button>
-              </div>
-            </div>
+        <div class="blog-links-container">
+          <div class="blog-links">
+            <a href="how-to-use.html" class="blog-link">📖 사용법 보기</a>
+            <a href="blog-css-units.html" class="blog-link"
+              >📐 CSS 단위 가이드</a
+            >
+            <a href="blog-responsive-design.html" class="blog-link"
+              >📱 반응형 디자인</a
+            >
+            <a href="blog-mobile-first.html" class="blog-link"
+              >📱 모바일 퍼스트</a
+            >
+            <a href="blog-css-best-practices.html" class="blog-link"
+              >🎨 CSS 모범 사례</a
+            >
+            <a href="blog-viewport-units.html" class="blog-link"
+              >📐 뷰포트 단위</a
+            >
           </div>
         </div>
       </div>
-      <div class="ad-banner right">
-        <a href="https://link.coupang.com/a/dfuxBJ" class="pc" target="_blank" referrerpolicy="unsafe-url">
-          <img src="https://ads-partners.coupang.com/banners/951478?subId=&traceId=V0-301-50c6c2b97fba9aee-I951478&w=160&h=600" alt="">
-        </a>
-        <a href="https://link.coupang.com/a/dfuIL7" class="mo" target="_blank" referrerpolicy="unsafe-url">
-          <img src="https://ads-partners.coupang.com/banners/666607?subId=&traceId=V0-301-50c6c2b97fba9aee-I666607&w=728&h=90" alt="">
-        </a>
-        <span>이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</span>
+      <div class="main-box">
+        <div class="ad-banner left">
+          <div class="pc">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666605,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "160",
+                height: "600",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <div class="mo">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666606,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "100%",
+                height: "90",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <span
+            >이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의
+            수수료를 제공받습니다.</span
+          >
+        </div>
+        <div class="main">
+          <div class="convert-section">
+            <div class="convert-box-section">
+              <div class="convert-box" id="px-to-vw-box">
+                <h2>PX to VW</h2>
+                <h3>Breakpoints</h3>
+                <div class="vw-preset-group">
+                  <button type="button" class="vw-preset-btn" data-value="320">
+                    320px
+                  </button>
+                  <button type="button" class="vw-preset-btn" data-value="360">
+                    360px
+                  </button>
+                  <button type="button" class="vw-preset-btn" data-value="480">
+                    480px
+                  </button>
+                  <button type="button" class="vw-preset-btn" data-value="720">
+                    720px
+                  </button>
+                  <button type="button" class="vw-preset-btn" data-value="1024">
+                    1024px
+                  </button>
+                  <button type="button" class="vw-preset-btn" data-value="1280">
+                    1280px
+                  </button>
+                  <button type="button" class="vw-preset-btn" data-value="1440">
+                    1440px
+                  </button>
+                  <button type="button" class="vw-preset-btn" data-value="1600">
+                    1600px
+                  </button>
+                  <button type="button" class="vw-preset-btn" data-value="1920">
+                    1920px
+                  </button>
+                </div>
+                <input type="number" id="vw1-width" value="720" /> PX / 소수점 :
+                <input type="number" id="vw1-float" value="2" min="0" max="5" />
+                <div class="row">
+                  <input type="number" id="px-input" placeholder="PX" />
+                  <input type="text" id="vw-output" placeholder="VW" readonly />
+                  <label style="margin-left: 6px"
+                    ><input
+                      type="checkbox"
+                      id="vw-unit-check"
+                      checked
+                    />단위포함(px)</label
+                  >
+                </div>
+                <div class="btn-box">
+                  <button id="px-to-vw-btn">
+                    <span style="margin-right: 4px">🧮</span>Convert
+                  </button>
+                  <button type="button" id="vw-copy-btn">
+                    <span style="margin-right: 4px">📋</span>Copy
+                  </button>
+                  <button type="button" id="vw-clear-btn">
+                    <span style="margin-right: 4px">🗑️</span>Clear
+                  </button>
+                </div>
+              </div>
+              <div class="css-box" id="css1-box">
+                <div class="css-header">
+                  Breakpoints
+                  <input type="number" id="css1-width" value="720" /> PX /
+                  소수점 :
+                  <input
+                    type="number"
+                    id="css1-float"
+                    value="2"
+                    min="0"
+                    max="5"
+                  />
+                  <label>
+                    <input type="checkbox" id="css1-remove" />속성삭제(Remove
+                    property)
+                  </label>
+                </div>
+                <div class="textarea-box">
+                  <textarea
+                    id="css1-input"
+                    placeholder="Enter the source"
+                  ></textarea>
+                  <textarea id="css1-output" readonly></textarea>
+                </div>
+                <div class="button-box">
+                  <button id="css1-btn">
+                    <span style="margin-right: 4px">🧮</span>Convert
+                  </button>
+                  <button id="css1-copy-btn">
+                    <span style="margin-right: 4px">📋</span>Copy
+                  </button>
+                  <button type="button" id="css1-clear-btn">
+                    <span style="margin-right: 4px">🗑️</span>Clear
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="convert-box-section">
+              <div class="convert-box" id="vw-to-px-box">
+                <h2>VW to PX</h2>
+                <h3>Breakpoints</h3>
+                <div class="vw-preset-group">
+                  <button type="button" class="vw2-preset-btn" data-value="320">
+                    320px
+                  </button>
+                  <button type="button" class="vw2-preset-btn" data-value="360">
+                    360px
+                  </button>
+                  <button type="button" class="vw2-preset-btn" data-value="480">
+                    480px
+                  </button>
+                  <button type="button" class="vw2-preset-btn" data-value="720">
+                    720px
+                  </button>
+                  <button
+                    type="button"
+                    class="vw2-preset-btn"
+                    data-value="1024"
+                  >
+                    1024px
+                  </button>
+                  <button
+                    type="button"
+                    class="vw2-preset-btn"
+                    data-value="1280"
+                  >
+                    1280px
+                  </button>
+                  <button
+                    type="button"
+                    class="vw2-preset-btn"
+                    data-value="1440"
+                  >
+                    1440px
+                  </button>
+                  <button
+                    type="button"
+                    class="vw2-preset-btn"
+                    data-value="1600"
+                  >
+                    1600px
+                  </button>
+                  <button
+                    type="button"
+                    class="vw2-preset-btn"
+                    data-value="1920"
+                  >
+                    1920px
+                  </button>
+                </div>
+                <input type="number" id="vw2-width" value="720" /> PX /
+                <label
+                  ><input type="checkbox" id="px-no-float" checked /> 소수점
+                  없음(반올림)</label
+                >
+                <div class="row">
+                  <input type="number" id="vw-input" placeholder="VW" />
+                  <input type="text" id="px-output" placeholder="PX" readonly />
+                  <label style="margin-left: 6px"
+                    ><input
+                      type="checkbox"
+                      id="px-unit-check"
+                      checked
+                    />단위포함(vw)</label
+                  >
+                </div>
+                <div class="btn-box">
+                  <button id="vw-to-px-btn">
+                    <span style="margin-right: 4px">🧮</span>Convert
+                  </button>
+                  <button type="button" id="px-copy-btn">
+                    <span style="margin-right: 4px">📋</span>Copy
+                  </button>
+                  <button type="button" id="px-clear-btn">
+                    <span style="margin-right: 4px">🗑️</span>Clear
+                  </button>
+                </div>
+              </div>
+              <div class="css-box" id="css2-box">
+                <div class="css-header">
+                  Breakpoints
+                  <input type="number" id="css2-width" value="720" /> PX
+                  <label
+                    ><input type="checkbox" id="css2-remove" />속성삭제(Remove
+                    property)</label
+                  >
+                  <label style="margin-left: 8px"
+                    ><input type="checkbox" id="css2-no-float" checked /> 소수점
+                    없음(반올림)</label
+                  >
+                </div>
+                <div class="textarea-box">
+                  <textarea
+                    id="css2-input"
+                    placeholder="Enter the source"
+                  ></textarea>
+                  <textarea id="css2-output" readonly></textarea>
+                </div>
+                <div class="button-box">
+                  <button id="css2-btn">
+                    <span style="margin-right: 4px">🧮</span>Convert
+                  </button>
+                  <button id="css2-copy-btn">
+                    <span style="margin-right: 4px">📋</span>Copy
+                  </button>
+                  <button type="button" id="css2-clear-btn">
+                    <span style="margin-right: 4px">🗑️</span>Clear
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ad-banner right">
+          <div class="pc">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666605,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "160",
+                height: "600",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <div class="mo">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666606,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "100%",
+                height: "90",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <span
+            >이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의
+            수수료를 제공받습니다.</span
+          >
+        </div>
       </div>
     </div>
-  </div>
-  
-  <!-- 모바일 전환 버튼 -->
-  <button class="mobile-toggle-btn" id="mobile-toggle-btn">PX to VWs</button>
-  <!-- Supabase 클라이언트 라이브러리 -->
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-  <script src="js/config.js"></script>
-  <script src="js/script.js"></script>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W9S8HFM9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9223960755326477"
-  crossorigin="anonymous"></script>
-</body>
 
-</html> 
+    <!-- 모바일 전환 버튼 -->
+    <button class="mobile-toggle-btn" id="mobile-toggle-btn">PX to VWs</button>
+    <!-- Supabase 클라이언트 라이브러리 -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-W9S8HFM9"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9223960755326477"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -293,10 +293,10 @@ if (css2ClearBtn) {
 
 // 모바일 전환 버튼 기능
 const mobileToggleBtn = document.getElementById("mobile-toggle-btn");
-const pxToVwBox = document.querySelector(".convert-box:first-child");
-const vwToPxBox = document.querySelector(".convert-box:last-child");
-const css1Box = document.querySelector(".css-box:first-child");
-const css2Box = document.querySelector(".css-box:last-child");
+const pxToVwBox = document.getElementById("px-to-vw-box");
+const vwToPxBox = document.getElementById("vw-to-px-box");
+const css1Box = document.getElementById("css1-box");
+const css2Box = document.getElementById("css2-box");
 
 if (mobileToggleBtn && pxToVwBox && vwToPxBox && css1Box && css2Box) {
   let isPxToVwVisible = true;
