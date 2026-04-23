@@ -6,34 +6,65 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no"
     />
-    <title>CSS Clamp Generator</title>
+    <title>
+      CSS Clamp 생성기 | 반응형 폰트 사이즈 자동 계산 (min, val, max)
+    </title>
     <link rel="icon" href="favicon.ico" />
-    <meta name="title" content="CSS Clamp 계산기" />
+    <link rel="canonical" href="https://pxtovw.co.kr/clamp-generator.html" />
+    <meta
+      name="title"
+      content="CSS Clamp 생성기 | 반응형 타이포그래피 자동 계산기"
+    />
     <meta
       name="description"
-      content="반응형 웹을 위한 CSS Clamp 생성기. 최소/최대 화면 크기와 폰트 크기를 설정하여 부끄럽게 변하는 유체 타이포그래피(Fluid Typography) 코드를 만들어보세요."
+      content="뷰포트 크기에 따라 유동적으로 변하는 CSS Clamp() 함수 코드를 생성해주는 도구입니다. 최소 크기, 최대 크기, 뷰포트 범위를 입력하여 완벽한 반응형 폰트/사이즈를 구현하세요."
     />
     <meta
       name="keywords"
-      content="clamp generator, css clamp, fluid typography, 반응형 폰트, css clamp 계산기, css 반응형 툴"
+      content="css clamp 생성기, clamp generator, 반응형 폰트, css clamp 계산기, 유동적 타이포그래피, vw calc, css 반응형 폰트 단위, 뷰포트 폰트 조절, min max clamp, css 자동화 툴"
     />
+    <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="CSS Clamp 계산기 | 반응형 웹 폰트 크기 조절"
+      content="CSS Clamp 생성기 | 반응형 웹 폰트 크기 자동 계산기"
     />
     <meta
       property="og:site_name"
-      content="PX-VW 변환기 - 반응형 CSS 단위 변환 툴"
+      content="PX-VW 변환기 - 반응형 웹 개발 도구"
     />
     <meta
       property="og:description"
-      content="최소/최대 뷰포트와 폰트 크기를 입력하면 완벽한 clamp() 속성을 즉시 만들어 드립니다."
+      content="최소/최대 뷰포트와 폰트 크기를 입력하면 완벽한 clamp() 코드를 즉시 만들어 드립니다. 반응형 웹 필수 도구."
     />
     <meta
       property="og:url"
       content="https://pxtovw.co.kr/clamp-generator.html"
     />
     <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="CSS Clamp 생성기 | 반응형 웹 폰트 크기 조절"
+    />
+    <meta
+      name="twitter:description"
+      content="완벽한 반응형 폰트 조절을 위한 CSS Clamp 코드를 쉽게 생성하세요."
+    />
+    <meta name="twitter:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="PX TO VW" />
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CSS Clamp 생성기",
+        "url": "https://pxtovw.co.kr/clamp-generator.html",
+        "description": "뷰포트 범위와 폰트 크기 범위를 입력받아 완벽하게 부드러운 반응형 폰트를 구현하는 css clamp() 코드를 생성하는 웹 애플리케이션입니다.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All"
+      }
+    </script>
     <!-- site verification -->
     <meta
       name="naver-site-verification"
@@ -89,94 +120,115 @@
   </head>
   <body>
     <div class="container">
-      <div class="visit-section">
-        <div class="visit-box">
-          <p>Visit Total : <span id="visit-total">0</span></p>
-          <p>Today : <span id="visit-today">0</span></p>
-          <p>Yesterday : <span id="visit-yesterday">0</span></p>
-        </div>
-        <div class="right-tools">
-          <select
-            class="blog-select"
-            onchange="if (this.value) location.href = this.value;"
-          >
-            <option value="">📖 블로그 및 문서</option>
-            <option value="how-to-use.html">📖 사용법 보기</option>
-            <option value="blog-css-units.html">📐 CSS 단위 가이드</option>
-            <option value="blog-responsive-design.html">
-              📱 반응형 디자인
-            </option>
-            <option value="blog-mobile-first.html">📱 모바일 퍼스트</option>
-            <option value="blog-css-best-practices.html">
-              🎨 CSS 모범 사례
-            </option>
-            <option value="blog-viewport-units.html">📐 뷰포트 단위</option>
-          </select>
-          <div class="version-info">
-            <button id="version-btn" class="version-btn">
-              v1.2.0 <span>▼</span>
-            </button>
-            <div class="version-modal" id="version-modal">
-              <h3>
-                업데이트 노트
-                <button
-                  type="button"
-                  class="close-version-btn"
-                  id="close-version-btn"
-                >
-                  &times;
+      <header class="app-header">
+        <div class="app-header-top">
+          <a href="index.html" class="app-logo">
+            <h1><span>PX</span> to <span>VW</span></h1>
+            <span class="subtitle">Web Tools</span>
+          </a>
+          <div class="app-header-tools">
+            <div class="visit-stats">
+              <div class="stat">
+                <span class="label">Total</span
+                ><span id="visit-total" class="value">0</span>
+              </div>
+              <div class="stat">
+                <span class="label">Today</span
+                ><span id="visit-today" class="value">0</span>
+              </div>
+              <div class="stat">
+                <span class="label">Yesterday</span
+                ><span id="visit-yesterday" class="value">0</span>
+              </div>
+            </div>
+            <div class="right-tools">
+              <select
+                class="blog-select"
+                onchange="if (this.value) location.href = this.value;"
+              >
+                <option value="">📖 블로그 및 문서</option>
+                <option value="how-to-use.html">📖 사용법 보기</option>
+                <option value="blog-css-units.html">📐 CSS 단위 가이드</option>
+                <option value="blog-responsive-design.html">
+                  📱 반응형 디자인
+                </option>
+                <option value="blog-mobile-first.html">📱 모바일 퍼스트</option>
+                <option value="blog-css-best-practices.html">
+                  🎨 CSS 모범 사례
+                </option>
+                <option value="blog-viewport-units.html">📐 뷰포트 단위</option>
+              </select>
+              <div class="version-info">
+                <button id="version-btn" class="version-btn">
+                  v1.2.0 <span>▼</span>
                 </button>
-              </h3>
-              <div class="version-item">
-                <strong>v1.2.0 (2026.04.23)</strong>
-                <ul>
-                  <li>CSS 스타일 및 시각화 생성기 추가</li>
-                  <li>Box Shadow & Text Shadow 생성기</li>
-                  <li>Border-Radius 생성기 (Liquid Shape)</li>
-                  <li>글래스모피즘 & 뉴모피즘 생성기</li>
-                </ul>
-              </div>
-              <div class="version-item">
-                <strong>v1.1.0 (2026.03.23)</strong>
-                <ul>
-                  <li>PX ↔ REM 변환기 및 CSS Clamp 생성기 기능 추가</li>
-                  <li>상단 네비게이션(GNB) 추가 및 보조 도구 사용성 개선</li>
-                  <li>모바일 환경 UI 최적화(가독성 개편 및 vw 적용 확대)</li>
-                </ul>
-              </div>
-              <div class="version-item">
-                <strong>v1.0.1 (2026.03.23)</strong>
-                <ul>
-                  <li>
-                    CSS "속성삭제" 체크 시 주석이 포함된 경우 발생하는 변환 오류
-                    수정
-                  </li>
-                  <li>광고 배너 높이 조정</li>
-                </ul>
-              </div>
-              <div class="version-item">
-                <strong>v1.0.0 (2024.10.01)</strong>
-                <ul>
-                  <li>PX ↔ VW 양방향 변환 기본 기능 출시</li>
-                  <li>Breakpoints 프리셋 제공 및 CSS 텍스트 일괄 변환 지원</li>
-                </ul>
+                <div class="version-modal" id="version-modal">
+                  <h3>
+                    업데이트 노트
+                    <button
+                      type="button"
+                      class="close-version-btn"
+                      id="close-version-btn"
+                    >
+                      &times;
+                    </button>
+                  </h3>
+                  <div class="version-item">
+                    <strong>v1.2.0 (2026.04.23)</strong>
+                    <ul>
+                      <li>CSS 스타일 및 시각화 생성기 추가</li>
+                      <li>Box Shadow & Text Shadow 생성기</li>
+                      <li>Border-Radius 생성기 (Liquid Shape)</li>
+                      <li>글래스모피즘 & 뉴모피즘 생성기</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v1.1.0 (2026.03.23)</strong>
+                    <ul>
+                      <li>PX ↔ REM 변환기 및 CSS Clamp 생성기 기능 추가</li>
+                      <li>
+                        상단 네비게이션(GNB) 추가 및 보조 도구 사용성 개선
+                      </li>
+                      <li>
+                        모바일 환경 UI 최적화(가독성 개편 및 vw 적용 확대)
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v1.0.1 (2026.03.23)</strong>
+                    <ul>
+                      <li>
+                        CSS "속성삭제" 체크 시 주석이 포함된 경우 발생하는 변환
+                        오류 수정
+                      </li>
+                      <li>광고 배너 높이 조정</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v1.0.0 (2024.10.01)</strong>
+                    <ul>
+                      <li>PX ↔ VW 양방향 변환 기본 기능 출시</li>
+                      <li>
+                        Breakpoints 프리셋 제공 및 CSS 텍스트 일괄 변환 지원
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- GNB Menu -->
-      <nav class="gnb-menu">
-        <div class="gnb-menu-inner">
-          <a href="index.html" class="gnb-item">PX ↔ VW</a>
-          <a href="px-to-rem.html" class="gnb-item">PX ↔ REM</a>
-          <a href="clamp-generator.html" class="gnb-item active"
-            >CSS Clamp Generator</a
-          >
-          <a href="css-generator.html" class="gnb-item">CSS Generator</a>
-        </div>
-      </nav>
+        <nav class="gnb-menu">
+          <div class="gnb-menu-inner">
+            <a href="index.html" class="gnb-item">PX ↔ VW</a>
+            <a href="px-to-rem.html" class="gnb-item">PX ↔ REM</a>
+            <a href="clamp-generator.html" class="gnb-item active"
+              >CSS Clamp Generator</a
+            >
+            <a href="css-generator.html" class="gnb-item">CSS Generator</a>
+          </div>
+        </nav>
+      </header>
 
       <div class="main-box">
         <div class="ad-banner left">
@@ -214,39 +266,33 @@
         <div class="main">
           <div class="convert-box" style="width: 100%">
             <h2>
-              CSS Clamp Generator
-              <span
-                style="
-                  font-size: 14px;
-                  font-weight: 400;
-                  color: #666;
-                  margin-left: 10px;
-                "
+              CSS Clamp Generator<br />
+              <span style="font-size: 14px; font-weight: 400; color: #666"
                 >최소값, 기본값(유동값), 최대값을 설정하여 반응형 폰트 크기,
-                간격, 너비를 계산해 주는 도구입니다. 복잡한 수식 없이 뷰포트
-                크기에 따라 유동적으로 변하는 CSS 코드를 즉시 생성하여 반응형
-                레이아웃을 간편하게 구현할 수 있습니다.
+                간격, 너비를 계산해 주는 도구입니다.<br />
+                복잡한 수식 없이 뷰포트 크기에 따라 유동적으로 변하는 CSS 코드를
+                즉시 생성하여 반응형 레이아웃을 간편하게 구현할 수 있습니다.
               </span>
             </h2>
             <div class="clamp-controls">
               <div class="row">
-                <label style="width: 160px">최소 뷰포트 (Min Viewport)</label>
+                <label style="width: 200px">최소 뷰포트 (Min Viewport)</label>
                 <input type="number" id="clamp-min-vp" value="320" /> px
               </div>
               <div class="row">
-                <label style="width: 160px">최대 뷰포트 (Max Viewport)</label>
+                <label style="width: 200px">최대 뷰포트 (Max Viewport)</label>
                 <input type="number" id="clamp-max-vp" value="1200" /> px
               </div>
               <div class="row">
-                <label style="width: 160px">최소 폰트 크기 (Min Size)</label>
+                <label style="width: 200px">최소 폰트 크기 (Min Size)</label>
                 <input type="number" id="clamp-min-font" value="16" /> px
               </div>
               <div class="row">
-                <label style="width: 160px">최대 폰트 크기 (Max Size)</label>
+                <label style="width: 200px">최대 폰트 크기 (Max Size)</label>
                 <input type="number" id="clamp-max-font" value="32" /> px
               </div>
               <div class="row">
-                <label style="width: 160px">기준 폰트 크기 (Root Size)</label>
+                <label style="width: 200px">기준 폰트 크기 (Root Size)</label>
                 <input
                   type="number"
                   id="clamp-root-font"
