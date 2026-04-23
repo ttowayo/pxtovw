@@ -10,74 +10,106 @@ function vwToPx(vw, viewport, floatNum) {
 }
 // CSS 내 px -> vw 변환
 function cssPxToVw(css, viewport, floatNum, removeValue) {
+  const cleanCss = css; // 주석 유지
+
   if (!removeValue) {
-    return css.replace(
+    return cleanCss.replace(
       /(\d+\.?\d*)px/g,
       (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
     );
   }
-  // 블록 파싱 오류를 방지하기 위해 CSS 주석 제거
-  const cleanCss = css.replace(/\/\*[\s\S]*?\*\//g, '');
-  
+
+  // { } 괄호가 없는 경우 처리
+  if (!cleanCss.includes("{")) {
+    return processProperties(cleanCss, (line) =>
+      line.replace(
+        /(\d+\.?\d*)px/g,
+        (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
+      )
+    , "");
+  }
+
   // 속성 삭제: 숫자 단위가 없는 속성 전체 삭제
   return cleanCss.replace(
-    /([^{]+{)([^}]+)(})/g,
+    /([^{]*{)([^}]+)(})/g,
     (match, selector, properties, closingBrace) => {
-      const propertyList = properties.split(/;\s*/);
-      const filteredProperties = propertyList
-        .map((line) => {
-          // 숫자+단위가 있으면 변환, 없으면 삭제
-          if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(line)) {
-            return line.replace(
-              /(\d+\.?\d*)px/g,
-              (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
-            );
-          }
-          return "";
-        })
-        .filter(Boolean);
-
-      const propertiesString =
-        filteredProperties.length > 0
-          ? filteredProperties.join(";\n") + ";\n"
-          : "";
-      return selector + propertiesString + closingBrace;
+      const processed = processProperties(properties, (line) =>
+        line.replace(
+          /(\d+\.?\d*)px/g,
+          (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
+        )
+      , "  ");
+      if (processed) {
+        return selector.trimEnd() + "\n  " + processed + "\n" + closingBrace.trim();
+      }
+      return selector.trimEnd() + closingBrace.trim();
     }
   );
 }
+
+// 속성 처리용 헬퍼 함수
+function processProperties(properties, transformFn, indent = "  ") {
+  const regex = /(\/\*[\s\S]*?\*\/)|([^:;{}]+:[^;{}]+;?)/g;
+  let match;
+  let result = [];
+  while ((match = regex.exec(properties)) !== null) {
+    let text = match[0].trim();
+    if (!text) continue;
+    
+    if (text.startsWith("/*")) {
+      result.push(transformFn(text));
+    } else {
+      if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(text)) {
+        result.push(transformFn(text));
+      }
+    }
+  }
+  
+  if (result.length === 0) return "";
+  
+  return result.map(line => {
+    if (!line.startsWith("/*") && !line.endsWith(";")) {
+      return line + ";";
+    }
+    return line;
+  }).join("\n" + indent);
+}
+
 // CSS 내 vw -> px 변환
 function cssVwToPx(css, viewport, floatNum, removeValue) {
+  const cleanCss = css; // 주석 유지
+
   if (!removeValue) {
-    return css.replace(
+    return cleanCss.replace(
       /(\d+\.?\d*)vw/g,
       (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
     );
   }
-  // 블록 파싱 오류를 방지하기 위해 CSS 주석 제거
-  const cleanCss = css.replace(/\/\*[\s\S]*?\*\//g, '');
+
+  // { } 괄호가 없는 경우 처리
+  if (!cleanCss.includes("{")) {
+    return processProperties(cleanCss, (line) =>
+      line.replace(
+        /(\d+\.?\d*)vw/g,
+        (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
+      )
+    , "");
+  }
 
   // 속성 삭제: 숫자 단위가 없는 속성 전체 삭제
   return cleanCss.replace(
-    /([^{]+{)([^}]+)(})/g,
+    /([^{]*{)([^}]+)(})/g,
     (match, selector, properties, closingBrace) => {
-      const propertyList = properties.split(/;\s*/);
-      const filteredProperties = propertyList
-        .map((line) => {
-          if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(line)) {
-            return line.replace(
-              /(\d+\.?\d*)vw/g,
-              (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
-            );
-          }
-          return "";
-        })
-        .filter(Boolean);
-
-      const propertiesString =
-        filteredProperties.length > 0
-          ? filteredProperties.join(";\n") + ";\n"
-          : "";
-      return selector + propertiesString + closingBrace;
+      const processed = processProperties(properties, (line) =>
+        line.replace(
+          /(\d+\.?\d*)vw/g,
+          (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
+        )
+      , "  ");
+      if (processed) {
+        return selector.trimEnd() + "\n  " + processed + "\n" + closingBrace.trim();
+      }
+      return selector.trimEnd() + closingBrace.trim();
     }
   );
 }

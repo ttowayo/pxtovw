@@ -11,72 +11,106 @@ function remToPx(rem, root, floatNum) {
 
 // CSS 내 px -> rem 변환
 function cssPxToRem(css, root, floatNum, removeValue) {
+  const cleanCss = css; // 주석 유지
+
   if (!removeValue) {
-    return css.replace(
+    return cleanCss.replace(
       /(\d+\.?\d*)px/g,
       (m, p1) => pxToRem(p1, root, floatNum) + "rem"
     );
   }
-  // 블록 파싱 오류를 방지하기 위해 CSS 주석 제거
-  const cleanCss = css.replace(/\/\*[\s\S]*?\*\//g, '');
-  
+
+  // { } 괄호가 없는 경우 처리
+  if (!cleanCss.includes("{")) {
+    return processPropertiesRem(cleanCss, (line) =>
+      line.replace(
+        /(\d+\.?\d*)px/g,
+        (m, p1) => pxToRem(p1, root, floatNum) + "rem"
+      )
+    , "");
+  }
+
   // 속성 삭제: 숫자 단위가 없는 속성 전체 삭제
   return cleanCss.replace(
-    /([^{]+{)([^}]+)(})/g,
+    /([^{]*{)([^}]+)(})/g,
     (match, selector, properties, closingBrace) => {
-      const propertyList = properties.split(/;\s*/);
-      const filteredProperties = propertyList
-        .map((line) => {
-          if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(line)) {
-            return line.replace(
-              /(\d+\.?\d*)px/g,
-              (m, p1) => pxToRem(p1, root, floatNum) + "rem"
-            );
-          }
-          return "";
-        })
-        .filter(Boolean);
-
-      const propertiesString =
-        filteredProperties.length > 0
-          ? filteredProperties.join(";\n") + ";\n"
-          : "";
-      return selector + propertiesString + closingBrace;
+      const processed = processPropertiesRem(properties, (line) =>
+        line.replace(
+          /(\d+\.?\d*)px/g,
+          (m, p1) => pxToRem(p1, root, floatNum) + "rem"
+        )
+      , "  ");
+      if (processed) {
+        return selector.trimEnd() + "\n  " + processed + "\n" + closingBrace.trim();
+      }
+      return selector.trimEnd() + closingBrace.trim();
     }
   );
 }
 
+// 속성 처리용 헬퍼 함수
+function processPropertiesRem(properties, transformFn, indent = "  ") {
+  const regex = /(\/\*[\s\S]*?\*\/)|([^:;{}]+:[^;{}]+;?)/g;
+  let match;
+  let result = [];
+  while ((match = regex.exec(properties)) !== null) {
+    let text = match[0].trim();
+    if (!text) continue;
+    
+    if (text.startsWith("/*")) {
+      result.push(transformFn(text));
+    } else {
+      if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(text)) {
+        result.push(transformFn(text));
+      }
+    }
+  }
+  
+  if (result.length === 0) return "";
+  
+  return result.map(line => {
+    if (!line.startsWith("/*") && !line.endsWith(";")) {
+      return line + ";";
+    }
+    return line;
+  }).join("\n" + indent);
+}
+
 // CSS 내 rem -> px 변환
 function cssRemToPx(css, root, floatNum, removeValue) {
+  const cleanCss = css; // 주석 유지
+
   if (!removeValue) {
-    return css.replace(
+    return cleanCss.replace(
       /(\d+\.?\d*)rem/g,
       (m, p1) => remToPx(p1, root, floatNum) + "px"
     );
   }
-  const cleanCss = css.replace(/\/\*[\s\S]*?\*\//g, '');
 
+  // { } 괄호가 없는 경우 처리
+  if (!cleanCss.includes("{")) {
+    return processPropertiesRem(cleanCss, (line) =>
+      line.replace(
+        /(\d+\.?\d*)rem/g,
+        (m, p1) => remToPx(p1, root, floatNum) + "px"
+      )
+    , "");
+  }
+
+  // 속성 삭제: 숫자 단위가 없는 속성 전체 삭제
   return cleanCss.replace(
-    /([^{]+{)([^}]+)(})/g,
+    /([^{]*{)([^}]+)(})/g,
     (match, selector, properties, closingBrace) => {
-      const propertyList = properties.split(/;\s*/);
-      const filteredProperties = propertyList
-        .map((line) => {
-          if (/:[^;]*([0-9.]+\s*(px|vw|rem|em|%|vh|vmin|vmax))/i.test(line)) {
-            return line.replace(
-              /(\d+\.?\d*)rem/g,
-              (m, p1) => remToPx(p1, root, floatNum) + "px"
-            );
-          }
-          return "";
-        })
-        .filter(Boolean);
-
-      const propertiesString =
-        filteredProperties.length > 0
-          ? filteredProperties.join(";\n") + ";\n"
-          : "";
-      return selector + propertiesString + closingBrace;
+      const processed = processPropertiesRem(properties, (line) =>
+        line.replace(
+          /(\d+\.?\d*)rem/g,
+          (m, p1) => remToPx(p1, root, floatNum) + "px"
+        )
+      , "  ");
+      if (processed) {
+        return selector.trimEnd() + "\n  " + processed + "\n" + closingBrace.trim();
+      }
+      return selector.trimEnd() + closingBrace.trim();
     }
   );
 }
