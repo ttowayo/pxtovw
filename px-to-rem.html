@@ -6,28 +6,48 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no"
     />
-    <title>PX ↔ REM Converter</title>
+    <title>PX to REM 변환기 (픽셀 ↔ 렘) | 반응형 웹 접근성 CSS 도구</title>
     <link rel="icon" href="favicon.ico" />
-    <meta name="title" content="PX ↔ REM 계산기" />
+    <link rel="canonical" href="https://pxtovw.co.kr/px-to-rem.html" />
+    <meta name="title" content="PX to REM 변환기 | 반응형 타이포그래피 계산기" />
     <meta
       name="description"
-      content="PX-REM 변환기는 기준 폰트 크기를 바탕으로 픽셀(px)과 렘(rem) 단위 간의 변환을 쉽고 빠르게 도와주는 계산기입니다."
+      content="디자이너와 퍼블리셔를 위한 PX to REM 변환기입니다. 기준 폰트 사이즈(root)를 설정하고 픽셀(px)을 REM 단위로 정확하게 변환하세요. 웹 접근성과 반응형 폰트 구현에 필수적입니다."
     />
     <meta
       name="keywords"
-      content="PX-REM 변환기, px to rem convert, px to rem, rem to px, rem to px convert, rem 계산기, 루트 폰트, CSS 접근성, 반응형 폰트"
+      content="px to rem, rem to px, rem 계산기, px rem 변환기, CSS 단위 변환, 웹 접근성, em 변환기, 루트 폰트 사이즈, 반응형 폰트, px to em, CSS rem 변환, 프론트엔드 도구"
     />
+    <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="PX-REM 변환기 | px to rem | rem to px | CSS 단위 변환"
+      content="PX to REM 변환기 (픽셀 ↔ 렘) | CSS 단위 계산기"
     />
-    <meta property="og:site_name" content="PX-REM 변환기" />
+    <meta property="og:site_name" content="PX-VW 변환기 - 반응형 웹 개발 도구" />
     <meta
       property="og:description"
-      content="PX-REM 변환기는 기준 폰트 크기를 바탕으로 픽셀(px)과 렘(rem) 단위 간의 변환을 쉽고 빠르게 도와줍니다."
+      content="기준 폰트 사이즈를 설정하고 픽셀(px)을 REM 단위로 정확하게 변환하세요. 웹 접근성을 위한 필수 계산기."
     />
     <meta property="og:url" content="https://pxtovw.co.kr/px-to-rem.html" />
     <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PX to REM 변환기 | 웹 접근성 CSS 도구" />
+    <meta name="twitter:description" content="픽셀(px)을 렘(rem) 단위로 쉽고 정확하게 변환해주는 타이포그래피 필수 도구." />
+    <meta name="twitter:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="PX TO VW" />
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "PX to REM 변환기",
+      "url": "https://pxtovw.co.kr/px-to-rem.html",
+      "description": "기준 폰트 사이즈(root)를 설정하고 픽셀(px)을 REM 단위로 정확하게 변환하는 개발자용 계산기입니다.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All"
+    }
+    </script>
     <!-- site verification -->
     <meta
       name="naver-site-verification"
@@ -83,94 +103,100 @@
   </head>
   <body>
     <div class="container">
-      <div class="visit-section">
-        <div class="visit-box">
-          <p>Visit Total : <span id="visit-total">0</span></p>
-          <p>Today : <span id="visit-today">0</span></p>
-          <p>Yesterday : <span id="visit-yesterday">0</span></p>
-        </div>
-        <div class="right-tools">
-          <select
-            class="blog-select"
-            onchange="if (this.value) location.href = this.value;"
-          >
-            <option value="">📖 블로그 및 문서</option>
-            <option value="how-to-use.html">📖 사용법 보기</option>
-            <option value="blog-css-units.html">📐 CSS 단위 가이드</option>
-            <option value="blog-responsive-design.html">
-              📱 반응형 디자인
-            </option>
-            <option value="blog-mobile-first.html">📱 모바일 퍼스트</option>
-            <option value="blog-css-best-practices.html">
-              🎨 CSS 모범 사례
-            </option>
-            <option value="blog-viewport-units.html">📐 뷰포트 단위</option>
-          </select>
-          <div class="version-info">
-            <button id="version-btn" class="version-btn">
-              v1.2.0 <span>▼</span>
-            </button>
-            <div class="version-modal" id="version-modal">
-              <h3>
-                업데이트 노트
-                <button
-                  type="button"
-                  class="close-version-btn"
-                  id="close-version-btn"
-                >
-                  &times;
+      <header class="app-header">
+        <div class="app-header-top">
+          <a href="index.html" class="app-logo">
+            <h1><span>PX</span> to <span>VW</span></h1>
+            <span class="subtitle">Web Tools</span>
+          </a>
+          <div class="app-header-tools">
+            <div class="visit-stats">
+              <div class="stat"><span class="label">Total</span><span id="visit-total" class="value">0</span></div>
+              <div class="stat"><span class="label">Today</span><span id="visit-today" class="value">0</span></div>
+              <div class="stat"><span class="label">Yesterday</span><span id="visit-yesterday" class="value">0</span></div>
+            </div>
+            <div class="right-tools">
+              <select
+                class="blog-select"
+                onchange="if (this.value) location.href = this.value;"
+              >
+                <option value="">📖 블로그 및 문서</option>
+                <option value="how-to-use.html">📖 사용법 보기</option>
+                <option value="blog-css-units.html">📐 CSS 단위 가이드</option>
+                <option value="blog-responsive-design.html">
+                  📱 반응형 디자인
+                </option>
+                <option value="blog-mobile-first.html">📱 모바일 퍼스트</option>
+                <option value="blog-css-best-practices.html">
+                  🎨 CSS 모범 사례
+                </option>
+                <option value="blog-viewport-units.html">📐 뷰포트 단위</option>
+              </select>
+              <div class="version-info">
+                <button id="version-btn" class="version-btn">
+                  v1.2.0 <span>▼</span>
                 </button>
-              </h3>
-              <div class="version-item">
-                <strong>v1.2.0 (2026.04.23)</strong>
-                <ul>
-                  <li>CSS 스타일 및 시각화 생성기 추가</li>
-                  <li>Box Shadow & Text Shadow 생성기</li>
-                  <li>Border-Radius 생성기 (Liquid Shape)</li>
-                  <li>글래스모피즘 & 뉴모피즘 생성기</li>
-                </ul>
-              </div>
-              <div class="version-item">
-                <strong>v1.1.0 (2026.03.23)</strong>
-                <ul>
-                  <li>PX ↔ REM 변환기 및 CSS Clamp 생성기 기능 추가</li>
-                  <li>상단 네비게이션(GNB) 추가 및 보조 도구 사용성 개선</li>
-                  <li>모바일 환경 UI 최적화(가독성 개편 및 vw 적용 확대)</li>
-                </ul>
-              </div>
-              <div class="version-item">
-                <strong>v1.0.1 (2026.03.23)</strong>
-                <ul>
-                  <li>
-                    CSS "속성삭제" 체크 시 주석이 포함된 경우 발생하는 변환 오류
-                    수정
-                  </li>
-                  <li>광고 배너 높이 조정</li>
-                </ul>
-              </div>
-              <div class="version-item">
-                <strong>v1.0.0 (2024.10.01)</strong>
-                <ul>
-                  <li>PX ↔ VW 양방향 변환 기본 기능 출시</li>
-                  <li>Breakpoints 프리셋 제공 및 CSS 텍스트 일괄 변환 지원</li>
-                </ul>
+                <div class="version-modal" id="version-modal">
+                  <h3>
+                    업데이트 노트
+                    <button
+                      type="button"
+                      class="close-version-btn"
+                      id="close-version-btn"
+                    >
+                      &times;
+                    </button>
+                  </h3>
+                  <div class="version-item">
+                    <strong>v1.2.0 (2026.04.23)</strong>
+                    <ul>
+                      <li>CSS 스타일 및 시각화 생성기 추가</li>
+                      <li>Box Shadow & Text Shadow 생성기</li>
+                      <li>Border-Radius 생성기 (Liquid Shape)</li>
+                      <li>글래스모피즘 & 뉴모피즘 생성기</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v1.1.0 (2026.03.23)</strong>
+                    <ul>
+                      <li>PX ↔ REM 변환기 및 CSS Clamp 생성기 기능 추가</li>
+                      <li>상단 네비게이션(GNB) 추가 및 보조 도구 사용성 개선</li>
+                      <li>모바일 환경 UI 최적화(가독성 개편 및 vw 적용 확대)</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v1.0.1 (2026.03.23)</strong>
+                    <ul>
+                      <li>
+                        CSS "속성삭제" 체크 시 주석이 포함된 경우 발생하는 변환 오류
+                        수정
+                      </li>
+                      <li>광고 배너 높이 조정</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v1.0.0 (2024.10.01)</strong>
+                    <ul>
+                      <li>PX ↔ VW 양방향 변환 기본 기능 출시</li>
+                      <li>Breakpoints 프리셋 제공 및 CSS 텍스트 일괄 변환 지원</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- GNB Menu -->
-      <nav class="gnb-menu">
-        <div class="gnb-menu-inner">
-          <a href="index.html" class="gnb-item">PX ↔ VW</a>
-          <a href="px-to-rem.html" class="gnb-item active">PX ↔ REM</a>
-          <a href="clamp-generator.html" class="gnb-item"
-            >CSS Clamp Generator</a
-          >
-          <a href="css-generator.html" class="gnb-item">CSS Generator</a>
-        </div>
-      </nav>
+        <nav class="gnb-menu">
+          <div class="gnb-menu-inner">
+            <a href="index.html" class="gnb-item">PX ↔ VW</a>
+            <a href="px-to-rem.html" class="gnb-item active">PX ↔ REM</a>
+            <a href="clamp-generator.html" class="gnb-item"
+              >CSS Clamp Generator</a
+            >
+            <a href="css-generator.html" class="gnb-item">CSS Generator</a>
+          </div>
+        </nav>
+      </header>
 
       <div class="main-box">
         <div class="ad-banner left">
