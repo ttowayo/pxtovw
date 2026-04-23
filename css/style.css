@@ -202,8 +202,8 @@ button:focus,
 .css-section {
   display: flex;
   justify-content: space-between;
-  height: calc(100vh - 314px);
-  min-height: 540px;
+  height: calc(100vh - 414px);
+  min-height: 440px;
 }
 .css-box {
   background: #fafbfc;
@@ -213,8 +213,8 @@ button:focus,
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 350px);
-  min-height: 626px;
+  height: calc(100vh - 450px);
+  min-height: 526px;
 }
 .css-header {
   font-size: 16px;
@@ -1056,4 +1056,140 @@ input[type="checkbox"]:checked::after {
     z-index: 2000;
     box-shadow: 0 10px 40px rgba(0,0,0,0.3);
   }
+}
+
+/* ========================================================================== */
+/* CSS Generator Styles */
+/* ========================================================================== */
+.generator-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.gen-card {
+  background: #fafbfc;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.gen-card h2 {
+  font-size: 18px;
+  margin: 0;
+  color: #333;
+  border-bottom: 2px solid #2196f3;
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.control-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.control-item label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+}
+.control-item label span {
+  color: #2196f3;
+}
+.preview-area {
+  height: 180px;
+  background: #eee;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  background-image: 
+    linear-gradient(45deg, #e5e5e5 25%, transparent 25%),
+    linear-gradient(-45deg, #e5e5e5 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e5e5e5 75%),
+    linear-gradient(-45deg, transparent 75%, #e5e5e5 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+.preview-box {
+  width: 100px;
+  height: 100px;
+  background: #fff;
+  transition: all 0.2s;
+}
+.preview-text {
+  font-size: 24px;
+  font-weight: 900;
+  color: #333;
+}
+.code-output {
+  background: #2d2d2d;
+  color: #ccc;
+  padding: 12px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 13px;
+  position: relative;
+  word-break: break-all;
+}
+.code-output code {
+  display: block;
+  line-height: 1.5;
+}
+.copy-code-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 4px 8px !important;
+  font-size: 11px !important;
+  margin: 0 !important;
+  height: auto !important;
+  background: #444 !important;
+  color: #fff !important;
+  border: 1px solid #555 !important;
+}
+.copy-code-btn:hover {
+  background: #666 !important;
+}
+input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+  accent-color: #2196f3;
+}
+.color-pickers {
+  display: flex;
+  gap: 10px;
+}
+.color-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.color-item input[type="color"] {
+  width: 100%;
+  height: 34px;
+  padding: 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#glass-preview-area {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+#neu-preview-area {
+  background: #e0e0e0;
 }

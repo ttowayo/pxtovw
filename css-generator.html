@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no"
+    />
+    <title>CSS 스타일 생성기 | Box Shadow, Border-Radius, Glassmorphism</title>
+    <link rel="icon" href="favicon.ico" />
+    <meta name="title" content="CSS 스타일 생성기" />
+    <meta
+      name="description"
+      content="Box Shadow, Text Shadow, Border-Radius, 글래스모피즘, 뉴모피즘 스타일을 간편하게 생성하고 CSS 코드를 복사하세요."
+    />
+    <!-- font add -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="visit-section">
+        <div class="visit-box">
+          <p>Visit Total : <span id="visit-total">0</span></p>
+          <p>Today : <span id="visit-today">0</span></p>
+          <p>Yesterday : <span id="visit-yesterday">0</span></p>
+        </div>
+        <div class="right-tools">
+          <select
+            class="blog-select"
+            onchange="if (this.value) location.href = this.value;"
+          >
+            <option value="">📖 블로그 및 문서</option>
+            <option value="how-to-use.html">📖 사용법 보기</option>
+            <option value="blog-css-units.html">📐 CSS 단위 가이드</option>
+            <option value="blog-responsive-design.html">
+              📱 반응형 디자인
+            </option>
+            <option value="blog-mobile-first.html">📱 모바일 퍼스트</option>
+            <option value="blog-css-best-practices.html">
+              🎨 CSS 모범 사례
+            </option>
+            <option value="blog-viewport-units.html">📐 뷰포트 단위</option>
+          </select>
+          <div class="version-info">
+            <button id="version-btn" class="version-btn">
+              v1.2.0 <span>▼</span>
+            </button>
+            <div class="version-modal" id="version-modal">
+              <h3>
+                업데이트 노트
+                <button
+                  type="button"
+                  class="close-version-btn"
+                  id="close-version-btn"
+                >
+                  &times;
+                </button>
+              </h3>
+              <div class="version-item">
+                <strong>v1.2.0 (2026.04.23)</strong>
+                <ul>
+                  <li>CSS 스타일 및 시각화 생성기 추가</li>
+                  <li>Box Shadow & Text Shadow 생성기</li>
+                  <li>Border-Radius 생성기 (Liquid Shape)</li>
+                  <li>글래스모피즘 & 뉴모피즘 생성기</li>
+                </ul>
+              </div>
+              <div class="version-item">
+                <strong>v1.1.0 (2026.03.23)</strong>
+                <ul>
+                  <li>PX ↔ REM 변환기 및 CSS Clamp 생성기 기능 추가</li>
+                  <li>상단 네비게이션(GNB) 추가 및 보조 도구 사용성 개선</li>
+                  <li>모바일 환경 UI 최적화</li>
+                </ul>
+              </div>
+              <div class="version-item">
+                <strong>v1.0.0 (2024.10.01)</strong>
+                <ul>
+                  <li>PX ↔ VW 양방향 변환 기본 기능 출시</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GNB Menu -->
+      <nav class="gnb-menu">
+        <div class="gnb-menu-inner">
+          <a href="index.html" class="gnb-item">PX ↔ VW</a>
+          <a href="px-to-rem.html" class="gnb-item">PX ↔ REM</a>
+          <a href="clamp-generator.html" class="gnb-item">CSS Clamp Generator</a>
+          <a href="css-generator.html" class="gnb-item active">CSS Generator</a>
+        </div>
+      </nav>
+
+      <div class="main-box">
+        <div class="main">
+          <div class="generator-grid">
+            <!-- Box Shadow Generator -->
+            <div class="gen-card">
+              <h2><span>🌓</span> Box Shadow</h2>
+              <div class="preview-area">
+                <div id="box-shadow-preview" class="preview-box"></div>
+              </div>
+              <div class="control-group">
+                <div class="control-item">
+                  <label>X Offset <span id="box-x-val">10px</span></label>
+                  <input type="range" id="box-x" min="-50" max="50" value="10" />
+                </div>
+                <div class="control-item">
+                  <label>Y Offset <span id="box-y-val">10px</span></label>
+                  <input type="range" id="box-y" min="-50" max="50" value="10" />
+                </div>
+                <div class="control-item">
+                  <label>Blur Radius <span id="box-blur-val">20px</span></label>
+                  <input type="range" id="box-blur" min="0" max="100" value="20" />
+                </div>
+                <div class="control-item">
+                  <label>Spread Radius <span id="box-spread-val">0px</span></label>
+                  <input type="range" id="box-spread" min="-20" max="50" value="0" />
+                </div>
+                <div class="color-pickers">
+                  <div class="color-item">
+                    <label>Box Color</label>
+                    <input type="color" id="box-color" value="#ffffff" />
+                  </div>
+                  <div class="color-item">
+                    <label>Shadow Color</label>
+                    <input type="color" id="box-shadow-color" value="#000000" />
+                  </div>
+                </div>
+                <div class="control-item">
+                  <label>Opacity <span id="box-opacity-val">0.3</span></label>
+                  <input type="range" id="box-opacity" min="0" max="1" step="0.01" value="0.3" />
+                </div>
+              </div>
+              <div class="code-output">
+                <code id="box-shadow-code">box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.3);</code>
+                <button class="copy-code-btn" data-target="box-shadow-code">Copy</button>
+              </div>
+            </div>
+
+            <!-- Text Shadow Generator -->
+            <div class="gen-card">
+              <h2><span>✍️</span> Text Shadow</h2>
+              <div class="preview-area">
+                <div id="text-shadow-preview" class="preview-text">Antigravity</div>
+              </div>
+              <div class="control-group">
+                <div class="control-item">
+                  <label>X Offset <span id="text-x-val">2px</span></label>
+                  <input type="range" id="text-x" min="-20" max="20" value="2" />
+                </div>
+                <div class="control-item">
+                  <label>Y Offset <span id="text-y-val">2px</span></label>
+                  <input type="range" id="text-y" min="-20" max="20" value="2" />
+                </div>
+                <div class="control-item">
+                  <label>Blur Radius <span id="text-blur-val">4px</span></label>
+                  <input type="range" id="text-blur" min="0" max="50" value="4" />
+                </div>
+                <div class="color-pickers">
+                  <div class="color-item">
+                    <label>Text Color</label>
+                    <input type="color" id="text-color" value="#333333" />
+                  </div>
+                  <div class="color-item">
+                    <label>Shadow Color</label>
+                    <input type="color" id="text-shadow-color" value="#000000" />
+                  </div>
+                </div>
+                <div class="control-item">
+                  <label>Opacity <span id="text-opacity-val">0.5</span></label>
+                  <input type="range" id="text-opacity" min="0" max="1" step="0.01" value="0.5" />
+                </div>
+              </div>
+              <div class="code-output">
+                <code id="text-shadow-code">text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);</code>
+                <button class="copy-code-btn" data-target="text-shadow-code">Copy</button>
+              </div>
+            </div>
+
+            <!-- Border Radius Generator -->
+            <div class="gen-card">
+              <h2><span>💧</span> Border Radius (Liquid)</h2>
+              <div class="preview-area">
+                <div id="border-radius-preview" class="preview-box" style="background: #2196f3; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;"></div>
+              </div>
+              <div class="control-group">
+                <div class="control-item">
+                  <label>Top Left <span id="br-tl-val">30%</span></label>
+                  <input type="range" id="br-tl" min="0" max="100" value="30" />
+                </div>
+                <div class="control-item">
+                  <label>Top Right <span id="br-tr-val">70%</span></label>
+                  <input type="range" id="br-tr" min="0" max="100" value="70" />
+                </div>
+                <div class="control-item">
+                  <label>Bottom Right <span id="br-br-val">70%</span></label>
+                  <input type="range" id="br-br" min="0" max="100" value="70" />
+                </div>
+                <div class="control-item">
+                  <label>Bottom Left <span id="br-bl-val">30%</span></label>
+                  <input type="range" id="br-bl" min="0" max="100" value="30" />
+                </div>
+                <div class="control-item">
+                  <label>Shape Factor <span id="br-f-val">30%</span></label>
+                  <input type="range" id="br-f" min="0" max="100" value="30" />
+                </div>
+              </div>
+              <div class="code-output">
+                <code id="border-radius-code">border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;</code>
+                <button class="copy-code-btn" data-target="border-radius-code">Copy</button>
+              </div>
+            </div>
+
+            <!-- Glassmorphism Generator -->
+            <div class="gen-card">
+              <h2><span>💎</span> Glassmorphism</h2>
+              <div class="preview-area" id="glass-preview-area">
+                <div id="glass-preview" class="preview-box" style="background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3);"></div>
+              </div>
+              <div class="control-group">
+                <div class="control-item">
+                  <label>Blur <span id="glass-blur-val">10px</span></label>
+                  <input type="range" id="glass-blur" min="0" max="50" value="10" />
+                </div>
+                <div class="control-item">
+                  <label>Opacity <span id="glass-opacity-val">0.2</span></label>
+                  <input type="range" id="glass-opacity" min="0" max="1" step="0.01" value="0.2" />
+                </div>
+                <div class="control-item">
+                  <label>Border Opacity <span id="glass-border-val">0.3</span></label>
+                  <input type="range" id="glass-border" min="0" max="1" step="0.01" value="0.3" />
+                </div>
+              </div>
+              <div class="code-output">
+                <code id="glass-code">background: rgba(255, 255, 255, 0.2);<br>backdrop-filter: blur(10px);<br>border: 1px solid rgba(255, 255, 255, 0.3);</code>
+                <button class="copy-code-btn" data-target="glass-code">Copy</button>
+              </div>
+            </div>
+
+            <!-- Neumorphism Generator -->
+            <div class="gen-card">
+              <h2><span>🔘</span> Neumorphism</h2>
+              <div class="preview-area" id="neu-preview-area">
+                <div id="neu-preview" class="preview-box" style="background: #e0e0e0; border-radius: 20px; box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;"></div>
+              </div>
+              <div class="control-group">
+                <div class="control-item">
+                  <label>Distance <span id="neu-dist-val">20px</span></label>
+                  <input type="range" id="neu-dist" min="0" max="50" value="20" />
+                </div>
+                <div class="control-item">
+                  <label>Intensity <span id="neu-int-val">0.15</span></label>
+                  <input type="range" id="neu-int" min="0.01" max="0.3" step="0.01" value="0.15" />
+                </div>
+                <div class="control-item">
+                  <label>Blur <span id="neu-blur-val">60px</span></label>
+                  <input type="range" id="neu-blur" min="0" max="100" value="60" />
+                </div>
+                <div class="control-item">
+                    <label>Shape</label>
+                    <select id="neu-shape" class="blog-select" style="width: 100%; height: auto;">
+                        <option value="flat">Flat</option>
+                        <option value="concave">Concave</option>
+                        <option value="convex">Convex</option>
+                    </select>
+                </div>
+              </div>
+              <div class="code-output">
+                <code id="neu-code">background: #e0e0e0;<br>box-shadow: 20px 20px 60px #bebebe,<br>-20px -20px 60px #ffffff;</code>
+                <button class="copy-code-btn" data-target="neu-code">Copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Supabase 클라이언트 라이브러리 -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/css-generator.js"></script>
+  </body>
+</html>
