@@ -662,12 +662,19 @@ input[type="checkbox"]:checked::after {
 }
 .gnb-menu-inner {
   display: flex;
-  gap: 10px;
+  gap: 10px 20px;
   justify-content: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 .gnb-menu-inner::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
+}
+.gnb-menu-inner {
+  cursor: grab;
+}
+.gnb-menu-inner.active-drag {
+  cursor: grabbing;
+  user-select: none;
 }
 .gnb-item {
   position: relative;
@@ -710,7 +717,7 @@ input[type="checkbox"]:checked::after {
 .clamp-container {
   display: flex;
   flex-direction: column;
-  max-width: 1000px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -995,6 +1002,27 @@ input[type="checkbox"]:checked::after {
 /* =========================== 1024px ================================ */
 /* =========================== 1024px ================================ */
 
+@media (max-width: 1400px) {
+  .ad-banner {
+    display: none;
+  }
+  .gnb-menu {
+    padding: 0;
+  }
+  .gnb-menu-inner {
+    padding: 0 20px;
+    gap: 20px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+  .gnb-menu-inner::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+}
 @media (max-width: 1024px) {
   .app-header-tools {
     gap: 12px;
@@ -1002,6 +1030,12 @@ input[type="checkbox"]:checked::after {
 }
 
 @media (max-width: 768px) {
+  .ad-banner {
+    display: block;
+  }
+  .ad-banner span {
+    display: block;
+  }
   .main-box {
     flex-direction: column;
   }
@@ -1014,29 +1048,26 @@ input[type="checkbox"]:checked::after {
   .app-header-tools {
     width: 100%;
     justify-content: space-between;
+    flex-direction: column;
+    align-items: stretch;
   }
   .visit-stats {
     flex-wrap: wrap;
     padding: 6px 12px;
-  }
-  .gnb-menu {
-    padding: 0 16px;
+    justify-content: center;
   }
   .gnb-item {
     font-size: 14px;
     padding: 14px 2px;
   }
-  .gnb-menu-inner {
-    gap: 16px;
-  }
 }
 @media (max-width: 480px) {
   .app-header-tools {
-    flex-direction: column;
-    align-items: stretch;
+    /* flex-direction: column; */
+    /* align-items: stretch; */
   }
   .visit-stats {
-    justify-content: center;
+    /* justify-content: center; */
   }
   .right-tools {
     justify-content: stretch;
@@ -1108,6 +1139,7 @@ input[type="checkbox"]:checked::after {
     padding: 15px 12px;
     height: 100%;
     min-height: 100%;
+    width: calc(100% - 24px);
   }
   .convert-section {
     flex-direction: column;
@@ -1119,7 +1151,6 @@ input[type="checkbox"]:checked::after {
     gap: 1.67vw;
   }
   .convert-box {
-    width: 100%;
     padding: 12px;
   }
   .convert-box h2 {
@@ -1433,6 +1464,8 @@ input[type="checkbox"]:checked::after {
     background-position: right 0px center;
     background-size: 5.5vw;
     margin-bottom: 0;
+    flex: 1;
+    text-align: center;
   }
   .version-modal {
     position: fixed;

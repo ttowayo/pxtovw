@@ -749,3 +749,71 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// GNB 활성 메뉴 자동 스크롤 기능 (선택된 메뉴를 가장 앞으로)
+document.addEventListener("DOMContentLoaded", function () {
+  const scrollContainer = document.querySelector(".gnb-menu-inner");
+  const activeItem = document.querySelector(".gnb-item.active");
+
+  if (scrollContainer && activeItem) {
+    // 활성 메뉴의 위치로 스크롤 이동
+    const targetScroll = activeItem.offsetLeft - 30; // 여유 공간을 30px로 상향 조정
+    scrollContainer.scrollLeft = targetScroll;
+  }
+});
+
+// GNB 메뉴 마우스 드래그 스크롤 기능
+document.addEventListener("DOMContentLoaded", function () {
+  const scrollContainer = document.querySelector(".gnb-menu-inner");
+
+  if (scrollContainer) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let isDragged = false;
+
+    scrollContainer.addEventListener("mousedown", (e) => {
+      isDown = true;
+      scrollContainer.classList.add("active-drag");
+      startX = e.pageX - scrollContainer.offsetLeft;
+      scrollLeft = scrollContainer.scrollLeft;
+      isDragged = false;
+    });
+
+    scrollContainer.addEventListener("mouseleave", () => {
+      isDown = false;
+      scrollContainer.classList.remove("active-drag");
+    });
+
+    scrollContainer.addEventListener("mouseup", (e) => {
+      isDown = false;
+      scrollContainer.classList.remove("active-drag");
+    });
+
+    scrollContainer.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      
+      const x = e.pageX - scrollContainer.offsetLeft;
+      const walk = (x - startX) * 2; // 스크롤 속도 배율
+      
+      if (Math.abs(walk) > 5) {
+        isDragged = true;
+      }
+      
+      if (isDragged) {
+        e.preventDefault();
+        scrollContainer.scrollLeft = scrollLeft - walk;
+      }
+    });
+
+    // 드래그 중 클릭(링크 이동) 방지
+    scrollContainer.addEventListener("click", (e) => {
+      if (isDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+  }
+});
+
+
