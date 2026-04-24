@@ -20,12 +20,17 @@ body {
 }
 .main-box {
   position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 .ad-banner {
   position: absolute;
   left: -170px;
   top: 20px;
   width: 160px;
+  flex-shrink: 0;
+  padding-top: 20px;
 }
 .ad-banner span {
   display: block;
@@ -59,6 +64,7 @@ body {
   cursor: pointer;
 }
 .main {
+  width: 100%;
   padding: 20px 16px;
   height: 100%;
   min-height: 900px;
@@ -656,25 +662,22 @@ input[type="checkbox"]:checked::after {
 }
 .gnb-menu-inner {
   display: flex;
-  gap: 24px;
-  overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: nowrap;
 }
 .gnb-menu-inner::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
 .gnb-item {
   position: relative;
-  padding: 16px 4px;
+  padding: 14px 4px;
   color: #868e96;
   text-decoration: none;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 13px;
   transition: color 0.2s;
   white-space: nowrap;
-  border: none;
-  background: transparent;
-  border-radius: 0;
 }
 .gnb-item::after {
   content: "";
@@ -701,40 +704,292 @@ input[type="checkbox"]:checked::after {
   background: #2196f3;
 }
 
-/* Clamp Generator 상단 툴 레이아웃 등 */
-.clamp-controls {
+/* ========================================================================== */
+/* Clamp Generator Redesign */
+/* ========================================================================== */
+.clamp-container {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
-.clamp-result-box {
-  background: #f1f8ff;
-  border: 1px solid #c8e1ff;
-  padding: 15px;
-  border-radius: 6px;
-  margin-top: 15px;
+
+.clamp-header-desc {
+  text-align: center;
+  margin-bottom: 10px;
 }
-.clamp-result-code {
-  font-family: monospace;
-  font-size: 18px;
-  color: #0366d6;
-  word-break: break-all;
-  margin: 10px 0;
+
+.clamp-header-desc h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 12px;
+  line-height: 1.3;
 }
-.clamp-preview {
+
+.clamp-header-desc p {
+  color: #666;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.clamp-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
   margin-top: 20px;
-  padding: 20px;
-  border: 1px dashed #ccc;
-  border-radius: 6px;
+}
+
+.clamp-card {
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s;
+}
+
+.clamp-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.clamp-card h3 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 24px;
+  color: #2196f3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  border-bottom: 1px solid #f1f3f5;
+  padding-bottom: 12px;
+}
+
+.clamp-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.clamp-input-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.clamp-input-item label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #495057;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.clamp-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.clamp-input-wrapper input {
+  width: 100%;
+  padding: 12px 40px 12px 14px;
+  border: 1.5px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.2s;
   background: #fff;
+  font-weight: 600;
+}
+
+.clamp-input-wrapper input:focus {
+  border-color: #2196f3;
+  box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.1);
+  outline: none;
+}
+
+.clamp-unit {
+  position: absolute;
+  right: 14px;
+  font-size: 12px;
+  color: #adb5bd;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.clamp-options {
+  grid-column: span 2;
+  display: flex;
+  justify-content: center;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+}
+
+.clamp-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #495057;
+  font-size: 15px;
+  user-select: none;
+}
+
+.clamp-result-section {
+  grid-column: span 2;
+}
+
+.clamp-result-card {
+  background: #212529;
+  color: #fff;
+  border-radius: 12px;
+  padding: 20px 30px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.clamp-result-card::before {
+  content: "CSS OUTPUT";
+  position: absolute;
+  top: 15px;
+  left: 24px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #495057;
+  letter-spacing: 1.5px;
+}
+
+.clamp-result-display {
+  font-family: "Consolas", "Monaco", "Lucida Console", monospace;
+  font-size: 24px;
+  color: #a5d8ff;
+  margin: 5px 0 15px 0;
+  word-break: break-all;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+#clamp-copy-btn {
+  background: #2196f3;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 0 #1971c2;
+}
+
+#clamp-copy-btn:hover {
+  background: #1c7ed6;
+  transform: translateY(1px);
+  box-shadow: 0 3px 0 #1971c2;
+}
+
+#clamp-copy-btn:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
+.clamp-preview-section {
+  grid-column: span 2;
+}
+
+.clamp-preview-card {
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 30px;
   text-align: center;
 }
-.clamp-preview-text {
-  font-weight: 700;
-  line-height: 1.4;
-  color: #333;
+
+.clamp-preview-controls {
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: #868e96;
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 6px;
+  display: inline-block;
 }
+
+.clamp-preview-container {
+  padding: 30px 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #dee2e6;
+  margin-top: 10px;
+  resize: horizontal;
+  overflow: auto;
+  max-width: 100%;
+}
+
+.clamp-preview-text {
+  transition: font-size 0.15s ease-out;
+  word-break: keep-all;
+  color: #212529;
+  font-weight: 800;
+}
+
+.clamp-guide-card {
+  background: #e7f5ff;
+  border: 1px solid #a5d8ff;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.clamp-guide-card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.clamp-guide-card ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.clamp-guide-card li {
+  margin-bottom: 2px;
+  line-height: 1.6;
+  color: #1971c2;
+}
+
+@media (max-width: 768px) {
+  .clamp-main-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .clamp-options,
+  .clamp-result-section,
+  .clamp-preview-section,
+  .clamp-guide-card {
+    grid-column: span 1;
+  }
+  .clamp-result-display {
+    font-size: 18px;
+  }
+  .clamp-result-card {
+    padding: 40px 20px 30px;
+  }
+}
+
+/* Clamp Generator 상단 툴 레이아웃 등 - 기존 스타일 제거 대상 포함 */
 
 /* =========================== 1024px ================================ */
 /* =========================== 1024px ================================ */
@@ -747,6 +1002,9 @@ input[type="checkbox"]:checked::after {
 }
 
 @media (max-width: 768px) {
+  .main-box {
+    flex-direction: column;
+  }
   .app-header-top {
     flex-direction: column;
     align-items: flex-start;
@@ -1164,7 +1422,6 @@ input[type="checkbox"]:checked::after {
   /* 상단 우측 보조 도구(블로그 링크 및 업데이트 노트) 모바일 변환 */
   .right-tools {
     margin-left: 0;
-    margin-top: 2.78vw;
     gap: 2.22vw;
   }
   .blog-select,

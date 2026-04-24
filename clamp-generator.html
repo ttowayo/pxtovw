@@ -98,7 +98,6 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-9S15LY0JFE");
     </script>
     <!-- Google Tag Manager -->
@@ -160,7 +159,7 @@
               </select>
               <div class="version-info">
                 <button id="version-btn" class="version-btn">
-                  v1.2.0 <span>▼</span>
+                  v2.1.0 <span>▼</span>
                 </button>
                 <div class="version-modal" id="version-modal">
                   <h3>
@@ -174,7 +173,37 @@
                     </button>
                   </h3>
                   <div class="version-item">
-                    <strong>v1.2.0 (2026.04.23)</strong>
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>WCAG Contrast Checker 신규 추가</li>
+                      <li>웹 접근성을 위한 컬러 대비 자동 검사</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>CSS Flexbox Visualizer 신규 추가</li>
+                      <li>레이아웃 속성 시각화 및 자동 코드 생성</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>CSS Gradient Generator 신규 추가</li>
+                      <li>컬러 변환기 시각적 컬러피커 기능 강화</li>
+                      <li>CSS 도구(Minifier) 성능 및 UI 개선</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>색상 변환기 (HEX ↔ RGB ↔ HSL) 추가</li>
+                      <li>CSS Minifier / Formatter 도구 추가</li>
+                      <li>CSS Clamp 생성기 UI 디자인 전면 개편</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.23)</strong>
                     <ul>
                       <li>CSS 스타일 및 시각화 생성기 추가</li>
                       <li>Box Shadow & Text Shadow 생성기</li>
@@ -183,7 +212,7 @@
                     </ul>
                   </div>
                   <div class="version-item">
-                    <strong>v1.1.0 (2026.03.23)</strong>
+                    <strong>v2.1.0 (2026.03.23)</strong>
                     <ul>
                       <li>PX ↔ REM 변환기 및 CSS Clamp 생성기 기능 추가</li>
                       <li>
@@ -195,7 +224,7 @@
                     </ul>
                   </div>
                   <div class="version-item">
-                    <strong>v1.0.1 (2026.03.23)</strong>
+                    <strong>v2.1.0 (2026.03.23)</strong>
                     <ul>
                       <li>
                         CSS "속성삭제" 체크 시 주석이 포함된 경우 발생하는 변환
@@ -205,7 +234,7 @@
                     </ul>
                   </div>
                   <div class="version-item">
-                    <strong>v1.0.0 (2024.10.01)</strong>
+                    <strong>v2.1.0 (2024.10.01)</strong>
                     <ul>
                       <li>PX ↔ VW 양방향 변환 기본 기능 출시</li>
                       <li>
@@ -222,14 +251,22 @@
           <div class="gnb-menu-inner">
             <a href="index.html" class="gnb-item">PX ↔ VW</a>
             <a href="px-to-rem.html" class="gnb-item">PX ↔ REM</a>
-            <a href="clamp-generator.html" class="gnb-item active"
-              >CSS Clamp Generator</a
+            <a href="clamp-generator.html" class="gnb-item active">CSS Clamp</a>
+            <a href="flexbox-visualizer.html" class="gnb-item">Flex Layout</a>
+            <a href="grid-generator.html" class="gnb-item">Grid Layout</a>
+            <a href="animation-generator.html" class="gnb-item">Animation</a>
+            <a href="divider-generator.html" class="gnb-item"
+              >Section Divider</a
             >
-            <a href="css-generator.html" class="gnb-item">CSS Generator</a>
+            <a href="aspect-ratio.html" class="gnb-item">Aspect Ratio</a>
+            <a href="css-generator.html" class="gnb-item">Visual Effects</a>
+            <a href="gradient-generator.html" class="gnb-item">Gradient</a>
+            <a href="color-converter.html" class="gnb-item">Color Tools</a>
+            <a href="contrast-checker.html" class="gnb-item">Contrast Check</a>
+            <a href="css-tools.html" class="gnb-item">Code Tools</a>
           </div>
         </nav>
       </header>
-
       <div class="main-box">
         <div class="ad-banner left">
           <div class="pc">
@@ -264,103 +301,202 @@
           >
         </div>
         <div class="main">
-          <div class="convert-box" style="width: 100%">
-            <h2>
-              CSS Clamp Generator<br />
-              <span style="font-size: 14px; font-weight: 400; color: #666"
-                >최소값, 기본값(유동값), 최대값을 설정하여 반응형 폰트 크기,
+          <div class="clamp-container">
+            <div class="clamp-header-desc">
+              <h2>CSS Clamp Generator</h2>
+              <p>
+                최소값, 기본값(유동값), 최대값을 설정하여 반응형 폰트 크기,
                 간격, 너비를 계산해 주는 도구입니다.<br />
                 복잡한 수식 없이 뷰포트 크기에 따라 유동적으로 변하는 CSS 코드를
-                즉시 생성하여 반응형 레이아웃을 간편하게 구현할 수 있습니다.
-              </span>
-            </h2>
-            <div class="clamp-controls">
-              <div class="row">
-                <label style="width: 200px">최소 뷰포트 (Min Viewport)</label>
-                <input type="number" id="clamp-min-vp" value="320" /> px
-              </div>
-              <div class="row">
-                <label style="width: 200px">최대 뷰포트 (Max Viewport)</label>
-                <input type="number" id="clamp-max-vp" value="1200" /> px
-              </div>
-              <div class="row">
-                <label style="width: 200px">최소 폰트 크기 (Min Size)</label>
-                <input type="number" id="clamp-min-font" value="16" /> px
-              </div>
-              <div class="row">
-                <label style="width: 200px">최대 폰트 크기 (Max Size)</label>
-                <input type="number" id="clamp-max-font" value="32" /> px
-              </div>
-              <div class="row">
-                <label style="width: 200px">기준 폰트 크기 (Root Size)</label>
-                <input
-                  type="number"
-                  id="clamp-root-font"
-                  value="16"
-                  title="REM 변환 기준 폰트 크기"
-                />
-                px
-              </div>
-              <div class="row">
-                <label style="width: 160px"></label>
-                <label style="margin-right: 15px">
-                  <input type="checkbox" id="clamp-use-rem" checked /> 결과 REM
-                  단위로 표시
-                </label>
-              </div>
+                즉시 생성하세요.
+              </p>
             </div>
-
-            <div class="clamp-result-box">
-              <h3 style="margin-top: 0">생성된 CSS 코드 (Generated Code):</h3>
-              <div class="clamp-result-code" id="clamp-result-text">
-                clamp(1rem, 0.5rem + 1.5vw, 2rem);
+            <style>
+              .clamp-main-layout {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+                margin-top: 20px;
+              }
+              .clamp-layout-left,
+              .clamp-layout-right {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+              }
+              .clamp-control-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+              }
+              .clamp-options,
+              .clamp-result-section,
+              .clamp-preview-section,
+              .clamp-guide-card {
+                grid-column: auto !important;
+                margin-top: 0 !important;
+              }
+              .clamp-preview-card {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+              }
+              .clamp-preview-container {
+                flex: 1;
+                min-height: 250px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+              @media (max-width: 1024px) {
+                .clamp-main-layout {
+                  grid-template-columns: 1fr;
+                }
+              }
+              @media (max-width: 600px) {
+                .clamp-control-row {
+                  grid-template-columns: 1fr;
+                }
+              }
+            </style>
+            <div class="clamp-main-layout">
+              <!-- Left Side: Controls & Result -->
+              <div class="clamp-layout-left">
+                <div class="clamp-control-row">
+                  <!-- Viewport Range Card -->
+                  <div class="clamp-card">
+                    <h3>📏 Viewport Range</h3>
+                    <div class="clamp-input-group">
+                      <div class="clamp-input-item">
+                        <label for="clamp-min-vp">Minimum Viewport</label>
+                        <div class="clamp-input-wrapper">
+                          <input type="number" id="clamp-min-vp" value="320" />
+                          <span class="clamp-unit">px</span>
+                        </div>
+                      </div>
+                      <div class="clamp-input-item">
+                        <label for="clamp-max-vp">Maximum Viewport</label>
+                        <div class="clamp-input-wrapper">
+                          <input type="number" id="clamp-max-vp" value="1200" />
+                          <span class="clamp-unit">px</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Size Range Card -->
+                  <div class="clamp-card">
+                    <h3>📐 Size Range</h3>
+                    <div class="clamp-input-group">
+                      <div class="clamp-input-item">
+                        <label for="clamp-min-font">Minimum Size</label>
+                        <div class="clamp-input-wrapper">
+                          <input type="number" id="clamp-min-font" value="16" />
+                          <span class="clamp-unit">px</span>
+                        </div>
+                      </div>
+                      <div class="clamp-input-item">
+                        <label for="clamp-max-font">Maximum Size</label>
+                        <div class="clamp-input-wrapper">
+                          <input type="number" id="clamp-max-font" value="32" />
+                          <span class="clamp-unit">px</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Root Size & Options -->
+                <div class="clamp-options">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 30px;
+                      flex-wrap: wrap;
+                      justify-content: center;
+                    "
+                  >
+                    <div
+                      class="clamp-input-item"
+                      style="
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 10px;
+                      "
+                    >
+                      <label
+                        for="clamp-root-font"
+                        style="margin: 0; white-space: nowrap"
+                        >Root Font Size</label
+                      >
+                      <div class="clamp-input-wrapper" style="width: 90px">
+                        <input type="number" id="clamp-root-font" value="16" />
+                        <span class="clamp-unit">px</span>
+                      </div>
+                    </div>
+                    <label class="clamp-checkbox-label">
+                      <input type="checkbox" id="clamp-use-rem" checked />
+                      결과를 REM 단위로 표시
+                    </label>
+                  </div>
+                </div>
+                <!-- Result Card -->
+                <div class="clamp-result-section">
+                  <div class="clamp-result-card">
+                    <div class="clamp-result-display" id="clamp-result-text">
+                      clamp(1rem, 0.5rem + 1.5vw, 2rem)
+                    </div>
+                    <button type="button" id="clamp-copy-btn">
+                      <span>📋</span> 결과 코드 복사하기
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div class="btn-box" style="margin-top: 10px">
-                <button type="button" id="clamp-copy-btn">
-                  <span style="margin-right: 4px">📋</span>클립보드에 복사하기
-                </button>
-              </div>
-            </div>
-
-            <div class="clamp-preview">
-              <h3>실시간 미리보기 (Live Preview)</h3>
-              <p>브라우저 너비를 줄이거나 늘려서 크기 변화를 확인해 보세요!</p>
-              <div class="clamp-preview-text" id="clamp-live-preview">
-                가나다라마바사 아자차카타파하 (The quick brown fox jumps over
-                the lazy dog)
-              </div>
-            </div>
-
-            <!-- 사용 방법 가이드 -->
-            <div
-              class="clamp-guide"
-              style="
-                margin-top: 30px;
-                border-top: 1px solid #eee;
-                padding-top: 20px;
-              "
-            >
-              <h3 style="color: #2196f3">📖 사용 방법 (How to use)</h3>
-              <div style="font-size: 14px; line-height: 1.6; color: #555">
-                <ol style="padding-left: 20px">
-                  <li>
-                    <strong>최소 뷰포트(Min Viewport):</strong> 화면 크기가 이
-                    값 이하일 때 최소 폰트 크기가 고정됩니다. (모바일 기준)
-                  </li>
-                  <li>
-                    <strong>최대 뷰포트(Max Viewport):</strong> 화면 크기가 이
-                    값 이상일 때 최대 폰트 크기가 고정됩니다. (PC 기준)
-                  </li>
-                  <li>
-                    <strong>최소/최대 폰트 크기:</strong> 화면 크기에 따라
-                    가변적으로 변할 폰트 크기의 범위를 입력합니다.
-                  </li>
-                  <li>
-                    위 값을 입력하면 중앙의 <code>clamp()</code> 코드가 자동
-                    생성됩니다. 이 한 줄의 코드로 미디어 쿼리 없이 반응형 폰트를
-                    구현할 수 있습니다!
-                  </li>
-                </ol>
+              <!-- Right Side: Preview & Guide -->
+              <div class="clamp-layout-right">
+                <!-- Live Preview Card -->
+                <div
+                  class="clamp-preview-section"
+                  style="flex: 1; display: flex; flex-direction: column"
+                >
+                  <div class="clamp-preview-card">
+                    <h3>✨ Live Preview</h3>
+                    <div class="clamp-preview-controls">
+                      브라우저 너비를 조절하며 텍스트 크기 변화를 확인하세요
+                    </div>
+                    <div class="clamp-preview-container">
+                      <div class="clamp-preview-text" id="clamp-live-preview">
+                        가나다라마바사 아자차카타파하<br />
+                        The quick brown fox jumps over the lazy dog
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Guide Card -->
+                <div class="clamp-guide-card">
+                  <h3 style="color: #2196f3; margin-top: 0">📖 사용 방법</h3>
+                  <div style="font-size: 14px; line-height: 1.8; color: #555">
+                    <ul style="padding-left: 18px; margin: 0">
+                      <li>
+                        <strong>Viewport Range:</strong> 가변적인 변화가 일어날
+                        화면 너비의 범위를 설정합니다. (모바일 ~ PC 범위)
+                      </li>
+                      <li>
+                        <strong>Size Range:</strong> 해당 뷰포트 범위 내에서
+                        변화할 요소(폰트 등)의 크기 범위를 입력합니다.
+                      </li>
+                      <li>
+                        <strong>Generated Code:</strong> 입력 즉시 미디어 쿼리
+                        없이도 화면 크기에 맞춰 부드럽게 변하는
+                        <code>clamp()</code> 코드가 생성됩니다.
+                      </li>
+                      <li>
+                        생성된 코드를 복사하여 <code>font-size</code>,
+                        <code>padding</code> 등에 적용해 보세요!
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

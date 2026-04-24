@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no"
+    />
+    <title>CSS 애니메이션 생성기 | Keyframes & Cubic-Bezier 빌더</title>
+    <link rel="icon" href="favicon.ico" />
+    <link
+      rel="canonical"
+      href="https://pxtovw.co.kr/animation-generator.html"
+    />
+    <meta name="title" content="CSS 애니메이션 생성기 | 비주얼 키프레임 빌더" />
+    <meta
+      name="description"
+      content="복잡한 CSS @keyframes 애니메이션을 시각적으로 설계하세요. 변형(Transform), 투명도, 타이밍 함수를 실시간으로 조절하고 완벽한 코드를 복사할 수 있습니다."
+    />
+    <meta
+      name="keywords"
+      content="css 애니메이션 생성기, animation generator, keyframes 생성, cubic-bezier 설정, 웹 애니메이션 도구, 프론트엔드 개발, css 시각화"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="CSS 애니메이션 생성기 | 비주얼 키프레임 빌더"
+    />
+    <meta
+      property="og:site_name"
+      content="PX-VW 변환기 - 반응형 웹 개발 도구"
+    />
+    <meta
+      property="og:description"
+      content="클릭 몇 번으로 역동적인 CSS 애니메이션을 만들고 코드를 복사하세요."
+    />
+    <meta
+      property="og:url"
+      content="https://pxtovw.co.kr/animation-generator.html"
+    />
+    <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="robots" content="index, follow" />
+    <!-- font add -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <style>
+      /* Animation Generator Specific Styles */
+      .anim-main-layout {
+        display: grid;
+        grid-template-columns: 400px 1fr;
+        gap: 30px;
+        margin-top: 20px;
+        align-items: start;
+      }
+      .anim-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .control-card {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+      .control-card h3 {
+        font-size: 16px;
+        margin-bottom: 20px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 10px;
+      }
+      .control-item {
+        margin-bottom: 15px;
+      }
+      .control-item label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        font-weight: 600;
+        color: #666;
+        margin-bottom: 8px;
+      }
+      .control-item label span {
+        color: #2196f3;
+      }
+      .anim-preview-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .anim-canvas {
+        background: #f8f9fa;
+        border: 2px dashed #dee2e6;
+        border-radius: 16px;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      #preview-box {
+        width: 100px;
+        height: 100px;
+        background: #2196f3;
+        border-radius: 12px;
+        box-shadow: 0 10px 20px rgba(33, 150, 243, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 900;
+        font-size: 24px;
+      }
+      .preset-group {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .preset-btn {
+        padding: 10px;
+        font-size: 12px;
+        background: #f1f3f5;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+        text-align: center;
+        font-weight: 600;
+      }
+      .preset-btn:hover {
+        background: #e7f5ff;
+        border-color: #339af0;
+        color: #1971c2;
+      }
+      .anim-code-card {
+        background: #212529;
+        color: #fff;
+        padding: 24px;
+        border-radius: 16px;
+        position: relative;
+      }
+      .anim-code-card h3 {
+        margin: 0 0 15px 0;
+        font-size: 15px;
+        color: #adb5bd;
+      }
+      .anim-code-card code {
+        display: block;
+        font-family: "Consolas", monospace;
+        line-height: 1.6;
+        font-size: 13px;
+        color: #69db7c;
+        white-space: pre-wrap;
+      }
+      .copy-btn-large {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 8px 16px;
+        background: #2196f3;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 700;
+      }
+      @media (max-width: 1024px) {
+        .anim-main-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="app-header">
+        <div class="app-header-top">
+          <a href="index.html" class="app-logo">
+            <h1><span>PX</span> to <span>VW</span></h1>
+            <span class="subtitle">Web Tools</span>
+          </a>
+          <div class="app-header-tools">
+            <div class="visit-stats">
+              <div class="stat">
+                <span class="label">Total</span
+                ><span id="visit-total" class="value">0</span>
+              </div>
+              <div class="stat">
+                <span class="label">Today</span
+                ><span id="visit-today" class="value">0</span>
+              </div>
+              <div class="stat">
+                <span class="label">Yesterday</span
+                ><span id="visit-yesterday" class="value">0</span>
+              </div>
+            </div>
+            <div class="right-tools">
+              <select
+                class="blog-select"
+                onchange="if (this.value) location.href = this.value;"
+              >
+                <option value="">📖 블로그 및 문서</option>
+                <option value="how-to-use.html">📖 사용법 보기</option>
+              </select>
+              <div class="version-info">
+                <button id="version-btn" class="version-btn">
+                  v2.1.0 <span>▼</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="gnb-menu">
+          <div class="gnb-menu-inner">
+            <a href="index.html" class="gnb-item">PX ↔ VW</a>
+            <a href="px-to-rem.html" class="gnb-item">PX ↔ REM</a>
+            <a href="clamp-generator.html" class="gnb-item">CSS Clamp</a>
+            <a href="flexbox-visualizer.html" class="gnb-item">Flex Layout</a>
+            <a href="grid-generator.html" class="gnb-item">Grid Layout</a>
+            <a href="animation-generator.html" class="gnb-item active"
+              >Animation</a
+            >
+            <a href="divider-generator.html" class="gnb-item"
+              >Section Divider</a
+            >
+            <a href="aspect-ratio.html" class="gnb-item">Aspect Ratio</a>
+            <a href="css-generator.html" class="gnb-item">Visual Effects</a>
+            <a href="gradient-generator.html" class="gnb-item">Gradient</a>
+            <a href="color-converter.html" class="gnb-item">Color Tools</a>
+            <a href="contrast-checker.html" class="gnb-item">Contrast Check</a>
+            <a href="css-tools.html" class="gnb-item">Code Tools</a>
+          </div>
+        </nav>
+      </header>
+      <div class="main-box">
+        <div class="ad-banner left">
+          <div class="pc">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666605,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "160",
+                height: "860",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <div class="mo">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666606,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "100%",
+                height: "90",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <span
+            >이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의
+            수수료를 제공받습니다.</span
+          >
+        </div>
+        <div class="main">
+          <div class="clamp-container" style="max-width: 1400px">
+            <div class="clamp-header-desc">
+              <h2>CSS Animation & Keyframes Generator</h2>
+              <p>
+                시각적인 키프레임 제어와 프리셋으로 역동적인 CSS 애니메이션을
+                만드세요.
+              </p>
+            </div>
+            <div class="anim-main-layout">
+              <!-- Left: Controls -->
+              <aside class="anim-controls">
+                <div class="control-card">
+                  <h3>⚙️ Animation Properties</h3>
+                  <div class="control-item">
+                    <label>Duration <span id="dur-val">1.0s</span></label>
+                    <input
+                      type="range"
+                      id="anim-duration"
+                      min="0.1"
+                      max="5"
+                      step="0.1"
+                      value="1"
+                    />
+                  </div>
+                  <div class="control-item">
+                    <label>Delay <span id="del-val">0s</span></label>
+                    <input
+                      type="range"
+                      id="anim-delay"
+                      min="0"
+                      max="3"
+                      step="0.1"
+                      value="0"
+                    />
+                  </div>
+                  <div class="control-item">
+                    <label>Timing Function</label>
+                    <select
+                      id="anim-timing"
+                      class="blog-select"
+                      style="width: 100%; height: auto"
+                    >
+                      <option value="ease">ease</option>
+                      <option value="linear">linear</option>
+                      <option value="ease-in">ease-in</option>
+                      <option value="ease-out">ease-out</option>
+                      <option value="ease-in-out">ease-in-out</option>
+                      <option value="cubic-bezier(0.68, -0.55, 0.265, 1.55)">
+                        Cubic-Bezier (Back)
+                      </option>
+                    </select>
+                  </div>
+                  <div class="control-item">
+                    <label>Iteration Count</label>
+                    <select
+                      id="anim-iteration"
+                      class="blog-select"
+                      style="width: 100%; height: auto"
+                    >
+                      <option value="infinite">infinite</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="control-card">
+                  <h3>🎬 Keyframes (100%)</h3>
+                  <div class="control-item">
+                    <label>Translate X <span id="tx-val">0px</span></label>
+                    <input
+                      type="range"
+                      id="anim-tx"
+                      min="-200"
+                      max="200"
+                      value="0"
+                    />
+                  </div>
+                  <div class="control-item">
+                    <label>Translate Y <span id="ty-val">-50px</span></label>
+                    <input
+                      type="range"
+                      id="anim-ty"
+                      min="-200"
+                      max="200"
+                      value="-50"
+                    />
+                  </div>
+                  <div class="control-item">
+                    <label>Rotate <span id="rot-val">0deg</span></label>
+                    <input
+                      type="range"
+                      id="anim-rot"
+                      min="-360"
+                      max="360"
+                      value="0"
+                    />
+                  </div>
+                  <div class="control-item">
+                    <label>Scale <span id="scale-val">1.2</span></label>
+                    <input
+                      type="range"
+                      id="anim-scale"
+                      min="0"
+                      max="2"
+                      step="0.1"
+                      value="1.2"
+                    />
+                  </div>
+                  <div class="control-item">
+                    <label>Opacity <span id="op-val">1</span></label>
+                    <input
+                      type="range"
+                      id="anim-op"
+                      min="0"
+                      max="1"
+                      step="0.1"
+                      value="1"
+                    />
+                  </div>
+                </div>
+                <div class="control-card">
+                  <h3>⚡ Quick Presets</h3>
+                  <div class="preset-group">
+                    <button class="preset-btn" data-preset="shake">
+                      Shake
+                    </button>
+                    <button class="preset-btn" data-preset="pulse">
+                      Pulse
+                    </button>
+                    <button class="preset-btn" data-preset="bounce">
+                      Bounce
+                    </button>
+                    <button class="preset-btn" data-preset="heartbeat">
+                      Heartbeat
+                    </button>
+                  </div>
+                </div>
+              </aside>
+              <!-- Right: Preview & Code -->
+              <div class="anim-preview-section">
+                <div class="anim-canvas">
+                  <div id="preview-box">Box</div>
+                </div>
+                <div class="anim-code-card">
+                  <h3>💻 CSS Code</h3>
+                  <button
+                    type="button"
+                    class="copy-btn-large"
+                    id="copy-anim-code"
+                  >
+                    Copy Code
+                  </button>
+                  <code id="anim-code-display">
+                    /* CSS 코드가 여기에 생성됩니다 */
+                  </code>
+                </div>
+                <div class="clamp-guide-card" style="margin-top: 0">
+                  <h3 style="color: #2196f3; margin-top: 0">📖 사용 방법</h3>
+                  <ul style="font-size: 14px; line-height: 1.8; color: #555">
+                    <li>
+                      <strong>Properties:</strong> 재생 시간(Duration), 지연
+                      시간(Delay), 속도 곡선(Timing) 등을 설정합니다.
+                    </li>
+                    <li>
+                      <strong>Keyframes:</strong> 애니메이션이 진행될 때(100%
+                      시점) 요소가 가질 최종 상태를 슬라이더로 조절합니다. (0%는
+                      기본 상태로 자동 설정됩니다.)
+                    </li>
+                    <li>
+                      <strong>Presets:</strong> 자주 사용되는 역동적인
+                      애니메이션 효과를 클릭 한 번으로 불러올 수 있습니다.
+                    </li>
+                    <li>
+                      <strong>Live:</strong> 모든 변경 사항은 즉시 프리뷰 박스에
+                      반영되며, 하단에서 `@keyframes` 코드를 포함한 전체 CSS를
+                      복사할 수 있습니다.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-banner right">
+            <div class="pc">
+              <script src="https://ads-partners.coupang.com/g.js"></script>
+              <script>
+                new PartnersCoupang.G({
+                  id: 666605,
+                  template: "carousel",
+                  trackingCode: "AF6310726",
+                  width: "160",
+                  height: "860",
+                  tsource: "",
+                });
+              </script>
+            </div>
+          </div>
+        </div>
+        <div class="ad-banner right">
+          <div class="pc">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666605,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "160",
+                height: "860",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <div class="mo">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666606,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "100%",
+                height: "90",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <span
+            >이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의
+            수수료를 제공받습니다.</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/animation-generator.js"></script>
+  </body>
+</html>

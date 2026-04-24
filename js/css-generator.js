@@ -211,6 +211,47 @@ document.addEventListener("DOMContentLoaded", function () {
     el.addEventListener("input", updateNeu),
   );
 
+  // --- CSS Filter Effects Generator ---
+  const filterBlur = document.getElementById("filter-blur");
+  const filterBright = document.getElementById("filter-bright");
+  const filterContrast = document.getElementById("filter-contrast");
+  const filterGray = document.getElementById("filter-gray");
+  const filterSaturate = document.getElementById("filter-saturate");
+  const filterHue = document.getElementById("filter-hue");
+  const filterSepia = document.getElementById("filter-sepia");
+  const filterInvert = document.getElementById("filter-invert");
+  const filterPreview = document.getElementById("filter-preview");
+  const filterCode = document.getElementById("filter-code");
+
+  function updateFilter() {
+    const blur = filterBlur.value;
+    const bright = filterBright.value;
+    const contrast = filterContrast.value;
+    const gray = filterGray.value;
+    const saturate = filterSaturate.value;
+    const hue = filterHue.value;
+    const sepia = filterSepia.value;
+    const invert = filterInvert.value;
+
+    const filterStr = `blur(${blur}px) brightness(${bright}%) contrast(${contrast}%) grayscale(${gray}%) saturate(${saturate}%) hue-rotate(${hue}deg) sepia(${sepia}%) invert(${invert}%)`;
+    
+    filterPreview.style.filter = filterStr;
+    filterCode.innerText = `filter: ${filterStr};`;
+
+    document.getElementById("filter-blur-val").innerText = `${blur}px`;
+    document.getElementById("filter-bright-val").innerText = `${bright}%`;
+    document.getElementById("filter-contrast-val").innerText = `${contrast}%`;
+    document.getElementById("filter-gray-val").innerText = `${gray}%`;
+    document.getElementById("filter-saturate-val").innerText = `${saturate}%`;
+    document.getElementById("filter-hue-val").innerText = `${hue}deg`;
+    document.getElementById("filter-sepia-val").innerText = `${sepia}%`;
+    document.getElementById("filter-invert-val").innerText = `${invert}%`;
+  }
+
+  [filterBlur, filterBright, filterContrast, filterGray, filterSaturate, filterHue, filterSepia, filterInvert].forEach(
+    (el) => el.addEventListener("input", updateFilter),
+  );
+
   // --- Copy Buttons ---
   document.querySelectorAll(".copy-code-btn").forEach((btn) => {
     btn.addEventListener("click", function () {
@@ -226,4 +267,6 @@ document.addEventListener("DOMContentLoaded", function () {
   updateBorderRadius();
   updateGlass();
   updateNeu();
+  updateFilter();
 });
+

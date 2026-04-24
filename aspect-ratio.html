@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no"
+    />
+    <title>Aspect Ratio 비율 계산기 | 시각적 화면 비율 도구</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="canonical" href="https://pxtovw.co.kr/aspect-ratio.html" />
+    <meta
+      name="title"
+      content="Aspect Ratio 비율 계산기 | 시각적 화면 비율 도구"
+    />
+    <meta
+      name="description"
+      content="이미지, 비디오, UI 요소의 정확한 화면 비율(Aspect Ratio)을 계산하고 최신 CSS 코드를 즉시 생성하세요. 16:9, 4:3 등 다양한 프리셋을 지원합니다."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Aspect Ratio 비율 계산기 | 시각적 화면 비율 도구"
+    />
+    <meta property="og:url" content="https://pxtovw.co.kr/aspect-ratio.html" />
+    <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="robots" content="index, follow" />
+    <!-- font add -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <style>
+      /* Aspect Ratio Specific Styles */
+      .ratio-main-layout {
+        display: grid;
+        grid-template-columns: 400px 1fr;
+        gap: 30px;
+        margin-top: 20px;
+        align-items: start;
+      }
+      .ratio-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .ratio-card {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+      .ratio-card h3 {
+        font-size: 16px;
+        margin-bottom: 20px;
+        color: #333;
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 10px;
+      }
+      .ratio-input-group {
+        display: grid;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+      .ratio-field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .ratio-field label {
+        font-size: 13px;
+        font-weight: 700;
+        color: #666;
+      }
+      .ratio-field input {
+        padding: 12px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        text-align: center;
+        transition: border-color 0.2s;
+      }
+      .ratio-field input:focus {
+        border-color: #2196f3;
+        outline: none;
+      }
+      .preset-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+      .preset-btn {
+        padding: 10px;
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .preset-btn:hover {
+        background: #e7f5ff;
+        border-color: #339af0;
+        color: #1971c2;
+      }
+      .preview-container {
+        background: #f8f9fa;
+        border: 2px dashed #dee2e6;
+        border-radius: 20px;
+        padding: 40px;
+        min-height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      #ratio-preview-box {
+        background: #fff;
+        border: 3px solid #2196f3;
+        box-shadow: 0 20px 40px rgba(33, 150, 243, 0.15);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+        max-height: 100%;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      #ratio-preview-box::after {
+        content: attr(data-dimensions);
+        font-size: 14px;
+        font-weight: 700;
+        color: #2196f3;
+      }
+      .code-section {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      @media (max-width: 1024px) {
+        .ratio-main-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="app-header">
+        <div class="app-header-top">
+          <a href="index.html" class="app-logo">
+            <h1><span>PX</span> to <span>VW</span></h1>
+            <span class="subtitle">Web Tools</span>
+          </a>
+          <div class="app-header-tools">
+            <div class="visit-stats">
+              <div class="stat">
+                <span class="label">Total</span
+                ><span id="visit-total" class="value">0</span>
+              </div>
+              <div class="stat">
+                <span class="label">Today</span
+                ><span id="visit-today" class="value">0</span>
+              </div>
+            </div>
+            <div class="right-tools">
+              <div class="version-info">
+                <button id="version-btn" class="version-btn">
+                  v2.1.0 <span>▼</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="gnb-menu">
+          <div class="gnb-menu-inner">
+            <a href="index.html" class="gnb-item">PX ↔ VW</a>
+            <a href="px-to-rem.html" class="gnb-item">PX ↔ REM</a>
+            <a href="clamp-generator.html" class="gnb-item">CSS Clamp</a>
+            <a href="flexbox-visualizer.html" class="gnb-item">Flex Layout</a>
+            <a href="grid-generator.html" class="gnb-item">Grid Layout</a>
+            <a href="animation-generator.html" class="gnb-item">Animation</a>
+            <a href="divider-generator.html" class="gnb-item"
+              >Section Divider</a
+            >
+            <a href="aspect-ratio.html" class="gnb-item active">Aspect Ratio</a>
+            <a href="css-generator.html" class="gnb-item">Visual Effects</a>
+            <a href="gradient-generator.html" class="gnb-item">Gradient</a>
+            <a href="color-converter.html" class="gnb-item">Color Tools</a>
+            <a href="contrast-checker.html" class="gnb-item">Contrast Check</a>
+            <a href="css-tools.html" class="gnb-item">Code Tools</a>
+          </div>
+        </nav>
+      </header>
+      <div class="main-box">
+        <div class="ad-banner left">
+          <div class="pc">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666605,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "160",
+                height: "860",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <div class="mo">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666606,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "100%",
+                height: "90",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <span
+            >이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의
+            수수료를 제공받습니다.</span
+          >
+        </div>
+        <div class="main">
+          <div class="clamp-container" style="max-width: 1400px">
+            <div class="clamp-header-desc">
+              <h2>Aspect Ratio Calculator</h2>
+              <p>
+                정확한 화면 비율을 계산하고 시각적인 프리뷰와 최적의 CSS 코드를
+                확인하세요.
+              </p>
+            </div>
+            <div class="ratio-main-layout">
+              <!-- Left: Controls -->
+              <aside class="ratio-controls">
+                <div class="ratio-card">
+                  <h3>🎯 Base Ratio</h3>
+                  <div class="ratio-input-group">
+                    <div class="ratio-field">
+                      <label>Width Ratio</label>
+                      <input type="number" id="base-w" value="16" />
+                    </div>
+                    <div class="ratio-field">
+                      <label>Height Ratio</label>
+                      <input type="number" id="base-h" value="9" />
+                    </div>
+                  </div>
+                  <div class="preset-grid">
+                    <button class="preset-btn" data-w="16" data-h="9">
+                      16:9
+                    </button>
+                    <button class="preset-btn" data-w="4" data-h="3">
+                      4:3
+                    </button>
+                    <button class="preset-btn" data-w="1" data-h="1">
+                      1:1
+                    </button>
+                    <button class="preset-btn" data-w="21" data-h="9">
+                      21:9
+                    </button>
+                    <button class="preset-btn" data-w="9" data-h="16">
+                      9:16
+                    </button>
+                    <button class="preset-btn" data-w="3" data-h="2">
+                      3:2
+                    </button>
+                  </div>
+                </div>
+                <div class="ratio-card">
+                  <h3>📏 Dimensions</h3>
+                  <div class="ratio-input-group">
+                    <div class="ratio-field">
+                      <label>Width (px)</label>
+                      <input type="number" id="calc-w" value="800" />
+                    </div>
+                    <div class="ratio-field">
+                      <label>Height (px)</label>
+                      <input type="number" id="calc-h" value="450" />
+                    </div>
+                  </div>
+                  <p style="font-size: 11px; color: #999; text-align: center">
+                    가로 또는 세로 값을 변경하면 자동으로 계산됩니다.
+                  </p>
+                </div>
+              </aside>
+              <!-- Right: Preview & Code -->
+              <div
+                class="ratio-preview-section"
+                style="display: flex; flex-direction: column; gap: 20px"
+              >
+                <div class="preview-container">
+                  <div id="ratio-preview-box" data-dimensions="800 x 450">
+                    <span
+                      style="
+                        font-size: 20px;
+                        font-weight: 900;
+                        color: #ced4da;
+                        margin-bottom: 5px;
+                      "
+                      >PREVIEW</span
+                    >
+                  </div>
+                </div>
+                <div class="code-section">
+                  <div class="div-code-card">
+                    <h3 style="color: #adb5bd; font-size: 14px; margin-top: 0">
+                      Modern CSS (aspect-ratio)
+                    </h3>
+                    <button
+                      type="button"
+                      class="copy-btn-large"
+                      onclick="copyText('modern-code', this)"
+                    >
+                      Copy
+                    </button>
+                    <code id="modern-code">aspect-ratio: 16 / 9;</code>
+                  </div>
+                  <div class="div-code-card">
+                    <h3 style="color: #adb5bd; font-size: 14px; margin-top: 0">
+                      Legacy CSS (Padding Hack)
+                    </h3>
+                    <button
+                      type="button"
+                      class="copy-btn-large"
+                      onclick="copyText('legacy-code', this)"
+                    >
+                      Copy
+                    </button>
+                    <code id="legacy-code">
+                      .container { position: relative; width: 100%; padding-top:
+                      56.25%; }<br />
+                      .content { position: absolute; top: 0; left: 0; width:
+                      100%; height: 100%; }
+                    </code>
+                  </div>
+                </div>
+                <div class="clamp-guide-card" style="margin-top: 0">
+                  <h3 style="color: #2196f3; margin-top: 0">📖 사용 방법</h3>
+                  <ul style="font-size: 14px; line-height: 1.8; color: #555">
+                    <li>
+                      <strong>Base Ratio:</strong> 원하는 비율을 직접 입력하거나
+                      프리셋 버튼을 클릭하여 설정합니다.
+                    </li>
+                    <li>
+                      <strong>Dimensions:</strong> 알고 있는 가로 또는 세로 값을
+                      입력하면 비율에 맞는 나머지 수치가 자동 계산됩니다.
+                    </li>
+                    <li>
+                      <strong>Preview:</strong> 설정한 비율대로 박스의 모양이
+                      실시간으로 변하며 크기감이 시각화됩니다.
+                    </li>
+                    <li>
+                      <strong>Code:</strong> 최신 브라우저용
+                      <code>aspect-ratio</code> 속성과 하위 브라우저 호환성을
+                      위한 <code>padding-top</code> 코드를 모두 제공합니다.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ad-banner right">
+          <div class="pc">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666605,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "160",
+                height: "860",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <div class="mo">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666606,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "100%",
+                height: "90",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <span
+            >이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의
+            수수료를 제공받습니다.</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/aspect-ratio.js"></script>
+    <script>
+      function copyText(id, btn) {
+        const text = document.getElementById(id).innerText;
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        const original = btn.innerText;
+        btn.innerText = "Copied!";
+        btn.style.background = "#4caf50";
+        setTimeout(() => {
+          btn.innerText = original;
+          btn.style.background = "";
+        }, 1500);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no"
+    />
+    <title>CSS Grid 레이아웃 생성기 | 시각적 그리드 설계 도구</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="canonical" href="https://pxtovw.co.kr/grid-generator.html" />
+    <meta
+      name="title"
+      content="CSS Grid 레이아웃 생성기 | 비주얼 그리드 빌더"
+    />
+    <meta
+      name="description"
+      content="행과 열의 개수, 간격, 단위를 시각적으로 조절하여 복잡한 CSS Grid 레이아웃 코드를 즉시 생성하세요. 실무 최적화 그리드 설계 도구입니다."
+    />
+    <meta
+      name="keywords"
+      content="css grid 생성기, grid generator, css 그리드 설계, 웹 레이아웃 도구, 프론트엔드 개발, css 시각화, css grid builder"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="CSS Grid 레이아웃 생성기 | 비주얼 그리드 빌더"
+    />
+    <meta
+      property="og:site_name"
+      content="PX-VW 변환기 - 반응형 웹 개발 도구"
+    />
+    <meta
+      property="og:description"
+      content="복잡한 CSS Grid 구조를 클릭 몇 번으로 설계하고 완벽한 코드를 복사하세요."
+    />
+    <meta
+      property="og:url"
+      content="https://pxtovw.co.kr/grid-generator.html"
+    />
+    <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="robots" content="index, follow" />
+    <!-- font add -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <style>
+      /* Grid Generator Specific Styles */
+      .grid-main-layout {
+        display: grid;
+        grid-template-columns: 350px 1fr;
+        gap: 30px;
+        margin-top: 20px;
+        align-items: start;
+      }
+      .grid-controls {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+      .grid-preview-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .grid-canvas-container {
+        background: #f8f9fa;
+        border: 2px dashed #dee2e6;
+        border-radius: 16px;
+        padding: 20px;
+        min-height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: auto;
+      }
+      #grid-visualizer {
+        display: grid;
+        width: 100%;
+        height: 100%;
+        min-height: 400px;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      .grid-item-sample {
+        background: rgba(33, 150, 243, 0.1);
+        border: 1px solid rgba(33, 150, 243, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: #2196f3;
+        font-size: 14px;
+        min-height: 50px;
+      }
+      .control-section {
+        margin-bottom: 25px;
+      }
+      .control-section h3 {
+        font-size: 16px;
+        margin-bottom: 15px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 8px;
+      }
+      .input-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .input-row label {
+        flex: 1;
+        font-size: 14px;
+        color: #666;
+      }
+      .input-row input[type="number"],
+      .input-row input[type="text"] {
+        width: 80px;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        text-align: center;
+      }
+      .unit-select {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: #fff;
+        font-size: 12px;
+      }
+      .grid-code-card {
+        background: #212529;
+        color: #fff;
+        padding: 24px;
+        border-radius: 16px;
+        position: relative;
+      }
+      .grid-code-card h3 {
+        margin-top: 0;
+        font-size: 15px;
+        color: #adb5bd;
+        margin-bottom: 15px;
+      }
+      .grid-code-card code {
+        display: block;
+        font-family: "Consolas", monospace;
+        line-height: 1.6;
+        font-size: 14px;
+        color: #69db7c;
+      }
+      .copy-btn-large {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 8px 16px;
+        background: #2196f3;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: 0.2s;
+      }
+      .copy-btn-large:hover {
+        background: #1976d2;
+      }
+      @media (max-width: 1100px) {
+        .grid-main-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="app-header">
+        <div class="app-header-top">
+          <a href="index.html" class="app-logo">
+            <h1><span>PX</span> to <span>VW</span></h1>
+            <span class="subtitle">Web Tools</span>
+          </a>
+          <div class="app-header-tools">
+            <div class="visit-stats">
+              <div class="stat">
+                <span class="label">Total</span
+                ><span id="visit-total" class="value">0</span>
+              </div>
+              <div class="stat">
+                <span class="label">Today</span
+                ><span id="visit-today" class="value">0</span>
+              </div>
+              <div class="stat">
+                <span class="label">Yesterday</span
+                ><span id="visit-yesterday" class="value">0</span>
+              </div>
+            </div>
+            <div class="right-tools">
+              <select
+                class="blog-select"
+                onchange="if (this.value) location.href = this.value;"
+              >
+                <option value="">📖 블로그 및 문서</option>
+                <option value="how-to-use.html">📖 사용법 보기</option>
+                <option value="blog-css-units.html">📐 CSS 단위 가이드</option>
+              </select>
+              <div class="version-info">
+                <button id="version-btn" class="version-btn">
+                  v2.1.0 <span>▼</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="gnb-menu">
+          <div class="gnb-menu-inner">
+            <a href="index.html" class="gnb-item">PX ↔ VW</a>
+            <a href="px-to-rem.html" class="gnb-item">PX ↔ REM</a>
+            <a href="clamp-generator.html" class="gnb-item">CSS Clamp</a>
+            <a href="flexbox-visualizer.html" class="gnb-item">Flex Layout</a>
+            <a href="grid-generator.html" class="gnb-item active"
+              >Grid Layout</a
+            >
+            <a href="animation-generator.html" class="gnb-item">Animation</a>
+            <a href="divider-generator.html" class="gnb-item"
+              >Section Divider</a
+            >
+            <a href="aspect-ratio.html" class="gnb-item">Aspect Ratio</a>
+            <a href="css-generator.html" class="gnb-item">Visual Effects</a>
+            <a href="gradient-generator.html" class="gnb-item">Gradient</a>
+            <a href="color-converter.html" class="gnb-item">Color Tools</a>
+            <a href="contrast-checker.html" class="gnb-item">Contrast Check</a>
+            <a href="css-tools.html" class="gnb-item">Code Tools</a>
+          </div>
+        </nav>
+      </header>
+      <div class="main-box">
+        <div class="ad-banner left">
+          <div class="pc">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666605,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "160",
+                height: "860",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <div class="mo">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666606,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "100%",
+                height: "90",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <span
+            >이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의
+            수수료를 제공받습니다.</span
+          >
+        </div>
+        <div class="main">
+          <div class="clamp-container" style="max-width: 1400px">
+            <div class="clamp-header-desc">
+              <h2>CSS Grid Generator</h2>
+              <p>
+                복잡한 그리드 레이아웃을 시각적으로 설계하고 코드를 즉시
+                생성하세요.
+              </p>
+            </div>
+            <div class="grid-main-layout">
+              <!-- Left: Controls -->
+              <aside class="grid-controls">
+                <div class="control-section">
+                  <h3>📏 Grid Structure</h3>
+                  <div class="input-row">
+                    <label>Columns (열)</label>
+                    <input
+                      type="number"
+                      id="grid-cols"
+                      min="1"
+                      max="12"
+                      value="3"
+                    />
+                  </div>
+                  <div class="input-row">
+                    <label>Rows (행)</label>
+                    <input
+                      type="number"
+                      id="grid-rows"
+                      min="1"
+                      max="12"
+                      value="3"
+                    />
+                  </div>
+                </div>
+                <div class="control-section">
+                  <h3>↔️ Spacing (Gap)</h3>
+                  <div class="input-row">
+                    <label>Column Gap</label>
+                    <input
+                      type="number"
+                      id="col-gap"
+                      min="0"
+                      max="100"
+                      value="20"
+                    />
+                    <span style="font-size: 12px; color: #999">px</span>
+                  </div>
+                  <div class="input-row">
+                    <label>Row Gap</label>
+                    <input
+                      type="number"
+                      id="row-gap"
+                      min="0"
+                      max="100"
+                      value="20"
+                    />
+                    <span style="font-size: 12px; color: #999">px</span>
+                  </div>
+                </div>
+                <div class="control-section">
+                  <h3>📐 Template Sizes</h3>
+                  <div class="input-row">
+                    <label>Col Width</label>
+                    <input type="text" id="col-width" value="1" />
+                    <select id="col-unit" class="unit-select">
+                      <option value="fr">fr</option>
+                      <option value="px">px</option>
+                      <option value="%">%</option>
+                      <option value="auto">auto</option>
+                    </select>
+                  </div>
+                  <div class="input-row">
+                    <label>Row Height</label>
+                    <input type="text" id="row-height" value="1" />
+                    <select id="row-unit" class="unit-select">
+                      <option value="fr">fr</option>
+                      <option value="px">px</option>
+                      <option value="%">%</option>
+                      <option value="auto">auto</option>
+                    </select>
+                  </div>
+                  <p style="font-size: 11px; color: #999; margin-top: 10px">
+                    * '1fr 2fr 1fr'와 같이 공백으로 구분하여 개별 설정도
+                    가능합니다.
+                  </p>
+                </div>
+              </aside>
+              <!-- Right: Preview & Code -->
+              <div class="grid-preview-section">
+                <div class="grid-canvas-container">
+                  <div id="grid-visualizer">
+                    <!-- Grid items will be generated here -->
+                  </div>
+                </div>
+                <div class="grid-code-card">
+                  <h3>💻 CSS Code</h3>
+                  <button
+                    type="button"
+                    class="copy-btn-large"
+                    id="copy-grid-code"
+                  >
+                    Copy Code
+                  </button>
+                  <code id="grid-code-display">
+                    display: grid;<br />
+                    grid-template-columns: repeat(3, 1fr);<br />
+                    grid-template-rows: repeat(3, 1fr);<br />
+                    gap: 20px 20px;
+                  </code>
+                </div>
+                <div class="clamp-guide-card" style="margin-top: 0">
+                  <h3 style="color: #2196f3; margin-top: 0">📖 사용 방법</h3>
+                  <ul style="font-size: 14px; line-height: 1.8; color: #555">
+                    <li>
+                      <strong>Structure:</strong> 행과 열의 개수를 입력하여 기본
+                      그리드 판을 만듭니다. (최대 12개)
+                    </li>
+                    <li>
+                      <strong>Gap:</strong> 그리드 사이의 간격을 가로/세로
+                      별도로 지정할 수 있습니다.
+                    </li>
+                    <li>
+                      <strong>Template Sizes:</strong> <code>1fr</code>과 같은
+                      단일 수치뿐만 아니라 <code>1fr 2fr 1fr</code>처럼 공백으로
+                      구분하여 각 칸의 크기를 상세하게 정의할 수 있습니다.
+                    </li>
+                    <li>
+                      <strong>Real-time:</strong> 모든 설정은 우측 캔버스에
+                      실시간으로 반영되며, 하단에서 완성된 코드를 즉시 복사할 수
+                      있습니다.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ad-banner right">
+          <div class="pc">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666605,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "160",
+                height: "860",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <div class="mo">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666606,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "100%",
+                height: "90",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <span
+            >이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의
+            수수료를 제공받습니다.</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/grid-generator.js"></script>
+  </body>
+</html>

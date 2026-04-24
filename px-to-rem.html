@@ -9,7 +9,10 @@
     <title>PX to REM 변환기 (픽셀 ↔ 렘) | 반응형 웹 접근성 CSS 도구</title>
     <link rel="icon" href="favicon.ico" />
     <link rel="canonical" href="https://pxtovw.co.kr/px-to-rem.html" />
-    <meta name="title" content="PX to REM 변환기 | 반응형 타이포그래피 계산기" />
+    <meta
+      name="title"
+      content="PX to REM 변환기 | 반응형 타이포그래피 계산기"
+    />
     <meta
       name="description"
       content="디자이너와 퍼블리셔를 위한 PX to REM 변환기입니다. 기준 폰트 사이즈(root)를 설정하고 픽셀(px)을 REM 단위로 정확하게 변환하세요. 웹 접근성과 반응형 폰트 구현에 필수적입니다."
@@ -23,7 +26,10 @@
       property="og:title"
       content="PX to REM 변환기 (픽셀 ↔ 렘) | CSS 단위 계산기"
     />
-    <meta property="og:site_name" content="PX-VW 변환기 - 반응형 웹 개발 도구" />
+    <meta
+      property="og:site_name"
+      content="PX-VW 변환기 - 반응형 웹 개발 도구"
+    />
     <meta
       property="og:description"
       content="기준 폰트 사이즈를 설정하고 픽셀(px)을 REM 단위로 정확하게 변환하세요. 웹 접근성을 위한 필수 계산기."
@@ -31,22 +37,28 @@
     <meta property="og:url" content="https://pxtovw.co.kr/px-to-rem.html" />
     <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="PX to REM 변환기 | 웹 접근성 CSS 도구" />
-    <meta name="twitter:description" content="픽셀(px)을 렘(rem) 단위로 쉽고 정확하게 변환해주는 타이포그래피 필수 도구." />
+    <meta
+      name="twitter:title"
+      content="PX to REM 변환기 | 웹 접근성 CSS 도구"
+    />
+    <meta
+      name="twitter:description"
+      content="픽셀(px)을 렘(rem) 단위로 쉽고 정확하게 변환해주는 타이포그래피 필수 도구."
+    />
     <meta name="twitter:image" content="https://pxtovw.co.kr/img/og.png" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="PX TO VW" />
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "PX to REM 변환기",
-      "url": "https://pxtovw.co.kr/px-to-rem.html",
-      "description": "기준 폰트 사이즈(root)를 설정하고 픽셀(px)을 REM 단위로 정확하게 변환하는 개발자용 계산기입니다.",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "All"
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "PX to REM 변환기",
+        "url": "https://pxtovw.co.kr/px-to-rem.html",
+        "description": "기준 폰트 사이즈(root)를 설정하고 픽셀(px)을 REM 단위로 정확하게 변환하는 개발자용 계산기입니다.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All"
+      }
     </script>
     <!-- site verification -->
     <meta
@@ -81,7 +93,6 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-9S15LY0JFE");
     </script>
     <!-- Google Tag Manager -->
@@ -111,9 +122,18 @@
           </a>
           <div class="app-header-tools">
             <div class="visit-stats">
-              <div class="stat"><span class="label">Total</span><span id="visit-total" class="value">0</span></div>
-              <div class="stat"><span class="label">Today</span><span id="visit-today" class="value">0</span></div>
-              <div class="stat"><span class="label">Yesterday</span><span id="visit-yesterday" class="value">0</span></div>
+              <div class="stat">
+                <span class="label">Total</span
+                ><span id="visit-total" class="value">0</span>
+              </div>
+              <div class="stat">
+                <span class="label">Today</span
+                ><span id="visit-today" class="value">0</span>
+              </div>
+              <div class="stat">
+                <span class="label">Yesterday</span
+                ><span id="visit-yesterday" class="value">0</span>
+              </div>
             </div>
             <div class="right-tools">
               <select
@@ -134,7 +154,7 @@
               </select>
               <div class="version-info">
                 <button id="version-btn" class="version-btn">
-                  v1.2.0 <span>▼</span>
+                  v2.1.0 <span>▼</span>
                 </button>
                 <div class="version-modal" id="version-modal">
                   <h3>
@@ -148,7 +168,37 @@
                     </button>
                   </h3>
                   <div class="version-item">
-                    <strong>v1.2.0 (2026.04.23)</strong>
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>WCAG Contrast Checker 신규 추가</li>
+                      <li>웹 접근성을 위한 컬러 대비 자동 검사</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>CSS Flexbox Visualizer 신규 추가</li>
+                      <li>레이아웃 속성 시각화 및 자동 코드 생성</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>CSS Gradient Generator 신규 추가</li>
+                      <li>컬러 변환기 시각적 컬러피커 기능 강화</li>
+                      <li>CSS 도구(Minifier) 성능 및 UI 개선</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>색상 변환기 (HEX ↔ RGB ↔ HSL) 추가</li>
+                      <li>CSS Minifier / Formatter 도구 추가</li>
+                      <li>CSS Clamp 생성기 UI 디자인 전면 개편</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.23)</strong>
                     <ul>
                       <li>CSS 스타일 및 시각화 생성기 추가</li>
                       <li>Box Shadow & Text Shadow 생성기</li>
@@ -157,28 +207,34 @@
                     </ul>
                   </div>
                   <div class="version-item">
-                    <strong>v1.1.0 (2026.03.23)</strong>
+                    <strong>v2.1.0 (2026.03.23)</strong>
                     <ul>
                       <li>PX ↔ REM 변환기 및 CSS Clamp 생성기 기능 추가</li>
-                      <li>상단 네비게이션(GNB) 추가 및 보조 도구 사용성 개선</li>
-                      <li>모바일 환경 UI 최적화(가독성 개편 및 vw 적용 확대)</li>
+                      <li>
+                        상단 네비게이션(GNB) 추가 및 보조 도구 사용성 개선
+                      </li>
+                      <li>
+                        모바일 환경 UI 최적화(가독성 개편 및 vw 적용 확대)
+                      </li>
                     </ul>
                   </div>
                   <div class="version-item">
-                    <strong>v1.0.1 (2026.03.23)</strong>
+                    <strong>v2.1.0 (2026.03.23)</strong>
                     <ul>
                       <li>
-                        CSS "속성삭제" 체크 시 주석이 포함된 경우 발생하는 변환 오류
-                        수정
+                        CSS "속성삭제" 체크 시 주석이 포함된 경우 발생하는 변환
+                        오류 수정
                       </li>
                       <li>광고 배너 높이 조정</li>
                     </ul>
                   </div>
                   <div class="version-item">
-                    <strong>v1.0.0 (2024.10.01)</strong>
+                    <strong>v2.1.0 (2024.10.01)</strong>
                     <ul>
                       <li>PX ↔ VW 양방향 변환 기본 기능 출시</li>
-                      <li>Breakpoints 프리셋 제공 및 CSS 텍스트 일괄 변환 지원</li>
+                      <li>
+                        Breakpoints 프리셋 제공 및 CSS 텍스트 일괄 변환 지원
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -190,14 +246,22 @@
           <div class="gnb-menu-inner">
             <a href="index.html" class="gnb-item">PX ↔ VW</a>
             <a href="px-to-rem.html" class="gnb-item active">PX ↔ REM</a>
-            <a href="clamp-generator.html" class="gnb-item"
-              >CSS Clamp Generator</a
+            <a href="clamp-generator.html" class="gnb-item">CSS Clamp</a>
+            <a href="flexbox-visualizer.html" class="gnb-item">Flex Layout</a>
+            <a href="grid-generator.html" class="gnb-item">Grid Layout</a>
+            <a href="animation-generator.html" class="gnb-item">Animation</a>
+            <a href="divider-generator.html" class="gnb-item"
+              >Section Divider</a
             >
-            <a href="css-generator.html" class="gnb-item">CSS Generator</a>
+            <a href="aspect-ratio.html" class="gnb-item">Aspect Ratio</a>
+            <a href="css-generator.html" class="gnb-item">Visual Effects</a>
+            <a href="gradient-generator.html" class="gnb-item">Gradient</a>
+            <a href="color-converter.html" class="gnb-item">Color Tools</a>
+            <a href="contrast-checker.html" class="gnb-item">Contrast Check</a>
+            <a href="css-tools.html" class="gnb-item">Code Tools</a>
           </div>
         </nav>
       </header>
-
       <div class="main-box">
         <div class="ad-banner left">
           <div class="pc">
@@ -425,6 +489,21 @@
               </div>
             </div>
           </div>
+          <div class="ad-banner right">
+            <div class="pc">
+              <script src="https://ads-partners.coupang.com/g.js"></script>
+              <script>
+                new PartnersCoupang.G({
+                  id: 666605,
+                  template: "carousel",
+                  trackingCode: "AF6310726",
+                  width: "160",
+                  height: "860",
+                  tsource: "",
+                });
+              </script>
+            </div>
+          </div>
         </div>
         <div class="ad-banner right">
           <div class="pc">
@@ -461,10 +540,6 @@
       </div>
     </div>
 
-    <!-- 모바일 전환 버튼 -->
-    <button class="mobile-toggle-btn" id="mobile-toggle-rem-btn">
-      PX to REM
-    </button>
     <!-- Supabase 클라이언트 라이브러리 -->
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="js/config.js"></script>

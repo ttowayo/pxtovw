@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no"
+    />
+    <title>WCAG Contrast Checker | 웹 접근성 컬러 대비 검사기</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="canonical" href="https://pxtovw.co.kr/contrast-checker.html" />
+    <meta name="title" content="WCAG Contrast Checker | 웹 접근성 도구" />
+    <meta
+      name="description"
+      content="배경색과 글자색의 대비율을 실시간으로 확인하고 WCAG 2.1 기준 통과 여부를 검사하세요. 접근성 높은 웹 디자인을 위한 필수 도구입니다."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="WCAG Contrast Checker | 프리미엄 도구" />
+    <meta property="og:site_name" content="PX-VW 변환기" />
+    <meta
+      property="og:description"
+      content="웹 접근성을 위한 컬러 대비를 가장 정확하게 체크하세요."
+    />
+    <meta
+      property="og:url"
+      content="https://pxtovw.co.kr/contrast-checker.html"
+    />
+    <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
+    <!-- font add -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <style>
+      .contrast-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+      .contrast-main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+      @media (max-width: 900px) {
+        .contrast-main-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .preview-card {
+        padding: 40px;
+        border-radius: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        transition: all 0.3s;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        border: 1px solid #eee;
+        min-height: 350px;
+      }
+      .preview-text-large {
+        font-size: 32px;
+        font-weight: 900;
+        line-height: 1.2;
+      }
+      .preview-text-small {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      .status-panel {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-top: 20px;
+      }
+      .status-item {
+        background: #fff;
+        padding: 15px;
+        border-radius: 16px;
+        border: 1px solid #eee;
+        text-align: center;
+      }
+      .status-item .label {
+        display: block;
+        font-size: 12px;
+        color: #888;
+        margin-bottom: 5px;
+      }
+      .status-item .badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .badge.pass {
+        background: #e6f4ea;
+        color: #1e8e3e;
+      }
+      .badge.fail {
+        background: #fce8e6;
+        color: #d93025;
+      }
+      .ratio-display {
+        font-size: 48px;
+        font-weight: 900;
+        color: #212529;
+        margin-bottom: 5px;
+      }
+      .ratio-label {
+        font-size: 14px;
+        color: #666;
+        font-weight: 600;
+      }
+      .input-card {
+        background: #fff;
+        padding: 30px;
+        border-radius: 24px;
+        border: 1px solid #eee;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .color-input-row {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .color-input-row input[type="color"] {
+        width: 60px;
+        height: 60px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        background: none;
+      }
+      .color-input-row input[type="text"] {
+        flex: 1;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        font-family: "Consolas", monospace;
+        font-size: 16px;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="app-header">
+        <div class="app-header-top">
+          <a href="index.html" class="app-logo">
+            <h1><span>PX</span> to <span>VW</span></h1>
+            <span class="subtitle">Web Tools</span>
+          </a>
+          <div class="app-header-tools">
+            <div class="visit-stats">
+              <div class="stat">
+                <span class="label">Total</span
+                ><span id="visit-total" class="value">0</span>
+              </div>
+              <div class="stat">
+                <span class="label">Today</span
+                ><span id="visit-today" class="value">0</span>
+              </div>
+              <div class="stat">
+                <span class="label">Yesterday</span
+                ><span id="visit-yesterday" class="value">0</span>
+              </div>
+            </div>
+            <div class="right-tools">
+              <select
+                class="blog-select"
+                onchange="if (this.value) location.href = this.value;"
+              >
+                <option value="">📖 블로그 및 문서</option>
+                <option value="how-to-use.html">📖 사용법 보기</option>
+                <option value="blog-css-units.html">📐 CSS 단위 가이드</option>
+                <option value="blog-responsive-design.html">
+                  📱 반응형 디자인
+                </option>
+                <option value="blog-mobile-first.html">📱 모바일 퍼스트</option>
+                <option value="blog-css-best-practices.html">
+                  🎨 CSS 모범 사례
+                </option>
+                <option value="blog-viewport-units.html">📐 뷰포트 단위</option>
+              </select>
+              <div class="version-info">
+                <button id="version-btn" class="version-btn">
+                  v2.1.0 <span>▼</span>
+                </button>
+                <div class="version-modal" id="version-modal">
+                  <h3>
+                    업데이트 노트
+                    <button
+                      type="button"
+                      class="close-version-btn"
+                      id="close-version-btn"
+                    >
+                      &times;
+                    </button>
+                  </h3>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>WCAG Contrast Checker 신규 추가</li>
+                      <li>웹 접근성을 위한 컬러 대비 자동 검사</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>CSS Flexbox Visualizer 신규 추가</li>
+                      <li>레이아웃 속성 시각화 및 자동 코드 생성</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="gnb-menu">
+          <div class="gnb-menu-inner">
+            <a href="index.html" class="gnb-item">PX ↔ VW</a>
+            <a href="px-to-rem.html" class="gnb-item">PX ↔ REM</a>
+            <a href="clamp-generator.html" class="gnb-item">CSS Clamp</a>
+            <a href="flexbox-visualizer.html" class="gnb-item">Flex Layout</a>
+            <a href="grid-generator.html" class="gnb-item">Grid Layout</a>
+            <a href="animation-generator.html" class="gnb-item">Animation</a>
+            <a href="divider-generator.html" class="gnb-item"
+              >Section Divider</a
+            >
+            <a href="aspect-ratio.html" class="gnb-item">Aspect Ratio</a>
+            <a href="css-generator.html" class="gnb-item">Visual Effects</a>
+            <a href="gradient-generator.html" class="gnb-item">Gradient</a>
+            <a href="color-converter.html" class="gnb-item">Color Tools</a>
+            <a href="contrast-checker.html" class="gnb-item active"
+              >Contrast Check</a
+            >
+            <a href="css-tools.html" class="gnb-item">Code Tools</a>
+          </div>
+        </nav>
+      </header>
+      <div class="main-box">
+        <div class="ad-banner left">
+          <div class="pc">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666605,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "160",
+                height: "860",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <div class="mo">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666606,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "100%",
+                height: "90",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <span
+            >이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의
+            수수료를 제공받습니다.</span
+          >
+        </div>
+        <div class="main">
+          <div class="contrast-container">
+            <div class="clamp-header-desc">
+              <h2>WCAG Contrast Checker</h2>
+              <p>
+                배경색과 글자색의 대비율을 확인하여 웹 접근성 기준 통과 여부를
+                검사하세요.
+              </p>
+            </div>
+            <div class="contrast-main-grid">
+              <!-- Left: Inputs & Stats -->
+              <div style="display: flex; flex-direction: column; gap: 24px">
+                <div class="input-card">
+                  <div class="property-group">
+                    <label
+                      style="
+                        display: block;
+                        margin-bottom: 10px;
+                        font-weight: 700;
+                      "
+                      >Background Color</label
+                    >
+                    <div class="color-input-row">
+                      <input type="color" id="bg-picker" value="#ffffff" />
+                      <input
+                        type="text"
+                        id="bg-hex"
+                        value="#FFFFFF"
+                        maxlength="7"
+                      />
+                    </div>
+                  </div>
+                  <div class="property-group">
+                    <label
+                      style="
+                        display: block;
+                        margin-bottom: 10px;
+                        font-weight: 700;
+                      "
+                      >Text Color</label
+                    >
+                    <div class="color-input-row">
+                      <input type="color" id="text-picker" value="#2196f3" />
+                      <input
+                        type="text"
+                        id="text-hex"
+                        value="#2196F3"
+                        maxlength="7"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="input-card" style="text-align: center">
+                  <div class="ratio-label">Contrast Ratio</div>
+                  <div class="ratio-display" id="contrast-ratio">4.50:1</div>
+                  <div class="status-panel">
+                    <div class="status-item">
+                      <span class="label">Small Text (AA)</span>
+                      <span id="small-aa" class="badge pass">Pass</span>
+                    </div>
+                    <div class="status-item">
+                      <span class="label">Small Text (AAA)</span>
+                      <span id="small-aaa" class="badge fail">Fail</span>
+                    </div>
+                    <div class="status-item">
+                      <span class="label">Large Text (AA)</span>
+                      <span id="large-aa" class="badge pass">Pass</span>
+                    </div>
+                    <div class="status-item">
+                      <span class="label">Large Text (AAA)</span>
+                      <span id="large-aaa" class="badge pass">Pass</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Right: Preview -->
+              <div
+                id="preview-box"
+                class="preview-card"
+                style="background: #ffffff; color: #2196f3"
+              >
+                <div class="preview-text-large">This is Large Text</div>
+                <div class="preview-text-small">
+                  이 텍스트는 일반적인 본문 크기(16px)의 미리보기입니다. 웹
+                  접근성 지침(WCAG)에 따르면 배경색과 글자색의 대비가 일정 수준
+                  이상이어야 모든 사용자가 내용을 원활하게 읽을 수 있습니다.
+                </div>
+                <div
+                  style="
+                    margin-top: 20px;
+                    font-size: 14px;
+                    opacity: 0.8;
+                    font-style: italic;
+                  "
+                >
+                  * Large text is defined as 18pt (24px) or larger, or 14pt
+                  (18.66px) or larger and bold.
+                </div>
+              </div>
+            </div>
+            <div class="clamp-guide-card">
+              <h3>📖 웹 접근성(WCAG) 대비율 기준</h3>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                  gap: 20px;
+                  font-size: 14px;
+                  line-height: 1.6;
+                  color: #555;
+                "
+              >
+                <div>
+                  <h4 style="color: #2196f3; margin-bottom: 10px">
+                    AA 등급 (최소 기준)
+                  </h4>
+                  <p>
+                    일반 텍스트는 <strong>4.5:1</strong> 이상의 대비를, 큰
+                    텍스트는 <strong>3:1</strong> 이상의 대비를 권장합니다.
+                    대부분의 상업용 웹사이트가 준수해야 하는 표준입니다.
+                  </p>
+                </div>
+                <div>
+                  <h4 style="color: #2196f3; margin-bottom: 10px">
+                    AAA 등급 (높은 기준)
+                  </h4>
+                  <p>
+                    일반 텍스트는 <strong>7:1</strong> 이상의 대비를, 큰
+                    텍스트는 <strong>4.5:1</strong> 이상의 대비를 권장합니다.
+                    가독성을 최우선으로 하는 문서나 공공 서비스에 적합합니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ad-banner right">
+          <div class="pc">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666605,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "160",
+                height: "860",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <div class="mo">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666606,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "100%",
+                height: "90",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <span
+            >이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의
+            수수료를 제공받습니다.</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/contrast.js"></script>
+  </body>
+</html>

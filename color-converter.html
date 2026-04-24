@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no"
+    />
+    <title>HEX ↔ RGB ↔ HSL 색상 변환기 | CSS 컬러 유틸리티</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="canonical" href="https://pxtovw.co.kr/color-converter.html" />
+    <meta name="title" content="색상 변환기 | HEX RGB HSL 상호 변환 도구" />
+    <meta
+      name="description"
+      content="디자이너와 개발자를 위한 색상 변환 도구입니다. HEX, RGB, HSL 코드를 입력하여 실시간으로 변환하고 CSS용 색상 코드를 간편하게 복사하세요."
+    />
+    <meta
+      name="keywords"
+      content="색상 변환기, HEX to RGB, RGB to HEX, HEX to HSL, HSL to HEX, 컬러 코드 변환, CSS 색상, 디자인 툴"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="색상 변환기 (HEX ↔ RGB ↔ HSL) | 컬러 유틸리티"
+    />
+    <meta
+      property="og:site_name"
+      content="PX-VW 변환기 - 반응형 웹 개발 도구"
+    />
+    <meta
+      property="og:description"
+      content="HEX, RGB, HSL 색상 코드를 자유롭게 변환하고 실시간으로 색상을 확인하세요."
+    />
+    <meta
+      property="og:url"
+      content="https://pxtovw.co.kr/color-converter.html"
+    />
+    <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="색상 변환기 | HEX RGB HSL 변환 툴" />
+    <meta
+      name="twitter:description"
+      content="실시간 컬러 프리뷰와 함께 정확한 색상 코드를 생성하세요."
+    />
+    <meta name="twitter:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="PX TO VW" />
+    <!-- font add -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <style>
+      .color-preview-box {
+        width: 100%;
+        height: 150px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 900;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        font-size: 24px;
+        transition: background-color 0.2s;
+      }
+      .color-input-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+      .color-card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #eee;
+      }
+      .color-card h3 {
+        margin-top: 0;
+        font-size: 16px;
+        color: #2196f3;
+        margin-bottom: 15px;
+      }
+      .color-field {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .color-field input {
+        flex: 1;
+        padding: 10px;
+        border: 1.5px solid #ddd;
+        border-radius: 8px;
+        font-family: monospace;
+        font-size: 16px;
+      }
+      .color-field button {
+        padding: 10px 15px;
+        background: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .color-chip {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 3px solid #fff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .color-chip:hover {
+        transform: scale(1.2);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+      }
+      .variant-item:hover div {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      .variant-item div {
+        transition: all 0.2s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="app-header">
+        <div class="app-header-top">
+          <a href="index.html" class="app-logo">
+            <h1><span>PX</span> to <span>VW</span></h1>
+            <span class="subtitle">Web Tools</span>
+          </a>
+          <div class="app-header-tools">
+            <div class="visit-stats">
+              <div class="stat">
+                <span class="label">Total</span
+                ><span id="visit-total" class="value">0</span>
+              </div>
+              <div class="stat">
+                <span class="label">Today</span
+                ><span id="visit-today" class="value">0</span>
+              </div>
+              <div class="stat">
+                <span class="label">Yesterday</span
+                ><span id="visit-yesterday" class="value">0</span>
+              </div>
+            </div>
+            <div class="right-tools">
+              <select
+                class="blog-select"
+                onchange="if (this.value) location.href = this.value;"
+              >
+                <option value="">📖 블로그 및 문서</option>
+                <option value="how-to-use.html">📖 사용법 보기</option>
+                <option value="blog-css-units.html">📐 CSS 단위 가이드</option>
+                <option value="blog-responsive-design.html">
+                  📱 반응형 디자인
+                </option>
+                <option value="blog-mobile-first.html">📱 모바일 퍼스트</option>
+                <option value="blog-css-best-practices.html">
+                  🎨 CSS 모범 사례
+                </option>
+                <option value="blog-viewport-units.html">📐 뷰포트 단위</option>
+              </select>
+              <div class="version-info">
+                <button id="version-btn" class="version-btn">
+                  v2.1.0 <span>▼</span>
+                </button>
+                <div class="version-modal" id="version-modal">
+                  <h3>
+                    업데이트 노트
+                    <button
+                      type="button"
+                      class="close-version-btn"
+                      id="close-version-btn"
+                    >
+                      &times;
+                    </button>
+                  </h3>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>WCAG Contrast Checker 신규 추가</li>
+                      <li>웹 접근성을 위한 컬러 대비 자동 검사</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>CSS Flexbox Visualizer 신규 추가</li>
+                      <li>레이아웃 속성 시각화 및 자동 코드 생성</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>CSS Gradient Generator 신규 추가</li>
+                      <li>컬러 변환기 시각적 컬러피커 기능 강화</li>
+                      <li>CSS 도구(Minifier) 성능 및 UI 개선</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>색상 변환기 (HEX ↔ RGB ↔ HSL) 추가</li>
+                      <li>CSS Minifier / Formatter 도구 추가</li>
+                      <li>CSS Clamp 생성기 UI 디자인 전면 개편</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.23)</strong>
+                    <ul>
+                      <li>CSS 스타일 및 시각화 생성기 추가</li>
+                      <li>Box Shadow & Text Shadow 생성기</li>
+                      <li>Border-Radius 생성기 (Liquid Shape)</li>
+                      <li>글래스모피즘 & 뉴모피즘 생성기</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="gnb-menu">
+          <div class="gnb-menu-inner">
+            <a href="index.html" class="gnb-item">PX ↔ VW</a>
+            <a href="px-to-rem.html" class="gnb-item">PX ↔ REM</a>
+            <a href="clamp-generator.html" class="gnb-item">CSS Clamp</a>
+            <a href="flexbox-visualizer.html" class="gnb-item">Flex Layout</a>
+            <a href="grid-generator.html" class="gnb-item">Grid Layout</a>
+            <a href="animation-generator.html" class="gnb-item">Animation</a>
+            <a href="divider-generator.html" class="gnb-item"
+              >Section Divider</a
+            >
+            <a href="aspect-ratio.html" class="gnb-item">Aspect Ratio</a>
+            <a href="css-generator.html" class="gnb-item">Visual Effects</a>
+            <a href="gradient-generator.html" class="gnb-item">Gradient</a>
+            <a href="color-converter.html" class="gnb-item active"
+              >Color Tools</a
+            >
+            <a href="contrast-checker.html" class="gnb-item">Contrast Check</a>
+            <a href="css-tools.html" class="gnb-item">Code Tools</a>
+          </div>
+        </nav>
+      </header>
+      <div class="main-box">
+        <div class="ad-banner left">
+          <div class="pc">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666605,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "160",
+                height: "860",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <div class="mo">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666606,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "100%",
+                height: "90",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <span
+            >이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의
+            수수료를 제공받습니다.</span
+          >
+        </div>
+        <div class="main">
+          <div class="clamp-container">
+            <div class="clamp-header-desc">
+              <h2>HEX ↔ RGB ↔ HSL Converter</h2>
+              <p>실시간으로 색상 코드를 변환하고 미리보기를 통해 확인하세요.</p>
+            </div>
+            <style>
+              .color-main-layout {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+                margin-top: 20px;
+              }
+              .color-layout-left,
+              .color-layout-right {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+              }
+              /* Override existing styles for 2-column layout */
+              .color-picker-section {
+                margin-bottom: 0 !important;
+                display: flex;
+                flex-direction: column;
+              }
+              .color-preview-box {
+                height: 240px !important;
+                margin-bottom: 15px !important;
+              }
+              .color-input-grid {
+                display: flex !important;
+                flex-direction: column;
+                gap: 15px;
+              }
+              .color-palette {
+                justify-content: center !important;
+                margin-top: 0 !important;
+                margin-bottom: 5px;
+              }
+              .color-card {
+                margin-top: 0 !important;
+              }
+              .variants-wrapper {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+              }
+              #color-variants {
+                flex: 1;
+                align-content: start;
+              }
+              .clamp-guide-card {
+                margin-top: 0 !important;
+              }
+              @media (max-width: 900px) {
+                .color-main-layout {
+                  grid-template-columns: 1fr;
+                }
+              }
+            </style>
+            <div class="color-main-layout">
+              <!-- Left Side -->
+              <div class="color-layout-left">
+                <div class="color-picker-section" style="text-align: center">
+                  <div
+                    id="color-preview"
+                    class="color-preview-box"
+                    style="
+                      background-color: #2196f3;
+                      position: relative;
+                      overflow: hidden;
+                      cursor: pointer;
+                      border-radius: 20px;
+                      box-shadow: 0 10px 30px rgba(33, 150, 243, 0.3);
+                    "
+                  >
+                    <div
+                      style="
+                        position: relative;
+                        z-index: 2;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 10px;
+                      "
+                    >
+                      <span
+                        style="
+                          font-size: 14px;
+                          opacity: 0.8;
+                          letter-spacing: 2px;
+                        "
+                        >PREVIEW & PICK</span
+                      >
+                      <span
+                        id="preview-hex-display"
+                        style="font-size: 32px; font-weight: 900"
+                        >#2196f3</span
+                      >
+                    </div>
+                    <input
+                      type="color"
+                      id="main-color-picker"
+                      value="#2196f3"
+                      style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        opacity: 0;
+                        cursor: pointer;
+                      "
+                    />
+                  </div>
+                  <div
+                    class="color-palette"
+                    style="display: flex; gap: 12px; flex-wrap: wrap"
+                  >
+                    <div
+                      class="color-chip"
+                      style="background: #f44336"
+                      data-color="#f44336"
+                    ></div>
+                    <div
+                      class="color-chip"
+                      style="background: #e91e63"
+                      data-color="#e91e63"
+                    ></div>
+                    <div
+                      class="color-chip"
+                      style="background: #9c27b0"
+                      data-color="#9c27b0"
+                    ></div>
+                    <div
+                      class="color-chip"
+                      style="background: #673ab7"
+                      data-color="#673ab7"
+                    ></div>
+                    <div
+                      class="color-chip"
+                      style="background: #3f51b5"
+                      data-color="#3f51b5"
+                    ></div>
+                    <div
+                      class="color-chip"
+                      style="background: #2196f3"
+                      data-color="#2196f3"
+                    ></div>
+                    <div
+                      class="color-chip"
+                      style="background: #00bcd4"
+                      data-color="#00bcd4"
+                    ></div>
+                    <div
+                      class="color-chip"
+                      style="background: #009688"
+                      data-color="#009688"
+                    ></div>
+                    <div
+                      class="color-chip"
+                      style="background: #4caf50"
+                      data-color="#4caf50"
+                    ></div>
+                    <div
+                      class="color-chip"
+                      style="background: #ffeb3b"
+                      data-color="#ffeb3b"
+                    ></div>
+                    <div
+                      class="color-chip"
+                      style="background: #ff9800"
+                      data-color="#ff9800"
+                    ></div>
+                    <div
+                      class="color-chip"
+                      style="background: #795548"
+                      data-color="#795548"
+                    ></div>
+                    <div
+                      class="color-chip"
+                      style="background: #000000"
+                      data-color="#000000"
+                    ></div>
+                    <div
+                      class="color-chip"
+                      style="background: #ffffff; border: 1px solid #ddd"
+                      data-color="#ffffff"
+                    ></div>
+                  </div>
+                </div>
+                <div class="color-input-grid">
+                  <div class="color-card">
+                    <h3># HEX</h3>
+                    <div class="color-field">
+                      <input
+                        type="text"
+                        id="hex-input"
+                        value="#2196f3"
+                        spellcheck="false"
+                      />
+                      <button
+                        type="button"
+                        class="copy-btn"
+                        data-target="hex-input"
+                      >
+                        Copy
+                      </button>
+                    </div>
+                  </div>
+                  <div class="color-card">
+                    <h3>RGB</h3>
+                    <div class="color-field">
+                      <input
+                        type="text"
+                        id="rgb-input"
+                        value="rgb(33, 150, 243)"
+                        spellcheck="false"
+                      />
+                      <button
+                        type="button"
+                        class="copy-btn"
+                        data-target="rgb-input"
+                      >
+                        Copy
+                      </button>
+                    </div>
+                  </div>
+                  <div class="color-card">
+                    <h3>HSL</h3>
+                    <div class="color-field">
+                      <input
+                        type="text"
+                        id="hsl-input"
+                        value="hsl(207, 90%, 54%)"
+                        spellcheck="false"
+                      />
+                      <button
+                        type="button"
+                        class="copy-btn"
+                        data-target="hsl-input"
+                      >
+                        Copy
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Right Side -->
+              <div class="color-layout-right">
+                <!-- Color Variants Section -->
+                <div class="color-card variants-wrapper">
+                  <h3 style="color: #333">
+                    🌓 Color Variants (Lighter & Darker)
+                  </h3>
+                  <div
+                    id="color-variants"
+                    style="
+                      display: grid;
+                      grid-template-columns: repeat(
+                        auto-fit,
+                        minmax(70px, 1fr)
+                      );
+                      gap: 10px;
+                      margin-top: 15px;
+                    "
+                  >
+                    <!-- Variants will be generated here -->
+                  </div>
+                </div>
+                <div class="clamp-guide-card">
+                  <h3 style="color: #2196f3; margin-top: 0">📖 사용 방법</h3>
+                  <ul style="font-size: 14px; line-height: 1.8; color: #555">
+                    <li>
+                      <strong>Color Picking:</strong> 좌측의 대형 프리뷰 박스를
+                      클릭하면 컬러 피커가 열려 시각적으로 색상을 선택할 수
+                      있습니다.
+                    </li>
+                    <li>
+                      <strong>Sync:</strong> 컬러 피커, 팔레트, 텍스트 입력 중
+                      무엇을 사용해도 모든 수치가 실시간으로 동기화됩니다.
+                    </li>
+                    <li>
+                      <strong>Variants:</strong> 선택한 색상의 명도별 변환
+                      수치를 함께 보여주어 디자인 작업 시 편리하게 활용
+                      가능합니다. (우측 패널)
+                    </li>
+                    <li>
+                      변환된 코드는 바로 복사하여 CSS에서 사용할 수 있습니다.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ad-banner right">
+          <div class="pc">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666605,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "160",
+                height: "860",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <div class="mo">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666606,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "100%",
+                height: "90",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <span
+            >이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의
+            수수료를 제공받습니다.</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/color.js"></script>
+  </body>
+</html>

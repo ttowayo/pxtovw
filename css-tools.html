@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no"
+    />
+    <title>CSS Minifier & Formatter | CSS 압축 및 정렬 도구</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="canonical" href="https://pxtovw.co.kr/css-tools.html" />
+    <meta name="title" content="CSS 도구 | CSS 압축기 및 포맷터" />
+    <meta
+      name="description"
+      content="CSS 코드를 한 줄로 압축하거나 가독성 있게 정렬해주는 온라인 도구입니다. 웹사이트 속도 최적화를 위해 CSS를 Minify하거나 코드를 깔끔하게 Format 하세요."
+    />
+    <meta
+      name="keywords"
+      content="CSS Minifier, CSS Formatter, CSS 압축, CSS 정렬, CSS 최적화, 코드 압축기, 프론트엔드 도구"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="CSS Minifier & Formatter | CSS 최적화 툴"
+    />
+    <meta
+      property="og:site_name"
+      content="PX-VW 변환기 - 반응형 웹 개발 도구"
+    />
+    <meta
+      property="og:description"
+      content="CSS 코드를 즉시 압축하거나 정렬하여 프로젝트에 바로 적용하세요."
+    />
+    <meta property="og:url" content="https://pxtovw.co.kr/css-tools.html" />
+    <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CSS 도구 | 압축 및 정렬" />
+    <meta
+      name="twitter:description"
+      content="CSS 코드를 최적화하는 가장 빠른 방법."
+    />
+    <meta name="twitter:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="PX TO VW" />
+    <!-- font add -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <style>
+      .css-tool-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .textarea-container {
+        position: relative;
+      }
+      textarea#css-input {
+        width: 100%;
+        height: 250px;
+        padding: 15px;
+        border: 1.5px solid #ddd;
+        border-radius: 12px;
+        font-family: monospace;
+        font-size: 14px;
+        resize: vertical;
+        background: #fdfdfd;
+      }
+      .tool-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin: 10px 0;
+      }
+      .tool-actions button {
+        padding: 12px 25px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: 700;
+        transition: all 0.2s;
+        font-size: 15px;
+      }
+      .btn-minify {
+        background: #212529;
+        color: #fff;
+      }
+      .btn-format {
+        background: #2196f3;
+        color: #fff;
+      }
+      .btn-minify:hover {
+        background: #000;
+      }
+      .btn-format:hover {
+        background: #1971c2;
+      }
+      .output-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .output-header h3 {
+        font-size: 16px;
+        margin: 0;
+        color: #333;
+      }
+      textarea#css-output {
+        width: 100%;
+        height: 250px;
+        padding: 15px;
+        border: 1.5px solid #eee;
+        border-radius: 12px;
+        font-family: monospace;
+        font-size: 14px;
+        background: #f8f9fa;
+        resize: vertical;
+      }
+      textarea#css-input:focus,
+      textarea#css-output:focus {
+        background: #fff;
+        box-shadow: inset 0 0 0 2px #2196f3;
+      }
+      textarea::-webkit-scrollbar {
+        width: 8px;
+      }
+      textarea::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      textarea::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 4px;
+      }
+      textarea::-webkit-scrollbar-thumb:hover {
+        background: #bbb;
+      }
+      .card-header button:hover {
+        background: #f1f1f1 !important;
+        border-color: #adb5bd !important;
+      }
+      #copy-output-btn:hover {
+        background: #1971c2 !important;
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="app-header">
+        <div class="app-header-top">
+          <a href="index.html" class="app-logo">
+            <h1><span>PX</span> to <span>VW</span></h1>
+            <span class="subtitle">Web Tools</span>
+          </a>
+          <div class="app-header-tools">
+            <div class="visit-stats">
+              <div class="stat">
+                <span class="label">Total</span
+                ><span id="visit-total" class="value">0</span>
+              </div>
+              <div class="stat">
+                <span class="label">Today</span
+                ><span id="visit-today" class="value">0</span>
+              </div>
+              <div class="stat">
+                <span class="label">Yesterday</span
+                ><span id="visit-yesterday" class="value">0</span>
+              </div>
+            </div>
+            <div class="right-tools">
+              <select
+                class="blog-select"
+                onchange="if (this.value) location.href = this.value;"
+              >
+                <option value="">📖 블로그 및 문서</option>
+                <option value="how-to-use.html">📖 사용법 보기</option>
+                <option value="blog-css-units.html">📐 CSS 단위 가이드</option>
+                <option value="blog-responsive-design.html">
+                  📱 반응형 디자인
+                </option>
+                <option value="blog-mobile-first.html">📱 모바일 퍼스트</option>
+                <option value="blog-css-best-practices.html">
+                  🎨 CSS 모범 사례
+                </option>
+                <option value="blog-viewport-units.html">📐 뷰포트 단위</option>
+              </select>
+              <div class="version-info">
+                <button id="version-btn" class="version-btn">
+                  v2.1.0 <span>▼</span>
+                </button>
+                <div class="version-modal" id="version-modal">
+                  <h3>
+                    업데이트 노트
+                    <button
+                      type="button"
+                      class="close-version-btn"
+                      id="close-version-btn"
+                    >
+                      &times;
+                    </button>
+                  </h3>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>WCAG Contrast Checker 신규 추가</li>
+                      <li>웹 접근성을 위한 컬러 대비 자동 검사</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>CSS Flexbox Visualizer 신규 추가</li>
+                      <li>레이아웃 속성 시각화 및 자동 코드 생성</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>CSS Gradient Generator 신규 추가</li>
+                      <li>컬러 변환기 시각적 컬러피커 기능 강화</li>
+                      <li>CSS 도구(Minifier) 성능 및 UI 개선</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.24)</strong>
+                    <ul>
+                      <li>색상 변환기 (HEX ↔ RGB ↔ HSL) 추가</li>
+                      <li>CSS Minifier / Formatter 도구 추가</li>
+                      <li>CSS Clamp 생성기 UI 디자인 전면 개편</li>
+                    </ul>
+                  </div>
+                  <div class="version-item">
+                    <strong>v2.1.0 (2026.04.23)</strong>
+                    <ul>
+                      <li>CSS 스타일 및 시각화 생성기 추가</li>
+                      <li>Box Shadow & Text Shadow 생성기</li>
+                      <li>Border-Radius 생성기 (Liquid Shape)</li>
+                      <li>글래스모피즘 & 뉴모피즘 생성기</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="gnb-menu">
+          <div class="gnb-menu-inner">
+            <a href="index.html" class="gnb-item">PX ↔ VW</a>
+            <a href="px-to-rem.html" class="gnb-item">PX ↔ REM</a>
+            <a href="clamp-generator.html" class="gnb-item">CSS Clamp</a>
+            <a href="flexbox-visualizer.html" class="gnb-item">Flex Layout</a>
+            <a href="grid-generator.html" class="gnb-item">Grid Layout</a>
+            <a href="animation-generator.html" class="gnb-item">Animation</a>
+            <a href="divider-generator.html" class="gnb-item"
+              >Section Divider</a
+            >
+            <a href="aspect-ratio.html" class="gnb-item">Aspect Ratio</a>
+            <a href="css-generator.html" class="gnb-item">Visual Effects</a>
+            <a href="gradient-generator.html" class="gnb-item">Gradient</a>
+            <a href="color-converter.html" class="gnb-item">Color Tools</a>
+            <a href="contrast-checker.html" class="gnb-item">Contrast Check</a>
+            <a href="css-tools.html" class="gnb-item active">Code Tools</a>
+          </div>
+        </nav>
+      </header>
+      <div class="main-box">
+        <div class="ad-banner left">
+          <div class="pc">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666605,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "160",
+                height: "860",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <div class="mo">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666606,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "100%",
+                height: "90",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <span
+            >이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의
+            수수료를 제공받습니다.</span
+          >
+        </div>
+        <div class="main">
+          <div class="clamp-container">
+            <div class="clamp-header-desc">
+              <h2>CSS Minifier & Formatter</h2>
+              <p>
+                CSS 코드를 압축(Minify)하여 용량을 줄이거나, 정렬(Format)하여
+                가독성을 높여보세요.
+              </p>
+            </div>
+            <style>
+              .css-tool-main-layout {
+                display: flex;
+                gap: 24px;
+                margin-top: 30px;
+                align-items: stretch;
+              }
+              .css-tool-panel {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                min-width: 0;
+              }
+              .css-tool-actions {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 15px;
+                width: 180px;
+                flex-shrink: 0;
+              }
+              .css-tool-actions button {
+                width: 100%;
+                padding: 20px 10px;
+                font-size: 16px;
+                border-radius: 12px;
+                border: none;
+                cursor: pointer;
+                font-weight: 800;
+                transition: all 0.2s;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+              }
+              .css-tool-actions button i {
+                font-size: 24px;
+                font-style: normal;
+              }
+              .btn-minify {
+                background: #212529;
+                color: #fff;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+              }
+              .btn-minify:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+              }
+              .btn-format {
+                background: #2196f3;
+                color: #fff;
+                box-shadow: 0 10px 20px rgba(33, 150, 243, 0.2);
+              }
+              .btn-format:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 25px rgba(33, 150, 243, 0.3);
+              }
+              .css-tool-card {
+                background: #fff;
+                border-radius: 16px;
+                border: 1px solid #eee;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                height: 650px;
+              }
+              .css-textarea {
+                width: 100%;
+                height: 500px !important;
+                padding: 20px;
+                border: none;
+                font-family: "Consolas", monospace;
+                font-size: 14px;
+                line-height: 1.6;
+                resize: none;
+                outline: none;
+                box-sizing: border-box;
+                flex: 1;
+              }
+              @media (max-width: 1024px) {
+                .css-tool-main-layout {
+                  flex-direction: column;
+                }
+                .css-tool-actions {
+                  flex-direction: row;
+                  width: 100%;
+                  justify-content: center;
+                }
+                .css-tool-actions button {
+                  width: auto;
+                  padding: 16px 40px;
+                  flex-direction: row;
+                }
+                .css-textarea {
+                  height: 350px !important;
+                }
+              }
+            </style>
+            <div class="css-tool-main-layout">
+              <div class="css-tool-panel">
+                <!-- Input Card -->
+                <div
+                  class="css-tool-card"
+                  style="
+                    background: #fff;
+                    border-radius: 16px;
+                    border: 1px solid #eee;
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                  "
+                >
+                  <div
+                    class="card-header"
+                    style="
+                      padding: 15px 20px;
+                      background: #f8f9fa;
+                      border-bottom: 1px solid #eee;
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                  >
+                    <h3 style="margin: 0; font-size: 15px; color: #333">
+                      📝 CSS Input
+                    </h3>
+                    <div style="display: flex; gap: 8px">
+                      <button
+                        type="button"
+                        id="clear-btn"
+                        style="
+                          padding: 5px 12px;
+                          font-size: 12px;
+                          border-radius: 6px;
+                          border: 1px solid #dee2e6;
+                          background: #fff;
+                          cursor: pointer;
+                          transition: all 0.2s;
+                        "
+                      >
+                        Clear
+                      </button>
+                      <button
+                        type="button"
+                        id="paste-btn"
+                        style="
+                          padding: 5px 12px;
+                          font-size: 12px;
+                          border-radius: 6px;
+                          border: 1px solid #dee2e6;
+                          background: #fff;
+                          cursor: pointer;
+                          transition: all 0.2s;
+                        "
+                      >
+                        Paste
+                      </button>
+                    </div>
+                  </div>
+                  <textarea
+                    id="css-input"
+                    class="css-textarea"
+                    placeholder="여기에 CSS 코드를 붙여넣으세요..."
+                    style="
+                      width: auto;
+                      padding: 20px;
+                      border: none;
+                      font-family: &quot;Consolas&quot;, monospace;
+                      font-size: 13px;
+                      line-height: 1.6;
+                      resize: none;
+                      outline: none;
+                    "
+                  ></textarea>
+                  <div
+                    style="
+                      padding: 10px 20px;
+                      background: #fff;
+                      border-top: 1px solid #f0f0f0;
+                      font-size: 12px;
+                      color: #888;
+                    "
+                  >
+                    Characters: <span id="input-char-count">0</span>
+                  </div>
+                </div>
+              </div>
+              <div class="css-tool-actions">
+                <button type="button" class="btn-minify" id="minify-btn">
+                  <i>⚡</i>
+                  <span
+                    >Minify<br /><span
+                      style="font-size: 12px; font-weight: 500; opacity: 0.8"
+                      >(압축)</span
+                    ></span
+                  >
+                </button>
+                <button type="button" class="btn-format" id="format-btn">
+                  <i>✨</i>
+                  <span
+                    >Format<br /><span
+                      style="font-size: 12px; font-weight: 500; opacity: 0.8"
+                      >(정렬)</span
+                    ></span
+                  >
+                </button>
+              </div>
+              <div class="css-tool-panel">
+                <!-- Output Card -->
+                <div
+                  class="css-tool-card"
+                  style="
+                    background: #fff;
+                    border-radius: 16px;
+                    border: 1px solid #eee;
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                  "
+                >
+                  <div
+                    class="card-header"
+                    style="
+                      padding: 15px 20px;
+                      background: #212529;
+                      border-bottom: 1px solid #333;
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                  >
+                    <h3 style="margin: 0; font-size: 15px; color: #fff">
+                      🚀 Processed Output
+                    </h3>
+                    <button
+                      type="button"
+                      id="copy-output-btn"
+                      style="
+                        padding: 5px 15px;
+                        font-size: 12px;
+                        border-radius: 6px;
+                        border: none;
+                        background: #2196f3;
+                        color: #fff;
+                        cursor: pointer;
+                        font-weight: 700;
+                        transition: all 0.2s;
+                      "
+                    >
+                      Copy Code
+                    </button>
+                  </div>
+                  <textarea
+                    id="css-output"
+                    class="css-textarea"
+                    readonly
+                    placeholder="결과가 여기에 표시됩니다..."
+                    style="
+                      width: auto;
+                      padding: 20px;
+                      border: none;
+                      font-family: &quot;Consolas&quot;, monospace;
+                      font-size: 13px;
+                      line-height: 1.6;
+                      resize: none;
+                      outline: none;
+                      background: #fafafa;
+                      color: #333;
+                    "
+                  ></textarea>
+                  <div
+                    style="
+                      padding: 10px 20px;
+                      background: #fff;
+                      border-top: 1px solid #f0f0f0;
+                      font-size: 12px;
+                      color: #888;
+                      display: flex;
+                      justify-content: space-between;
+                    "
+                  >
+                    <span
+                      >Characters: <span id="output-char-count">0</span></span
+                    >
+                    <span
+                      id="reduction-stat"
+                      style="color: #2b8a3e; font-weight: 700"
+                    ></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tool-actions"
+              style="display: none"
+              style="
+                margin-top: 30px;
+                display: flex;
+                gap: 20px;
+                justify-content: center;
+              "
+            >
+              <button
+                type="button"
+                class="btn-minify"
+                id="minify-btn"
+                style="
+                  padding: 16px 40px;
+                  font-size: 18px;
+                  border-radius: 12px;
+                  border: none;
+                  background: #212529;
+                  color: #fff;
+                  cursor: pointer;
+                  font-weight: 800;
+                  transition: all 0.2s;
+                  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                "
+              >
+                ⚡ Minify (압축)
+              </button>
+              <button
+                type="button"
+                class="btn-format"
+                id="format-btn"
+                style="
+                  padding: 16px 40px;
+                  font-size: 18px;
+                  border-radius: 12px;
+                  border: none;
+                  background: #2196f3;
+                  color: #fff;
+                  cursor: pointer;
+                  font-weight: 800;
+                  transition: all 0.2s;
+                  box-shadow: 0 10px 20px rgba(33, 150, 243, 0.2);
+                "
+              >
+                ✨ Format (정렬)
+              </button>
+            </div>
+            <div class="clamp-guide-card" style="margin-top: 40px">
+              <h3>📖 사용 방법</h3>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                  gap: 20px;
+                "
+              >
+                <div>
+                  <h4 style="color: #212529; margin-bottom: 10px">
+                    ⚡ CSS Minifier
+                  </h4>
+                  <p
+                    style="
+                      font-size: 13px;
+                      color: #666;
+                      line-height: 1.6;
+                      margin: 0;
+                    "
+                  >
+                    모든 불필요한 공백, 줄바꿈, 주석을 제거합니다. 파일 용량을
+                    획기적으로 줄여 웹사이트 로딩 속도를 향상시키고 데이터
+                    전송량을 절약할 수 있습니다.
+                  </p>
+                </div>
+                <div>
+                  <h4 style="color: #2196f3; margin-bottom: 10px">
+                    ✨ CSS Formatter
+                  </h4>
+                  <p
+                    style="
+                      font-size: 13px;
+                      color: #666;
+                      line-height: 1.6;
+                      margin: 0;
+                    "
+                  >
+                    난해하게 꼬인 코드를 표준 CSS 스타일로 정렬합니다. 적절한
+                    들여쓰기와 줄바꿈을 통해 가독성을 높이고 유지보수를 쉽게
+                    만들어 줍니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ad-banner right">
+          <div class="pc">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666605,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "160",
+                height: "860",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <div class="mo">
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({
+                id: 666606,
+                template: "carousel",
+                trackingCode: "AF6310726",
+                width: "100%",
+                height: "90",
+                tsource: "",
+              });
+            </script>
+          </div>
+          <span
+            >이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의
+            수수료를 제공받습니다.</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/css-tools.js"></script>
+  </body>
+</html>
