@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -121,21 +121,19 @@
           </a>
           <div class="app-header-tools">
             <div class="right-tools">
-              <select
-                class="blog-select"
-                onchange="if (this.value) location.href = this.value;"
-              >
+              <select class="blog-select" onchange="if (this.value) location.href = this.value;">
                 <option value="">📖 블로그 및 문서</option>
                 <option value="how-to-use.html">📖 사용법 보기</option>
                 <option value="blog-css-units.html">📐 CSS 단위 가이드</option>
-                <option value="blog-responsive-design.html">
-                  📱 반응형 디자인
-                </option>
+                <option value="blog-responsive-design.html">📱 반응형 디자인</option>
                 <option value="blog-mobile-first.html">📱 모바일 퍼스트</option>
-                <option value="blog-css-best-practices.html">
-                  🎨 CSS 모범 사례
-                </option>
+                <option value="blog-css-best-practices.html">🎨 CSS 모범 사례</option>
                 <option value="blog-viewport-units.html">📐 뷰포트 단위</option>
+                <option value="blog-when-not-to-use-vw.html">🚫 VW 사용 주의사항</option>
+                <option value="blog-clamp-vs-vw.html">🖇️ Clamp vs VW 비교</option>
+                <option value="blog-1440px-conversion.html">🖥️ 1440px 실무 가이드</option>
+                <option value="blog-mobile-font-responsive.html">✍️ 모바일 폰트 계산법</option>
+                <option value="blog-vw-accessibility.html">♿ VW와 웹 접근성</option>
               </select>
             </div>
           </div>
@@ -357,6 +355,26 @@
           </div>
         </div>
       </div>
+      
+      <section class="tool-info-section">
+        <h2>PX to REM 변환 가이드: 웹 접근성의 시작</h2>
+        <p><strong>PX to REM 변환기</strong>는 접근성이 뛰어난 웹 사이트를 제작하려는 개발자들에게 가장 권장되는 도구입니다. 픽셀(PX)이 화면의 물리적인 크기를 나타낸다면, REM은 사용자의 환경과 브라우저 설정에 반응하는 '지능적인' 단위입니다.</p>
+        
+        <h3>1. REM(Root EM) 단위란 무엇인가요?</h3>
+        <p>REM은 문서의 최상위 요소인 <code>&lt;html&gt;</code> 태그에 설정된 폰트 크기를 기준으로 하는 상대 단위입니다. 브라우저의 기본 폰트 크기는 보통 <strong>16px</strong>로 설정되어 있으며, 이 경우 1rem은 16px이 됩니다. 만약 사용자가 시력이 좋지 않아 브라우저 설정에서 기본 글자 크기를 크게 변경하면, REM으로 작성된 모든 요소도 그에 맞춰 비례하여 커집니다. 이것이 바로 PX 대신 REM을 사용해야 하는 가장 큰 이유입니다.</p>
+
+        <h3>2. REM과 EM의 결정적인 차이</h3>
+        <ul>
+          <li><strong>REM (Root EM)</strong>: 항상 HTML 태그의 폰트 크기만을 참조합니다. 어디서 사용하든 일관된 크기를 유지하므로 계산이 쉽고 관리가 용이합니다.</li>
+          <li><strong>EM</strong>: 현재 요소의 부모 요소 폰트 크기를 참조합니다. 중첩된 구조에서 크기가 기하급수적으로 커지거나 작아지는 문제가 발생할 수 있어 사용 시 주의가 필요합니다.</li>
+        </ul>
+
+        <h3>3. 왜 REM을 사용해야 할까요?</h3>
+        <p>가장 큰 이유는 <strong>웹 접근성(Accessibility)</strong>입니다. 고정된 PX 단위를 사용하면 사용자가 폰트 크기를 조절해도 웹 사이트의 글자 크기가 변하지 않아 불편을 겪을 수 있습니다. REM을 사용하면 사용자의 브라우저 선호도를 존중하면서도 디자인의 균형을 맞출 수 있습니다. 또한 최근의 반응형 디자인 트렌드인 '유동적인 타이포그래피(Fluid Typography)'를 구현하는 데에도 필수적입니다.</p>
+
+        <h3>4. 도구 활용 및 실무 팁</h3>
+        <p>상단의 <strong>Base Font Size</strong> 칸에 기준이 되는 폰트 크기를 입력하세요(기본 16px). 시안에 적힌 PX 값을 입력하면 즉시 REM 값으로 변환됩니다. 최근에는 CSS에서 <code>html { font-size: 62.5%; }</code>와 같은 트릭을 사용하여 1rem을 10px로 맞춰서 계산을 편하게 하는 경우도 많은데, 이 도구에서 Base를 10으로 설정하면 그런 환경에서도 정확한 변환이 가능합니다.</p>
+      </section>
     </div>
 
     <!-- Supabase 클라이언트 라이브러리 -->

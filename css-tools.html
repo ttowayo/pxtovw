@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -165,21 +165,19 @@
           </a>
           <div class="app-header-tools">
             <div class="right-tools">
-              <select
-                class="blog-select"
-                onchange="if (this.value) location.href = this.value;"
-              >
+              <select class="blog-select" onchange="if (this.value) location.href = this.value;">
                 <option value="">📖 블로그 및 문서</option>
                 <option value="how-to-use.html">📖 사용법 보기</option>
                 <option value="blog-css-units.html">📐 CSS 단위 가이드</option>
-                <option value="blog-responsive-design.html">
-                  📱 반응형 디자인
-                </option>
+                <option value="blog-responsive-design.html">📱 반응형 디자인</option>
                 <option value="blog-mobile-first.html">📱 모바일 퍼스트</option>
-                <option value="blog-css-best-practices.html">
-                  🎨 CSS 모범 사례
-                </option>
+                <option value="blog-css-best-practices.html">🎨 CSS 모범 사례</option>
                 <option value="blog-viewport-units.html">📐 뷰포트 단위</option>
+                <option value="blog-when-not-to-use-vw.html">🚫 VW 사용 주의사항</option>
+                <option value="blog-clamp-vs-vw.html">🖇️ Clamp vs VW 비교</option>
+                <option value="blog-1440px-conversion.html">🖥️ 1440px 실무 가이드</option>
+                <option value="blog-mobile-font-responsive.html">✍️ 모바일 폰트 계산법</option>
+                <option value="blog-vw-accessibility.html">♿ VW와 웹 접근성</option>
               </select>
             </div>
           </div>
@@ -603,6 +601,23 @@
                 </div>
               </div>
             </div>
+
+        <section class="tool-info-section">
+          <h2>CSS 코드 최적화 가이드: 더 깔끔하고 빠른 웹 사이트</h2>
+          <p><strong>CSS Minifier & Formatter</strong>는 코드의 가독성과 웹 사이트의 성능이라는 두 마리 토끼를 모두 잡기 위한 도구입니다. 효율적인 CSS 관리는 원활한 협업뿐만 아니라 검색 엔진 최적화(SEO)와 사용자 유지율에도 긍정적인 영향을 미칩니다.</p>
+          
+          <h3>1. CSS Minifier (코드 압축)</h3>
+          <p>개발 과정에서 작성하는 주석, 공백, 줄바꿈은 개발자에게는 중요하지만 브라우저가 코드를 해석하는 데는 전혀 필요하지 않습니다. Minifier는 이러한 불필요한 데이터를 제거하여 CSS 파일의 용량을 최대 80%까지 줄여줍니다. 파일 용량이 작을수록 브라우저가 스타일을 더 빨리 다운로드하고 렌더링할 수 있어, 사용자에게 더 빠른 첫 화면(LCP)을 제공할 수 있습니다.</p>
+
+          <h3>2. CSS Formatter (코드 정렬)</h3>
+          <p>반대로, 이미 압축되었거나 다른 사람이 작성하여 읽기 힘든 코드를 분석해야 할 때는 Formatter가 필수적입니다. 표준 들여쓰기와 일관된 줄바꿈 규칙을 적용하여 코드를 시각적으로 구조화해 줍니다. 이는 버그를 찾거나 새로운 기능을 추가할 때 소요되는 시간을 획기적으로 줄여주는 유지보수의 핵심 도구입니다.</p>
+
+          <h3>3. PX to VW/REM 일괄 변환</h3>
+          <p>기존의 고정형(Fixed) 레이아웃 프로젝트를 반응형으로 전환하고 싶을 때, 수천 줄의 코드를 일일이 수정하는 것은 불가능에 가깝습니다. 본 도구의 변환 기능을 활용하면 전체 CSS 코드에서 PX 단위를 찾아 설정한 기준에 맞춰 VW나 REM으로 한꺼번에 변환할 수 있습니다. 이를 통해 레거시 프로젝트를 현대적인 모바일 최적화 사이트로 손쉽게 업그레이드할 수 있습니다.</p>
+
+          <h3>4. 실무 활용 팁</h3>
+          <p>작업 중에는 Formatter를 사용하여 가독성을 유지하고, 실제 서버에 배포(Production)하기 직전에는 Minifier를 통해 최종 최적화된 파일을 만드세요. 특히 모바일 환경에서는 1KB의 차이도 체감 성능에 영향을 줄 수 있으므로, 모든 CSS 파일을 압축하여 배포하는 습관을 들이는 것이 좋습니다. 본 도구의 직관적인 인터페이스를 통해 복잡한 빌드 도구 없이도 전문적인 코드 최적화를 수행해 보세요.</p>
+        </section>
           </div>
         </div>
       </div>
