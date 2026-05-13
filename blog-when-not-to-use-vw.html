@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no">
+  <title>PX를 VW로 바꾸면 안 되는 5가지 경우 | 반응형 웹 디자인 주의사항</title>
+  <link rel="icon" href="favicon.ico">
+  <meta name="description" content="모든 PX를 VW로 바꾸는 것이 정답은 아닙니다. 보더 두께, 그림자, 접근성 등 VW 사용을 지양해야 하는 구체적인 사례를 알아봅니다.">
+  <meta name="keywords" content="VW 주의사항, 반응형 웹, CSS 단위, PX to VW, 웹 디자인, 프론트엔드, 웹 접근성">
+  <meta property="og:title" content="PX를 VW로 바꾸면 안 되는 5가지 경우">
+  <meta property="og:description" content="반응형 웹 디자인에서 VW 단위 사용을 지양해야 하는 사례 정리">
+  <meta property="og:url" content="https://pxtovw.co.kr/blog-when-not-to-use-vw.html">
+  <meta property="og:image" content="https://pxtovw.co.kr/img/og.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/blog.css">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4275974341995601"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+<body>
+  <div class="blog-container">
+    <div class="blog-header">
+      <h1>PX를 VW로 바꾸면 안 되는 5가지 경우</h1>
+      <div class="blog-meta">
+        <span>📅 2025년 7월 20일</span> | 
+        <span>👨‍💻 웹 디자인</span> | 
+        <span>⚠️ 주의사항</span>
+      </div>
+      <p>모든 요소를 VW로 만들면 오히려 UI가 깨질 수 있습니다. VW 사용을 지양해야 하는 사례를 정리했습니다.</p>
+    </div>
+    
+    <div class="blog-content">
+      <p>반응형 웹을 개발할 때 VW 단위는 매우 편리합니다. 화면 크기에 맞춰 자동으로 크기가 조절되기 때문이죠. 하지만 숙련된 개발자들은 모든 PX를 무분별하게 VW로 바꾸지 않습니다. 특정 상황에서는 고정된 PX나 다른 상대 단위(REM 등)가 훨씬 나은 선택이기 때문입니다.</p>
+      
+      <h2>1. 보더(Border) 두께</h2>
+      <p>가장 흔한 실수 중 하나가 테두리 두께를 VW로 설정하는 것입니다. 보통 디자인 가이드에서 1px인 테두리를 VW로 변환하면 모바일 기기에서 0.5px보다 작아지는 경우가 발생합니다.</p>
+      
+      <div class="warning-box">
+        <h4>⚠️ 사라지는 테두리 문제</h4>
+        <p>화면이 작아질 때 보더 두께가 1px 미만이 되면, 브라우저 렌더링 방식에 따라 테두리가 흐릿하게 보이거나 아예 사라질 수 있습니다. 테두리는 항상 <strong>고정 PX</strong>를 사용하는 것이 안전합니다.</p>
+      </div>
+      
+      <h2>2. 박스 그림자(Box-Shadow)</h2>
+      <p>그림자의 오프셋(Offset)과 블러(Blur) 값도 VW로 변환할 때 주의해야 합니다. 그림자는 미묘한 시각적 효과를 위해 존재하는데, 화면이 작아질 때 그림자까지 작아지면 입체감이 사라지고 지저분해 보일 수 있습니다.</p>
+      
+      <div class="code-block">
+        /* 권장하지 않음 */
+        .card { box-shadow: 0.5vw 0.5vw 1vw rgba(0,0,0,0.1); }
+        
+        /* 권장 (고정 PX 사용) */
+        .card { box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+      </div>
+      
+      <h2>3. 텍스트 가독성과 접근성</h2>
+      <p>폰트 크기를 오직 VW로만 설정하면 사용자의 브라우저 설정(글꼴 크기 조절)을 무시하게 됩니다. 이는 웹 접근성 표준에 어긋나는 행위입니다.</p>
+      
+      <ul>
+        <li><strong>문제점</strong>: 사용자가 시스템 폰트를 크게 설정해도 VW 기반 폰트는 화면 너비에만 반응하므로 크기가 변하지 않습니다.</li>
+        <li><strong>해결책</strong>: <code>clamp()</code>를 사용하여 최소 폰트 크기를 보장하거나, <code>calc(1rem + 1vw)</code>와 같이 REM과 VW를 조합하여 사용하세요.</li>
+      </ul>
+      
+      <h2>4. 최대/최소 제한이 없는 레이아웃</h2>
+      <p>너비나 높이를 VW로만 설정하고 <code>max-width</code>를 지정하지 않으면, 울트라 와이드 모니터나 매우 큰 디스플레이에서 요소가 기괴하게 커질 수 있습니다.</p>
+      
+      <div class="tip-box">
+        <h4>💡 해결 방법</h4>
+        <p>VW를 사용할 때는 항상 <code>max-width</code>나 <code>clamp()</code>를 함께 사용하여 디자인이 무너지는 임계점을 설정해야 합니다.</p>
+      </div>
+
+      <h2>5. 고정 비율의 아이콘</h2>
+      <p>SVG가 아닌 비트맵 이미지 아이콘이나 폰트 아이콘의 경우, VW로 크기를 조절하면 픽셀이 깨져 보이거나(Aliasing) 렌더링 성능이 저하될 수 있습니다. 작고 정밀한 그래픽 요소는 PX 단위로 고정하는 것이 시각적으로 더 선명합니다.</p>
+      
+      <h2>결론</h2>
+      <p>VW는 강력한 도구이지만 만능은 아닙니다. 레이아웃의 큰 틀은 VW로 잡되, 디테일한 요소(보더, 간격, 정밀한 폰트)는 PX나 REM을 적절히 혼용하는 지혜가 필요합니다.</p>
+    </div>
+    
+    <div class="nav-links">
+      <a href="index.html">메인으로</a>
+      <a href="blog-responsive-design.html">이전 글</a>
+      <a href="blog-clamp-vs-vw.html">다음 글</a>
+    </div>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+</html>

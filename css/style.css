@@ -17,6 +17,7 @@ body {
   border-radius: 6px 6px 0 0;
   max-width: 1400px;
   min-width: 900px;
+  padding-bottom: 20px;
 }
 .main-box {
   position: relative;
@@ -1651,5 +1652,64 @@ input[type="range"] {
 
   .footer-links a {
     font-size: 13px;
+  }
+}
+/* 도구 설명 섹션 스타일 */
+.tool-info-section {
+  margin: 20px 16px;
+  width: auto;
+  padding: 20px 16px;
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  line-height: 1.8;
+  color: #495057;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.tool-info-section h2 {
+  font-size: 24px;
+  color: #212529;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #2196f3;
+  display: inline-block;
+}
+
+.tool-info-section h3 {
+  font-size: 18px;
+  color: #343a40;
+  margin: 24px 0 12px 0;
+  font-weight: 700;
+}
+
+.tool-info-section p {
+  margin-bottom: 16px;
+  font-size: 15px;
+}
+
+.tool-info-section ul,
+.tool-info-section ol {
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+
+.tool-info-section li {
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.tool-info-section strong {
+  color: #2196f3;
+}
+
+@media (max-width: 768px) {
+  .tool-info-section {
+    margin: 20px 12px;
+    padding: 24px 20px;
+  }
+
+  .tool-info-section h2 {
+    font-size: 20px;
   }
 }

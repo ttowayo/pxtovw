@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no">
+  <title>CSS clamp() vs VW 차이점 완벽 정리 | 폰트 반응형 최적화</title>
+  <link rel="icon" href="favicon.ico">
+  <meta name="description" content="단순한 VW 사용과 현대적인 clamp() 함수의 차이를 알아봅니다. 왜 전문가들은 단순 변환보다 clamp()를 선호하는지 이유를 설명합니다.">
+  <meta name="keywords" content="clamp함수, CSS clamp, VW 차이, 반응형 폰트, CSS 가이드, 현대적 CSS, 웹 개발">
+  <meta property="og:title" content="CSS clamp() vs VW 차이점 완벽 정리">
+  <meta property="og:description" content="단순한 VW 사용과 현대적인 clamp() 함수의 차이 비교">
+  <meta property="og:url" content="https://pxtovw.co.kr/blog-clamp-vs-vw.html">
+  <meta property="og:image" content="https://pxtovw.co.kr/img/og.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/blog.css">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4275974341995601"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+<body>
+  <div class="blog-container">
+    <div class="blog-header">
+      <h1>CSS clamp() vs VW 차이점 완벽 정리</h1>
+      <div class="blog-meta">
+        <span>📅 2025년 7월 21일</span> | 
+        <span>👨‍💻 CSS 테크닉</span> | 
+        <span>🛠️ 도구 비교</span>
+      </div>
+      <p>단순히 비례하는 VW와 한계치를 정하는 clamp() 중 무엇이 더 좋을까요?</p>
+    </div>
+    
+    <div class="blog-content">
+      <p>반응형 디자인을 구현할 때 "화면이 커지면 요소도 커져야 한다"는 명제는 참입니다. 하지만 "무한히 커지거나 무한히 작아져야 한다"는 것은 거짓입니다. 여기서 VW와 <code>clamp()</code>의 근본적인 차이가 발생합니다.</p>
+      
+      <h2>1. VW: 단순 비례의 세계</h2>
+      <p>VW 단위는 뷰포트 너비에 1:1로 대응합니다. <code>font-size: 5vw</code>라고 설정하면 화면이 2000px일 때는 100px이 되고, 200px일 때는 10px이 됩니다.</p>
+      
+      <div class="warning-box">
+        <h4>⚠️ VW 단독 사용의 한계</h4>
+        <p>모바일에서는 글씨가 너무 작아서 안 보이고, 데스크톱에서는 너무 커서 부담스러운 상황이 연출됩니다. 이를 막으려면 미디어 쿼리(Media Queries)를 수없이 작성해야 합니다.</p>
+      </div>
+      
+      <h2>2. clamp(): 한계가 있는 자유</h2>
+      <p>현대 CSS의 <code>clamp()</code> 함수는 세 가지 값을 인자로 받습니다: <strong>최솟값, 권장값, 최댓값</strong>.</p>
+      
+      <div class="code-block">
+        /* 문법: clamp(MIN, VAL, MAX) */
+        h1 { font-size: clamp(18px, 5vw, 32px); }
+      </div>
+      
+      <p>위 코드는 다음과 같이 작동합니다:</p>
+      <ul>
+        <li>화면이 아무리 작아져도 폰트는 <strong>18px</strong> 미만으로 떨어지지 않습니다.</li>
+        <li>화면이 아무리 커져도 폰트는 <strong>32px</strong> 이상으로 커지지 않습니다.</li>
+        <li>그 사이 구간에서는 <strong>5vw</strong> 비율에 맞춰 유연하게 변합니다.</li>
+      </ul>
+      
+      <h2>3. 주요 차이점 비교</h2>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>특징</th>
+            <th>VW 단위</th>
+            <th>clamp() 함수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>범위 제한</td>
+            <td>없음 (무한 비례)</td>
+            <td>있음 (최소/최대 설정)</td>
+          </tr>
+          <tr>
+            <td>미디어 쿼리 의존도</td>
+            <td>높음 (구간별 보정 필요)</td>
+            <td>낮음 (함수 하나로 해결)</td>
+          </tr>
+          <tr>
+            <td>코드 가독성</td>
+            <td>단순함</td>
+            <td>다소 복잡하지만 명확함</td>
+          </tr>
+          <tr>
+            <td>가독성/접근성</td>
+            <td>취약함</td>
+            <td>매우 우수함</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h2>4. 실무에서는 어떻게 쓰나요?</h2>
+      <p>최근 실무에서는 <strong>"Fluid Typography"</strong> 기법을 구현하기 위해 <code>clamp()</code>를 훨씬 많이 선호합니다. 특히 우리 사이트의 <a href="clamp-generator.html">Clamp 생성기</a>를 사용하면 복잡한 계산 없이 최적의 값을 뽑아낼 수 있습니다.</p>
+      
+      <div class="tip-box">
+        <h4>💡 전문가의 팁</h4>
+        <p>단순한 배경 레이아웃이나 장식 요소는 <strong>VW</strong>를 사용하고, 텍스트 가독성이 중요한 폰트나 주요 컨텐츠 박스에는 <strong>clamp()</strong>를 사용하세요.</p>
+      </div>
+
+      <h2>결론</h2>
+      <p>VW는 엔진이고, clamp()는 그 엔진의 속도를 조절하는 리미터(Limiter)와 같습니다. 두 기술을 적절히 조합할 때 비로소 진정한 반응형 웹 디자인이 완성됩니다.</p>
+    </div>
+    
+    <div class="nav-links">
+      <a href="index.html">메인으로</a>
+      <a href="blog-when-not-to-use-vw.html">이전 글</a>
+      <a href="blog-1440px-conversion.html">다음 글</a>
+    </div>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+</html>

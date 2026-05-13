@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -204,6 +204,30 @@
               >
                 <option value="">📖 블로그 및 문서</option>
                 <option value="how-to-use.html">📖 사용법 보기</option>
+                <option value="blog-css-units.html">📐 CSS 단위 가이드</option>
+                <option value="blog-responsive-design.html">
+                  📱 반응형 디자인
+                </option>
+                <option value="blog-mobile-first.html">📱 모바일 퍼스트</option>
+                <option value="blog-css-best-practices.html">
+                  🎨 CSS 모범 사례
+                </option>
+                <option value="blog-viewport-units.html">📐 뷰포트 단위</option>
+                <option value="blog-when-not-to-use-vw.html">
+                  🚫 VW 사용 주의사항
+                </option>
+                <option value="blog-clamp-vs-vw.html">
+                  🖇️ Clamp vs VW 비교
+                </option>
+                <option value="blog-1440px-conversion.html">
+                  🖥️ 1440px 실무 가이드
+                </option>
+                <option value="blog-mobile-font-responsive.html">
+                  ✍️ 모바일 폰트 계산법
+                </option>
+                <option value="blog-vw-accessibility.html">
+                  ♿ VW와 웹 접근성
+                </option>
               </select>
             </div>
           </div>
@@ -417,6 +441,62 @@
           </div>
         </div>
       </div>
+      <section class="tool-info-section">
+        <h2>CSS 애니메이션 가이드: 웹에 생동감을 불어넣는 기술</h2>
+        <p>
+          <strong>CSS 애니메이션 생성기</strong>는 복잡한 코딩 없이도 웹
+          페이지에 역동적인 움직임을 추가할 수 있도록 도와주는 강력한
+          도구입니다. 정적인 웹 사이트에 생명력을 불어넣어 사용자의 시선을
+          사로잡고 브랜드의 아이덴티티를 강화해 보세요.
+        </p>
+
+        <h3>1. CSS 애니메이션(@keyframes)이란 무엇인가요?</h3>
+        <p>
+          CSS 애니메이션은 요소의 스타일을 한 상태에서 다른 상태로 점진적으로
+          변화시키는 기술입니다. <code>@keyframes</code> 규칙을 사용하면
+          애니메이션의 시작(0%), 중간, 끝(100%) 시점의 스타일을 정의할 수
+          있으며, 브라우저는 이 사이의 변화를 부드럽게 계산하여 화면에
+          표시합니다.
+        </p>
+
+        <h3>2. 주요 속성 및 타이밍 함수 이해</h3>
+        <ul>
+          <li>
+            <strong>Duration & Delay</strong>: 애니메이션이 지속되는 시간과 시작
+            전 대기 시간을 설정합니다. 너무 빠르면 사용자에게 불안감을 줄 수
+            있고, 너무 느리면 답답함을 줄 수 있으므로 0.3s~0.8s 사이의 적절한
+            값을 찾는 것이 중요합니다.
+          </li>
+          <li>
+            <strong>Timing Function (Easing)</strong>: 애니메이션의 속도 변화를
+            제어합니다. 'ease-in-out'은 부드러운 시작과 끝을 제공하며,
+            'cubic-bezier'를 활용하면 튕기는 효과(Back)와 같은 더 개성 있는
+            움직임을 만들 수 있습니다.
+          </li>
+          <li>
+            <strong>Transforms</strong>: 이동(Translate), 회전(Rotate), 크기
+            조절(Scale)은 GPU 가속을 활용하기 때문에 브라우저 성능에 부담을 주지
+            않으면서도 매끄러운 애니메이션을 구현할 수 있는 최적의 속성입니다.
+          </li>
+        </ul>
+
+        <h3>3. 마이크로 인터랙션의 중요성</h3>
+        <p>
+          훌륭한 웹 디자인은 디테일에서 결정됩니다. 버튼을 눌렀을 때 살짝 떨리는
+          효과(Shake)나 강조하고 싶은 요소가 은은하게 커지는 효과(Pulse) 등
+          마이크로 인터랙션을 적절히 배치하면 사용자와 웹 사이트가 상호작용하고
+          있다는 느낌을 줄 수 있어 사용자 경험(UX)이 크게 향상됩니다.
+        </p>
+
+        <h3>4. 실무 활용 팁</h3>
+        <p>
+          애니메이션은 '과유불급'입니다. 너무 많은 요소가 동시에 움직이면
+          사용자가 컨텐츠에 집중하기 어렵습니다. 중요한 호출 버튼(CTA)이나
+          페이지 로딩 시 나타나는 요소들에 한정하여 전략적으로 사용하는 것이
+          좋습니다. 이 생성기를 통해 미리 정의된 프리셋(Bounce, Heartbeat 등)을
+          활용하면 누구나 전문가 수준의 애니메이션을 즉시 구현할 수 있습니다.
+        </p>
+      </section>
     </div>
 
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
