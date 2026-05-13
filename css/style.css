@@ -12,9 +12,9 @@ body {
 }
 .container {
   background: #fff;
-  margin: 20px auto;
+  margin: 20px auto 0 auto;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  border-radius: 6px;
+  border-radius: 6px 6px 0 0;
   max-width: 1400px;
   min-width: 900px;
 }
@@ -1544,8 +1544,27 @@ input[type="range"] {
   background: #ffffff;
   padding: 40px 24px;
   border-top: 1px solid #e9ecef;
-  margin-top: 40px;
   border-radius: 0 0 6px 6px;
+  margin: 20px auto 40px auto;
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+}
+
+/* 상단 컨테이너 너비와 일치시키기 */
+.container + .app-footer {
+  max-width: 1400px;
+}
+
+.guide-container + .app-footer {
+  max-width: 1200px;
+}
+
+.blog-container + .app-footer {
+  max-width: 900px;
+}
+
+.clamp-container + .app-footer {
+  max-width: 1100px;
 }
 
 .footer-content {
@@ -1600,6 +1619,7 @@ input[type="range"] {
     padding: 30px 16px;
     margin-top: 20px;
     border-radius: 0;
+    width: calc(100% - 24px);
   }
 
   .footer-links {
