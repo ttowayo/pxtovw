@@ -24,27 +24,6 @@ body {
   justify-content: center;
   gap: 20px;
 }
-.ad-banner {
-  position: absolute;
-  left: -170px;
-  top: 20px;
-  width: 160px;
-  flex-shrink: 0;
-  padding-top: 20px;
-}
-.ad-banner span {
-  display: block;
-  width: 160px;
-  font-size: 12px;
-  line-height: 1.2;
-  color: #000;
-  text-align: center;
-  margin-top: 10px;
-}
-.ad-banner.right {
-  left: auto;
-  right: -170px;
-}
 .h .header {
   background: #2196f3;
   color: #fff;
@@ -1003,9 +982,6 @@ input[type="checkbox"]:checked::after {
 /* =========================== 1024px ================================ */
 
 @media (max-width: 1400px) {
-  .ad-banner {
-    display: none;
-  }
   .gnb-menu {
     padding: 0;
   }
@@ -1030,12 +1006,6 @@ input[type="checkbox"]:checked::after {
 }
 
 @media (max-width: 768px) {
-  .ad-banner {
-    display: block;
-  }
-  .ad-banner span {
-    display: block;
-  }
   .main-box {
     flex-direction: column;
   }
@@ -1095,29 +1065,6 @@ input[type="checkbox"]:checked::after {
     min-width: auto;
     max-width: none;
     height: 100%;
-  }
-  .ad-banner {
-    position: relative;
-    left: auto;
-    top: 0;
-    width: calc(100% - 30px);
-    padding: 15px 0;
-    margin: 0 auto;
-  }
-  .ad-banner a {
-    padding: 0 12px;
-  }
-  .ad-banner img {
-    width: 100%;
-  }
-  .ad-banner.right {
-    left: auto;
-    right: -0;
-  }
-  .ad-banner span {
-    width: auto;
-    padding: 0 12px;
-    text-align: left;
   }
   .header {
     font-size: 18px;
