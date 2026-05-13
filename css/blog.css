@@ -1,11 +1,11 @@
 /* 블로그 페이지 공통 스타일 */
 .blog-container {
   max-width: 900px;
-  margin: 0 auto;
+  margin: 20px auto 0 auto;
   padding: 20px;
   background: #fff;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  border-radius: 6px;
+  border-radius: 6px 6px 0 0;
   line-height: 1.7;
 }
 
@@ -154,11 +154,11 @@
 /* 가이드 페이지 전용 스타일 */
 .guide-container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 20px auto 0 auto;
   padding: 20px;
   background: #fff;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  border-radius: 6px;
+  border-radius: 6px 6px 0 0;
 }
 
 .guide-header {
