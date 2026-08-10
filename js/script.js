@@ -484,23 +484,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const footer = document.createElement('footer');
     footer.className = 'app-footer';
-    
+
+    // /en/ 하위 페이지에서도 링크가 동작하도록 경로 보정
+    const pathPrefix = window.location.pathname.indexOf('/en/') !== -1 ? '../' : '';
+
     footer.innerHTML = `
         <div class="footer-content">
             <div class="footer-links">
-                <a href="about.html">사이트 소개</a>
-                <a href="privacy.html" class="privacy-link">개인정보처리방침</a>
-                <a href="terms.html">이용약관</a>
-                <a href="contact.html">문의하기</a>
+                <a href="${pathPrefix}about.html">사이트 소개</a>
+                <a href="${pathPrefix}privacy.html" class="privacy-link">개인정보처리방침</a>
+                <a href="${pathPrefix}terms.html">이용약관</a>
+                <a href="${pathPrefix}contact.html">문의하기</a>
                 <div class="version-info">
                     <button id="version-btn" class="version-btn">
-                        v2.1.0 <span>▼</span>
+                        v2.2.0 <span>▼</span>
                     </button>
                     <div class="version-modal" id="version-modal">
                         <h3>
                             업데이트 노트
                             <button type="button" class="close-version-btn" id="close-version-btn">&times;</button>
                         </h3>
+                        <div class="version-item">
+                            <strong>v2.2.0 (2026.08.10)</strong>
+                            <ul>
+                                <li>PX ↔ EM 변환기 신규 추가</li>
+                                <li>자간(Letter Spacing) 변환기 신규 추가 (피그마 %·포토샵 VA 지원)</li>
+                                <li>행간(Line Height) 계산기 신규 추가</li>
+                                <li>영어 버전 공개 (PX↔VW, PX↔REM, CSS Clamp)</li>
+                                <li>주요 도구 페이지 FAQ 섹션 추가</li>
+                                <li>모바일 화면 확대(핀치 줌) 허용 등 접근성 개선</li>
+                                <li>검색엔진 최적화: 구조화 데이터 적용 및 사이트맵 정비</li>
+                            </ul>
+                        </div>
                         <div class="version-item">
                             <strong>v2.1.0 (2026.04.24)</strong>
                             <ul>

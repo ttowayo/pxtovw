@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Clamp Generator | Fluid Font Size Calculator (min, val, max)</title>
+    <link rel="icon" href="../favicon.ico" />
+    <link rel="canonical" href="https://pxtovw.co.kr/en/clamp-generator.html" />
+    <link rel="alternate" hreflang="ko" href="https://pxtovw.co.kr/clamp-generator.html" />
+    <link rel="alternate" hreflang="en" href="https://pxtovw.co.kr/en/clamp-generator.html" />
+    <link rel="alternate" hreflang="x-default" href="https://pxtovw.co.kr/en/clamp-generator.html" />
+    <meta name="title" content="CSS Clamp Generator | Fluid Typography Calculator" />
+    <meta
+      name="description"
+      content="Free CSS clamp() generator for fluid, responsive typography. Enter your minimum and maximum font sizes and viewport range to get a ready-to-copy clamp() rule with live preview — no media queries needed."
+    />
+    <meta
+      name="keywords"
+      content="css clamp generator, clamp calculator, fluid typography, responsive font size, css clamp function, min max clamp, viewport font scaling, fluid font size calculator, clamp vw calc"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="CSS Clamp Generator | Fluid Font Size Calculator"
+    />
+    <meta property="og:site_name" content="PX to VW Converter - Responsive Web Tools" />
+    <meta
+      property="og:description"
+      content="Enter min/max viewport and font sizes to get a perfect clamp() rule instantly, with live preview. Essential tool for responsive web design."
+    />
+    <meta property="og:url" content="https://pxtovw.co.kr/en/clamp-generator.html" />
+    <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CSS Clamp Generator | Fluid Typography" />
+    <meta
+      name="twitter:description"
+      content="Generate perfect CSS clamp() code for fluid responsive font sizes in seconds."
+    />
+    <meta name="twitter:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="PX TO VW" />
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CSS Clamp Generator",
+        "url": "https://pxtovw.co.kr/en/clamp-generator.html",
+        "description": "A web application that generates CSS clamp() code for perfectly smooth fluid typography from a viewport range and a font size range, with live preview.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All",
+        "inLanguage": "en",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pxtovw.co.kr/en/" },
+          { "@type": "ListItem", "position": 2, "name": "CSS Clamp Generator", "item": "https://pxtovw.co.kr/en/clamp-generator.html" }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does the CSS clamp() function work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "clamp(minimum, preferred, maximum) lets the preferred value scale with the viewport while never going below the minimum or above the maximum."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I use clamp() or media queries?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use clamp() for values that should change continuously, like font sizes and spacing. Use media queries when the layout structure itself changes, such as the number of columns. Most projects use both together."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How well is clamp() supported in browsers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "clamp() is supported in every major browser released since 2020 (Chrome 79+, Safari 13.1+, Firefox 75+, Edge 79+), covering well over 95% of users worldwide."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is the vw value in the preferred parameter calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It comes from linear interpolation between your four inputs: minimum/maximum font size and minimum/maximum viewport width. The generator solves for the slope and intercept and outputs a ready-to-copy clamp() rule."
+            }
+          }
+        ]
+      }
+    </script>
+    <!-- site verification -->
+    <meta
+      name="naver-site-verification"
+      content="20103ff533a39100e375ea8cc675b287b31cadb6"
+    />
+    <meta
+      name="google-site-verification"
+      content="vIfbWBh0H5UPBCqtAVVb7PiNFfPiswQ6N6SRisPMDTs"
+    />
+    <!-- font add -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-9S15LY0JFE"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-9S15LY0JFE");
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-W9S8HFM9");
+    </script>
+    <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4275974341995601"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="app-header">
+        <div class="app-header-top">
+          <a href="index.html" class="app-logo">
+            <h1><span>PX</span> to <span>VW</span></h1>
+            <span class="subtitle">Web Tools</span>
+          </a>
+          <div class="app-header-tools">
+            <div class="right-tools">
+              <a href="../clamp-generator.html" class="lang-switch" title="한국어로 보기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>한국어</a>
+            </div>
+          </div>
+        </div>
+        <nav class="gnb-menu">
+          <div class="gnb-menu-inner">
+            <a href="index.html" class="gnb-item">PX ↔ VW</a>
+            <a href="px-to-rem.html" class="gnb-item">PX ↔ REM</a>
+            <a href="../px-to-em.html" class="gnb-item">PX ↔ EM</a>
+            <a href="../letter-spacing.html" class="gnb-item">Letter Spacing</a>
+            <a href="../line-height.html" class="gnb-item">Line Height</a>
+            <a href="clamp-generator.html" class="gnb-item active">CSS Clamp</a>
+            <a href="../flexbox-visualizer.html" class="gnb-item">Flex Layout</a>
+            <a href="../grid-generator.html" class="gnb-item">Grid Layout</a>
+            <a href="../animation-generator.html" class="gnb-item">Animation</a>
+            <a href="../divider-generator.html" class="gnb-item">Section Divider</a>
+            <a href="../aspect-ratio.html" class="gnb-item">Aspect Ratio</a>
+            <a href="../css-generator.html" class="gnb-item">Visual Effects</a>
+            <a href="../gradient-generator.html" class="gnb-item">Gradient</a>
+            <a href="../color-converter.html" class="gnb-item">Color Tools</a>
+            <a href="../contrast-checker.html" class="gnb-item">Contrast Check</a>
+            <a href="../css-tools.html" class="gnb-item">Code Tools</a>
+          </div>
+        </nav>
+      </header>
+      <div class="main-box">
+        <div class="main">
+          <div class="clamp-container">
+            <div class="clamp-header-desc">
+              <h2>CSS Clamp Generator</h2>
+              <p>
+                Set a minimum, preferred (fluid), and maximum value to calculate
+                responsive font sizes, spacing, and widths.<br />
+                Generate CSS that scales smoothly with the viewport — no
+                complicated math, no media queries.
+              </p>
+            </div>
+            <style>
+              .clamp-main-layout {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+                margin-top: 20px;
+              }
+              .clamp-layout-left,
+              .clamp-layout-right {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+              }
+              .clamp-control-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+              }
+              .clamp-options,
+              .clamp-result-section,
+              .clamp-preview-section,
+              .clamp-guide-card {
+                grid-column: auto !important;
+                margin-top: 0 !important;
+              }
+              .clamp-preview-card {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+              }
+              .clamp-preview-container {
+                flex: 1;
+                min-height: 250px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+              @media (max-width: 1024px) {
+                .clamp-main-layout {
+                  grid-template-columns: 1fr;
+                }
+              }
+              @media (max-width: 600px) {
+                .clamp-control-row {
+                  grid-template-columns: 1fr;
+                }
+              }
+            </style>
+            <div class="clamp-main-layout">
+              <!-- Left Side: Controls & Result -->
+              <div class="clamp-layout-left">
+                <div class="clamp-control-row">
+                  <!-- Viewport Range Card -->
+                  <div class="clamp-card">
+                    <h3>📏 Viewport Range</h3>
+                    <div class="clamp-input-group">
+                      <div class="clamp-input-item">
+                        <label for="clamp-min-vp">Minimum Viewport</label>
+                        <div class="clamp-input-wrapper">
+                          <input type="number" id="clamp-min-vp" value="320" />
+                          <span class="clamp-unit">px</span>
+                        </div>
+                      </div>
+                      <div class="clamp-input-item">
+                        <label for="clamp-max-vp">Maximum Viewport</label>
+                        <div class="clamp-input-wrapper">
+                          <input type="number" id="clamp-max-vp" value="1200" />
+                          <span class="clamp-unit">px</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Size Range Card -->
+                  <div class="clamp-card">
+                    <h3>📐 Size Range</h3>
+                    <div class="clamp-input-group">
+                      <div class="clamp-input-item">
+                        <label for="clamp-min-font">Minimum Size</label>
+                        <div class="clamp-input-wrapper">
+                          <input type="number" id="clamp-min-font" value="16" />
+                          <span class="clamp-unit">px</span>
+                        </div>
+                      </div>
+                      <div class="clamp-input-item">
+                        <label for="clamp-max-font">Maximum Size</label>
+                        <div class="clamp-input-wrapper">
+                          <input type="number" id="clamp-max-font" value="32" />
+                          <span class="clamp-unit">px</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Root Size & Options -->
+                <div class="clamp-options">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 30px;
+                      flex-wrap: wrap;
+                      justify-content: center;
+                    "
+                  >
+                    <div
+                      class="clamp-input-item"
+                      style="
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 10px;
+                      "
+                    >
+                      <label
+                        for="clamp-root-font"
+                        style="margin: 0; white-space: nowrap"
+                        >Root Font Size</label
+                      >
+                      <div class="clamp-input-wrapper" style="width: 90px">
+                        <input type="number" id="clamp-root-font" value="16" />
+                        <span class="clamp-unit">px</span>
+                      </div>
+                    </div>
+                    <label class="clamp-checkbox-label">
+                      <input type="checkbox" id="clamp-use-rem" checked />
+                      Show result in REM units
+                    </label>
+                  </div>
+                </div>
+                <!-- Result Card -->
+                <div class="clamp-result-section">
+                  <div class="clamp-result-card">
+                    <div class="clamp-result-display" id="clamp-result-text">
+                      clamp(1rem, 0.5rem + 1.5vw, 2rem)
+                    </div>
+                    <button type="button" id="clamp-copy-btn">
+                      <span>📋</span> Copy generated code
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Right Side: Preview & Guide -->
+              <div class="clamp-layout-right">
+                <!-- Live Preview Card -->
+                <div
+                  class="clamp-preview-section"
+                  style="flex: 1; display: flex; flex-direction: column"
+                >
+                  <div class="clamp-preview-card">
+                    <h3>✨ Live Preview</h3>
+                    <div class="clamp-preview-controls">
+                      Resize your browser window to watch the text scale
+                    </div>
+                    <div class="clamp-preview-container">
+                      <div class="clamp-preview-text" id="clamp-live-preview">
+                        The quick brown fox jumps over the lazy dog<br />
+                        0123456789 !@#$%
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Guide Card -->
+                <div class="clamp-guide-card">
+                  <h3 style="color: #2196f3; margin-top: 0">📖 How to use</h3>
+                  <div style="font-size: 14px; line-height: 1.8; color: #555">
+                    <ul style="padding-left: 18px; margin: 0">
+                      <li>
+                        <strong>Viewport Range:</strong> set the range of screen
+                        widths where the value should scale (mobile → desktop).
+                      </li>
+                      <li>
+                        <strong>Size Range:</strong> enter the element's size at
+                        the smallest and largest viewport.
+                      </li>
+                      <li>
+                        <strong>Generated Code:</strong> a
+                        <code>clamp()</code> rule that scales smoothly without
+                        media queries is generated as you type.
+                      </li>
+                      <li>
+                        Copy the code and apply it to
+                        <code>font-size</code>, <code>padding</code>, and more!
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="tool-info-section">
+        <h2>CSS Clamp Generator: Fluid Typography Done Right</h2>
+        <p>The <strong>CSS Clamp generator</strong> is the best way to build responsive fonts and layouts that scale smoothly without media queries. It produces optimal responsive code in real time — no manual math required.</p>
+
+        <h3>1. What is the CSS clamp() function?</h3>
+        <p><code>clamp()</code> is a modern CSS function that constrains a value with three parameters: <strong>minimum, preferred, and maximum</strong>. The element's size follows the preferred value as the screen scales, but never drops below the minimum or exceeds the maximum.</p>
+
+        <h3>2. Why use clamp()?</h3>
+        <ul>
+          <li><strong>Seamless scaling</strong>: media queries make sizes jump at breakpoints; clamp() scales linearly and smoothly with the viewport.</li>
+          <li><strong>Less maintenance</strong>: one line of code replaces a stack of media query blocks.</li>
+          <li><strong>Guaranteed readability</strong>: text never becomes too large on mobile or too small on desktop.</li>
+        </ul>
+
+        <h3>3. How the calculation works</h3>
+        <p>This generator uses linear interpolation to compute the ideal preferred value. You only enter the <strong>min/max font size</strong> and the <strong>min/max viewport width</strong> — the generated <code>calc()</code> expression lets the browser work out the exact pixel value for any screen size.</p>
+
+        <h3>4. Practical tips</h3>
+        <p>Don't stop at font sizes — clamp() works great for <code>padding</code>, <code>margin</code>, and <code>width</code> too. Applying it to hero titles and content gutters keeps your designer's intended proportions intact on every resolution.</p>
+      </section>
+
+      <section class="tool-info-section">
+        <h2>Frequently Asked Questions</h2>
+        <h3>Q. How does the CSS clamp() function work?</h3>
+        <p>clamp(minimum, preferred, maximum) lets the preferred value scale with the viewport while never going below the minimum or above the maximum.</p>
+        <h3>Q. Should I use clamp() or media queries?</h3>
+        <p>Use clamp() for values that should change continuously, like font sizes and spacing. Use media queries when the layout structure itself changes. Most projects use both together.</p>
+        <h3>Q. How well is clamp() supported in browsers?</h3>
+        <p>clamp() is supported in every major browser released since 2020 (Chrome 79+, Safari 13.1+, Firefox 75+, Edge 79+), covering well over 95% of users worldwide.</p>
+        <h3>Q. How is the vw value in the preferred parameter calculated?</h3>
+        <p>By linear interpolation between your four inputs: min/max font size and min/max viewport width. The generator solves the equation and outputs a ready-to-copy clamp() rule.</p>
+      </section>
+    </div>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/clamp.js"></script>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-W9S8HFM9"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  </body>
+</html>
