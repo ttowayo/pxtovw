@@ -15,35 +15,43 @@ function cssPxToVw(css, viewport, floatNum, removeValue) {
   if (!removeValue) {
     return cleanCss.replace(
       /(\d+\.?\d*)px/g,
-      (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
+      (m, p1) => pxToVw(p1, viewport, floatNum) + "vw",
     );
   }
 
   // { } 괄호가 없는 경우 처리
   if (!cleanCss.includes("{")) {
-    return processProperties(cleanCss, (line) =>
-      line.replace(
-        /(\d+\.?\d*)px/g,
-        (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
-      )
-    , "");
+    return processProperties(
+      cleanCss,
+      (line) =>
+        line.replace(
+          /(\d+\.?\d*)px/g,
+          (m, p1) => pxToVw(p1, viewport, floatNum) + "vw",
+        ),
+      "",
+    );
   }
 
   // 속성 삭제: 숫자 단위가 없는 속성 전체 삭제
   return cleanCss.replace(
     /([^{]*{)([^}]+)(})/g,
     (match, selector, properties, closingBrace) => {
-      const processed = processProperties(properties, (line) =>
-        line.replace(
-          /(\d+\.?\d*)px/g,
-          (m, p1) => pxToVw(p1, viewport, floatNum) + "vw"
-        )
-      , "  ");
+      const processed = processProperties(
+        properties,
+        (line) =>
+          line.replace(
+            /(\d+\.?\d*)px/g,
+            (m, p1) => pxToVw(p1, viewport, floatNum) + "vw",
+          ),
+        "  ",
+      );
       if (processed) {
-        return selector.trimEnd() + "\n  " + processed + "\n" + closingBrace.trim();
+        return (
+          selector.trimEnd() + "\n  " + processed + "\n" + closingBrace.trim()
+        );
       }
       return selector.trimEnd() + closingBrace.trim();
-    }
+    },
   );
 }
 
@@ -55,7 +63,7 @@ function processProperties(properties, transformFn, indent = "  ") {
   while ((match = regex.exec(properties)) !== null) {
     let text = match[0].trim();
     if (!text) continue;
-    
+
     if (text.startsWith("/*")) {
       result.push(transformFn(text));
     } else {
@@ -64,15 +72,17 @@ function processProperties(properties, transformFn, indent = "  ") {
       }
     }
   }
-  
+
   if (result.length === 0) return "";
-  
-  return result.map(line => {
-    if (!line.startsWith("/*") && !line.endsWith(";")) {
-      return line + ";";
-    }
-    return line;
-  }).join("\n" + indent);
+
+  return result
+    .map((line) => {
+      if (!line.startsWith("/*") && !line.endsWith(";")) {
+        return line + ";";
+      }
+      return line;
+    })
+    .join("\n" + indent);
 }
 
 // CSS 내 vw -> px 변환
@@ -82,35 +92,43 @@ function cssVwToPx(css, viewport, floatNum, removeValue) {
   if (!removeValue) {
     return cleanCss.replace(
       /(\d+\.?\d*)vw/g,
-      (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
+      (m, p1) => vwToPx(p1, viewport, floatNum) + "px",
     );
   }
 
   // { } 괄호가 없는 경우 처리
   if (!cleanCss.includes("{")) {
-    return processProperties(cleanCss, (line) =>
-      line.replace(
-        /(\d+\.?\d*)vw/g,
-        (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
-      )
-    , "");
+    return processProperties(
+      cleanCss,
+      (line) =>
+        line.replace(
+          /(\d+\.?\d*)vw/g,
+          (m, p1) => vwToPx(p1, viewport, floatNum) + "px",
+        ),
+      "",
+    );
   }
 
   // 속성 삭제: 숫자 단위가 없는 속성 전체 삭제
   return cleanCss.replace(
     /([^{]*{)([^}]+)(})/g,
     (match, selector, properties, closingBrace) => {
-      const processed = processProperties(properties, (line) =>
-        line.replace(
-          /(\d+\.?\d*)vw/g,
-          (m, p1) => vwToPx(p1, viewport, floatNum) + "px"
-        )
-      , "  ");
+      const processed = processProperties(
+        properties,
+        (line) =>
+          line.replace(
+            /(\d+\.?\d*)vw/g,
+            (m, p1) => vwToPx(p1, viewport, floatNum) + "px",
+          ),
+        "  ",
+      );
       if (processed) {
-        return selector.trimEnd() + "\n  " + processed + "\n" + closingBrace.trim();
+        return (
+          selector.trimEnd() + "\n  " + processed + "\n" + closingBrace.trim()
+        );
       }
       return selector.trimEnd() + closingBrace.trim();
-    }
+    },
   );
 }
 // px -> vw 단일 변환
@@ -122,9 +140,9 @@ const vw1Float = document.getElementById("vw1-float");
 Array.from(document.getElementsByClassName("vw-preset-btn")).forEach((btn) => {
   btn.onclick = function () {
     const value = this.getAttribute("data-value");
-    if(vw1Width) vw1Width.value = value;
+    if (vw1Width) vw1Width.value = value;
     // CSS1 섹션의 너비도 함께 변경
-    if (typeof css1Width !== 'undefined' && css1Width) {
+    if (typeof css1Width !== "undefined" && css1Width) {
       css1Width.value = value;
     }
   };
@@ -148,24 +166,27 @@ function calcPxToVw() {
   let result = pxToVw(
     pxInput.value,
     vw1Width.value,
-    Math.min(3, parseInt(vw1Float ? vw1Float.value : 3) || 3)
+    Math.min(3, parseInt(vw1Float ? vw1Float.value : 3) || 3),
   );
   if (vwUnitCheck && vwUnitCheck.checked) {
     result += "vw";
   }
-  if(vwOutput) vwOutput.value = result;
+  if (vwOutput) vwOutput.value = result;
 }
 const pxToVwBtn = document.getElementById("px-to-vw-btn");
 if (pxToVwBtn) pxToVwBtn.onclick = calcPxToVw;
-if (pxInput) pxInput.addEventListener("keydown", function (e) {
-  if (e.key === "Enter") calcPxToVw();
-});
-if (vw1Width) vw1Width.addEventListener("keydown", function (e) {
-  if (e.key === "Enter") calcPxToVw();
-});
-if (vw1Float) vw1Float.addEventListener("keydown", function (e) {
-  if (e.key === "Enter") calcPxToVw();
-});
+if (pxInput)
+  pxInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") calcPxToVw();
+  });
+if (vw1Width)
+  vw1Width.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") calcPxToVw();
+  });
+if (vw1Float)
+  vw1Float.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") calcPxToVw();
+  });
 // vw -> px 단일 변환
 const vwInput = document.getElementById("vw-input");
 const pxOutput = document.getElementById("px-output");
@@ -211,12 +232,14 @@ function calcVwToPx() {
 }
 const vwToPxBtn = document.getElementById("vw-to-px-btn");
 if (vwToPxBtn) vwToPxBtn.onclick = calcVwToPx;
-if (vwInput) vwInput.addEventListener("keydown", function (e) {
-  if (e.key === "Enter") calcVwToPx();
-});
-if (vw2Width) vw2Width.addEventListener("keydown", function (e) {
-  if (e.key === "Enter") calcVwToPx();
-});
+if (vwInput)
+  vwInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") calcVwToPx();
+  });
+if (vw2Width)
+  vw2Width.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") calcVwToPx();
+  });
 if (pxNoFloat) pxNoFloat.addEventListener("change", calcVwToPx);
 // CSS px -> vw 변환
 const css1Input = document.getElementById("css1-input");
@@ -232,7 +255,7 @@ if (css1Btn) {
       css1Input.value,
       css1Width.value,
       Math.min(3, parseInt(css1Float ? css1Float.value : 3) || 3),
-      css1Remove ? css1Remove.checked : false
+      css1Remove ? css1Remove.checked : false,
     );
   };
 }
@@ -249,25 +272,27 @@ function calcCss2() {
     css2Input.value,
     css2Width.value,
     floatNum === 0 ? 5 : 1,
-    css2Remove ? css2Remove.checked : false
+    css2Remove ? css2Remove.checked : false,
   );
   if (floatNum === 0) {
     // 정수로 반올림
     result = result.replace(
       /([0-9]+\.[0-9]+)px/g,
-      (m, p1) => Math.round(parseFloat(p1)) + "px"
+      (m, p1) => Math.round(parseFloat(p1)) + "px",
     );
   }
   if (css2Output) css2Output.value = result;
 }
 const css2Btn = document.getElementById("css2-btn");
 if (css2Btn) css2Btn.onclick = calcCss2;
-if (css2Input) css2Input.addEventListener("keydown", function (e) {
-  if (e.key === "Enter") calcCss2();
-});
-if (css2Width) css2Width.addEventListener("keydown", function (e) {
-  if (e.key === "Enter") calcCss2();
-});
+if (css2Input)
+  css2Input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") calcCss2();
+  });
+if (css2Width)
+  css2Width.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") calcCss2();
+  });
 if (css2NoFloat) css2NoFloat.addEventListener("change", calcCss2);
 
 // 복사 버튼 기능
@@ -285,14 +310,14 @@ const vwCopyBtn = document.getElementById("vw-copy-btn");
 if (vwCopyBtn) {
   vwCopyBtn.onclick = function () {
     const vwOutputEl = document.getElementById("vw-output");
-    if(vwOutputEl) copyToClipboard(vwOutputEl.value, this);
+    if (vwOutputEl) copyToClipboard(vwOutputEl.value, this);
   };
 }
 const pxCopyBtn = document.getElementById("px-copy-btn");
 if (pxCopyBtn) {
   pxCopyBtn.onclick = function () {
     const pxOutputEl = document.getElementById("px-output");
-    if(pxOutputEl) copyToClipboard(pxOutputEl.value, this);
+    if (pxOutputEl) copyToClipboard(pxOutputEl.value, this);
   };
 }
 // css1-output 복사 버튼
@@ -408,7 +433,6 @@ if (mobileToggleBtn && pxToVwBox && vwToPxBox && css1Box && css2Box) {
   setInitialMobileState();
 }
 
-
 // GNB 활성 메뉴 자동 스크롤 기능 (선택된 메뉴를 가장 앞으로)
 document.addEventListener("DOMContentLoaded", function () {
   const scrollContainer = document.querySelector(".gnb-menu-inner");
@@ -451,14 +475,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     scrollContainer.addEventListener("mousemove", (e) => {
       if (!isDown) return;
-      
+
       const x = e.pageX - scrollContainer.offsetLeft;
       const walk = (x - startX) * 2; // 스크롤 속도 배율
-      
+
       if (Math.abs(walk) > 5) {
         isDragged = true;
       }
-      
+
       if (isDragged) {
         e.preventDefault();
         scrollContainer.scrollLeft = scrollLeft - walk;
@@ -466,29 +490,34 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 드래그 중 클릭(링크 이동) 방지
-    scrollContainer.addEventListener("click", (e) => {
-      if (isDragged) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    }, true);
+    scrollContainer.addEventListener(
+      "click",
+      (e) => {
+        if (isDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      },
+      true,
+    );
   }
 });
 
 /**
  * 공통 푸터 주입 기능
  */
-document.addEventListener('DOMContentLoaded', function() {
-    // 이미 푸터가 있으면 중복 생성 방지
-    if (document.querySelector('.app-footer')) return;
+document.addEventListener("DOMContentLoaded", function () {
+  // 이미 푸터가 있으면 중복 생성 방지
+  if (document.querySelector(".app-footer")) return;
 
-    const footer = document.createElement('footer');
-    footer.className = 'app-footer';
+  const footer = document.createElement("footer");
+  footer.className = "app-footer";
 
-    // /en/ 하위 페이지에서도 링크가 동작하도록 경로 보정
-    const pathPrefix = window.location.pathname.indexOf('/en/') !== -1 ? '../' : '';
+  // /en/ 하위 페이지에서도 링크가 동작하도록 경로 보정
+  const pathPrefix =
+    window.location.pathname.indexOf("/en/") !== -1 ? "../" : "";
 
-    footer.innerHTML = `
+  footer.innerHTML = `
         <div class="footer-content">
             <div class="footer-links">
                 <a href="${pathPrefix}about.html">사이트 소개</a>
@@ -513,7 +542,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <li>영어 버전 공개 (PX↔VW, PX↔REM, CSS Clamp)</li>
                                 <li>주요 도구 페이지 FAQ 섹션 추가</li>
                                 <li>모바일 화면 확대(핀치 줌) 허용 등 접근성 개선</li>
-                                <li>검색엔진 최적화: 구조화 데이터 적용 및 사이트맵 정비</li>
                             </ul>
                         </div>
                         <div class="version-item">
@@ -603,47 +631,45 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     `;
 
-    // 삽입 위치 결정 (메인 컨테이너 뒤 또는 body 끝)
-    const container = document.querySelector('.container') || 
-                      document.querySelector('.guide-container') || 
-                      document.querySelector('.blog-container') ||
-                      document.querySelector('.clamp-container');
-    
-    if (container && container.parentElement === document.body) {
-        container.insertAdjacentElement('afterend', footer);
-    } else {
-        document.body.appendChild(footer);
+  // 삽입 위치 결정 (메인 컨테이너 뒤 또는 body 끝)
+  const container =
+    document.querySelector(".container") ||
+    document.querySelector(".guide-container") ||
+    document.querySelector(".blog-container") ||
+    document.querySelector(".clamp-container");
+
+  if (container && container.parentElement === document.body) {
+    container.insertAdjacentElement("afterend", footer);
+  } else {
+    document.body.appendChild(footer);
+  }
+
+  // 버전 정보 모달창 기능 연결
+  const versionBtn = document.getElementById("version-btn");
+  const versionModal = document.getElementById("version-modal");
+  const closeVersionBtn = document.getElementById("close-version-btn");
+
+  if (versionBtn && versionModal) {
+    versionBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      versionModal.classList.toggle("show");
+    });
+
+    if (closeVersionBtn) {
+      closeVersionBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        versionModal.classList.remove("show");
+      });
     }
 
-    // 버전 정보 모달창 기능 연결
-    const versionBtn = document.getElementById("version-btn");
-    const versionModal = document.getElementById("version-modal");
-    const closeVersionBtn = document.getElementById("close-version-btn");
+    versionModal.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
 
-    if (versionBtn && versionModal) {
-        versionBtn.addEventListener("click", function (e) {
-            e.stopPropagation();
-            versionModal.classList.toggle("show");
-        });
-
-        if (closeVersionBtn) {
-            closeVersionBtn.addEventListener("click", function (e) {
-                e.stopPropagation();
-                versionModal.classList.remove("show");
-            });
-        }
-
-        versionModal.addEventListener("click", function (e) {
-            e.stopPropagation();
-        });
-
-        document.addEventListener("click", function (e) {
-            if (versionModal.classList.contains("show")) {
-                versionModal.classList.remove("show");
-            }
-        });
-    }
+    document.addEventListener("click", function (e) {
+      if (versionModal.classList.contains("show")) {
+        versionModal.classList.remove("show");
+      }
+    });
+  }
 });
-
-
-
