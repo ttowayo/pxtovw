@@ -1,52 +1,40 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <title>PX to VW 변환기 (픽셀 ↔ 뷰포트) | CSS 단위 계산기</title>
-    <link rel="icon" href="favicon.ico" />
-    <link rel="canonical" href="https://pxtovw.co.kr/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PX to VW Converter (Pixels ↔ Viewport Width) | Free CSS Unit Calculator</title>
+    <link rel="icon" href="../favicon.ico" />
+    <link rel="canonical" href="https://pxtovw.co.kr/en/" />
     <link rel="alternate" hreflang="ko" href="https://pxtovw.co.kr/" />
     <link rel="alternate" hreflang="en" href="https://pxtovw.co.kr/en/" />
     <link rel="alternate" hreflang="x-default" href="https://pxtovw.co.kr/en/" />
-    <meta
-      name="title"
-      content="PX to VW 변환기 | 반응형 CSS 단위 자동 계산기"
-    />
+    <meta name="title" content="PX to VW Converter | Responsive CSS Unit Calculator" />
     <meta
       name="description"
-      content="디자이너와 프론트엔드 개발자를 위한 PX to VW 변환기입니다. 픽셀(px)을 뷰포트(vw, vh) 단위로 쉽게 변환하세요. 반응형 웹 디자인, 모바일 최적화를 위한 필수 CSS 변환 도구입니다."
+      content="Free PX to VW converter for designers and front-end developers. Convert pixels to viewport width (vw) units instantly, or paste your CSS to convert every px value at once. Perfect for responsive web design."
     />
     <meta
       name="keywords"
-      content="PX-VW 변환기, px to vw convert, px to vw, vw to px, vw to px convert, vw 계산, vw 계산기, 뷰포트, 픽셀 변환, CSS 자동 변환, 웹디자인, 프론트엔드, 모바일 웹, 반응형 단위, px vw 변환기, CSS px vw 변환, px vw 자동 변환, CSS 단위 자동 변환, 웹 퍼블리셔 툴, 프론트엔드 툴"
+      content="px to vw, px to vw converter, vw to px, viewport width calculator, css unit converter, responsive design tool, pixel to viewport, vw calculator, convert px to vw css, fluid layout"
     />
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="PX to VW 변환기 (픽셀 ↔ 뷰포트) | CSS 단위 자동 계산기"
+      content="PX to VW Converter (Pixels ↔ Viewport Width) | CSS Unit Calculator"
     />
-    <meta
-      property="og:site_name"
-      content="PX-VW 변환기 - 반응형 웹 개발 도구"
-    />
+    <meta property="og:site_name" content="PX to VW Converter - Responsive Web Tools" />
     <meta
       property="og:description"
-      content="디자이너와 프론트엔드 개발자를 위한 PX to VW 변환기입니다. 픽셀(px)을 뷰포트(vw) 단위로 쉽게 변환하세요. 웹 접근성과 반응형 디자인에 필수적인 툴입니다."
+      content="Convert pixels to viewport width (vw) units instantly. Batch-convert entire CSS files. Free tool for responsive web design."
     />
-    <meta property="og:url" content="https://pxtovw.co.kr/" />
+    <meta property="og:url" content="https://pxtovw.co.kr/en/" />
     <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="PX to VW 변환기 | CSS 단위 자동 계산기"
-    />
+    <meta name="twitter:title" content="PX to VW Converter | CSS Unit Calculator" />
     <meta
       name="twitter:description"
-      content="픽셀(px)을 뷰포트(vw) 단위로 쉽고 정확하게 변환해주는 반응형 웹 필수 도구."
+      content="Convert pixels to viewport width (vw) units instantly. Free responsive design tool."
     />
     <meta name="twitter:image" content="https://pxtovw.co.kr/img/og.png" />
     <meta name="robots" content="index, follow" />
@@ -56,11 +44,13 @@
       {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "PX to VW 변환기",
-        "url": "https://pxtovw.co.kr/",
-        "description": "픽셀(px)과 뷰포트(vw) 단위를 양방향으로 쉽게 변환해주는 반응형 웹 디자인을 위한 프론트엔드 개발자 도구입니다.",
+        "name": "PX to VW Converter",
+        "url": "https://pxtovw.co.kr/en/",
+        "description": "A free developer tool that converts pixels (px) to viewport width (vw) units in both directions, including batch CSS conversion, for responsive web design.",
         "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "All"
+        "operatingSystem": "All",
+        "inLanguage": "en",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
       }
     </script>
     <script type="application/ld+json">
@@ -70,34 +60,34 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "px를 vw로 변환하는 공식은 무엇인가요?",
+            "name": "How do I convert px to vw?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "vw 값 = (변환할 px 값 ÷ 기준 뷰포트 너비 px) × 100입니다. 예를 들어 1920px 기준 시안에서 96px는 (96 ÷ 1920) × 100 = 5vw가 됩니다."
+              "text": "vw = (px value ÷ reference viewport width) × 100. For example, on a 1920px design, 96px equals (96 ÷ 1920) × 100 = 5vw."
             }
           },
           {
             "@type": "Question",
-            "name": "기준 뷰포트 너비는 몇으로 설정해야 하나요?",
+            "name": "What viewport width should I use as the base?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "디자인 시안의 아트보드 너비를 그대로 입력하면 됩니다. 데스크톱 시안은 보통 1920px 또는 1440px, 모바일 시안은 375px 또는 360px이 많이 사용됩니다."
+              "text": "Use the artboard width of your design file. Desktop mockups are usually 1920px or 1440px, and mobile mockups are usually 375px or 360px."
             }
           },
           {
             "@type": "Question",
-            "name": "폰트 크기도 vw로 변환해도 되나요?",
+            "name": "Is it safe to use vw for font sizes?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "가능하지만 주의가 필요합니다. 작은 화면에서 글자가 너무 작아지거나 큰 화면에서 지나치게 커질 수 있으므로, clamp() 함수로 최소·최대 크기를 제한하는 것을 권장합니다. 또한 vw로만 지정된 폰트는 브라우저 확대/축소가 잘 동작하지 않아 접근성에 불리할 수 있습니다."
+              "text": "It works, but text can become too small on narrow screens and too large on wide screens. Use the CSS clamp() function to set minimum and maximum sizes. Also note that fonts sized purely in vw ignore browser zoom, which hurts accessibility."
             }
           },
           {
             "@type": "Question",
-            "name": "CSS 코드 전체를 한 번에 vw로 변환할 수 있나요?",
+            "name": "Can I convert a whole CSS file to vw at once?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "네. 이 페이지의 CSS 일괄 변환 도구에 CSS 코드를 붙여넣으면 코드 안의 모든 px 값을 찾아 한 번에 vw로 변환해 줍니다. 반대로 vw를 px로 되돌리는 변환도 지원합니다."
+              "text": "Yes. Paste your CSS into the batch converter on this page and every px value is converted to vw in one click. The reverse conversion (vw to px) is also supported."
             }
           }
         ]
@@ -130,7 +120,6 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-9S15LY0JFE");
     </script>
     <!-- Google Tag Manager -->
@@ -147,8 +136,8 @@
       })(window, document, "script", "dataLayer", "GTM-W9S8HFM9");
     </script>
     <!-- End Google Tag Manager -->
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/reset.css" />
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4275974341995601"
@@ -165,44 +154,28 @@
           </a>
           <div class="app-header-tools">
             <div class="right-tools">
-              <select class="blog-select" onchange="if (this.value) location.href = this.value;">
-                <option value="">📖 블로그 및 문서</option>
-                <option value="how-to-use.html">📖 사용법 보기</option>
-                <option value="blog-css-units.html">📐 CSS 단위 가이드</option>
-                <option value="blog-responsive-design.html">📱 반응형 디자인</option>
-                <option value="blog-mobile-first.html">📱 모바일 퍼스트</option>
-                <option value="blog-css-best-practices.html">🎨 CSS 모범 사례</option>
-                <option value="blog-viewport-units.html">📐 뷰포트 단위</option>
-                <option value="blog-when-not-to-use-vw.html">🚫 VW 사용 주의사항</option>
-                <option value="blog-clamp-vs-vw.html">🖇️ Clamp vs VW 비교</option>
-                <option value="blog-1440px-conversion.html">🖥️ 1440px 실무 가이드</option>
-                <option value="blog-mobile-font-responsive.html">✍️ 모바일 폰트 계산법</option>
-                <option value="blog-vw-accessibility.html">♿ VW와 웹 접근성</option>
-              </select>
-              <a href="en/index.html" class="gnb-item" style="text-decoration: none">🇺🇸 EN</a>
+              <a href="../index.html" class="gnb-item" style="text-decoration: none">🇰🇷 한국어</a>
             </div>
           </div>
         </div>
         <nav class="gnb-menu">
           <div class="gnb-menu-inner">
             <a href="index.html" class="gnb-item active">PX ↔ VW</a>
-            <a href="px-to-rem.html" class="gnb-item">PX ↔ REM</a>
-            <a href="px-to-em.html" class="gnb-item">PX ↔ EM</a>
-            <a href="letter-spacing.html" class="gnb-item">Letter Spacing</a>
-            <a href="line-height.html" class="gnb-item">Line Height</a>
-            <a href="clamp-generator.html" class="gnb-item">CSS Clamp</a>
-            <a href="flexbox-visualizer.html" class="gnb-item">Flex Layout</a>
-            <a href="grid-generator.html" class="gnb-item">Grid Layout</a>
-            <a href="animation-generator.html" class="gnb-item">Animation</a>
-            <a href="divider-generator.html" class="gnb-item"
-              >Section Divider</a
-            >
-            <a href="aspect-ratio.html" class="gnb-item">Aspect Ratio</a>
-            <a href="css-generator.html" class="gnb-item">Visual Effects</a>
-            <a href="gradient-generator.html" class="gnb-item">Gradient</a>
-            <a href="color-converter.html" class="gnb-item">Color Tools</a>
-            <a href="contrast-checker.html" class="gnb-item">Contrast Check</a>
-            <a href="css-tools.html" class="gnb-item">Code Tools</a>
+            <a href="../px-to-rem.html" class="gnb-item">PX ↔ REM</a>
+            <a href="../px-to-em.html" class="gnb-item">PX ↔ EM</a>
+            <a href="../letter-spacing.html" class="gnb-item">Letter Spacing</a>
+            <a href="../line-height.html" class="gnb-item">Line Height</a>
+            <a href="../clamp-generator.html" class="gnb-item">CSS Clamp</a>
+            <a href="../flexbox-visualizer.html" class="gnb-item">Flex Layout</a>
+            <a href="../grid-generator.html" class="gnb-item">Grid Layout</a>
+            <a href="../animation-generator.html" class="gnb-item">Animation</a>
+            <a href="../divider-generator.html" class="gnb-item">Section Divider</a>
+            <a href="../aspect-ratio.html" class="gnb-item">Aspect Ratio</a>
+            <a href="../css-generator.html" class="gnb-item">Visual Effects</a>
+            <a href="../gradient-generator.html" class="gnb-item">Gradient</a>
+            <a href="../color-converter.html" class="gnb-item">Color Tools</a>
+            <a href="../contrast-checker.html" class="gnb-item">Contrast Check</a>
+            <a href="../css-tools.html" class="gnb-item">Code Tools</a>
           </div>
         </nav>
       </header>
@@ -243,7 +216,7 @@
                     1920px
                   </button>
                 </div>
-                <input type="number" id="vw1-width" value="720" /> PX / 소수점 :
+                <input type="number" id="vw1-width" value="720" /> PX / Decimals :
                 <input type="number" id="vw1-float" value="2" min="0" max="5" />
                 <div class="row">
                   <input type="number" id="px-input" placeholder="PX" />
@@ -253,7 +226,7 @@
                       type="checkbox"
                       id="vw-unit-check"
                       checked
-                    />단위포함(px)</label
+                    />Include unit (vw)</label
                   >
                 </div>
                 <div class="btn-box">
@@ -272,7 +245,7 @@
                 <div class="css-header">
                   Breakpoints
                   <input type="number" id="css1-width" value="720" /> PX /
-                  소수점 :
+                  Decimals :
                   <input
                     type="number"
                     id="css1-float"
@@ -281,8 +254,7 @@
                     max="5"
                   />
                   <label>
-                    <input type="checkbox" id="css1-remove" />속성삭제(Remove
-                    property)
+                    <input type="checkbox" id="css1-remove" />Remove property
                   </label>
                 </div>
                 <div class="textarea-box">
@@ -322,46 +294,26 @@
                   <button type="button" class="vw2-preset-btn" data-value="720">
                     720px
                   </button>
-                  <button
-                    type="button"
-                    class="vw2-preset-btn"
-                    data-value="1024"
-                  >
+                  <button type="button" class="vw2-preset-btn" data-value="1024">
                     1024px
                   </button>
-                  <button
-                    type="button"
-                    class="vw2-preset-btn"
-                    data-value="1280"
-                  >
+                  <button type="button" class="vw2-preset-btn" data-value="1280">
                     1280px
                   </button>
-                  <button
-                    type="button"
-                    class="vw2-preset-btn"
-                    data-value="1440"
-                  >
+                  <button type="button" class="vw2-preset-btn" data-value="1440">
                     1440px
                   </button>
-                  <button
-                    type="button"
-                    class="vw2-preset-btn"
-                    data-value="1600"
-                  >
+                  <button type="button" class="vw2-preset-btn" data-value="1600">
                     1600px
                   </button>
-                  <button
-                    type="button"
-                    class="vw2-preset-btn"
-                    data-value="1920"
-                  >
+                  <button type="button" class="vw2-preset-btn" data-value="1920">
                     1920px
                   </button>
                 </div>
                 <input type="number" id="vw2-width" value="720" /> PX /
                 <label
-                  ><input type="checkbox" id="px-no-float" checked /> 소수점
-                  없음(반올림)</label
+                  ><input type="checkbox" id="px-no-float" checked /> No
+                  decimals (round)</label
                 >
                 <div class="row">
                   <input type="number" id="vw-input" placeholder="VW" />
@@ -371,7 +323,7 @@
                       type="checkbox"
                       id="px-unit-check"
                       checked
-                    />단위포함(vw)</label
+                    />Include unit (px)</label
                   >
                 </div>
                 <div class="btn-box">
@@ -391,12 +343,12 @@
                   Breakpoints
                   <input type="number" id="css2-width" value="720" /> PX
                   <label
-                    ><input type="checkbox" id="css2-remove" />속성삭제(Remove
-                    property)</label
+                    ><input type="checkbox" id="css2-remove" />Remove
+                    property</label
                   >
                   <label style="margin-left: 8px"
-                    ><input type="checkbox" id="css2-no-float" checked /> 소수점
-                    없음(반올림)</label
+                    ><input type="checkbox" id="css2-no-float" checked /> No
+                    decimals (round)</label
                   >
                 </div>
                 <div class="textarea-box">
@@ -422,45 +374,44 @@
           </div>
         </div>
       </div>
-      
-      <section class="tool-info-section">
-        <h2>PX to VW 변환기 완벽 가이드</h2>
-        <p><strong>PX to VW 변환기</strong>는 현대적인 웹 디자인에서 가장 필수적인 도구 중 하나입니다. 과거에는 웹 사이트를 제작할 때 픽셀(PX) 단위를 주로 사용했지만, 스마트폰부터 울트라 와이드 모니터까지 디스플레이 환경이 다양해지면서 뷰포트 너비(VW) 단위의 중요성이 매우 커졌습니다.</p>
-        
-        <h3>1. VW(Viewport Width) 단위란 무엇인가요?</h3>
-        <p>VW는 현재 브라우저 화면(Viewport)의 너비를 기준으로 하는 상대적인 단위입니다. 1vw는 화면 너비의 1%를 의미합니다. 예를 들어 사용자의 화면 너비가 1000px이라면 1vw는 10px이 되고, 화면이 500px로 줄어들면 1vw는 자동으로 5px로 계산됩니다. 이러한 특성 덕분에 별도의 미디어 쿼리(Media Queries) 없이도 화면 크기에 비례하여 요소의 크기가 유연하게 조절되는 반응형 디자인을 구현할 수 있습니다.</p>
 
-        <h3>2. PX 대신 VW를 사용해야 하는 이유</h3>
+      <section class="tool-info-section">
+        <h2>The Complete Guide to PX to VW Conversion</h2>
+        <p>The <strong>PX to VW converter</strong> is one of the most essential tools in modern web design. Fixed pixel (px) units were fine when everyone browsed on similar screens, but with devices ranging from small phones to ultra-wide monitors, viewport-relative units like <strong>vw</strong> have become the backbone of fluid, responsive layouts.</p>
+
+        <h3>1. What is the VW (Viewport Width) unit?</h3>
+        <p>VW is a relative unit based on the width of the browser viewport: 1vw equals 1% of the viewport width. If the screen is 1000px wide, 1vw is 10px; shrink the window to 500px and 1vw automatically becomes 5px. This lets elements scale in proportion to the screen without writing media queries.</p>
+
+        <h3>2. Why convert PX to VW?</h3>
         <ul>
-          <li><strong>완전한 반응형 구현</strong>: PX 단위는 화면이 작아져도 크기가 고정되어 레이아웃이 깨지기 쉽지만, VW는 화면 비율을 완벽하게 유지합니다.</li>
-          <li><strong>코드의 간결함</strong>: 기기별로 수많은 미디어 쿼리를 작성할 필요가 없어 스타일시트의 양이 획기적으로 줄어듭니다.</li>
-          <li><strong>디자인 의도 유지</strong>: 디자이너가 의도한 레이아웃 비율을 모든 해상도에서 동일하게 제공할 수 있습니다.</li>
+          <li><strong>Truly fluid layouts</strong>: px values stay fixed as the screen shrinks and break layouts; vw preserves the design's proportions at every width.</li>
+          <li><strong>Less code</strong>: one vw value can replace a stack of breakpoint-specific media queries.</li>
+          <li><strong>Design fidelity</strong>: the ratios your designer intended are preserved on every resolution.</li>
         </ul>
 
-        <h3>3. 도구 사용 방법 및 실무 팁</h3>
-        <p>본 도구의 상단에 있는 <strong>Viewport Width</strong> 칸에 디자인 시안의 기준 너비(예: 피그마 시안 1440px 또는 375px)를 입력하세요. 그 후 변환하고자 하는 PX 값을 입력하면 실시간으로 VW 값이 계산됩니다. 우측의 CSS 변환 도구를 사용하면 작성된 CSS 코드 전체에서 PX 단위를 찾아 한꺼번에 VW로 변환할 수도 있어 작업 시간을 대폭 단축해 줍니다.</p>
+        <h3>3. How to use this tool</h3>
+        <p>Enter your design file's reference width (e.g. a 1440px or 375px Figma artboard) in the <strong>Breakpoints</strong> field, then type any px value to get the vw equivalent instantly. The CSS batch converter on the right finds every px value in your stylesheet and converts them all at once — a huge time-saver when converting an existing project.</p>
 
-        <h3>4. 사용 시 주의사항</h3>
-        <p>모든 요소를 VW로 만드는 것이 항상 정답은 아닙니다. 폰트의 경우 너무 작은 화면에서 글자가 읽기 힘들 정도로 작아질 수 있으므로, <code>clamp()</code> 함수를 함께 사용하거나 최소/최대 폰트 크기를 제한하는 것이 좋습니다. 또한 보더(Border) 두께나 미세한 그림자 효과 등은 고정 PX 단위를 사용하는 것이 시각적으로 더 깔끔합니다.</p>
+        <h3>4. When NOT to use vw</h3>
+        <p>Not everything should be vw. Font sizes can become unreadably small on narrow screens, so combine vw with <code>clamp()</code> to set minimum and maximum sizes. Keep borders, box shadows, and other hairline details in fixed px — they look crisper that way. Also remember that text sized purely in vw does not respond to browser zoom, which is an accessibility concern.</p>
       </section>
 
       <section class="tool-info-section">
-        <h2>자주 묻는 질문 (FAQ)</h2>
-        <h3>Q. px를 vw로 변환하는 공식은 무엇인가요?</h3>
-        <p>vw 값 = (변환할 px 값 ÷ 기준 뷰포트 너비 px) × 100입니다. 1920px 기준 시안에서 96px는 (96 ÷ 1920) × 100 = 5vw가 됩니다.</p>
-        <h3>Q. 기준 뷰포트 너비는 몇으로 설정해야 하나요?</h3>
-        <p>디자인 시안의 아트보드 너비를 그대로 입력하면 됩니다. 데스크톱 시안은 보통 1920px 또는 1440px, 모바일 시안은 375px 또는 360px이 많이 사용됩니다.</p>
-        <h3>Q. 폰트 크기도 vw로 변환해도 되나요?</h3>
-        <p>가능하지만 작은 화면에서 글자가 너무 작아질 수 있으므로 <a href="clamp-generator.html">clamp() 생성기</a>로 최소·최대 크기를 제한하는 것을 권장합니다. vw로만 지정된 폰트는 브라우저 확대/축소가 잘 동작하지 않아 접근성에 불리할 수 있습니다.</p>
-        <h3>Q. CSS 코드 전체를 한 번에 vw로 변환할 수 있나요?</h3>
-        <p>네. CSS 일괄 변환 도구에 코드를 붙여넣으면 모든 px 값을 한 번에 vw로 변환해 줍니다. 반대 방향(vw → px) 변환도 지원합니다.</p>
+        <h2>Frequently Asked Questions</h2>
+        <h3>Q. How do I convert px to vw?</h3>
+        <p>vw = (px value ÷ reference viewport width) × 100. On a 1920px design, 96px equals (96 ÷ 1920) × 100 = 5vw.</p>
+        <h3>Q. What viewport width should I use as the base?</h3>
+        <p>Use the artboard width of your design file. Desktop mockups are usually 1920px or 1440px; mobile mockups are usually 375px or 360px.</p>
+        <h3>Q. Is it safe to use vw for font sizes?</h3>
+        <p>It works, but text can become too small on narrow screens. Use CSS <code>clamp()</code> to set minimum and maximum sizes, and keep accessibility in mind — vw-only fonts ignore browser zoom.</p>
+        <h3>Q. Can I convert a whole CSS file to vw at once?</h3>
+        <p>Yes. Paste your CSS into the batch converter on this page and every px value is converted in one click. The reverse (vw → px) is also supported.</p>
       </section>
     </div>
-    <!-- 모바일 전환 버튼 -->
-    <button class="mobile-toggle-btn" id="mobile-toggle-btn">PX to VWs</button>
+    <!-- mobile toggle button -->
+    <button class="mobile-toggle-btn" id="mobile-toggle-btn">PX to VW</button>
 
-
-    <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
     <!-- Google Tag Manager (noscript) -->
     <noscript
       ><iframe

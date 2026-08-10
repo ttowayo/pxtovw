@@ -2,169 +2,193 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pxtovw.co.kr/</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/px-to-rem.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pxtovw.co.kr/en/</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pxtovw.co.kr/px-to-em.html</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pxtovw.co.kr/letter-spacing.html</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pxtovw.co.kr/line-height.html</loc>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/clamp-generator.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/flexbox-visualizer.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/grid-generator.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/animation-generator.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/divider-generator.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/aspect-ratio.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/css-generator.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/gradient-generator.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/color-converter.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/contrast-checker.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/css-tools.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/how-to-use.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/blog-css-units.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/blog-responsive-design.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/blog-mobile-first.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/blog-css-best-practices.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/blog-viewport-units.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/blog-when-not-to-use-vw.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/blog-clamp-vs-vw.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/blog-1440px-conversion.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/blog-mobile-font-responsive.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/blog-vw-accessibility.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/about.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/privacy.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/terms.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://pxtovw.co.kr/contact.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

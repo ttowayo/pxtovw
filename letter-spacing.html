@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>자간 변환기 (Letter Spacing) | 피그마·포토샵 자간 → CSS EM 변환</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="canonical" href="https://pxtovw.co.kr/letter-spacing.html" />
+    <meta name="title" content="Letter Spacing 자간 변환기 | PX·%·포토샵 → EM" />
+    <meta
+      name="description"
+      content="피그마(%), 포토샵/일러스트(VA), 픽셀(px) 자간을 CSS letter-spacing EM 값으로 변환하는 무료 계산기입니다. 디자인 시안의 자간을 정확한 CSS 코드로 옮기세요."
+    />
+    <meta
+      name="keywords"
+      content="letter-spacing 변환, 자간 변환기, 피그마 자간, 포토샵 자간 css, letter spacing em, px to em letter spacing, 자간 계산기, VA 자간, 트래킹 변환, 웹 퍼블리셔 자간"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="자간 변환기 (Letter Spacing) | 피그마·포토샵 → CSS"
+    />
+    <meta
+      property="og:site_name"
+      content="PX-VW 변환기 - 반응형 웹 개발 도구"
+    />
+    <meta
+      property="og:description"
+      content="피그마 %, 포토샵 VA, 픽셀 자간을 CSS letter-spacing EM 값으로 정확하게 변환하세요."
+    />
+    <meta property="og:url" content="https://pxtovw.co.kr/letter-spacing.html" />
+    <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="자간 변환기 (Letter Spacing) | 피그마·포토샵 → CSS"
+    />
+    <meta
+      name="twitter:description"
+      content="디자인 시안의 자간 값을 CSS letter-spacing EM 값으로 쉽고 정확하게 변환해주는 도구."
+    />
+    <meta name="twitter:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="PX TO VW" />
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "자간 변환기 (Letter Spacing)",
+        "url": "https://pxtovw.co.kr/letter-spacing.html",
+        "description": "피그마(%), 포토샵/일러스트레이터(VA), 픽셀(px) 자간 값을 CSS letter-spacing EM 단위로 변환하는 계산기입니다.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://pxtovw.co.kr/" },
+          { "@type": "ListItem", "position": 2, "name": "자간 변환기 (Letter Spacing)", "item": "https://pxtovw.co.kr/letter-spacing.html" }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "포토샵 자간(VA) 값을 CSS로 어떻게 변환하나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "포토샵과 일러스트레이터의 자간(트래킹, VA) 값은 1000으로 나누면 em 값이 됩니다. 예를 들어 자간 -25는 letter-spacing: -0.025em입니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "피그마의 letter spacing %는 CSS로 어떻게 변환하나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "피그마의 % 자간은 100으로 나누면 em 값이 됩니다. 예를 들어 -2%는 letter-spacing: -0.02em입니다. px 단위로 표시된 경우에는 그대로 px를 쓰거나 폰트 크기로 나눠 em으로 변환합니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "letter-spacing은 px와 em 중 어떤 단위가 좋나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "em 단위를 권장합니다. 자간은 글자 크기에 비례해야 자연스러운데, em으로 지정하면 폰트 크기가 바뀌어도 자간 비율이 자동으로 유지됩니다. px로 고정하면 큰 제목에서는 자간이 너무 좁아 보이고 작은 글씨에서는 너무 넓어 보일 수 있습니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "한글 웹사이트에 적절한 letter-spacing 값은 얼마인가요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "한글 본문에는 보통 -0.02em ~ -0.05em(약 -2% ~ -5%) 정도의 좁은 자간이 많이 사용됩니다. 고딕 계열 폰트는 기본 자간이 넓은 편이라 살짝 좁혀주면 가독성이 좋아집니다. 제목은 본문보다 더 좁게 설정하는 경우가 많습니다."
+            }
+          }
+        ]
+      }
+    </script>
+    <!-- site verification -->
+    <meta
+      name="naver-site-verification"
+      content="20103ff533a39100e375ea8cc675b287b31cadb6"
+    />
+    <meta
+      name="google-site-verification"
+      content="vIfbWBh0H5UPBCqtAVVb7PiNFfPiswQ6N6SRisPMDTs"
+    />
+    <!-- font add -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-9S15LY0JFE"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-9S15LY0JFE");
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-W9S8HFM9");
+    </script>
+    <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4275974341995601"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="app-header">
+        <div class="app-header-top">
+          <a href="index.html" class="app-logo">
+            <h1><span>PX</span> to <span>VW</span></h1>
+            <span class="subtitle">Web Tools</span>
+          </a>
+          <div class="app-header-tools">
+            <div class="right-tools">
+              <select class="blog-select" onchange="if (this.value) location.href = this.value;">
+                <option value="">📖 블로그 및 문서</option>
+                <option value="how-to-use.html">📖 사용법 보기</option>
+                <option value="blog-css-units.html">📐 CSS 단위 가이드</option>
+                <option value="blog-responsive-design.html">📱 반응형 디자인</option>
+                <option value="blog-mobile-first.html">📱 모바일 퍼스트</option>
+                <option value="blog-css-best-practices.html">🎨 CSS 모범 사례</option>
+                <option value="blog-viewport-units.html">📐 뷰포트 단위</option>
+                <option value="blog-when-not-to-use-vw.html">🚫 VW 사용 주의사항</option>
+                <option value="blog-clamp-vs-vw.html">🖇️ Clamp vs VW 비교</option>
+                <option value="blog-1440px-conversion.html">🖥️ 1440px 실무 가이드</option>
+                <option value="blog-mobile-font-responsive.html">✍️ 모바일 폰트 계산법</option>
+                <option value="blog-vw-accessibility.html">♿ VW와 웹 접근성</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <nav class="gnb-menu">
+          <div class="gnb-menu-inner">
+            <a href="index.html" class="gnb-item">PX ↔ VW</a>
+            <a href="px-to-rem.html" class="gnb-item">PX ↔ REM</a>
+            <a href="px-to-em.html" class="gnb-item">PX ↔ EM</a>
+            <a href="letter-spacing.html" class="gnb-item active">Letter Spacing</a>
+            <a href="line-height.html" class="gnb-item">Line Height</a>
+            <a href="clamp-generator.html" class="gnb-item">CSS Clamp</a>
+            <a href="flexbox-visualizer.html" class="gnb-item">Flex Layout</a>
+            <a href="grid-generator.html" class="gnb-item">Grid Layout</a>
+            <a href="animation-generator.html" class="gnb-item">Animation</a>
+            <a href="divider-generator.html" class="gnb-item"
+              >Section Divider</a
+            >
+            <a href="aspect-ratio.html" class="gnb-item">Aspect Ratio</a>
+            <a href="css-generator.html" class="gnb-item">Visual Effects</a>
+            <a href="gradient-generator.html" class="gnb-item">Gradient</a>
+            <a href="color-converter.html" class="gnb-item">Color Tools</a>
+            <a href="contrast-checker.html" class="gnb-item">Contrast Check</a>
+            <a href="css-tools.html" class="gnb-item">Code Tools</a>
+          </div>
+        </nav>
+      </header>
+      <div class="main-box">
+        <div class="main">
+          <div class="convert-section">
+            <div class="convert-box-section">
+              <div class="convert-box" id="ls-px-box">
+                <h2>PX → EM 자간</h2>
+                <h3>Font Size 기준</h3>
+                <div class="vw-preset-group">
+                  <button type="button" class="ls-preset-btn" data-value="12">
+                    12px
+                  </button>
+                  <button type="button" class="ls-preset-btn" data-value="14">
+                    14px
+                  </button>
+                  <button type="button" class="ls-preset-btn" data-value="16">
+                    16px
+                  </button>
+                  <button type="button" class="ls-preset-btn" data-value="18">
+                    18px
+                  </button>
+                  <button type="button" class="ls-preset-btn" data-value="24">
+                    24px
+                  </button>
+                  <button type="button" class="ls-preset-btn" data-value="32">
+                    32px
+                  </button>
+                </div>
+                폰트 크기 <input type="number" id="ls-font-size" value="16" /> PX
+                / 소수점 :
+                <input type="number" id="ls-float" value="3" min="0" max="5" />
+                <div class="row">
+                  <input
+                    type="number"
+                    id="ls-px-input"
+                    step="0.1"
+                    placeholder="자간 PX (예: -0.5)"
+                  />
+                  <input
+                    type="text"
+                    id="ls-em-output"
+                    placeholder="EM"
+                    readonly
+                  />
+                  <label style="margin-left: 6px"
+                    ><input
+                      type="checkbox"
+                      id="ls-unit-check"
+                      checked
+                    />단위포함(em)</label
+                  >
+                </div>
+                <div class="btn-box">
+                  <button id="ls-px-btn">
+                    <span style="margin-right: 4px">🧮</span>Convert
+                  </button>
+                  <button type="button" id="ls-px-copy-btn">
+                    <span style="margin-right: 4px">📋</span>Copy
+                  </button>
+                  <button type="button" id="ls-px-clear-btn">
+                    <span style="margin-right: 4px">🗑️</span>Clear
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="convert-box-section">
+              <div class="convert-box" id="ls-figma-box">
+                <h2>피그마 % → EM 자간</h2>
+                <h3>Figma Letter Spacing (%)</h3>
+                <div class="row">
+                  <input
+                    type="number"
+                    id="ls-figma-input"
+                    step="0.1"
+                    placeholder="% (예: -2)"
+                  />
+                  <input
+                    type="text"
+                    id="ls-figma-output"
+                    placeholder="EM"
+                    readonly
+                  />
+                </div>
+                <div class="btn-box">
+                  <button id="ls-figma-btn">
+                    <span style="margin-right: 4px">🧮</span>Convert
+                  </button>
+                  <button type="button" id="ls-figma-copy-btn">
+                    <span style="margin-right: 4px">📋</span>Copy
+                  </button>
+                  <button type="button" id="ls-figma-clear-btn">
+                    <span style="margin-right: 4px">🗑️</span>Clear
+                  </button>
+                </div>
+              </div>
+              <div class="convert-box" id="ls-ps-box">
+                <h2>포토샵 VA → EM 자간</h2>
+                <h3>Photoshop / Illustrator 자간 (VA)</h3>
+                <div class="row">
+                  <input
+                    type="number"
+                    id="ls-ps-input"
+                    placeholder="VA (예: -25)"
+                  />
+                  <input
+                    type="text"
+                    id="ls-ps-output"
+                    placeholder="EM"
+                    readonly
+                  />
+                </div>
+                <div class="btn-box">
+                  <button id="ls-ps-btn">
+                    <span style="margin-right: 4px">🧮</span>Convert
+                  </button>
+                  <button type="button" id="ls-ps-copy-btn">
+                    <span style="margin-right: 4px">📋</span>Copy
+                  </button>
+                  <button type="button" id="ls-ps-clear-btn">
+                    <span style="margin-right: 4px">🗑️</span>Clear
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="tool-info-section">
+        <h2>자간(Letter Spacing) 변환 가이드: 시안 그대로 옮기기</h2>
+        <p><strong>자간 변환기</strong>는 피그마, 포토샵, 일러스트레이터 등 디자인 툴의 자간 값을 CSS <code>letter-spacing</code> 값으로 변환해주는 도구입니다. 디자인 툴마다 자간 단위가 달라서 퍼블리싱할 때 혼란스러운 부분을 한 번에 해결합니다.</p>
+
+        <h3>1. 디자인 툴별 자간 단위 변환 공식</h3>
+        <ul>
+          <li><strong>포토샵/일러스트레이터 (VA)</strong>: VA 값 ÷ 1000 = em 값. 예: 자간 -25 → <code>letter-spacing: -0.025em</code></li>
+          <li><strong>피그마 (%)</strong>: % 값 ÷ 100 = em 값. 예: -2% → <code>letter-spacing: -0.02em</code></li>
+          <li><strong>피그마/스케치 (px)</strong>: px 값 ÷ 폰트 크기(px) = em 값. 예: 16px 폰트에 -0.5px → <code>letter-spacing: -0.031em</code></li>
+        </ul>
+
+        <h3>2. 왜 letter-spacing은 em으로 쓰는 것이 좋을까요?</h3>
+        <p>자간은 글자 크기에 비례할 때 자연스럽습니다. em 단위로 지정하면 폰트 크기가 바뀌어도 자간의 비율이 그대로 유지되므로, 반응형에서 폰트 크기를 조절해도 타이포그래피의 밀도가 일정하게 보입니다. px로 고정하면 큰 제목에서는 좁아 보이고 작은 캡션에서는 넓어 보이는 문제가 생깁니다.</p>
+
+        <h3>3. 한글 타이포그래피 자간 팁</h3>
+        <p>한글 고딕 계열 폰트(Noto Sans KR, Pretendard 등)는 기본 자간이 다소 넓게 느껴져서, 본문에 <code>-0.02em ~ -0.05em</code> 정도의 좁은 자간을 적용하는 경우가 많습니다. 제목처럼 크기가 큰 텍스트는 자간을 더 좁혀야 시각적으로 안정되어 보입니다. 반대로 영문 대문자로만 이루어진 라벨은 자간을 넓히는 것(<code>0.05em ~ 0.1em</code>)이 가독성에 좋습니다.</p>
+      </section>
+
+      <section class="tool-info-section">
+        <h2>자주 묻는 질문 (FAQ)</h2>
+        <h3>Q. 포토샵 자간(VA) 값을 CSS로 어떻게 변환하나요?</h3>
+        <p>포토샵과 일러스트레이터의 자간(트래킹) 값은 1000으로 나누면 em 값이 됩니다. 자간 -25는 letter-spacing: -0.025em입니다.</p>
+        <h3>Q. 피그마의 letter spacing %는 CSS로 어떻게 변환하나요?</h3>
+        <p>피그마의 % 자간은 100으로 나누면 em 값이 됩니다. -2%는 letter-spacing: -0.02em입니다.</p>
+        <h3>Q. letter-spacing은 px와 em 중 어떤 단위가 좋나요?</h3>
+        <p>em 단위를 권장합니다. 폰트 크기가 바뀌어도 자간 비율이 자동으로 유지되기 때문입니다.</p>
+        <h3>Q. 한글 웹사이트에 적절한 letter-spacing 값은 얼마인가요?</h3>
+        <p>한글 본문에는 보통 -0.02em ~ -0.05em 정도의 좁은 자간이 많이 사용됩니다. 제목은 본문보다 더 좁게 설정하는 경우가 많습니다.</p>
+      </section>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/letter-spacing.js"></script>
+    <script src="js/footer.js"></script>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-W9S8HFM9"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  </body>
+</html>
