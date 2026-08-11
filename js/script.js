@@ -433,73 +433,106 @@ if (mobileToggleBtn && pxToVwBox && vwToPxBox && css1Box && css2Box) {
   setInitialMobileState();
 }
 
-// GNB 활성 메뉴 자동 스크롤 기능 (선택된 메뉴를 가장 앞으로)
+// GNB 더보기(overflow) 드롭다운: 화면에 들어가는 메뉴만 보여주고
+// 넘치는 메뉴는 "더보기 ▾" 드롭다운으로 이동 (Priority+ 패턴)
 document.addEventListener("DOMContentLoaded", function () {
-  const scrollContainer = document.querySelector(".gnb-menu-inner");
-  const activeItem = document.querySelector(".gnb-item.active");
+  const inner = document.querySelector(".gnb-menu-inner");
+  if (!inner) return;
 
-  if (scrollContainer && activeItem) {
-    // 활성 메뉴의 위치로 스크롤 이동
-    const targetScroll = activeItem.offsetLeft - 30; // 여유 공간을 30px로 상향 조정
-    scrollContainer.scrollLeft = targetScroll;
+  const items = Array.from(inner.querySelectorAll(".gnb-item"));
+  if (items.length === 0) return;
+
+  const isEnglish = document.documentElement.lang === "en";
+
+  // 더보기 버튼 + 드롭다운 목록 생성
+  const more = document.createElement("div");
+  more.className = "gnb-more";
+  more.innerHTML =
+    '<button type="button" class="gnb-more-btn" aria-haspopup="true" aria-expanded="false">' +
+    (isEnglish ? "More" : "더보기") +
+    ' <span class="gnb-caret">▼</span></button>' +
+    '<div class="gnb-more-list"></div>';
+  inner.appendChild(more);
+
+  const moreBtn = more.querySelector(".gnb-more-btn");
+  const moreList = more.querySelector(".gnb-more-list");
+
+  function closeDropdown() {
+    more.classList.remove("open");
+    moreBtn.setAttribute("aria-expanded", "false");
   }
-});
 
-// GNB 메뉴 마우스 드래그 스크롤 기능
-document.addEventListener("DOMContentLoaded", function () {
-  const scrollContainer = document.querySelector(".gnb-menu-inner");
+  function layout() {
+    // 측정을 위해 모든 메뉴를 원래 위치(더보기 버튼 앞)로 복원
+    items.forEach((item) => inner.insertBefore(item, more));
+    more.classList.add("is-visible");
 
-  if (scrollContainer) {
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-    let isDragged = false;
+    const innerStyle = getComputedStyle(inner);
+    const gap = parseFloat(innerStyle.columnGap || innerStyle.gap) || 0;
+    const available =
+      inner.clientWidth -
+      parseFloat(innerStyle.paddingLeft) -
+      parseFloat(innerStyle.paddingRight);
 
-    scrollContainer.addEventListener("mousedown", (e) => {
-      isDown = true;
-      scrollContainer.classList.add("active-drag");
-      startX = e.pageX - scrollContainer.offsetLeft;
-      scrollLeft = scrollContainer.scrollLeft;
-      isDragged = false;
-    });
+    const widths = items.map((item) => item.offsetWidth);
+    const totalWidth =
+      widths.reduce((sum, w) => sum + w, 0) + gap * (items.length - 1);
 
-    scrollContainer.addEventListener("mouseleave", () => {
-      isDown = false;
-      scrollContainer.classList.remove("active-drag");
-    });
+    // 전부 들어가면 더보기 버튼 숨김
+    if (totalWidth <= available) {
+      more.classList.remove("is-visible", "has-active");
+      closeDropdown();
+      return;
+    }
 
-    scrollContainer.addEventListener("mouseup", (e) => {
-      isDown = false;
-      scrollContainer.classList.remove("active-drag");
-    });
+    // 더보기 버튼 자리를 확보한 상태에서 들어가는 만큼만 계산
+    const moreWidth = more.offsetWidth + gap;
+    let used = moreWidth;
+    let fitCount = 0;
+    for (let i = 0; i < items.length; i++) {
+      const w = widths[i] + (i > 0 ? gap : 0);
+      if (used + w > available) break;
+      used += w;
+      fitCount++;
+    }
 
-    scrollContainer.addEventListener("mousemove", (e) => {
-      if (!isDown) return;
+    // 넘치는 메뉴를 드롭다운으로 이동
+    items.slice(fitCount).forEach((item) => moreList.appendChild(item));
 
-      const x = e.pageX - scrollContainer.offsetLeft;
-      const walk = (x - startX) * 2; // 스크롤 속도 배율
-
-      if (Math.abs(walk) > 5) {
-        isDragged = true;
-      }
-
-      if (isDragged) {
-        e.preventDefault();
-        scrollContainer.scrollLeft = scrollLeft - walk;
-      }
-    });
-
-    // 드래그 중 클릭(링크 이동) 방지
-    scrollContainer.addEventListener(
-      "click",
-      (e) => {
-        if (isDragged) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      },
-      true,
+    // 현재 페이지 메뉴가 드롭다운 안에 있으면 버튼을 활성 표시
+    more.classList.toggle(
+      "has-active",
+      moreList.querySelector(".gnb-item.active") !== null,
     );
+  }
+
+
+  moreBtn.addEventListener("click", function () {
+    const isOpen = more.classList.toggle("open");
+    moreBtn.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!more.contains(e.target)) closeDropdown();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeDropdown();
+  });
+
+  let resizeRaf = null;
+  window.addEventListener("resize", function () {
+    if (resizeRaf) cancelAnimationFrame(resizeRaf);
+    resizeRaf = requestAnimationFrame(layout);
+  });
+
+  layout();
+  // 배치 완료 후에는 드롭다운이 잘리지 않도록 overflow 해제
+  inner.classList.add("gnb-ready");
+
+  // 웹폰트 로드 후 글자 폭이 달라질 수 있으므로 다시 계산
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(layout);
   }
 });
 
