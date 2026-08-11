@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Letter Spacing Converter | Figma % &amp; Photoshop Tracking to CSS em/px</title>
+    <link rel="icon" href="../favicon.ico" />
+    <link rel="canonical" href="https://pxtovw.co.kr/en/letter-spacing.html" />
+    <link rel="alternate" hreflang="ko" href="https://pxtovw.co.kr/letter-spacing.html" />
+    <link rel="alternate" hreflang="en" href="https://pxtovw.co.kr/en/letter-spacing.html" />
+    <link rel="alternate" hreflang="x-default" href="https://pxtovw.co.kr/en/letter-spacing.html" />
+    <meta name="title" content="Letter Spacing Converter | Figma % & Photoshop Tracking to CSS em" />
+    <meta
+      name="description"
+      content="Free letter spacing converter for developers. Turn Figma %, Photoshop/Illustrator tracking (VA), and pixel letter spacing into exact CSS letter-spacing em values."
+    />
+    <meta
+      name="keywords"
+      content="letter spacing converter, figma letter spacing to css, photoshop tracking to css, tracking to em, letter-spacing px to em, letter spacing calculator, VA to em, figma percent letter spacing, css letter-spacing, kerning to css"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Letter Spacing Converter | Figma & Photoshop Tracking to CSS"
+    />
+    <meta property="og:site_name" content="PX to VW Converter - Responsive Web Tools" />
+    <meta
+      property="og:description"
+      content="Convert Figma %, Photoshop tracking (VA), and pixel letter spacing into precise CSS letter-spacing em values."
+    />
+    <meta property="og:url" content="https://pxtovw.co.kr/en/letter-spacing.html" />
+    <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Letter Spacing Converter | Design Tools to CSS em" />
+    <meta
+      name="twitter:description"
+      content="Turn design-tool letter spacing values into accurate CSS letter-spacing em values in one click."
+    />
+    <meta name="twitter:image" content="https://pxtovw.co.kr/img/og.png" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="PX TO VW" />
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Letter Spacing Converter",
+        "url": "https://pxtovw.co.kr/en/letter-spacing.html",
+        "description": "A free calculator that converts Figma (%), Photoshop/Illustrator tracking (VA), and pixel letter spacing values into CSS letter-spacing em units.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All",
+        "inLanguage": "en",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pxtovw.co.kr/en/" },
+          { "@type": "ListItem", "position": 2, "name": "Letter Spacing Converter", "item": "https://pxtovw.co.kr/en/letter-spacing.html" }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I convert Photoshop tracking (VA) to CSS?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Divide the Photoshop or Illustrator tracking (VA) value by 1000 to get the em value. For example, a tracking of -25 becomes letter-spacing: -0.025em."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I convert Figma letter spacing % to CSS?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Divide the Figma percentage by 100 to get the em value. For example, -2% becomes letter-spacing: -0.02em. If Figma shows the value in px, either use px directly or divide it by the font size to convert it to em."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should letter-spacing use px or em?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use em. Letter spacing looks natural when it scales with the font size, and em keeps the ratio intact whenever the font size changes. Fixed px values can look too tight on large headings and too loose on small text."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a good default letter-spacing value for body text?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For most sans-serif body text, values between -0.02em and -0.05em (roughly -2% to -5%) slightly tighten the default spacing and improve readability. Large headings are often set even tighter, while all-caps labels usually benefit from wider spacing such as 0.05em to 0.1em."
+            }
+          }
+        ]
+      }
+    </script>
+    <!-- site verification -->
+    <meta
+      name="naver-site-verification"
+      content="20103ff533a39100e375ea8cc675b287b31cadb6"
+    />
+    <meta
+      name="google-site-verification"
+      content="vIfbWBh0H5UPBCqtAVVb7PiNFfPiswQ6N6SRisPMDTs"
+    />
+    <!-- font add -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-9S15LY0JFE"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-9S15LY0JFE");
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-W9S8HFM9");
+    </script>
+    <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4275974341995601"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="app-header">
+        <div class="app-header-top">
+          <a href="index.html" class="app-logo">
+            <h1><span>PX</span> to <span>VW</span></h1>
+            <span class="subtitle">Web Tools</span>
+          </a>
+          <div class="app-header-tools">
+            <div class="right-tools">
+              <a href="../letter-spacing.html" class="lang-switch" title="한국어로 보기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>한국어</a>
+            </div>
+          </div>
+        </div>
+        <nav class="gnb-menu">
+          <div class="gnb-menu-inner">
+            <a href="index.html" class="gnb-item">PX ↔ VW</a>
+            <a href="px-to-rem.html" class="gnb-item">PX ↔ REM</a>
+            <a href="px-to-em.html" class="gnb-item">PX ↔ EM</a>
+            <a href="letter-spacing.html" class="gnb-item active">Letter Spacing</a>
+            <a href="line-height.html" class="gnb-item">Line Height</a>
+            <a href="clamp-generator.html" class="gnb-item">CSS Clamp</a>
+            <a href="../flexbox-visualizer.html" class="gnb-item">Flex Layout</a>
+            <a href="../grid-generator.html" class="gnb-item">Grid Layout</a>
+            <a href="../animation-generator.html" class="gnb-item">Animation</a>
+            <a href="../divider-generator.html" class="gnb-item">Section Divider</a>
+            <a href="aspect-ratio.html" class="gnb-item">Aspect Ratio</a>
+            <a href="../css-generator.html" class="gnb-item">Visual Effects</a>
+            <a href="../gradient-generator.html" class="gnb-item">Gradient</a>
+            <a href="../color-converter.html" class="gnb-item">Color Tools</a>
+            <a href="../contrast-checker.html" class="gnb-item">Contrast Check</a>
+            <a href="../css-tools.html" class="gnb-item">Code Tools</a>
+          </div>
+        </nav>
+      </header>
+      <div class="main-box">
+        <div class="main">
+          <div class="convert-section">
+            <div class="convert-box-section">
+              <div class="convert-box" id="ls-px-box">
+                <h2>PX → EM Letter Spacing</h2>
+                <h3>Base Font Size</h3>
+                <div class="vw-preset-group">
+                  <button type="button" class="ls-preset-btn" data-value="12">
+                    12px
+                  </button>
+                  <button type="button" class="ls-preset-btn" data-value="14">
+                    14px
+                  </button>
+                  <button type="button" class="ls-preset-btn" data-value="16">
+                    16px
+                  </button>
+                  <button type="button" class="ls-preset-btn" data-value="18">
+                    18px
+                  </button>
+                  <button type="button" class="ls-preset-btn" data-value="24">
+                    24px
+                  </button>
+                  <button type="button" class="ls-preset-btn" data-value="32">
+                    32px
+                  </button>
+                </div>
+                Font size <input type="number" id="ls-font-size" value="16" /> PX
+                / Decimals :
+                <input type="number" id="ls-float" value="3" min="0" max="5" />
+                <div class="row">
+                  <input
+                    type="number"
+                    id="ls-px-input"
+                    step="0.1"
+                    placeholder="Spacing PX (e.g. -0.5)"
+                  />
+                  <input
+                    type="text"
+                    id="ls-em-output"
+                    placeholder="EM"
+                    readonly
+                  />
+                  <label style="margin-left: 6px"
+                    ><input
+                      type="checkbox"
+                      id="ls-unit-check"
+                      checked
+                    />Include unit (em)</label
+                  >
+                </div>
+                <div class="btn-box">
+                  <button id="ls-px-btn">
+                    <span style="margin-right: 4px">🧮</span>Convert
+                  </button>
+                  <button type="button" id="ls-px-copy-btn">
+                    <span style="margin-right: 4px">📋</span>Copy
+                  </button>
+                  <button type="button" id="ls-px-clear-btn">
+                    <span style="margin-right: 4px">🗑️</span>Clear
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="convert-box-section">
+              <div class="convert-box" id="ls-figma-box">
+                <h2>Figma % → EM Letter Spacing</h2>
+                <h3>Figma Letter Spacing (%)</h3>
+                <div class="row">
+                  <input
+                    type="number"
+                    id="ls-figma-input"
+                    step="0.1"
+                    placeholder="% (e.g. -2)"
+                  />
+                  <input
+                    type="text"
+                    id="ls-figma-output"
+                    placeholder="EM"
+                    readonly
+                  />
+                </div>
+                <div class="btn-box">
+                  <button id="ls-figma-btn">
+                    <span style="margin-right: 4px">🧮</span>Convert
+                  </button>
+                  <button type="button" id="ls-figma-copy-btn">
+                    <span style="margin-right: 4px">📋</span>Copy
+                  </button>
+                  <button type="button" id="ls-figma-clear-btn">
+                    <span style="margin-right: 4px">🗑️</span>Clear
+                  </button>
+                </div>
+              </div>
+              <div class="convert-box" id="ls-ps-box">
+                <h2>Photoshop VA → EM Letter Spacing</h2>
+                <h3>Photoshop / Illustrator Tracking (VA)</h3>
+                <div class="row">
+                  <input
+                    type="number"
+                    id="ls-ps-input"
+                    placeholder="VA (e.g. -25)"
+                  />
+                  <input
+                    type="text"
+                    id="ls-ps-output"
+                    placeholder="EM"
+                    readonly
+                  />
+                </div>
+                <div class="btn-box">
+                  <button id="ls-ps-btn">
+                    <span style="margin-right: 4px">🧮</span>Convert
+                  </button>
+                  <button type="button" id="ls-ps-copy-btn">
+                    <span style="margin-right: 4px">📋</span>Copy
+                  </button>
+                  <button type="button" id="ls-ps-clear-btn">
+                    <span style="margin-right: 4px">🗑️</span>Clear
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="tool-info-section">
+        <h2>Letter Spacing Conversion Guide: Match Your Design Exactly</h2>
+        <p>This <strong>letter spacing converter</strong> translates the tracking values used in Figma, Photoshop, and Illustrator into CSS <code>letter-spacing</code> values. Every design tool measures letter spacing differently, which makes handoff confusing — this tool resolves all of them into clean CSS in one step.</p>
+
+        <h3>1. Conversion formulas per design tool</h3>
+        <ul>
+          <li><strong>Photoshop/Illustrator (VA tracking)</strong>: VA value ÷ 1000 = em. Example: tracking -25 → <code>letter-spacing: -0.025em</code></li>
+          <li><strong>Figma (%)</strong>: % value ÷ 100 = em. Example: -2% → <code>letter-spacing: -0.02em</code></li>
+          <li><strong>Figma/Sketch (px)</strong>: px value ÷ font size (px) = em. Example: -0.5px on a 16px font → <code>letter-spacing: -0.031em</code></li>
+        </ul>
+
+        <h3>2. Why should letter-spacing be in em?</h3>
+        <p>Letter spacing looks natural when it stays proportional to the font size. Setting it in em preserves that ratio automatically, so the typographic density stays consistent even when font sizes change across responsive breakpoints. A fixed px value tends to look too tight on large headings and too loose on small captions.</p>
+
+        <h3>3. Practical letter spacing tips</h3>
+        <p>Many modern sans-serif fonts (such as Noto Sans or Pretendard) ship with fairly loose default spacing, so body text often reads better with a slightly negative value around <code>-0.02em to -0.05em</code>. Large display text usually needs even tighter spacing to look visually balanced. In contrast, all-caps labels and buttons are easier to read with wider spacing, typically <code>0.05em to 0.1em</code>.</p>
+      </section>
+
+      <section class="tool-info-section">
+        <h2>Frequently Asked Questions</h2>
+        <h3>Q. How do I convert Photoshop tracking (VA) to CSS?</h3>
+        <p>Divide the Photoshop or Illustrator tracking value by 1000 to get em. A tracking of -25 is letter-spacing: -0.025em.</p>
+        <h3>Q. How do I convert Figma letter spacing % to CSS?</h3>
+        <p>Divide the Figma percentage by 100 to get em. -2% is letter-spacing: -0.02em.</p>
+        <h3>Q. Should letter-spacing use px or em?</h3>
+        <p>Use em. The spacing ratio is preserved automatically whenever the font size changes.</p>
+        <h3>Q. What is a good default letter-spacing value for body text?</h3>
+        <p>For most sans-serif body text, a slightly negative value between -0.02em and -0.05em works well. Headings are often set tighter than body text.</p>
+      </section>
+    </div>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/letter-spacing.js"></script>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-W9S8HFM9"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  </body>
+</html>

@@ -1,53 +1,53 @@
-﻿<!DOCTYPE html>
-<html lang="ko">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>뷰포트 단위 심화 | vw, vh, vmin, vmax 완벽 활용 가이드</title>
-  <link rel="icon" href="favicon.ico">
-  <meta name="description" content="뷰포트 단위의 심화 활용법을 알아보세요. vw, vh, vmin, vmax의 고급 활용법과 실전 예제, 주의사항까지 완벽하게 정리했습니다.">
-  <meta name="keywords" content="뷰포트 단위, vw, vh, vmin, vmax, CSS 단위, 반응형 디자인, 웹 개발">
-  <meta property="og:title" content="뷰포트 단위 심화">
-  <meta property="og:description" content="vw, vh, vmin, vmax 완벽 활용 가이드">
-  <meta property="og:url" content="https://pxtovw.co.kr/blog-viewport-units.html">
+  <title>CSS Viewport Units Explained: vw, vh, vmin, vmax, dvh, svh & lvh</title>
+  <link rel="icon" href="../favicon.ico">
+  <meta name="description" content="Master CSS viewport units: how vw, vh, vmin and vmax work, the dvh/svh/lvh fix for the mobile address bar, plus clamp() patterns and real examples.">
+  <meta name="keywords" content="css viewport units, vw vh vmin vmax, dvh svh lvh difference, viewport width, viewport height, 100vh mobile fix, responsive design, css units, fluid typography">
+  <meta property="og:title" content="CSS Viewport Units Explained: vw, vh, vmin, vmax & dvh">
+  <meta property="og:description" content="A complete guide to CSS viewport units — vw, vh, vmin, vmax — with real-world examples, the mobile 100vh fix, and best practices.">
+  <meta property="og:url" content="https://pxtovw.co.kr/en/blog-viewport-units.html">
   <meta property="og:image" content="https://pxtovw.co.kr/img/og.png">
-  <link rel="canonical" href="https://pxtovw.co.kr/blog-viewport-units.html">
+  <link rel="canonical" href="https://pxtovw.co.kr/en/blog-viewport-units.html">
   <link rel="alternate" hreflang="ko" href="https://pxtovw.co.kr/blog-viewport-units.html">
   <link rel="alternate" hreflang="en" href="https://pxtovw.co.kr/en/blog-viewport-units.html">
   <link rel="alternate" hreflang="x-default" href="https://pxtovw.co.kr/en/blog-viewport-units.html">
   <meta name="robots" content="index, follow">
   <meta property="og:type" content="article">
-  <meta property="og:site_name" content="PX-VW 변환기 - 반응형 웹 개발 도구">
+  <meta property="og:site_name" content="PX to VW Converter - Responsive Web Tools">
   <meta property="article:published_time" content="2025-07-11T09:00:00+09:00">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="뷰포트 단위 심화 | vw, vh, vmin, vmax 완벽 활용 가이드">
-  <meta name="twitter:description" content="뷰포트 단위의 심화 활용법을 알아보세요. vw, vh, vmin, vmax의 고급 활용법과 실전 예제, 주의사항까지 완벽하게 정리했습니다.">
+  <meta name="twitter:title" content="CSS Viewport Units Explained: vw, vh, vmin, vmax, dvh, svh & lvh">
+  <meta name="twitter:description" content="Master CSS viewport units: how vw, vh, vmin and vmax work, the dvh/svh/lvh fix for the mobile address bar, plus clamp() patterns and real examples.">
   <meta name="twitter:image" content="https://pxtovw.co.kr/img/og.png">
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "뷰포트 단위 심화 | vw, vh, vmin, vmax 완벽 활용 가이드",
-    "description": "뷰포트 단위의 심화 활용법을 알아보세요. vw, vh, vmin, vmax의 고급 활용법과 실전 예제, 주의사항까지 완벽하게 정리했습니다.",
+    "headline": "CSS Viewport Units Explained: vw, vh, vmin, vmax, dvh, svh & lvh",
+    "description": "Master CSS viewport units: how vw, vh, vmin and vmax work, the dvh/svh/lvh fix for the mobile address bar, plus clamp() patterns and real examples.",
     "datePublished": "2025-07-11",
     "dateModified": "2025-07-11",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://pxtovw.co.kr/blog-viewport-units.html" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://pxtovw.co.kr/en/blog-viewport-units.html" },
     "image": "https://pxtovw.co.kr/img/og.png",
-    "inLanguage": "ko",
+    "inLanguage": "en",
     "author": { "@type": "Organization", "name": "PX TO VW", "url": "https://pxtovw.co.kr/" },
     "publisher": { "@type": "Organization", "name": "PX TO VW", "logo": { "@type": "ImageObject", "url": "https://pxtovw.co.kr/img/og.png" } }
   }
   </script>
-  
+
   <!-- font add -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/blog.css">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/blog.css">
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4275974341995601"
@@ -57,127 +57,127 @@
 <body>
   <div class="blog-container">
     <div class="blog-header">
-      <h1>뷰포트 단위 심화</h1>
+      <h1>CSS Viewport Units, In Depth</h1>
       <div class="blog-meta">
-        <span>📅 2025년 7월 11일</span> | 
-        <span>👨‍💻 웹 개발</span> | 
-        <span>📐 CSS 단위</span>
+        <span>📅 July 11, 2025</span> |
+        <span>👨‍💻 Web Development</span> |
+        <span>📐 CSS Units</span>
       </div>
-      <p>vw, vh, vmin, vmax 완벽 활용 가이드</p>
+      <p>The complete guide to vw, vh, vmin, and vmax</p>
     </div>
-    
+
     <div class="blog-content">
-      <p>뷰포트 단위는 화면 크기에 비례하여 조정되는 CSS 단위로, 반응형 웹 디자인의 핵심 요소입니다. 이 글에서는 뷰포트 단위의 심화 활용법과 실전 예제를 통해 완벽한 반응형 레이아웃을 구축하는 방법을 알아보겠습니다.</p>
-      
-      <h2>1. 뷰포트 단위의 종류</h2>
-      
-      <h3>1.1 기본 뷰포트 단위</h3>
-      
+      <p>Viewport units are CSS units that scale in proportion to the size of the screen, which makes them a cornerstone of responsive web design. In this article we'll go beyond the basics and look at advanced techniques and real-world examples for building truly fluid, responsive layouts with viewport units.</p>
+
+      <h2>1. The Viewport Unit Family</h2>
+
+      <h3>1.1 The Core Viewport Units</h3>
+
       <ul>
-        <li><strong>vw (viewport width)</strong>: 뷰포트 너비의 1%</li>
-        <li><strong>vh (viewport height)</strong>: 뷰포트 높이의 1%</li>
-        <li><strong>vmin (viewport minimum)</strong>: vw와 vh 중 작은 값의 1%</li>
-        <li><strong>vmax (viewport maximum)</strong>: vw와 vh 중 큰 값의 1%</li>
+        <li><strong>vw (viewport width)</strong>: 1% of the viewport's width</li>
+        <li><strong>vh (viewport height)</strong>: 1% of the viewport's height</li>
+        <li><strong>vmin (viewport minimum)</strong>: 1% of the smaller of vw and vh</li>
+        <li><strong>vmax (viewport maximum)</strong>: 1% of the larger of vw and vh</li>
       </ul>
-      
+
       <div class="code-block">
-        /* 기본 뷰포트 단위 예시 */
+        /* Basic viewport unit examples */
         .viewport-example {
-          width: 50vw;        /* 화면 너비의 50% */
-          height: 30vh;       /* 화면 높이의 30% */
-          font-size: 2vmin;   /* vw와 vh 중 작은 값의 2% */
-          margin: 1vmax;      /* vw와 vh 중 큰 값의 1% */
+          width: 50vw;        /* 50% of the viewport width */
+          height: 30vh;       /* 30% of the viewport height */
+          font-size: 2vmin;   /* 2% of the smaller of vw and vh */
+          margin: 1vmax;      /* 1% of the larger of vw and vh */
         }
       </div>
-      
-      <h3>1.2 뷰포트 단위 계산 예시</h3>
-      
+
+      <h3>1.2 How Viewport Units Compute in Practice</h3>
+
       <div class="code-block">
-        /* 화면 크기: 1920x1080 */
+        /* Screen size: 1920x1080 */
         .example-1920x1080 {
           width: 50vw;        /* 960px (1920 × 0.5) */
           height: 30vh;       /* 324px (1080 × 0.3) */
-          font-size: 2vmin;   /* 21.6px (1080 × 0.02) - vh가 작음 */
-          margin: 1vmax;      /* 19.2px (1920 × 0.01) - vw가 큼 */
+          font-size: 2vmin;   /* 21.6px (1080 × 0.02) - vh is smaller */
+          margin: 1vmax;      /* 19.2px (1920 × 0.01) - vw is larger */
         }
-        
-        /* 화면 크기: 375x667 (iPhone) */
+
+        /* Screen size: 375x667 (iPhone) */
         .example-375x667 {
           width: 50vw;        /* 187.5px (375 × 0.5) */
           height: 30vh;       /* 200.1px (667 × 0.3) */
-          font-size: 2vmin;   /* 7.5px (375 × 0.02) - vw가 작음 */
-          margin: 1vmax;      /* 6.67px (667 × 0.01) - vh가 큼 */
+          font-size: 2vmin;   /* 7.5px (375 × 0.02) - vw is smaller */
+          margin: 1vmax;      /* 6.67px (667 × 0.01) - vh is larger */
         }
       </div>
-      
-      <h2>2. vw (Viewport Width) 심화 활용</h2>
-      
-      <h3>2.1 반응형 컨테이너</h3>
-      
+
+      <h2>2. Getting More Out of vw (Viewport Width)</h2>
+
+      <h3>2.1 Responsive Containers</h3>
+
       <div class="code-block">
-        /* 완전 반응형 컨테이너 */
+        /* Fully responsive container */
         .responsive-container {
-          width: 90vw;                    /* 화면 너비의 90% */
-          max-width: 1200px;              /* 최대 너비 제한 */
+          width: 90vw;                    /* 90% of the viewport width */
+          max-width: 1200px;              /* cap the maximum width */
           margin: 0 auto;
-          padding: 2vw;                   /* 반응형 패딩 */
+          padding: 2vw;                   /* responsive padding */
         }
-        
-        /* 유연한 그리드 시스템 */
+
+        /* Flexible grid system */
         .flexible-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 2vw;                       /* 반응형 간격 */
-          padding: 3vw;                   /* 반응형 패딩 */
+          gap: 2vw;                       /* responsive gap */
+          padding: 3vw;                   /* responsive padding */
         }
-        
-        /* 반응형 카드 */
+
+        /* Responsive card */
         .responsive-card {
           width: 100%;
-          padding: 4vw;                   /* 반응형 패딩 */
-          border-radius: 1vw;             /* 반응형 둥근 모서리 */
+          padding: 4vw;                   /* responsive padding */
+          border-radius: 1vw;             /* responsive rounded corners */
           box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.1);
         }
       </div>
-      
-      <h3>2.2 반응형 타이포그래피</h3>
-      
+
+      <h3>2.2 Fluid Typography</h3>
+
       <div class="code-block">
-        /* 기본 반응형 폰트 크기 */
+        /* Basic fluid font size */
         .responsive-text {
           font-size: clamp(1rem, 2.5vw, 2rem);
         }
-        
-        /* 제목용 반응형 폰트 */
+
+        /* Fluid font for headings */
         .responsive-heading {
           font-size: clamp(1.5rem, 4vw, 3rem);
           line-height: 1.2;
         }
-        
-        /* 부제목용 반응형 폰트 */
+
+        /* Fluid font for subheadings */
         .responsive-subheading {
           font-size: clamp(1.125rem, 3vw, 1.5rem);
           line-height: 1.3;
         }
-        
-        /* 본문용 반응형 폰트 */
+
+        /* Fluid font for body copy */
         .responsive-body {
           font-size: clamp(0.875rem, 2vw, 1rem);
           line-height: 1.6;
         }
       </div>
-      
+
       <div class="tip-box">
-        <h4>💡 clamp() 함수 활용</h4>
-        <p>clamp(최소값, 선호값, 최대값) 함수를 사용하면 뷰포트 단위의 극단적 크기 변화를 방지할 수 있습니다. 최소값과 최대값을 설정하여 적절한 범위 내에서만 조정되도록 할 수 있습니다.</p>
+        <h4>💡 Put clamp() to Work</h4>
+        <p>The clamp(minimum, preferred, maximum) function prevents viewport units from producing extreme sizes. By defining a minimum and a maximum, your values only fluctuate within a sensible range.</p>
       </div>
-      
-      <h2>3. vh (Viewport Height) 심화 활용</h2>
-      
-      <h3>3.1 풀스크린 레이아웃</h3>
-      
+
+      <h2>3. Getting More Out of vh (Viewport Height)</h2>
+
+      <h3>3.1 Full-Screen Layouts</h3>
+
       <div class="code-block">
-        /* 풀스크린 섹션 */
+        /* Full-screen section */
         .fullscreen-section {
           width: 100vw;
           height: 100vh;
@@ -186,15 +186,15 @@
           justify-content: center;
           background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
         }
-        
-        /* 헤로 섹션 */
+
+        /* Hero section */
         .hero-section {
           width: 100vw;
           height: 100vh;
           position: relative;
           overflow: hidden;
         }
-        
+
         .hero-content {
           position: absolute;
           top: 50%;
@@ -203,8 +203,8 @@
           text-align: center;
           color: white;
         }
-        
-        /* 스티키 푸터 */
+
+        /* Sticky footer */
         .sticky-footer {
           position: fixed;
           bottom: 0;
@@ -218,64 +218,66 @@
           justify-content: center;
         }
       </div>
-      
-      <h3>3.2 모바일 주소창 문제 해결</h3>
-      
+
+      <h3>3.2 Fixing the Mobile Address Bar Problem</h3>
+
       <div class="warning-box">
-        <h4>⚠️ 모바일 vh 문제</h4>
-        <p>모바일 브라우저에서 주소창이 나타나거나 사라질 때 vh 값이 변경되어 레이아웃이 깨질 수 있습니다. 이를 해결하기 위한 방법들을 알아보겠습니다.</p>
+        <h4>⚠️ The Mobile vh Problem</h4>
+        <p>On mobile browsers, the vh value changes as the address bar appears and disappears, which can break your layout. Let's look at the ways to fix this.</p>
       </div>
-      
+
       <div class="code-block">
-        /* CSS 변수를 활용한 해결책 */
+        /* Fix using a CSS custom property */
         :root {
           --vh: 1vh;
         }
-        
-        /* JavaScript로 실제 뷰포트 높이 계산 */
+
+        /* Compute the real viewport height with JavaScript */
         function setVH() {
           const vh = window.innerHeight * 0.01;
           document.documentElement.style.setProperty('--vh', `${vh}px`);
         }
-        
+
         setVH();
         window.addEventListener('resize', setVH);
-        
-        /* CSS에서 사용 */
+
+        /* Use it in your CSS */
         .mobile-friendly-height {
           height: calc(var(--vh, 1vh) * 100);
         }
-        
-        /* 또는 CSS만으로 해결 */
+
+        /* Or fix it with CSS alone */
         .mobile-height-fix {
           height: 100vh;
           height: 100dvh; /* dynamic viewport height */
         }
       </div>
-      
-      <h2>4. vmin과 vmax 심화 활용</h2>
-      
-      <h3>4.1 vmin 활용</h3>
-      
-      <p>vmin은 vw와 vh 중 작은 값을 기준으로 하므로, 화면 방향에 관계없이 일정한 크기를 유지할 수 있습니다.</p>
-      
+
+      <p>Modern browsers also ship two siblings of dvh: <strong>svh</strong> (small viewport height, measured with the browser UI expanded) and <strong>lvh</strong> (large viewport height, measured with it collapsed). In short: svh is the guaranteed-visible minimum, lvh is the maximum, and dvh tracks the current value in real time as the address bar shows or hides — which is why 100dvh is usually the right replacement for 100vh on mobile.</p>
+
+      <h2>4. Getting More Out of vmin and vmax</h2>
+
+      <h3>4.1 Working with vmin</h3>
+
+      <p>Because vmin is based on the smaller of vw and vh, it keeps elements at a consistent size regardless of screen orientation.</p>
+
       <div class="code-block">
-        /* 정사각형 요소 */
+        /* Square element */
         .square-element {
           width: 50vmin;
           height: 50vmin;
           background: #2196f3;
           border-radius: 2vmin;
         }
-        
-        /* 반응형 아이콘 */
+
+        /* Responsive icon */
         .responsive-icon {
           width: 8vmin;
           height: 8vmin;
           font-size: 4vmin;
         }
-        
-        /* 반응형 버튼 */
+
+        /* Responsive button */
         .responsive-button {
           padding: 2vmin 4vmin;
           font-size: 3vmin;
@@ -283,8 +285,8 @@
           min-width: 20vmin;
           min-height: 8vmin;
         }
-        
-        /* 반응형 아바타 */
+
+        /* Responsive avatar */
         .responsive-avatar {
           width: 15vmin;
           height: 15vmin;
@@ -292,92 +294,92 @@
           border: 0.5vmin solid #fff;
         }
       </div>
-      
-      <h3>4.2 vmax 활용</h3>
-      
-      <p>vmax는 vw와 vh 중 큰 값을 기준으로 하므로, 화면이 클 때 더 큰 크기를 가질 수 있습니다.</p>
-      
+
+      <h3>4.2 Working with vmax</h3>
+
+      <p>Because vmax is based on the larger of vw and vh, elements can grow bigger as the screen gets bigger.</p>
+
       <div class="code-block">
-        /* 큰 화면에서 더 큰 요소 */
+        /* Larger elements on larger screens */
         .large-screen-element {
           width: 30vmax;
           height: 30vmax;
           background: #ff9800;
           border-radius: 3vmax;
         }
-        
-        /* 반응형 배경 이미지 */
+
+        /* Responsive background image */
         .responsive-bg {
           background-size: 100vmax auto;
           background-position: center;
           background-repeat: no-repeat;
         }
-        
-        /* 반응형 로고 */
+
+        /* Responsive logo */
         .responsive-logo {
           width: 25vmax;
           height: auto;
           max-width: 300px;
         }
       </div>
-      
-      <h2>5. 고급 활용 기법</h2>
-      
-      <h3>5.1 뷰포트 단위 조합</h3>
-      
+
+      <h2>5. Advanced Techniques</h2>
+
+      <h3>5.1 Combining Viewport Units</h3>
+
       <div class="code-block">
-        /* 복합 뷰포트 단위 활용 */
+        /* Mixing viewport units with other units */
         .complex-layout {
           width: calc(100vw - 4rem);
           height: calc(100vh - 2rem);
           margin: 1rem;
           padding: 2vw;
         }
-        
-        /* 반응형 그리드 */
+
+        /* Responsive grid */
         .responsive-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
           gap: 2vw;
           padding: 3vw;
         }
-        
-        /* 반응형 플렉스박스 */
+
+        /* Responsive flexbox */
         .responsive-flex {
           display: flex;
           flex-wrap: wrap;
           gap: 2vw;
           padding: 2vw;
         }
-        
+
         .responsive-flex > * {
           flex: 1 1 calc(33.333% - 2vw);
           min-width: 250px;
         }
       </div>
-      
-      <h3>5.2 CSS 변수와 뷰포트 단위</h3>
-      
+
+      <h3>5.2 CSS Custom Properties and Viewport Units</h3>
+
       <div class="code-block">
-        /* 뷰포트 단위를 CSS 변수로 관리 */
+        /* Manage viewport units through CSS custom properties */
         :root {
           --spacing-xs: 1vw;
           --spacing-sm: 2vw;
           --spacing-md: 3vw;
           --spacing-lg: 4vw;
           --spacing-xl: 5vw;
-          
+
           --font-size-xs: 2vmin;
           --font-size-sm: 3vmin;
           --font-size-md: 4vmin;
           --font-size-lg: 5vmin;
           --font-size-xl: 6vmin;
-          
+
           --border-radius: 1vmin;
           --shadow: 0 1vmin 2vmin rgba(0, 0, 0, 0.1);
         }
-        
-        /* 변수 사용 */
+
+        /* Use the variables */
         .consistent-spacing {
           padding: var(--spacing-md);
           margin: var(--spacing-sm);
@@ -386,13 +388,13 @@
           font-size: var(--font-size-md);
         }
       </div>
-      
-      <h2>6. 실전 예제</h2>
-      
-      <h3>6.1 반응형 카드 컴포넌트</h3>
-      
+
+      <h2>6. Real-World Examples</h2>
+
+      <h3>6.1 A Responsive Card Component</h3>
+
       <div class="code-block">
-        /* 반응형 카드 */
+        /* Responsive card */
         .responsive-card {
           width: 100%;
           max-width: 400px;
@@ -402,24 +404,24 @@
           background: white;
           transition: transform 0.3s ease;
         }
-        
+
         .responsive-card:hover {
           transform: translateY(-1vmin);
         }
-        
+
         .card-title {
           font-size: clamp(1.25rem, 4vmin, 1.5rem);
           margin-bottom: 2vmin;
           color: #333;
         }
-        
+
         .card-content {
           font-size: clamp(0.875rem, 3vmin, 1rem);
           line-height: 1.6;
           color: #666;
           margin-bottom: 3vmin;
         }
-        
+
         .card-button {
           padding: 2vmin 4vmin;
           font-size: clamp(0.875rem, 3vmin, 1rem);
@@ -430,16 +432,16 @@
           cursor: pointer;
           transition: background 0.3s;
         }
-        
+
         .card-button:hover {
           background: #1976d2;
         }
       </div>
-      
-      <h3>6.2 반응형 네비게이션</h3>
-      
+
+      <h3>6.2 A Responsive Navigation Bar</h3>
+
       <div class="code-block">
-        /* 반응형 네비게이션 */
+        /* Responsive navigation */
         .responsive-nav {
           width: 100vw;
           height: 10vh;
@@ -453,23 +455,23 @@
           left: 0;
           z-index: 1000;
         }
-        
+
         .nav-logo {
           font-size: clamp(1.25rem, 4vmin, 1.5rem);
           color: white;
           font-weight: bold;
         }
-        
+
         .nav-menu {
           display: flex;
           gap: 4vw;
           list-style: none;
         }
-        
+
         .nav-item {
           font-size: clamp(0.875rem, 3vmin, 1rem);
         }
-        
+
         .nav-link {
           color: white;
           text-decoration: none;
@@ -477,12 +479,12 @@
           border-radius: 1vmin;
           transition: background 0.3s;
         }
-        
+
         .nav-link:hover {
           background: rgba(255, 255, 255, 0.1);
         }
-        
-        /* 모바일 메뉴 */
+
+        /* Mobile menu */
         .mobile-menu-toggle {
           display: none;
           font-size: 4vmin;
@@ -491,48 +493,48 @@
           border: none;
           cursor: pointer;
         }
-        
+
         @media (max-width: 768px) {
           .nav-menu {
             display: none;
           }
-          
+
           .mobile-menu-toggle {
             display: block;
           }
         }
       </div>
-      
-      <h2>7. 성능 최적화</h2>
-      
-      <h3>7.1 뷰포트 단위 최적화</h3>
-      
+
+      <h2>7. Performance Optimization</h2>
+
+      <h3>7.1 Using Viewport Units Efficiently</h3>
+
       <ul>
-        <li><strong>과도한 사용 방지</strong>: 모든 요소에 뷰포트 단위를 사용하면 성능이 저하될 수 있습니다</li>
-        <li><strong>적절한 범위 설정</strong>: clamp() 함수로 최소/최대값을 설정하여 극단적 변화 방지</li>
-        <li><strong>CSS 변수 활용</strong>: 자주 사용되는 값은 CSS 변수로 관리</li>
-        <li><strong>브라우저 호환성 고려</strong>: 구형 브라우저에서는 fallback 값 제공</li>
+        <li><strong>Don't overuse them</strong>: applying viewport units to every element can hurt rendering performance</li>
+        <li><strong>Set sensible bounds</strong>: use clamp() to define minimum and maximum values and avoid extreme sizes</li>
+        <li><strong>Lean on CSS custom properties</strong>: manage frequently used values as variables</li>
+        <li><strong>Mind browser compatibility</strong>: provide fallback values for older browsers</li>
       </ul>
-      
-      <h3>7.2 브라우저 호환성</h3>
-      
+
+      <h3>7.2 Browser Compatibility</h3>
+
       <div class="code-block">
-        /* 브라우저 호환성을 위한 fallback */
+        /* Fallbacks for browser compatibility */
         .fallback-example {
           width: 90%;                    /* fallback */
-          width: 90vw;                   /* 모던 브라우저 */
+          width: 90vw;                   /* modern browsers */
           font-size: 16px;               /* fallback */
-          font-size: clamp(16px, 2.5vw, 24px); /* 모던 브라우저 */
+          font-size: clamp(16px, 2.5vw, 24px); /* modern browsers */
         }
-        
-        /* @supports로 기능 감지 */
+
+        /* Feature detection with @supports */
         @supports (width: 1vw) {
           .viewport-supported {
             width: 50vw;
             height: 50vh;
           }
         }
-        
+
         @supports not (width: 1vw) {
           .viewport-fallback {
             width: 50%;
@@ -540,81 +542,81 @@
           }
         }
       </div>
-      
-      <h2>8. 주의사항 및 문제 해결</h2>
-      
-      <h3>8.1 일반적인 문제들</h3>
-      
+
+      <h2>8. Pitfalls and Troubleshooting</h2>
+
+      <h3>8.1 Common Problems</h3>
+
       <div class="warning-box">
-        <h4>⚠️ 뷰포트 단위 주의사항</h4>
+        <h4>⚠️ Viewport Unit Pitfalls</h4>
         <ul>
-          <li><strong>극단적 크기 변화</strong>: 매우 작거나 큰 화면에서 부적절한 크기</li>
-          <li><strong>모바일 주소창 문제</strong>: vh 단위의 모바일 브라우저 문제</li>
-          <li><strong>성능 이슈</strong>: 과도한 사용으로 인한 렌더링 성능 저하</li>
-          <li><strong>접근성 문제</strong>: 사용자 설정을 무시할 수 있음</li>
+          <li><strong>Extreme size swings</strong>: sizes become inappropriate on very small or very large screens</li>
+          <li><strong>Mobile address bar issues</strong>: the well-known vh problem in mobile browsers</li>
+          <li><strong>Performance issues</strong>: overuse can degrade rendering performance</li>
+          <li><strong>Accessibility concerns</strong>: viewport-based sizing can override user preferences like browser zoom</li>
         </ul>
       </div>
-      
-      <h3>8.2 해결 방법</h3>
-      
+
+      <h3>8.2 Solutions</h3>
+
       <div class="code-block">
-        /* 1. 극단적 크기 방지 */
+        /* 1. Prevent extreme sizes */
         .safe-viewport {
           font-size: clamp(12px, 2.5vw, 24px);
           width: clamp(300px, 50vw, 800px);
         }
-        
-        /* 2. 모바일 주소창 문제 해결 */
+
+        /* 2. Fix the mobile address bar problem */
         .mobile-safe-height {
           height: 100vh;
           height: 100dvh; /* dynamic viewport height */
         }
-        
-        /* 3. 성능 최적화 */
+
+        /* 3. Optimize performance */
         .optimized-viewport {
           will-change: auto;
-          transform: translateZ(0); /* GPU 가속 */
+          transform: translateZ(0); /* GPU acceleration */
         }
-        
-        /* 4. 접근성 고려 */
+
+        /* 4. Respect accessibility preferences */
         @media (prefers-reduced-motion: reduce) {
           .viewport-animation {
             transition: none;
           }
         }
       </div>
-      
+
       <div class="success-box">
-        <h4>✅ 뷰포트 단위 모범 사례</h4>
+        <h4>✅ Viewport Unit Best Practices</h4>
         <ul>
-          <li>clamp() 함수로 안전한 범위 설정</li>
-          <li>CSS 변수로 일관성 유지</li>
-          <li>브라우저 호환성 고려</li>
-          <li>성능 최적화 적용</li>
-          <li>접근성 고려사항 반영</li>
-          <li>실제 기기에서 테스트</li>
+          <li>Use clamp() to keep values within a safe range</li>
+          <li>Keep values consistent with CSS custom properties</li>
+          <li>Account for browser compatibility</li>
+          <li>Apply performance optimizations</li>
+          <li>Factor in accessibility considerations</li>
+          <li>Test on real devices</li>
         </ul>
       </div>
-      
-      <h2>9. PX-VW 변환기와 뷰포트 단위</h2>
-      
-      <p>뷰포트 단위를 효과적으로 활용하려면 정확한 변환이 필요합니다. <a href="index.html">PX-VW 변환기</a>를 사용하면 디자인 시안의 픽셀 값을 정확한 뷰포트 단위로 변환할 수 있습니다.</p>
-      
+
+      <h2>9. The PX to VW Converter and Viewport Units</h2>
+
+      <p>Working effectively with viewport units requires accurate conversion. With the <a href="index.html">PX to VW Converter</a>, you can turn the pixel values from your design mockups into precise viewport units.</p>
+
       <div class="tip-box">
-        <h4>🔧 실전 활용 팁</h4>
-        <p>디자인 시안의 px 값을 PX-VW 변환기로 변환한 후, clamp() 함수와 함께 사용하여 안전하고 반응형인 레이아웃을 구축하세요. 이를 통해 모든 화면 크기에서 최적의 사용자 경험을 제공할 수 있습니다.</p>
+        <h4>🔧 Practical Tip</h4>
+        <p>Convert the px values from your design mockups with the PX to VW Converter, then combine the results with clamp() to build layouts that are both safe and responsive. That way you can deliver an optimal user experience at every screen size.</p>
       </div>
-      
-      <h2>10. 결론</h2>
-      
-      <p>뷰포트 단위는 현대 웹 디자인의 필수 요소입니다. vw, vh, vmin, vmax를 적절히 활용하면 완벽한 반응형 웹사이트를 구축할 수 있습니다. 하지만 주의사항을 고려하고 최적화 기법을 적용하여 사용자 경험을 향상시키는 것이 중요합니다. PX-VW 변환기를 활용하면 더욱 효율적으로 뷰포트 단위를 활용할 수 있습니다.</p>
-      
+
+      <h2>10. Conclusion</h2>
+
+      <p>Viewport units are an essential part of modern web design. Used well, vw, vh, vmin, and vmax let you build perfectly responsive websites. Just be sure to keep the pitfalls in mind and apply the optimization techniques above to keep the user experience solid. And with the PX to VW Converter, working with viewport units becomes that much more efficient.</p>
+
       <div class="nav-links">
-        <a href="index.html">🏠 메인으로</a>
-        <a href="how-to-use.html">📖 사용법 가이드</a>
-        <a href="blog-css-units.html">📐 CSS 단위 가이드</a>
+        <a href="index.html">🏠 Back to Converter</a>
+        <a href="../how-to-use.html">📖 How to Use</a>
+        <a href="../blog-css-units.html">📐 CSS Units Guide</a>
       </div>
     </div>
   </div>
-<script src="js/script.js"></script></body>
-</html> 
+<script src="../js/script.js"></script></body>
+</html>
