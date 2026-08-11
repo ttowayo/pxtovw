@@ -433,73 +433,106 @@ if (mobileToggleBtn && pxToVwBox && vwToPxBox && css1Box && css2Box) {
   setInitialMobileState();
 }
 
-// GNB 활성 메뉴 자동 스크롤 기능 (선택된 메뉴를 가장 앞으로)
+// GNB 더보기(overflow) 드롭다운: 화면에 들어가는 메뉴만 보여주고
+// 넘치는 메뉴는 "더보기 ▾" 드롭다운으로 이동 (Priority+ 패턴)
 document.addEventListener("DOMContentLoaded", function () {
-  const scrollContainer = document.querySelector(".gnb-menu-inner");
-  const activeItem = document.querySelector(".gnb-item.active");
+  const inner = document.querySelector(".gnb-menu-inner");
+  if (!inner) return;
 
-  if (scrollContainer && activeItem) {
-    // 활성 메뉴의 위치로 스크롤 이동
-    const targetScroll = activeItem.offsetLeft - 30; // 여유 공간을 30px로 상향 조정
-    scrollContainer.scrollLeft = targetScroll;
+  const items = Array.from(inner.querySelectorAll(".gnb-item"));
+  if (items.length === 0) return;
+
+  const isEnglish = document.documentElement.lang === "en";
+
+  // 더보기 버튼 + 드롭다운 목록 생성
+  const more = document.createElement("div");
+  more.className = "gnb-more";
+  more.innerHTML =
+    '<button type="button" class="gnb-more-btn" aria-haspopup="true" aria-expanded="false">' +
+    (isEnglish ? "More" : "더보기") +
+    ' <span class="gnb-caret">▼</span></button>' +
+    '<div class="gnb-more-list"></div>';
+  inner.appendChild(more);
+
+  const moreBtn = more.querySelector(".gnb-more-btn");
+  const moreList = more.querySelector(".gnb-more-list");
+
+  function closeDropdown() {
+    more.classList.remove("open");
+    moreBtn.setAttribute("aria-expanded", "false");
   }
-});
 
-// GNB 메뉴 마우스 드래그 스크롤 기능
-document.addEventListener("DOMContentLoaded", function () {
-  const scrollContainer = document.querySelector(".gnb-menu-inner");
+  function layout() {
+    // 측정을 위해 모든 메뉴를 원래 위치(더보기 버튼 앞)로 복원
+    items.forEach((item) => inner.insertBefore(item, more));
+    more.classList.add("is-visible");
 
-  if (scrollContainer) {
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-    let isDragged = false;
+    const innerStyle = getComputedStyle(inner);
+    const gap = parseFloat(innerStyle.columnGap || innerStyle.gap) || 0;
+    const available =
+      inner.clientWidth -
+      parseFloat(innerStyle.paddingLeft) -
+      parseFloat(innerStyle.paddingRight);
 
-    scrollContainer.addEventListener("mousedown", (e) => {
-      isDown = true;
-      scrollContainer.classList.add("active-drag");
-      startX = e.pageX - scrollContainer.offsetLeft;
-      scrollLeft = scrollContainer.scrollLeft;
-      isDragged = false;
-    });
+    const widths = items.map((item) => item.offsetWidth);
+    const totalWidth =
+      widths.reduce((sum, w) => sum + w, 0) + gap * (items.length - 1);
 
-    scrollContainer.addEventListener("mouseleave", () => {
-      isDown = false;
-      scrollContainer.classList.remove("active-drag");
-    });
+    // 전부 들어가면 더보기 버튼 숨김
+    if (totalWidth <= available) {
+      more.classList.remove("is-visible", "has-active");
+      closeDropdown();
+      return;
+    }
 
-    scrollContainer.addEventListener("mouseup", (e) => {
-      isDown = false;
-      scrollContainer.classList.remove("active-drag");
-    });
+    // 더보기 버튼 자리를 확보한 상태에서 들어가는 만큼만 계산
+    const moreWidth = more.offsetWidth + gap;
+    let used = moreWidth;
+    let fitCount = 0;
+    for (let i = 0; i < items.length; i++) {
+      const w = widths[i] + (i > 0 ? gap : 0);
+      if (used + w > available) break;
+      used += w;
+      fitCount++;
+    }
 
-    scrollContainer.addEventListener("mousemove", (e) => {
-      if (!isDown) return;
+    // 넘치는 메뉴를 드롭다운으로 이동
+    items.slice(fitCount).forEach((item) => moreList.appendChild(item));
 
-      const x = e.pageX - scrollContainer.offsetLeft;
-      const walk = (x - startX) * 2; // 스크롤 속도 배율
-
-      if (Math.abs(walk) > 5) {
-        isDragged = true;
-      }
-
-      if (isDragged) {
-        e.preventDefault();
-        scrollContainer.scrollLeft = scrollLeft - walk;
-      }
-    });
-
-    // 드래그 중 클릭(링크 이동) 방지
-    scrollContainer.addEventListener(
-      "click",
-      (e) => {
-        if (isDragged) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      },
-      true,
+    // 현재 페이지 메뉴가 드롭다운 안에 있으면 버튼을 활성 표시
+    more.classList.toggle(
+      "has-active",
+      moreList.querySelector(".gnb-item.active") !== null,
     );
+  }
+
+
+  moreBtn.addEventListener("click", function () {
+    const isOpen = more.classList.toggle("open");
+    moreBtn.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!more.contains(e.target)) closeDropdown();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeDropdown();
+  });
+
+  let resizeRaf = null;
+  window.addEventListener("resize", function () {
+    if (resizeRaf) cancelAnimationFrame(resizeRaf);
+    resizeRaf = requestAnimationFrame(layout);
+  });
+
+  layout();
+  // 배치 완료 후에는 드롭다운이 잘리지 않도록 overflow 해제
+  inner.classList.add("gnb-ready");
+
+  // 웹폰트 로드 후 글자 폭이 달라질 수 있으므로 다시 계산
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(layout);
   }
 });
 
@@ -513,119 +546,244 @@ document.addEventListener("DOMContentLoaded", function () {
   const footer = document.createElement("footer");
   footer.className = "app-footer";
 
-  // /en/ 하위 페이지에서도 링크가 동작하도록 경로 보정
-  const pathPrefix =
-    window.location.pathname.indexOf("/en/") !== -1 ? "../" : "";
+  // 언어별 분기: 영문 페이지(/en/)는 영문 라벨과 영문 정책 페이지로 연결
+  // (각 언어의 정책 페이지가 같은 폴더에 있으므로 상대 경로 그대로 사용)
+  const isEnglish = document.documentElement.lang === "en";
+
+  const t = isEnglish
+    ? {
+        about: "About",
+        privacy: "Privacy Policy",
+        terms: "Terms of Service",
+        contact: "Contact",
+        notesTitle: "Release Notes",
+        info1:
+          "PX to VW Converter is a free tool for web designers and front-end developers.",
+        info2:
+          "All conversion results are for reference only — always verify before applying them.",
+      }
+    : {
+        about: "사이트 소개",
+        privacy: "개인정보처리방침",
+        terms: "이용약관",
+        contact: "문의하기",
+        notesTitle: "업데이트 노트",
+        info1: "PX to VW 변환기는 웹 디자이너와 프론트엔드 개발자를 위한 무료 도구입니다.",
+        info2: "모든 변환 결과는 참고용이며, 실제 적용 시 반드시 확인이 필요합니다.",
+      };
+
+  const versionNotes = isEnglish
+    ? [
+        {
+          version: "v2.2.0 (2026.08.10)",
+          items: [
+            "New PX ↔ EM converter",
+            "New Letter Spacing converter (Figma % and Photoshop VA support)",
+            "New Line Height calculator",
+            "English version released (PX↔VW, PX↔REM, CSS Clamp)",
+            "FAQ sections added to major tool pages",
+            "Accessibility improvements, including pinch-zoom on mobile",
+          ],
+        },
+        {
+          version: "v2.1.0 (2026.04.24)",
+          items: [
+            "New Section Divider Generator",
+            "New Aspect Ratio Calculator",
+            "New CSS Animation Generator",
+          ],
+        },
+        {
+          version: "v2.0.0 (2026.04.24)",
+          items: [
+            "New CSS Grid Generator",
+            "Visual grid design with automatic code generation",
+          ],
+        },
+        {
+          version: "v1.6.0 (2026.04.24)",
+          items: [
+            "New WCAG Contrast Checker",
+            "Automatic color-contrast checks for web accessibility",
+          ],
+        },
+        {
+          version: "v1.5.0 (2026.04.24)",
+          items: [
+            "New CSS Flexbox Visualizer",
+            "Layout property visualization with automatic code generation",
+          ],
+        },
+        {
+          version: "v1.4.0 (2026.04.24)",
+          items: [
+            "New CSS Gradient Generator",
+            "Enhanced visual color picker in the color converter",
+            "CSS Minifier performance and UI improvements",
+          ],
+        },
+        {
+          version: "v1.3.0 (2026.04.24)",
+          items: [
+            "Color converter (HEX ↔ RGB ↔ HSL) added",
+            "CSS Minifier / Formatter added",
+            "CSS Clamp generator UI redesign",
+          ],
+        },
+        {
+          version: "v1.2.0 (2026.04.23)",
+          items: [
+            "CSS style and visualization generators added",
+            "Box Shadow & Text Shadow generator",
+            "Border-Radius generator (Liquid Shape)",
+            "Glassmorphism & Neumorphism generators",
+          ],
+        },
+        {
+          version: "v1.1.0 (2026.03.23)",
+          items: [
+            "PX ↔ REM converter and CSS Clamp generator added",
+            "Top navigation (GNB) added, utility usability improved",
+            "Mobile UI optimization (readability, wider vw usage)",
+          ],
+        },
+        {
+          version: "v1.0.1 (2026.03.23)",
+          items: [
+            'Fixed a conversion error when "Remove property" was checked on CSS containing comments',
+            "Adjusted ad banner height",
+          ],
+        },
+        {
+          version: "v1.0.0 (2024.10.01)",
+          items: [
+            "Initial release with two-way PX ↔ VW conversion",
+            "Breakpoint presets and batch CSS conversion",
+          ],
+        },
+      ]
+    : [
+        {
+          version: "v2.2.0 (2026.08.10)",
+          items: [
+            "PX ↔ EM 변환기 신규 추가",
+            "자간(Letter Spacing) 변환기 신규 추가 (피그마 %·포토샵 VA 지원)",
+            "행간(Line Height) 계산기 신규 추가",
+            "영어 버전 공개 (PX↔VW, PX↔REM, CSS Clamp)",
+            "주요 도구 페이지 FAQ 섹션 추가",
+            "모바일 화면 확대(핀치 줌) 허용 등 접근성 개선",
+          ],
+        },
+        {
+          version: "v2.1.0 (2026.04.24)",
+          items: [
+            "Section Divider Generator 신규 추가",
+            "Aspect Ratio Calculator 신규 추가",
+            "CSS Animation Generator 신규 추가",
+          ],
+        },
+        {
+          version: "v2.0.0 (2026.04.24)",
+          items: [
+            "CSS Grid Generator 신규 추가",
+            "시각적 그리드 설계 및 자동 코드 생성 기능",
+          ],
+        },
+        {
+          version: "v1.6.0 (2026.04.24)",
+          items: [
+            "WCAG Contrast Checker 신규 추가",
+            "웹 접근성을 위한 컬러 대비 자동 검사",
+          ],
+        },
+        {
+          version: "v1.5.0 (2026.04.24)",
+          items: [
+            "CSS Flexbox Visualizer 신규 추가",
+            "레이아웃 속성 시각화 및 자동 코드 생성",
+          ],
+        },
+        {
+          version: "v1.4.0 (2026.04.24)",
+          items: [
+            "CSS Gradient Generator 신규 추가",
+            "컬러 변환기 시각적 컬러피커 기능 강화",
+            "CSS 도구(Minifier) 성능 및 UI 개선",
+          ],
+        },
+        {
+          version: "v1.3.0 (2026.04.24)",
+          items: [
+            "색상 변환기 (HEX ↔ RGB ↔ HSL) 추가",
+            "CSS Minifier / Formatter 도구 추가",
+            "CSS Clamp 생성기 UI 디자인 전면 개편",
+          ],
+        },
+        {
+          version: "v1.2.0 (2026.04.23)",
+          items: [
+            "CSS 스타일 및 시각화 생성기 추가",
+            "Box Shadow & Text Shadow 생성기",
+            "Border-Radius 생성기 (Liquid Shape)",
+            "글래스모피즘 & 뉴모피즘 생성기",
+          ],
+        },
+        {
+          version: "v1.1.0 (2026.03.23)",
+          items: [
+            "PX ↔ REM 변환기 및 CSS Clamp 생성기 기능 추가",
+            "상단 네비게이션(GNB) 추가 및 보조 도구 사용성 개선",
+            "모바일 환경 UI 최적화(가독성 개편 및 vw 적용 확대)",
+          ],
+        },
+        {
+          version: "v1.0.1 (2026.03.23)",
+          items: [
+            'CSS "속성삭제" 체크 시 주석이 포함된 경우 발생하는 변환 오류 수정',
+            "광고 배너 높이 조정",
+          ],
+        },
+        {
+          version: "v1.0.0 (2024.10.01)",
+          items: [
+            "PX ↔ VW 양방향 변환 기본 기능 출시",
+            "Breakpoints 프리셋 제공 및 CSS 텍스트 일괄 변환 지원",
+          ],
+        },
+      ];
+
+  const versionHtml = versionNotes
+    .map(
+      (note) =>
+        `<div class="version-item"><strong>${note.version}</strong><ul>` +
+        note.items.map((item) => `<li>${item}</li>`).join("") +
+        `</ul></div>`,
+    )
+    .join("");
 
   footer.innerHTML = `
         <div class="footer-content">
             <div class="footer-links">
-                <a href="${pathPrefix}about.html">사이트 소개</a>
-                <a href="${pathPrefix}privacy.html" class="privacy-link">개인정보처리방침</a>
-                <a href="${pathPrefix}terms.html">이용약관</a>
-                <a href="${pathPrefix}contact.html">문의하기</a>
+                <a href="about.html">${t.about}</a>
+                <a href="privacy.html" class="privacy-link">${t.privacy}</a>
+                <a href="terms.html">${t.terms}</a>
+                <a href="contact.html">${t.contact}</a>
                 <div class="version-info">
                     <button id="version-btn" class="version-btn">
                         v2.2.0 <span>▼</span>
                     </button>
                     <div class="version-modal" id="version-modal">
                         <h3>
-                            업데이트 노트
+                            ${t.notesTitle}
                             <button type="button" class="close-version-btn" id="close-version-btn">&times;</button>
                         </h3>
-                        <div class="version-item">
-                            <strong>v2.2.0 (2026.08.10)</strong>
-                            <ul>
-                                <li>PX ↔ EM 변환기 신규 추가</li>
-                                <li>자간(Letter Spacing) 변환기 신규 추가 (피그마 %·포토샵 VA 지원)</li>
-                                <li>행간(Line Height) 계산기 신규 추가</li>
-                                <li>영어 버전 공개 (PX↔VW, PX↔REM, CSS Clamp)</li>
-                                <li>주요 도구 페이지 FAQ 섹션 추가</li>
-                                <li>모바일 화면 확대(핀치 줌) 허용 등 접근성 개선</li>
-                            </ul>
-                        </div>
-                        <div class="version-item">
-                            <strong>v2.1.0 (2026.04.24)</strong>
-                            <ul>
-                                <li>Section Divider Generator 신규 추가</li>
-                                <li>Aspect Ratio Calculator 신규 추가</li>
-                                <li>CSS Animation Generator 신규 추가</li>
-                            </ul>
-                        </div>
-                        <div class="version-item">
-                            <strong>v2.0.0 (2026.04.24)</strong>
-                            <ul>
-                                <li>CSS Grid Generator 신규 추가</li>
-                                <li>시각적 그리드 설계 및 자동 코드 생성 기능</li>
-                            </ul>
-                        </div>
-                        <div class="version-item">
-                            <strong>v1.6.0 (2026.04.24)</strong>
-                            <ul>
-                                <li>WCAG Contrast Checker 신규 추가</li>
-                                <li>웹 접근성을 위한 컬러 대비 자동 검사</li>
-                            </ul>
-                        </div>
-                        <div class="version-item">
-                            <strong>v1.5.0 (2026.04.24)</strong>
-                            <ul>
-                                <li>CSS Flexbox Visualizer 신규 추가</li>
-                                <li>레이아웃 속성 시각화 및 자동 코드 생성</li>
-                            </ul>
-                        </div>
-                        <div class="version-item">
-                            <strong>v1.4.0 (2026.04.24)</strong>
-                            <ul>
-                                <li>CSS Gradient Generator 신규 추가</li>
-                                <li>컬러 변환기 시각적 컬러피커 기능 강화</li>
-                                <li>CSS 도구(Minifier) 성능 및 UI 개선</li>
-                            </ul>
-                        </div>
-                        <div class="version-item">
-                            <strong>v1.3.0 (2026.04.24)</strong>
-                            <ul>
-                                <li>색상 변환기 (HEX ↔ RGB ↔ HSL) 추가</li>
-                                <li>CSS Minifier / Formatter 도구 추가</li>
-                                <li>CSS Clamp 생성기 UI 디자인 전면 개편</li>
-                            </ul>
-                        </div>
-                        <div class="version-item">
-                            <strong>v1.2.0 (2026.04.23)</strong>
-                            <ul>
-                                <li>CSS 스타일 및 시각화 생성기 추가</li>
-                                <li>Box Shadow & Text Shadow 생성기</li>
-                                <li>Border-Radius 생성기 (Liquid Shape)</li>
-                                <li>글래스모피즘 & 뉴모피즘 생성기</li>
-                            </ul>
-                        </div>
-                        <div class="version-item">
-                            <strong>v1.1.0 (2026.03.23)</strong>
-                            <ul>
-                                <li>PX ↔ REM 변환기 및 CSS Clamp 생성기 기능 추가</li>
-                                <li>상단 네비게이션(GNB) 추가 및 보조 도구 사용성 개선</li>
-                                <li>모바일 환경 UI 최적화(가독성 개편 및 vw 적용 확대)</li>
-                            </ul>
-                        </div>
-                        <div class="version-item">
-                            <strong>v1.0.1 (2026.03.23)</strong>
-                            <ul>
-                                <li>CSS "속성삭제" 체크 시 주석이 포함된 경우 발생하는 변환 오류 수정</li>
-                                <li>광고 배너 높이 조정</li>
-                            </ul>
-                        </div>
-                        <div class="version-item">
-                            <strong>v1.0.0 (2024.10.01)</strong>
-                            <ul>
-                                <li>PX ↔ VW 양방향 변환 기본 기능 출시</li>
-                                <li>Breakpoints 프리셋 제공 및 CSS 텍스트 일괄 변환 지원</li>
-                            </ul>
-                        </div>
+                        ${versionHtml}
                     </div>
                 </div>
             </div>
             <div class="footer-info">
-                <p>PX to VW 변환기는 웹 디자이너와 프론트엔드 개발자를 위한 무료 도구입니다.</p>
-                <p>모든 변환 결과는 참고용이며, 실제 적용 시 반드시 확인이 필요합니다.</p>
+                <p>${t.info1}</p>
+                <p>${t.info2}</p>
                 <p class="footer-copyright">© 2026 PX to VW. All rights reserved.</p>
             </div>
         </div>

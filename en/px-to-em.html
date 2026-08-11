@@ -1,43 +1,40 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PX to EM 변환기 (픽셀 ↔ 엠) | 부모 폰트 기준 CSS 단위 계산기</title>
-    <link rel="icon" href="favicon.ico" />
-    <link rel="canonical" href="https://pxtovw.co.kr/px-to-em.html" />
+    <title>PX to EM Converter (Pixels ↔ Em) | Free CSS Typography Calculator</title>
+    <link rel="icon" href="../favicon.ico" />
+    <link rel="canonical" href="https://pxtovw.co.kr/en/px-to-em.html" />
     <link rel="alternate" hreflang="ko" href="https://pxtovw.co.kr/px-to-em.html" />
     <link rel="alternate" hreflang="en" href="https://pxtovw.co.kr/en/px-to-em.html" />
     <link rel="alternate" hreflang="x-default" href="https://pxtovw.co.kr/en/px-to-em.html" />
-    <meta name="title" content="PX to EM 변환기 | 부모 폰트 기준 계산기" />
+    <meta name="title" content="PX to EM Converter | Parent Font Size Calculator" />
     <meta
       name="description"
-      content="픽셀(px)을 EM 단위로, EM을 픽셀로 변환하는 무료 계산기입니다. 부모 요소의 폰트 크기를 기준으로 정확하게 변환하고, CSS 코드 전체를 한 번에 일괄 변환할 수 있습니다."
+      content="Free PX to EM converter for designers and developers. Set the parent font size, convert pixels to em instantly, or batch-convert an entire CSS file. Perfect for component-based, scalable typography."
     />
     <meta
       name="keywords"
-      content="px to em, em to px, em 계산기, px em 변환기, em 변환, CSS em, 부모 폰트 사이즈, CSS 단위 변환, 폰트 크기 변환, 웹 퍼블리셔 툴, 프론트엔드 도구"
+      content="px to em, px to em converter, em to px, em calculator, css em calculator, convert pixels to em, em unit css, parent font size, relative font size, css unit converter, responsive typography"
     />
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="PX to EM 변환기 (픽셀 ↔ 엠) | CSS 단위 계산기"
+      content="PX to EM Converter (Pixels ↔ Em) | CSS Unit Calculator"
     />
-    <meta
-      property="og:site_name"
-      content="PX-VW 변환기 - 반응형 웹 개발 도구"
-    />
+    <meta property="og:site_name" content="PX to VW Converter - Responsive Web Tools" />
     <meta
       property="og:description"
-      content="부모 폰트 크기를 기준으로 픽셀(px)을 EM 단위로 정확하게 변환하세요. CSS 코드 일괄 변환도 지원합니다."
+      content="Set the parent font size and convert pixels to em instantly. Batch CSS conversion supported. Ideal for component-based design."
     />
-    <meta property="og:url" content="https://pxtovw.co.kr/px-to-em.html" />
+    <meta property="og:url" content="https://pxtovw.co.kr/en/px-to-em.html" />
     <meta property="og:image" content="https://pxtovw.co.kr/img/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="PX to EM 변환기 | CSS 단위 계산기" />
+    <meta name="twitter:title" content="PX to EM Converter | CSS Typography Tool" />
     <meta
       name="twitter:description"
-      content="픽셀(px)을 엠(em) 단위로 쉽고 정확하게 변환해주는 CSS 필수 도구."
+      content="Convert pixels to em units instantly based on the parent font size. Free tool for scalable, component-based typography."
     />
     <meta name="twitter:image" content="https://pxtovw.co.kr/img/og.png" />
     <meta name="robots" content="index, follow" />
@@ -47,12 +44,13 @@
       {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "PX to EM 변환기",
-        "url": "https://pxtovw.co.kr/px-to-em.html",
-        "description": "부모 요소의 폰트 크기를 기준으로 픽셀(px)과 EM 단위를 양방향으로 변환하는 개발자용 계산기입니다.",
+        "name": "PX to EM Converter",
+        "url": "https://pxtovw.co.kr/en/px-to-em.html",
+        "description": "A free developer calculator that converts pixels (px) to em units in both directions based on the parent element's font size, including batch CSS conversion.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "All",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+        "inLanguage": "en",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
       }
     </script>
     <script type="application/ld+json">
@@ -60,8 +58,8 @@
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://pxtovw.co.kr/" },
-          { "@type": "ListItem", "position": 2, "name": "PX to EM 변환기", "item": "https://pxtovw.co.kr/px-to-em.html" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pxtovw.co.kr/en/" },
+          { "@type": "ListItem", "position": 2, "name": "PX to EM Converter", "item": "https://pxtovw.co.kr/en/px-to-em.html" }
         ]
       }
     </script>
@@ -72,34 +70,34 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "1em은 몇 px인가요?",
+            "name": "How many pixels is 1em?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "1em은 현재 요소에 적용된 폰트 크기와 같습니다. 별도 설정이 없다면 브라우저 기본값인 16px이므로 1em = 16px입니다. 부모 요소의 폰트 크기가 20px이면 자식 요소의 1em은 20px이 됩니다."
+              "text": "1em equals the font size applied to the current element. Without any custom styles it inherits the browser default of 16px, so 1em = 16px. If the parent element's font size is 20px, then 1em inside a child equals 20px."
             }
           },
           {
             "@type": "Question",
-            "name": "EM과 REM의 차이는 무엇인가요?",
+            "name": "What is the difference between EM and REM?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "EM은 부모(정확히는 현재 요소)의 폰트 크기를 기준으로 하고, REM은 항상 html 루트 요소의 폰트 크기를 기준으로 합니다. EM은 중첩될수록 크기가 누적되어 계산이 복잡해질 수 있으므로, 전역적인 크기는 REM, 컴포넌트 내부의 상대적인 크기(패딩, 아이콘 등)는 EM을 쓰는 것이 일반적입니다."
+              "text": "EM is relative to the parent (strictly, the current element's) font size, while REM always references the html root element's font size. Because em values compound when elements are nested, the common practice is to use rem for global sizing and em for proportions inside a component, such as padding and icons."
             }
           },
           {
             "@type": "Question",
-            "name": "px를 em으로 변환하는 공식은 무엇인가요?",
+            "name": "What is the formula to convert px to em?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "em 값 = 변환할 px 값 ÷ 부모 요소의 폰트 크기(px)입니다. 예를 들어 부모 폰트가 16px일 때 24px는 24 ÷ 16 = 1.5em이 됩니다."
+              "text": "em = px value ÷ parent font size in px. For example, with a 16px parent font, 24px equals 24 ÷ 16 = 1.5em."
             }
           },
           {
             "@type": "Question",
-            "name": "언제 EM 단위를 사용하는 것이 좋나요?",
+            "name": "When should I use the EM unit?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "버튼의 패딩, 아이콘 크기, letter-spacing처럼 글자 크기에 비례해서 함께 커지거나 작아져야 하는 속성에 EM이 적합합니다. 폰트 크기만 바꾸면 관련 요소들이 자동으로 비율을 유지하기 때문에 컴포넌트 단위 디자인에 유리합니다."
+              "text": "EM is ideal for properties that should scale with the text, such as button padding, icon sizes, and letter-spacing. Change only the font size and every related dimension keeps its proportions automatically, which makes em perfect for component-based design."
             }
           }
         ]
@@ -148,8 +146,8 @@
       })(window, document, "script", "dataLayer", "GTM-W9S8HFM9");
     </script>
     <!-- End Google Tag Manager -->
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/reset.css" />
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4275974341995601"
@@ -166,21 +164,7 @@
           </a>
           <div class="app-header-tools">
             <div class="right-tools">
-              <select class="blog-select" onchange="if (this.value) location.href = this.value;">
-                <option value="">📖 블로그 및 문서</option>
-                <option value="how-to-use.html">📖 사용법 보기</option>
-                <option value="blog-css-units.html">📐 CSS 단위 가이드</option>
-                <option value="blog-responsive-design.html">📱 반응형 디자인</option>
-                <option value="blog-mobile-first.html">📱 모바일 퍼스트</option>
-                <option value="blog-css-best-practices.html">🎨 CSS 모범 사례</option>
-                <option value="blog-viewport-units.html">📐 뷰포트 단위</option>
-                <option value="blog-when-not-to-use-vw.html">🚫 VW 사용 주의사항</option>
-                <option value="blog-clamp-vs-vw.html">🖇️ Clamp vs VW 비교</option>
-                <option value="blog-1440px-conversion.html">🖥️ 1440px 실무 가이드</option>
-                <option value="blog-mobile-font-responsive.html">✍️ 모바일 폰트 계산법</option>
-                <option value="blog-vw-accessibility.html">♿ VW와 웹 접근성</option>
-              </select>
-              <a href="en/px-to-em.html" class="lang-switch" title="View in English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>EN</a>
+              <a href="../px-to-em.html" class="lang-switch" title="한국어로 보기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>한국어</a>
             </div>
           </div>
         </div>
@@ -192,18 +176,16 @@
             <a href="letter-spacing.html" class="gnb-item">Letter Spacing</a>
             <a href="line-height.html" class="gnb-item">Line Height</a>
             <a href="clamp-generator.html" class="gnb-item">CSS Clamp</a>
-            <a href="flexbox-visualizer.html" class="gnb-item">Flex Layout</a>
-            <a href="grid-generator.html" class="gnb-item">Grid Layout</a>
-            <a href="animation-generator.html" class="gnb-item">Animation</a>
-            <a href="divider-generator.html" class="gnb-item"
-              >Section Divider</a
-            >
+            <a href="../flexbox-visualizer.html" class="gnb-item">Flex Layout</a>
+            <a href="../grid-generator.html" class="gnb-item">Grid Layout</a>
+            <a href="../animation-generator.html" class="gnb-item">Animation</a>
+            <a href="../divider-generator.html" class="gnb-item">Section Divider</a>
             <a href="aspect-ratio.html" class="gnb-item">Aspect Ratio</a>
-            <a href="css-generator.html" class="gnb-item">Visual Effects</a>
-            <a href="gradient-generator.html" class="gnb-item">Gradient</a>
-            <a href="color-converter.html" class="gnb-item">Color Tools</a>
-            <a href="contrast-checker.html" class="gnb-item">Contrast Check</a>
-            <a href="css-tools.html" class="gnb-item">Code Tools</a>
+            <a href="../css-generator.html" class="gnb-item">Visual Effects</a>
+            <a href="../gradient-generator.html" class="gnb-item">Gradient</a>
+            <a href="../color-converter.html" class="gnb-item">Color Tools</a>
+            <a href="../contrast-checker.html" class="gnb-item">Contrast Check</a>
+            <a href="../css-tools.html" class="gnb-item">Code Tools</a>
           </div>
         </nav>
       </header>
@@ -234,7 +216,7 @@
                     24px
                   </button>
                 </div>
-                <input type="number" id="em1-base" value="16" /> PX / 소수점 :
+                <input type="number" id="em1-base" value="16" /> PX / Decimals :
                 <input type="number" id="em1-float" value="3" min="0" max="5" />
                 <div class="row">
                   <input type="number" id="em-px-input" placeholder="PX" />
@@ -249,7 +231,7 @@
                       type="checkbox"
                       id="em-unit-check"
                       checked
-                    />단위포함(em)</label
+                    />Include unit (em)</label
                   >
                 </div>
                 <div class="btn-box">
@@ -268,7 +250,7 @@
                 <div class="css-header">
                   Parent Font Size
                   <input type="number" id="css-em1-base" value="16" /> PX /
-                  소수점 :
+                  Decimals :
                   <input
                     type="number"
                     id="css-em1-float"
@@ -323,8 +305,8 @@
                 </div>
                 <input type="number" id="em2-base" value="16" /> PX /
                 <label
-                  ><input type="checkbox" id="em-px-no-float" checked /> 소수점
-                  없음(반올림)</label
+                  ><input type="checkbox" id="em-px-no-float" checked /> No
+                  decimals (round)</label
                 >
                 <div class="row">
                   <input type="number" id="em-input" placeholder="EM" />
@@ -339,7 +321,7 @@
                       type="checkbox"
                       id="em-px-unit-check"
                       checked
-                    />단위포함(px)</label
+                    />Include unit (px)</label
                   >
                 </div>
                 <div class="btn-box">
@@ -360,7 +342,7 @@
                   <input type="number" id="css-em2-base" value="16" /> PX
                   <label style="margin-left: 8px"
                     ><input type="checkbox" id="css-em2-no-float" checked />
-                    소수점 없음(반올림)</label
+                    No decimals (round)</label
                   >
                 </div>
                 <div class="textarea-box">
@@ -388,47 +370,46 @@
       </div>
 
       <section class="tool-info-section">
-        <h2>PX to EM 변환 가이드: 컴포넌트 중심 디자인의 핵심</h2>
-        <p><strong>PX to EM 변환기</strong>는 부모 요소의 폰트 크기를 기준으로 픽셀 값을 EM 단위로 변환해주는 도구입니다. EM은 컴포넌트 내부에서 글자 크기와 비례하는 여백, 아이콘, 자간 등을 만들 때 가장 강력한 단위입니다.</p>
+        <h2>PX to EM Conversion Guide: The Key to Component-Based Design</h2>
+        <p>The <strong>PX to EM converter</strong> turns pixel values into em units based on the parent element's font size. EM is the most powerful unit for building components where padding, icons, and letter-spacing should all scale in proportion to the text.</p>
 
-        <h3>1. EM 단위란 무엇인가요?</h3>
-        <p>EM은 현재 요소에 적용된 폰트 크기를 1로 보는 상대 단위입니다. 폰트 크기가 16px인 요소에서 1em은 16px, 1.5em은 24px입니다. <code>font-size</code> 속성 자체에 EM을 사용하면 부모 요소의 폰트 크기를 기준으로 계산됩니다.</p>
+        <h3>1. What is the EM unit?</h3>
+        <p>EM is a relative unit where 1 equals the font size applied to the current element. In an element with a 16px font size, 1em is 16px and 1.5em is 24px. When you use EM on the <code>font-size</code> property itself, it is calculated against the parent element's font size.</p>
 
-        <h3>2. 변환 공식</h3>
+        <h3>2. The conversion formulas</h3>
         <ul>
-          <li><strong>PX → EM</strong>: 변환할 px 값 ÷ 부모 폰트 크기(px) = em 값</li>
-          <li><strong>EM → PX</strong>: em 값 × 부모 폰트 크기(px) = px 값</li>
-          <li>예: 부모 폰트가 16px일 때 24px = 24 ÷ 16 = <strong>1.5em</strong></li>
+          <li><strong>PX → EM</strong>: px value ÷ parent font size (px) = em value</li>
+          <li><strong>EM → PX</strong>: em value × parent font size (px) = px value</li>
+          <li>Example: with a 16px parent font, 24px = 24 ÷ 16 = <strong>1.5em</strong></li>
         </ul>
 
-        <h3>3. EM을 사용하기 좋은 곳</h3>
+        <h3>3. Where EM shines</h3>
         <ul>
-          <li><strong>버튼/뱃지의 패딩</strong>: 폰트 크기만 바꾸면 버튼 전체가 비례해서 커집니다.</li>
-          <li><strong>아이콘 크기</strong>: 텍스트 옆 아이콘을 1em으로 설정하면 글자와 항상 같은 크기를 유지합니다.</li>
-          <li><strong>letter-spacing, text-indent</strong>: 글자 크기에 비례해야 자연스러운 속성들입니다.</li>
-          <li><strong>미디어 쿼리</strong>: 사용자의 폰트 설정을 존중하는 반응형 분기점을 만들 수 있습니다.</li>
+          <li><strong>Button and badge padding</strong>: change only the font size and the whole button scales proportionally.</li>
+          <li><strong>Icon sizes</strong>: set an inline icon to 1em and it always matches the text height next to it.</li>
+          <li><strong>letter-spacing and text-indent</strong>: properties that only look right when they track the font size.</li>
+          <li><strong>Media queries</strong>: em-based breakpoints respect the user's font settings for more accessible responsive layouts.</li>
         </ul>
 
-        <h3>4. 주의사항: EM의 중첩 문제</h3>
-        <p>EM은 부모의 폰트 크기를 상속받아 계산되므로, 중첩된 요소에 연속으로 EM을 사용하면 크기가 곱해져서 의도보다 커지거나 작아질 수 있습니다. 예를 들어 1.2em 안의 1.2em은 1.44배가 됩니다. 이런 문제를 피하려면 전역 크기는 <a href="px-to-rem.html">REM 단위</a>를 사용하고, 컴포넌트 내부의 비례 관계에만 EM을 사용하는 것이 좋습니다.</p>
+        <h3>4. Watch out: the EM compounding problem</h3>
+        <p>Because EM is computed from the inherited parent font size, using em on nested elements multiplies the values: 1.2em inside 1.2em becomes 1.44 times the base size, which may be larger or smaller than you intended. To avoid this, use the <a href="px-to-rem.html">REM unit</a> for global sizing and reserve EM for proportional relationships inside a component.</p>
       </section>
 
       <section class="tool-info-section">
-        <h2>자주 묻는 질문 (FAQ)</h2>
-        <h3>Q. 1em은 몇 px인가요?</h3>
-        <p>1em은 현재 요소에 적용된 폰트 크기와 같습니다. 별도 설정이 없다면 브라우저 기본값인 16px이므로 1em = 16px입니다. 부모 요소의 폰트 크기가 20px이면 자식 요소의 1em은 20px이 됩니다.</p>
-        <h3>Q. EM과 REM의 차이는 무엇인가요?</h3>
-        <p>EM은 부모(현재 요소)의 폰트 크기를 기준으로 하고, REM은 항상 html 루트 요소의 폰트 크기를 기준으로 합니다. 전역적인 크기는 REM, 컴포넌트 내부의 상대적인 크기는 EM을 쓰는 것이 일반적입니다.</p>
-        <h3>Q. px를 em으로 변환하는 공식은 무엇인가요?</h3>
-        <p>em 값 = 변환할 px 값 ÷ 부모 요소의 폰트 크기(px)입니다. 부모 폰트가 16px일 때 24px는 24 ÷ 16 = 1.5em이 됩니다.</p>
-        <h3>Q. 언제 EM 단위를 사용하는 것이 좋나요?</h3>
-        <p>버튼의 패딩, 아이콘 크기, letter-spacing처럼 글자 크기에 비례해서 함께 커지거나 작아져야 하는 속성에 적합합니다. 폰트 크기만 바꾸면 관련 요소들이 자동으로 비율을 유지합니다.</p>
+        <h2>Frequently Asked Questions</h2>
+        <h3>Q. How many pixels is 1em?</h3>
+        <p>1em equals the font size applied to the current element. Without any custom styles it inherits the browser default of 16px, so 1em = 16px. If the parent element's font size is 20px, then 1em inside a child equals 20px.</p>
+        <h3>Q. What is the difference between EM and REM?</h3>
+        <p>EM is relative to the parent (current element's) font size, while REM always references the html root element's font size. The common practice is rem for global sizing and em for relative sizes inside a component.</p>
+        <h3>Q. What is the formula to convert px to em?</h3>
+        <p>em = px value ÷ parent font size in px. With a 16px parent font, 24px equals 24 ÷ 16 = 1.5em.</p>
+        <h3>Q. When should I use the EM unit?</h3>
+        <p>It is ideal for properties that should grow and shrink with the text, such as button padding, icon sizes, and letter-spacing. Change only the font size and the related elements keep their proportions automatically.</p>
       </section>
     </div>
 
-    <script src="js/script.js"></script>
-    <script src="js/em.js"></script>
-    <script src="js/footer.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/em.js"></script>
     <!-- Google Tag Manager (noscript) -->
     <noscript
       ><iframe

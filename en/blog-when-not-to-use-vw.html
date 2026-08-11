@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>When NOT to Use vw Units in CSS: 5 Cases Where Viewport Units Backfire</title>
+  <link rel="icon" href="../favicon.ico">
+  <meta name="description" content="Converting every px to vw is not always the answer. Learn when not to use vw units: borders, box shadows, font-size accessibility, unbounded layouts, and icons.">
+  <meta name="keywords" content="when not to use vw, vw units problems, vw font size accessibility, viewport units pitfalls, px to vw, responsive web design, css units, front-end development">
+  <meta property="og:title" content="When NOT to Use vw Units in CSS: 5 Cases Where Viewport Units Backfire">
+  <meta property="og:description" content="Five common cases where vw units hurt your responsive design — and what to use instead.">
+  <meta property="og:url" content="https://pxtovw.co.kr/en/blog-when-not-to-use-vw.html">
+  <meta property="og:image" content="https://pxtovw.co.kr/img/og.png">
+  <link rel="canonical" href="https://pxtovw.co.kr/en/blog-when-not-to-use-vw.html">
+  <link rel="alternate" hreflang="ko" href="https://pxtovw.co.kr/blog-when-not-to-use-vw.html">
+  <link rel="alternate" hreflang="en" href="https://pxtovw.co.kr/en/blog-when-not-to-use-vw.html">
+  <link rel="alternate" hreflang="x-default" href="https://pxtovw.co.kr/en/blog-when-not-to-use-vw.html">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="PX to VW Converter - Responsive Web Tools">
+  <meta property="article:published_time" content="2025-07-20T09:00:00+09:00">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="When NOT to Use vw Units in CSS: 5 Cases Where Viewport Units Backfire">
+  <meta name="twitter:description" content="Converting every px to vw is not always the answer. Learn when not to use vw units: borders, box shadows, font-size accessibility, unbounded layouts, and icons.">
+  <meta name="twitter:image" content="https://pxtovw.co.kr/img/og.png">
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "When NOT to Use vw Units in CSS: 5 Cases Where Viewport Units Backfire",
+    "description": "Converting every px to vw is not always the answer. Learn when not to use vw units: borders, box shadows, font-size accessibility, unbounded layouts, and icons.",
+    "datePublished": "2025-07-20",
+    "dateModified": "2025-07-20",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://pxtovw.co.kr/en/blog-when-not-to-use-vw.html" },
+    "image": "https://pxtovw.co.kr/img/og.png",
+    "inLanguage": "en",
+    "author": { "@type": "Organization", "name": "PX TO VW", "url": "https://pxtovw.co.kr/" },
+    "publisher": { "@type": "Organization", "name": "PX TO VW", "logo": { "@type": "ImageObject", "url": "https://pxtovw.co.kr/img/og.png" } }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/blog.css">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4275974341995601"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+<body>
+  <div class="blog-container">
+    <div class="blog-header">
+      <h1>5 Cases Where You Should NOT Convert px to vw</h1>
+      <div class="blog-meta">
+        <span>📅 July 20, 2025</span> |
+        <span>👨‍💻 Web Design</span> |
+        <span>⚠️ Pitfalls</span>
+      </div>
+      <p>Sizing everything in vw can actually break your UI. Here are the cases where viewport units do more harm than good.</p>
+    </div>
+
+    <div class="blog-content">
+      <p>Viewport units are incredibly convenient for responsive web development — everything scales automatically with the screen. But experienced developers never blindly convert every px value to vw. In certain situations, a fixed px value or another relative unit like rem is simply the better choice.</p>
+
+      <h2>1. Border Widths</h2>
+      <p>One of the most common mistakes is setting border widths in vw. Take a 1px border from your design spec: convert it to vw, and on mobile devices it can easily end up thinner than 0.5px.</p>
+
+      <div class="warning-box">
+        <h4>⚠️ The Disappearing Border Problem</h4>
+        <p>When a border drops below 1px on small screens, it may render blurry or vanish entirely depending on how the browser handles sub-pixel rendering. Borders should always use <strong>fixed px values</strong>.</p>
+      </div>
+
+      <h2>2. Box Shadows</h2>
+      <p>Shadow offset and blur values also deserve caution when converting to vw. Shadows exist to create a subtle sense of depth — if they shrink along with the viewport, that depth disappears and the design starts to look muddy.</p>
+
+      <div class="code-block">
+        /* Not recommended */
+        .card { box-shadow: 0.5vw 0.5vw 1vw rgba(0,0,0,0.1); }
+
+        /* Recommended (fixed px values) */
+        .card { box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+      </div>
+
+      <h2>3. Text Readability and Accessibility</h2>
+      <p>Setting font sizes purely in vw ignores the user's browser settings, such as their preferred font size. That is a direct violation of web accessibility standards.</p>
+
+      <ul>
+        <li><strong>The problem</strong>: Even when a user increases their system font size, vw-based text only responds to viewport width — it never gets any bigger.</li>
+        <li><strong>The fix</strong>: Use <code>clamp()</code> to guarantee a minimum font size, or combine rem and vw with something like <code>calc(1rem + 1vw)</code>.</li>
+      </ul>
+
+      <h2>4. Layouts Without Min/Max Constraints</h2>
+      <p>If you set widths or heights in vw without a <code>max-width</code>, elements can grow to absurd sizes on ultrawide monitors and other very large displays.</p>
+
+      <div class="tip-box">
+        <h4>💡 How to Fix It</h4>
+        <p>Whenever you use vw, always pair it with <code>max-width</code> or <code>clamp()</code> to set the breaking point where your design would otherwise fall apart.</p>
+      </div>
+
+      <h2>5. Fixed-Ratio Icons</h2>
+      <p>For bitmap image icons and icon fonts (as opposed to SVG), scaling with vw can introduce aliasing artifacts or degrade rendering performance. Small, precise graphic elements look visually sharper when locked to px.</p>
+
+      <h2>Conclusion</h2>
+      <p>vw is a powerful tool, but it is not a silver bullet. Use vw for the broad strokes of your layout, and mix in px or rem for the details — borders, spacing, and precisely sized type. Knowing when to use each unit is what separates a fluid design from a fragile one.</p>
+    </div>
+
+    <div class="nav-links">
+      <a href="index.html">Back to Main</a>
+      <a href="../blog-responsive-design.html">Previous Post</a>
+      <a href="blog-clamp-vs-vw.html">Next Post</a>
+    </div>
+  </div>
+  <script src="../js/script.js"></script>
+</body>
+</html>
